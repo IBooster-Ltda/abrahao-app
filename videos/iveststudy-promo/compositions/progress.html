@@ -1,60 +1,70 @@
 <template>
   <style>
-    #root { position: absolute; inset: 0; font-family: var(--font-display, "Inter"), sans-serif; color: #fff; }
-    .t { position: absolute; left: 120px; width: 720px; font-weight: 700; font-size: 68px; line-height: 1.04; letter-spacing: -0.03em; }
-    .t .w { display: inline-block; margin-right: 0.22em; opacity: 0; }
-    .t .acc { color: var(--color-accent-light, #60a5fa); }
-    .sub { position: absolute; left: 124px; width: 620px; font-size: 30px; line-height: 1.4; font-weight: 500; color: #9aa3b2; opacity: 0; }
-    .win { position: absolute; left: 780px; top: 190px; width: 1100px; height: 688px; border-radius: 20px; overflow: hidden; background: #0b1220; border: 2px solid rgba(96,165,250,.22); box-shadow: 0 30px 80px rgba(0,0,0,.7); }
+    #root { position: absolute; inset: 0; font-family: var(--font-display, "Inter"), sans-serif; color: #fff; overflow: hidden; }
+    .stage { position: absolute; inset: 0; overflow: hidden; background: #0b1220; }
     .cam { position: absolute; left: 0; top: 0; width: 1440px; height: 900px; transform-origin: 0 0; }
     .cam > video, .cam > img { position: absolute; left: 0; top: 0; width: 1440px; height: 900px; display: block; }
-    .tag { position: absolute; left: 780px; top: 898px; font-size: 26px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: #9aa3b2; opacity: 0; }
+    .photo { position: absolute; left: -60px; top: -34px; width: 2040px; height: 1148px; }
+    .photo img { width: 2040px; height: 1148px; display: block; }
+    .kin { position: absolute; left: 0; width: 1920px; text-align: center; font-weight: 800; font-size: 220px; line-height: 1; letter-spacing: -0.045em; color: #fff; }
+    .kin .acc { color: var(--color-accent-light, #60a5fa); }
+    .kin.left { left: 120px; width: 1680px; text-align: left; }
+    .kin.sm { font-size: 96px; font-weight: 700; letter-spacing: -0.03em; }
+    .kin .w { display: inline-block; margin: 0 0.12em; opacity: 0; }
+    .chip { position: absolute; display: inline-block; padding: 16px 28px; border-radius: 14px; background: rgba(15,23,42,.9); border: 2px solid rgba(96,165,250,.55); color: #fff; font-size: 34px; font-weight: 700; letter-spacing: -0.01em; opacity: 0; white-space: nowrap; }
+    .chip .acc { color: var(--color-accent-light, #60a5fa); }
+    .num { position: absolute; left: 0; width: 1920px; text-align: center; font-weight: 800; font-size: 360px; line-height: 1; letter-spacing: -0.05em; color: #fff; font-variant-numeric: tabular-nums; }
+    .num small { font-size: 120px; font-weight: 700; color: #9aa3b2; letter-spacing: -0.02em; }
+    .typed { position: absolute; left: 0; width: 1920px; text-align: center; font-size: 44px; font-weight: 500; color: #9aa3b2; }
+    .typed .caret { display: inline-block; width: 3px; height: 1em; background: #60a5fa; vertical-align: -0.12em; margin-left: 4px; }
 
   </style>
   <div id="root" data-composition-id="progress" data-width="1920" data-height="1080">
-    <h1 id="pg-1" class="t clip" data-start="0.3" data-duration="4.1" style="top:300px" data-layout-allow-overflow><span class="w">O</span><span class="w">que</span><span class="w">é</span><span class="w">medido,</span></h1>
-    <h1 id="pg-2" class="t clip" data-start="0.6" data-duration="3.8" style="top:380px" data-layout-allow-overflow><span class="w">é</span><span class="w acc">melhorado.</span></h1>
-    <h1 id="pg-3" class="t clip" data-start="4.7" data-duration="5.2" style="top:300px" data-layout-allow-overflow><span class="w">Do</span><span class="w">Bronze</span></h1>
-    <h1 id="pg-4" class="t clip" data-start="5.0" data-duration="4.9" style="top:380px" data-layout-allow-overflow><span class="w">ao</span><span class="w acc">Elite.</span></h1>
-    <p id="pg-s" class="sub clip" data-start="7.0" data-duration="2.9" style="top:500px">20 conquistas · Índice de Preparo de 0 a 100</p>
-    <div id="pg-win" class="win" data-layout-allow-overflow><div id="pg-win-cam" class="cam"><img id="pg-win-m" src="assets/app/stills/dashboard-full.png" alt="" /></div></div>
-    <p id="pg-win-tag" class="tag" data-layout-ignore>Tela real do app · modo noturno</p>
-    <div id="pg-win2" class="win" data-layout-allow-overflow style="opacity:0"><div id="pg-win2-cam" class="cam"><img id="pg-win2-m" src="assets/app/stills/ranks.png" alt="" /></div></div>
-    <div id="pg-win3" class="win" data-layout-allow-overflow style="opacity:0"><div id="pg-win3-cam" class="cam"><img id="pg-win3-m" src="assets/app/stills/conquistas.png" alt="" /></div></div>
+    <div id="pg-a" class="stage" data-layout-allow-overflow><div id="pg-a-cam" class="cam"><img id="pg-a-m" src="assets/app/stills/dashboard-full.png" alt="" style="height:auto" /></div></div>
+    <div id="pg-b" class="stage" style="opacity:0" data-layout-allow-overflow><div id="pg-b-cam" class="cam"><img id="pg-b-m" src="assets/app/stills/ranks.png" alt="" /></div></div>
+    <div id="pg-c" class="stage" style="opacity:0" data-layout-allow-overflow><div id="pg-c-cam" class="cam"><img id="pg-c-m" src="assets/app/stills/conquistas-full.png" alt="" style="height:auto" /></div></div>
+    <div id="pg-k" class="kin sm clip" data-start="3.9" data-duration="2.8" style="top:80px" data-layout-allow-overflow><span class="w">do</span><span class="w">Bronze</span><span class="w">ao</span><span class="w acc">Elite</span></div>
+    <div id="pg-c1" class="chip clip" data-start="0.5" data-duration="2.9" style="left:120px; top:900px">Por trilha · por <span class="acc">dificuldade</span> · ao longo do tempo</div>
+    <div id="pg-c2" class="chip clip" data-start="4.2" data-duration="2.3" style="left:120px; top:900px">Índice de <span class="acc">Preparo</span> 0–100</div>
+    <div id="pg-c3" class="chip clip" data-start="7.1" data-duration="2.2" style="left:120px; top:900px"><span class="acc">20</span> conquistas</div>
 
   </div>
   <script>
     (() => {
       const tl = gsap.timeline({ paused: true });
 
-      const wordIn = (sel, at) => document.querySelectorAll(sel + " .w").forEach((w, i) =>
-        tl.fromTo(w, { opacity: 0, filter: "blur(6px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.13, ease: "power2.out" }, at + i * 0.07));
-      const wordOut = (sel, at) => tl.to(sel + " .w", { opacity: 0, filter: "blur(6px)", duration: 0.18, ease: "power2.in", stagger: 0.03 }, at);
-      const subIn = (sel, at) => tl.fromTo(sel, { opacity: 0, filter: "blur(6px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.2, ease: "power2.out" }, at);
-      const K = 1100 / 1440;
-      const cam = (s, fx, fy) => ({ scale: K * s, x: 550 - fx * K * s, y: 344 - fy * K * s });
-      const camSet = (sel, s, fx, fy) => tl.fromTo(sel, cam(s, fx, fy), { ...cam(s, fx, fy), duration: 0.01 }, 0);
-      const camTo = (sel, s, fx, fy, at, dur = 0.6, ease = "power2.inOut") => tl.to(sel, { ...cam(s, fx, fy), duration: dur, ease }, at);
-      const winIn = (sel, at, fromX = 900) => tl.fromTo(sel, { x: fromX, opacity: 0, filter: "blur(10px)" }, { x: 0, opacity: 1, filter: "blur(0px)", duration: 0.55, ease: "power4.out" }, at);
-      const winOut = (sel, at, toX = 160) => tl.to(sel, { x: toX, opacity: 0, filter: "blur(10px)", duration: 0.4, ease: "power3.in" }, at);
-      const tagIn = (sel, at) => tl.fromTo(sel, { opacity: 0 }, { opacity: 1, duration: 0.3 }, at);
+      const wordIn = (sel, at, step = 0.09) => document.querySelectorAll(sel + " .w").forEach((w, i) =>
+        tl.fromTo(w, { opacity: 0, scale: 1.25, filter: "blur(10px)" }, { opacity: 1, scale: 1, filter: "blur(0px)", duration: 0.28, ease: "back.out(1.6)", transformOrigin: "50% 60%" }, at + i * step));
+      const wordOut = (sel, at) => tl.to(sel + " .w", { opacity: 0, filter: "blur(8px)", duration: 0.18, ease: "power2.in", stagger: 0.03 }, at);
+      const chipIn = (sel, at) => tl.fromTo(sel, { opacity: 0, scale: 0.8, y: 16 }, { opacity: 1, scale: 1, y: 0, duration: 0.32, ease: "back.out(1.7)", transformOrigin: "0% 100%" }, at);
+      const chipOut = (sel, at) => tl.to(sel, { opacity: 0, y: -10, duration: 0.18, ease: "power2.in" }, at);
+      // full-frame camera over a 1440x900 plate; the view never leaves the plate
+      const cam = (s, fx, fy, H = 900) => { const S = s * 4 / 3; const hw = 960 / S, hh = 540 / S; fx = Math.min(Math.max(fx, hw), 1440 - hw); fy = Math.min(Math.max(fy, hh), H - hh); return { scale: S, x: 960 - fx * S, y: 540 - fy * S }; };
+      const camSet = (sel, s, fx, fy, H) => tl.fromTo(sel, cam(s, fx, fy, H), { ...cam(s, fx, fy, H), duration: 0.01 }, 0);
+      const camTo = (sel, s, fx, fy, at, dur = 0.6, ease = "power2.inOut", H) => tl.to(sel, { ...cam(s, fx, fy, H), duration: dur, ease }, at);
+      const camCut = (sel, s, fx, fy, at, H) => tl.set(sel, cam(s, fx, fy, H), at);
+      const show = (sel, at) => tl.set(sel, { opacity: 1 }, at);
+      const hide = (sel, at) => tl.set(sel, { opacity: 0 }, at);
+      const dip = (sel, at) => { tl.to(sel, { opacity: 0, filter: "blur(8px)", duration: 0.16, ease: "power2.in" }, at); };
+      const rise = (sel, at) => { tl.fromTo(sel, { opacity: 0, filter: "blur(8px)", scale: 1.05 }, { opacity: 1, filter: "blur(0px)", scale: 1, duration: 0.22, ease: "power2.out", transformOrigin: "50% 50%" }, at); };
+      const push = (sel, from, to, at, dur) => tl.fromTo(sel, { scale: from }, { scale: to, duration: dur, ease: "none", transformOrigin: "50% 50%" }, at);
+      const typeInto = (sel, text, at, cps = 22) => { const el = document.querySelector(sel + " .tx"); const st = { n: 0 }; tl.fromTo(st, { n: 0 }, { n: text.length, duration: text.length / cps, ease: "none", onUpdate: () => { el.textContent = text.slice(0, Math.round(st.n)); } }, at); };
+      const countTo = (sel, to, at, dur, fmt = (v) => String(Math.round(v))) => { const el = document.querySelector(sel + " .v"); const st = { v: 0 }; tl.fromTo(st, { v: 0 }, { v: to, duration: dur, ease: "power3.out", onUpdate: () => { el.textContent = fmt(st.v); } }, at); };
 
 
-      document.getElementById("pg-win-m").style.height = "auto";
-      winIn("#pg-win", 0, -900); tagIn("#pg-win-tag", 0.5);
-      wordIn("#pg-1", 0.3); wordIn("#pg-2", 0.6);
-      camSet("#pg-win-cam", 1.7, 800, 650);
-      camTo("#pg-win-cam", 1.7, 800, 940, 1.8, 2.4, "power1.inOut");
-      tl.fromTo("#pg-win2", { y: 500, opacity: 0, filter: "blur(10px)" }, { y: 0, opacity: 1, filter: "blur(0px)", duration: 0.55, ease: "power4.out" }, 4.5);
-      tl.to("#pg-win", { y: -200, opacity: 0, filter: "blur(8px)", duration: 0.45, ease: "power3.in" }, 4.4);
-      wordOut("#pg-1", 4.3); wordOut("#pg-2", 4.35); wordIn("#pg-3", 4.7); wordIn("#pg-4", 5.0);
-      camSet("#pg-win2-cam", 1.0, 720, 450); camTo("#pg-win2-cam", 1.5, 820, 300, 4.6, 0.9);
-      tl.fromTo("#pg-win3", { y: 500, opacity: 0, filter: "blur(10px)" }, { y: 0, opacity: 1, filter: "blur(0px)", duration: 0.55, ease: "power4.out" }, 7.0);
-      tl.to("#pg-win2", { y: -200, opacity: 0, filter: "blur(8px)", duration: 0.45, ease: "power3.in" }, 6.9);
-      subIn("#pg-s", 7.0);
-      camSet("#pg-win3-cam", 1.0, 720, 450); camTo("#pg-win3-cam", 1.4, 720, 480, 7.1, 0.8); camTo("#pg-win3-cam", 1.4, 720, 560, 7.9, 1.5, "none");
-      tl.to("#pg-win3", { x: 160, opacity: 0, filter: "blur(10px)", duration: 0.4, ease: "power3.in" }, 9.5);
-      tl.to("#pg-3 .w, #pg-4 .w, #pg-s, #pg-win-tag", { opacity: 0, duration: 0.25, ease: "power2.in" }, 9.55);
+      camSet("#pg-a-cam", 1.6, 820, 620, 1700);
+      camTo("#pg-a-cam", 1.6, 820, 980, 0.2, 3.2, "power1.inOut", 1700);
+      chipIn("#pg-c1", 0.5); chipOut("#pg-c1", 3.3);
+      hide("#pg-a", 3.6); show("#pg-b", 3.6); rise("#pg-b", 3.6);
+      camSet("#pg-b-cam", 2.0, 900, 330);                          // the Bronze→Elite band
+      camTo("#pg-b-cam", 2.0, 1000, 330, 3.65, 2.9, "power1.inOut");
+      wordIn("#pg-k", 3.9); wordOut("#pg-k", 6.5);
+      chipIn("#pg-c2", 4.2); chipOut("#pg-c2", 6.4);
+      hide("#pg-b", 6.8); show("#pg-c", 6.8); rise("#pg-c", 6.8);
+      camSet("#pg-c-cam", 1.5, 720, 520, 2000);
+      camTo("#pg-c-cam", 1.5, 720, 900, 6.85, 2.6, "power1.inOut", 2000);
+      chipIn("#pg-c3", 7.1); chipOut("#pg-c3", 9.2);
+      tl.to("#pg-c", { opacity: 0, filter: "blur(10px)", duration: 0.25, ease: "power2.in" }, 9.6);
 
       window.__timelines["progress"] = tl;
     })();

@@ -1,47 +1,66 @@
 <template>
   <style>
-    #root { position: absolute; inset: 0; font-family: var(--font-display, "Inter"), sans-serif; color: #fff; }
-    .t { position: absolute; left: 120px; width: 720px; font-weight: 700; font-size: 68px; line-height: 1.04; letter-spacing: -0.03em; }
-    .t .w { display: inline-block; margin-right: 0.22em; opacity: 0; }
-    .t .acc { color: var(--color-accent-light, #60a5fa); }
-    .sub { position: absolute; left: 124px; width: 620px; font-size: 30px; line-height: 1.4; font-weight: 500; color: #9aa3b2; opacity: 0; }
-    .win { position: absolute; left: 780px; top: 190px; width: 1100px; height: 688px; border-radius: 20px; overflow: hidden; background: #0b1220; border: 2px solid rgba(96,165,250,.22); box-shadow: 0 30px 80px rgba(0,0,0,.7); }
+    #root { position: absolute; inset: 0; font-family: var(--font-display, "Inter"), sans-serif; color: #fff; overflow: hidden; }
+    .stage { position: absolute; inset: 0; overflow: hidden; background: #0b1220; }
     .cam { position: absolute; left: 0; top: 0; width: 1440px; height: 900px; transform-origin: 0 0; }
     .cam > video, .cam > img { position: absolute; left: 0; top: 0; width: 1440px; height: 900px; display: block; }
-    .tag { position: absolute; left: 780px; top: 898px; font-size: 26px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: #9aa3b2; opacity: 0; }
+    .photo { position: absolute; left: -60px; top: -34px; width: 2040px; height: 1148px; }
+    .photo img { width: 2040px; height: 1148px; display: block; }
+    .kin { position: absolute; left: 0; width: 1920px; text-align: center; font-weight: 800; font-size: 220px; line-height: 1; letter-spacing: -0.045em; color: #fff; }
+    .kin .acc { color: var(--color-accent-light, #60a5fa); }
+    .kin.left { left: 120px; width: 1680px; text-align: left; }
+    .kin.sm { font-size: 96px; font-weight: 700; letter-spacing: -0.03em; }
+    .kin .w { display: inline-block; margin: 0 0.12em; opacity: 0; }
+    .chip { position: absolute; display: inline-block; padding: 16px 28px; border-radius: 14px; background: rgba(15,23,42,.9); border: 2px solid rgba(96,165,250,.55); color: #fff; font-size: 34px; font-weight: 700; letter-spacing: -0.01em; opacity: 0; white-space: nowrap; }
+    .chip .acc { color: var(--color-accent-light, #60a5fa); }
+    .num { position: absolute; left: 0; width: 1920px; text-align: center; font-weight: 800; font-size: 360px; line-height: 1; letter-spacing: -0.05em; color: #fff; font-variant-numeric: tabular-nums; }
+    .num small { font-size: 120px; font-weight: 700; color: #9aa3b2; letter-spacing: -0.02em; }
+    .typed { position: absolute; left: 0; width: 1920px; text-align: center; font-size: 44px; font-weight: 500; color: #9aa3b2; }
+    .typed .caret { display: inline-block; width: 3px; height: 1em; background: #60a5fa; vertical-align: -0.12em; margin-left: 4px; }
 
   </style>
   <div id="root" data-composition-id="simul" data-width="1920" data-height="1080">
-    <h1 id="sm-1" class="t clip" data-start="0.3" data-duration="9.3" style="top:300px" data-layout-allow-overflow><span class="w acc">Simulados</span></h1>
-    <h1 id="sm-2" class="t clip" data-start="0.6" data-duration="9.0" style="top:380px" data-layout-allow-overflow><span class="w">no</span><span class="w">formato</span><span class="w">oficial.</span></h1>
-    <p id="sm-s" class="sub clip" data-start="2.6" data-duration="7.0" style="top:500px">ENEM · Fuvest · Unicamp · PAES · SAT · cronometrados</p>
-    <div id="sm-win" class="win" data-layout-allow-overflow><div id="sm-win-cam" class="cam"><video id="sm-win-m" class="clip" src="assets/app/clips/simulados.mp4" data-start="0" data-duration="9.6" data-playback-rate="1.2" data-media-start="1.5" muted playsinline data-track-index="2"></video></div></div>
-    <p id="sm-win-tag" class="tag" data-layout-ignore>Tela real do app · modo noturno</p>
+    <div id="sm-1" class="kin  clip" data-start="0.1" data-duration="0.5" style="top:400px" data-layout-allow-overflow><span class="w">ENEM</span></div>
+    <div id="sm-2" class="kin  clip" data-start="0.6" data-duration="0.5" style="top:400px" data-layout-allow-overflow><span class="w">FUVEST</span></div>
+    <div id="sm-3" class="kin  clip" data-start="1.1" data-duration="0.5" style="top:400px" data-layout-allow-overflow><span class="w">UNICAMP</span></div>
+    <div id="sm-4" class="kin  clip" data-start="1.6" data-duration="0.5" style="top:400px" data-layout-allow-overflow><span class="w">PAES</span></div>
+    <div id="sm-5" class="kin  clip" data-start="2.1" data-duration="0.5" style="top:400px" data-layout-allow-overflow><span class="w acc">SAT</span></div>
+    <div id="sm-a" class="stage" style="opacity:0" data-layout-allow-overflow><div id="sm-a-cam" class="cam"><video id="sm-a-m" class="clip" src="assets/app/clips/simulados.mp4" data-start="2.6" data-duration="7.0" data-playback-rate="1.2" data-media-start="1.3" muted playsinline data-track-index="2"></video></div></div>
+    <div id="sm-c1" class="chip clip" data-start="3.0" data-duration="2.8" style="left:120px; top:900px"><span class="acc">Formato oficial</span> de cada banca</div>
+    <div id="sm-c2" class="chip clip" data-start="6.6" data-duration="2.4" style="left:120px; top:900px">Cronometrado: <span class="acc">74:57</span></div>
 
   </div>
   <script>
     (() => {
       const tl = gsap.timeline({ paused: true });
 
-      const wordIn = (sel, at) => document.querySelectorAll(sel + " .w").forEach((w, i) =>
-        tl.fromTo(w, { opacity: 0, filter: "blur(6px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.13, ease: "power2.out" }, at + i * 0.07));
-      const wordOut = (sel, at) => tl.to(sel + " .w", { opacity: 0, filter: "blur(6px)", duration: 0.18, ease: "power2.in", stagger: 0.03 }, at);
-      const subIn = (sel, at) => tl.fromTo(sel, { opacity: 0, filter: "blur(6px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.2, ease: "power2.out" }, at);
-      const K = 1100 / 1440;
-      const cam = (s, fx, fy) => ({ scale: K * s, x: 550 - fx * K * s, y: 344 - fy * K * s });
-      const camSet = (sel, s, fx, fy) => tl.fromTo(sel, cam(s, fx, fy), { ...cam(s, fx, fy), duration: 0.01 }, 0);
-      const camTo = (sel, s, fx, fy, at, dur = 0.6, ease = "power2.inOut") => tl.to(sel, { ...cam(s, fx, fy), duration: dur, ease }, at);
-      const winIn = (sel, at, fromX = 900) => tl.fromTo(sel, { x: fromX, opacity: 0, filter: "blur(10px)" }, { x: 0, opacity: 1, filter: "blur(0px)", duration: 0.55, ease: "power4.out" }, at);
-      const winOut = (sel, at, toX = 160) => tl.to(sel, { x: toX, opacity: 0, filter: "blur(10px)", duration: 0.4, ease: "power3.in" }, at);
-      const tagIn = (sel, at) => tl.fromTo(sel, { opacity: 0 }, { opacity: 1, duration: 0.3 }, at);
+      const wordIn = (sel, at, step = 0.09) => document.querySelectorAll(sel + " .w").forEach((w, i) =>
+        tl.fromTo(w, { opacity: 0, scale: 1.25, filter: "blur(10px)" }, { opacity: 1, scale: 1, filter: "blur(0px)", duration: 0.28, ease: "back.out(1.6)", transformOrigin: "50% 60%" }, at + i * step));
+      const wordOut = (sel, at) => tl.to(sel + " .w", { opacity: 0, filter: "blur(8px)", duration: 0.18, ease: "power2.in", stagger: 0.03 }, at);
+      const chipIn = (sel, at) => tl.fromTo(sel, { opacity: 0, scale: 0.8, y: 16 }, { opacity: 1, scale: 1, y: 0, duration: 0.32, ease: "back.out(1.7)", transformOrigin: "0% 100%" }, at);
+      const chipOut = (sel, at) => tl.to(sel, { opacity: 0, y: -10, duration: 0.18, ease: "power2.in" }, at);
+      // full-frame camera over a 1440x900 plate; the view never leaves the plate
+      const cam = (s, fx, fy, H = 900) => { const S = s * 4 / 3; const hw = 960 / S, hh = 540 / S; fx = Math.min(Math.max(fx, hw), 1440 - hw); fy = Math.min(Math.max(fy, hh), H - hh); return { scale: S, x: 960 - fx * S, y: 540 - fy * S }; };
+      const camSet = (sel, s, fx, fy, H) => tl.fromTo(sel, cam(s, fx, fy, H), { ...cam(s, fx, fy, H), duration: 0.01 }, 0);
+      const camTo = (sel, s, fx, fy, at, dur = 0.6, ease = "power2.inOut", H) => tl.to(sel, { ...cam(s, fx, fy, H), duration: dur, ease }, at);
+      const camCut = (sel, s, fx, fy, at, H) => tl.set(sel, cam(s, fx, fy, H), at);
+      const show = (sel, at) => tl.set(sel, { opacity: 1 }, at);
+      const hide = (sel, at) => tl.set(sel, { opacity: 0 }, at);
+      const dip = (sel, at) => { tl.to(sel, { opacity: 0, filter: "blur(8px)", duration: 0.16, ease: "power2.in" }, at); };
+      const rise = (sel, at) => { tl.fromTo(sel, { opacity: 0, filter: "blur(8px)", scale: 1.05 }, { opacity: 1, filter: "blur(0px)", scale: 1, duration: 0.22, ease: "power2.out", transformOrigin: "50% 50%" }, at); };
+      const push = (sel, from, to, at, dur) => tl.fromTo(sel, { scale: from }, { scale: to, duration: dur, ease: "none", transformOrigin: "50% 50%" }, at);
+      const typeInto = (sel, text, at, cps = 22) => { const el = document.querySelector(sel + " .tx"); const st = { n: 0 }; tl.fromTo(st, { n: 0 }, { n: text.length, duration: text.length / cps, ease: "none", onUpdate: () => { el.textContent = text.slice(0, Math.round(st.n)); } }, at); };
+      const countTo = (sel, to, at, dur, fmt = (v) => String(Math.round(v))) => { const el = document.querySelector(sel + " .v"); const st = { v: 0 }; tl.fromTo(st, { v: 0 }, { v: to, duration: dur, ease: "power3.out", onUpdate: () => { el.textContent = fmt(st.v); } }, at); };
 
 
-      winIn("#sm-win", 0); tagIn("#sm-win-tag", 0.5);
-      wordIn("#sm-1", 0.3); wordIn("#sm-2", 0.6); subIn("#sm-s", 2.6);
-      camSet("#sm-win-cam", 1.0, 720, 450);
-      camTo("#sm-win-cam", 1.2, 720, 480, 0.6, 1.0);
-      camTo("#sm-win-cam", 1.45, 720, 420, 8.0, 0.7);
-      winOut("#sm-win", 9.2); tl.to("#sm-1 .w, #sm-2 .w, #sm-s, #sm-win-tag", { opacity: 0, duration: 0.25, ease: "power2.in" }, 9.25);
+      ["#sm-1", "#sm-2", "#sm-3", "#sm-4", "#sm-5"].forEach((s, i) => wordIn(s, 0.1 + i * 0.5));
+      show("#sm-a", 2.6); rise("#sm-a", 2.6);
+      camSet("#sm-a-cam", 1.3, 720, 480);
+      camTo("#sm-a-cam", 1.3, 720, 560, 2.7, 3.2, "none");
+      camCut("#sm-a-cam", 1.9, 760, 300, 6.4);                    // the FUVEST question with the exam clock
+      camTo("#sm-a-cam", 1.9, 760, 360, 6.45, 2.6, "none");
+      chipIn("#sm-c1", 3.0); chipOut("#sm-c1", 5.6); chipIn("#sm-c2", 6.6); chipOut("#sm-c2", 8.9);
+      tl.to("#sm-a", { opacity: 0, filter: "blur(10px)", duration: 0.25, ease: "power2.in" }, 9.35);
 
       window.__timelines["simul"] = tl;
     })();

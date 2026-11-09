@@ -1,64 +1,83 @@
 <template>
   <style>
-    #root { position: absolute; inset: 0; font-family: var(--font-display, "Inter"), sans-serif; color: #fff; }
-    .t { position: absolute; left: 120px; width: 720px; font-weight: 700; font-size: 68px; line-height: 1.04; letter-spacing: -0.03em; }
-    .t .w { display: inline-block; margin-right: 0.22em; opacity: 0; }
-    .t .acc { color: var(--color-accent-light, #60a5fa); }
-    .sub { position: absolute; left: 124px; width: 620px; font-size: 30px; line-height: 1.4; font-weight: 500; color: #9aa3b2; opacity: 0; }
-    .win { position: absolute; left: 780px; top: 190px; width: 1100px; height: 688px; border-radius: 20px; overflow: hidden; background: #0b1220; border: 2px solid rgba(96,165,250,.22); box-shadow: 0 30px 80px rgba(0,0,0,.7); }
+    #root { position: absolute; inset: 0; font-family: var(--font-display, "Inter"), sans-serif; color: #fff; overflow: hidden; }
+    .stage { position: absolute; inset: 0; overflow: hidden; background: #0b1220; }
     .cam { position: absolute; left: 0; top: 0; width: 1440px; height: 900px; transform-origin: 0 0; }
     .cam > video, .cam > img { position: absolute; left: 0; top: 0; width: 1440px; height: 900px; display: block; }
-    .tag { position: absolute; left: 780px; top: 898px; font-size: 26px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: #9aa3b2; opacity: 0; }
+    .photo { position: absolute; left: -60px; top: -34px; width: 2040px; height: 1148px; }
+    .photo img { width: 2040px; height: 1148px; display: block; }
+    .kin { position: absolute; left: 0; width: 1920px; text-align: center; font-weight: 800; font-size: 220px; line-height: 1; letter-spacing: -0.045em; color: #fff; }
+    .kin .acc { color: var(--color-accent-light, #60a5fa); }
+    .kin.left { left: 120px; width: 1680px; text-align: left; }
+    .kin.sm { font-size: 96px; font-weight: 700; letter-spacing: -0.03em; }
+    .kin .w { display: inline-block; margin: 0 0.12em; opacity: 0; }
+    .chip { position: absolute; display: inline-block; padding: 16px 28px; border-radius: 14px; background: rgba(15,23,42,.9); border: 2px solid rgba(96,165,250,.55); color: #fff; font-size: 34px; font-weight: 700; letter-spacing: -0.01em; opacity: 0; white-space: nowrap; }
+    .chip .acc { color: var(--color-accent-light, #60a5fa); }
+    .num { position: absolute; left: 0; width: 1920px; text-align: center; font-weight: 800; font-size: 360px; line-height: 1; letter-spacing: -0.05em; color: #fff; font-variant-numeric: tabular-nums; }
+    .num small { font-size: 120px; font-weight: 700; color: #9aa3b2; letter-spacing: -0.02em; }
+    .typed { position: absolute; left: 0; width: 1920px; text-align: center; font-size: 44px; font-weight: 500; color: #9aa3b2; }
+    .typed .caret { display: inline-block; width: 3px; height: 1em; background: #60a5fa; vertical-align: -0.12em; margin-left: 4px; }
 
   </style>
   <div id="root" data-composition-id="estudo" data-width="1920" data-height="1080">
-    <h1 id="es-1" class="t clip" data-start="0.3" data-duration="5.0" style="top:300px" data-layout-allow-overflow><span class="w">Como</span><span class="w">na</span><span class="w acc">prova.</span></h1>
-    <p id="es-s1" class="sub clip" data-start="1.6" data-duration="3.7" style="top:500px">Digitando ou por voz · cronômetro · símbolos matemáticos</p>
-    <h1 id="es-2" class="t clip" data-start="5.6" data-duration="9.8" style="top:300px" data-layout-allow-overflow><span class="w">Nota,</span><span class="w">avaliação</span></h1>
-    <h1 id="es-3" class="t clip" data-start="5.9" data-duration="9.5" style="top:380px" data-layout-allow-overflow><span class="w">e</span><span class="w">o</span><span class="w">que</span><span class="w acc">faltou.</span></h1>
-    <p id="es-s2" class="sub clip" data-start="9.6" data-duration="5.8" style="top:500px">Resposta de referência · revisão analítica · chat para aprofundar</p>
-    <div id="es-win" class="win" data-layout-allow-overflow><div id="es-win-cam" class="cam"><video id="es-win-m" class="clip" src="assets/app/clips/estudo-typing.mp4" data-start="0" data-duration="5.0" data-playback-rate="3" data-media-start="2" muted playsinline data-track-index="2"></video></div></div>
-    <p id="es-win-tag" class="tag" data-layout-ignore>Tela real do app · modo noturno</p>
-    <div id="es-win2" class="win" data-layout-allow-overflow style="opacity:0"><div id="es-win2-cam" class="cam"><video id="es-win2-m" class="clip" src="assets/app/clips/estudo-grade.mp4" data-start="4.9" data-duration="5.0" data-playback-rate="1.0" data-media-start="0.8" muted playsinline data-track-index="2"></video></div></div>
-    <div id="es-win3" class="win" data-layout-allow-overflow style="opacity:0"><div id="es-win3-cam" class="cam"><img id="es-win3-m" src="assets/app/stills/estudo-q2-graded-full.png" alt="" style="height:auto" /></div></div>
+    <div id="es-a" class="stage" data-layout-allow-overflow><div id="es-a-cam" class="cam"><video id="es-a-m" class="clip" src="assets/app/clips/estudo-typing.mp4" data-start="0" data-duration="6.4" data-playback-rate="4" data-media-start="1" muted playsinline data-track-index="2"></video></div></div>
+    <div id="es-b" class="stage" style="opacity:0" data-layout-allow-overflow><div id="es-b-cam" class="cam"><video id="es-b-m" class="clip" src="assets/app/clips/estudo-grade.mp4" data-start="6.4" data-duration="3.4" data-playback-rate="1.0" data-media-start="12.3" muted playsinline data-track-index="2"></video></div></div>
+    <div id="es-c" class="stage" style="opacity:0" data-layout-allow-overflow><div id="es-c-cam" class="cam"><img id="es-c-m" src="assets/app/stills/estudo-q2-graded-full.png" alt="" style="height:auto" /></div></div>
+    <div id="es-num" class="num clip" data-start="9.8" data-duration="2.6" style="top:300px" data-layout-allow-overflow><span class="v">0</span><small>/10</small></div>
+    <div id="es-k1" class="kin sm clip" data-start="10.3" data-duration="2.1" style="top:720px" data-layout-allow-overflow><span class="w">Nota,</span><span class="w">avaliação</span><span class="w">e</span><span class="w">o</span><span class="w">que</span><span class="w acc">faltou.</span></div>
+    <div id="es-c1" class="chip clip" data-start="0.9" data-duration="2.6" style="left:120px; top:900px">Digitando ou por <span class="acc">voz</span></div>
+    <div id="es-c2" class="chip clip" data-start="3.7" data-duration="2.6" style="left:120px; top:900px">Cronômetro · Normal · Rápido · <span class="acc">Turbo</span></div>
+    <div id="es-c3" class="chip clip" data-start="12.5" data-duration="2.8" style="left:120px; top:900px"><span class="acc">Avaliação</span> detalhada</div>
+    <div id="es-c4" class="chip clip" data-start="13.3" data-duration="2.0" style="left:120px; top:820px">Resposta de <span class="acc">referência</span></div>
+    <div id="es-c5" class="chip clip" data-start="14.1" data-duration="1.2" style="left:120px; top:740px">Revisão <span class="acc">analítica</span></div>
 
   </div>
   <script>
     (() => {
       const tl = gsap.timeline({ paused: true });
 
-      const wordIn = (sel, at) => document.querySelectorAll(sel + " .w").forEach((w, i) =>
-        tl.fromTo(w, { opacity: 0, filter: "blur(6px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.13, ease: "power2.out" }, at + i * 0.07));
-      const wordOut = (sel, at) => tl.to(sel + " .w", { opacity: 0, filter: "blur(6px)", duration: 0.18, ease: "power2.in", stagger: 0.03 }, at);
-      const subIn = (sel, at) => tl.fromTo(sel, { opacity: 0, filter: "blur(6px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.2, ease: "power2.out" }, at);
-      const K = 1100 / 1440;
-      const cam = (s, fx, fy) => ({ scale: K * s, x: 550 - fx * K * s, y: 344 - fy * K * s });
-      const camSet = (sel, s, fx, fy) => tl.fromTo(sel, cam(s, fx, fy), { ...cam(s, fx, fy), duration: 0.01 }, 0);
-      const camTo = (sel, s, fx, fy, at, dur = 0.6, ease = "power2.inOut") => tl.to(sel, { ...cam(s, fx, fy), duration: dur, ease }, at);
-      const winIn = (sel, at, fromX = 900) => tl.fromTo(sel, { x: fromX, opacity: 0, filter: "blur(10px)" }, { x: 0, opacity: 1, filter: "blur(0px)", duration: 0.55, ease: "power4.out" }, at);
-      const winOut = (sel, at, toX = 160) => tl.to(sel, { x: toX, opacity: 0, filter: "blur(10px)", duration: 0.4, ease: "power3.in" }, at);
-      const tagIn = (sel, at) => tl.fromTo(sel, { opacity: 0 }, { opacity: 1, duration: 0.3 }, at);
+      const wordIn = (sel, at, step = 0.09) => document.querySelectorAll(sel + " .w").forEach((w, i) =>
+        tl.fromTo(w, { opacity: 0, scale: 1.25, filter: "blur(10px)" }, { opacity: 1, scale: 1, filter: "blur(0px)", duration: 0.28, ease: "back.out(1.6)", transformOrigin: "50% 60%" }, at + i * step));
+      const wordOut = (sel, at) => tl.to(sel + " .w", { opacity: 0, filter: "blur(8px)", duration: 0.18, ease: "power2.in", stagger: 0.03 }, at);
+      const chipIn = (sel, at) => tl.fromTo(sel, { opacity: 0, scale: 0.8, y: 16 }, { opacity: 1, scale: 1, y: 0, duration: 0.32, ease: "back.out(1.7)", transformOrigin: "0% 100%" }, at);
+      const chipOut = (sel, at) => tl.to(sel, { opacity: 0, y: -10, duration: 0.18, ease: "power2.in" }, at);
+      // full-frame camera over a 1440x900 plate; the view never leaves the plate
+      const cam = (s, fx, fy, H = 900) => { const S = s * 4 / 3; const hw = 960 / S, hh = 540 / S; fx = Math.min(Math.max(fx, hw), 1440 - hw); fy = Math.min(Math.max(fy, hh), H - hh); return { scale: S, x: 960 - fx * S, y: 540 - fy * S }; };
+      const camSet = (sel, s, fx, fy, H) => tl.fromTo(sel, cam(s, fx, fy, H), { ...cam(s, fx, fy, H), duration: 0.01 }, 0);
+      const camTo = (sel, s, fx, fy, at, dur = 0.6, ease = "power2.inOut", H) => tl.to(sel, { ...cam(s, fx, fy, H), duration: dur, ease }, at);
+      const camCut = (sel, s, fx, fy, at, H) => tl.set(sel, cam(s, fx, fy, H), at);
+      const show = (sel, at) => tl.set(sel, { opacity: 1 }, at);
+      const hide = (sel, at) => tl.set(sel, { opacity: 0 }, at);
+      const dip = (sel, at) => { tl.to(sel, { opacity: 0, filter: "blur(8px)", duration: 0.16, ease: "power2.in" }, at); };
+      const rise = (sel, at) => { tl.fromTo(sel, { opacity: 0, filter: "blur(8px)", scale: 1.05 }, { opacity: 1, filter: "blur(0px)", scale: 1, duration: 0.22, ease: "power2.out", transformOrigin: "50% 50%" }, at); };
+      const push = (sel, from, to, at, dur) => tl.fromTo(sel, { scale: from }, { scale: to, duration: dur, ease: "none", transformOrigin: "50% 50%" }, at);
+      const typeInto = (sel, text, at, cps = 22) => { const el = document.querySelector(sel + " .tx"); const st = { n: 0 }; tl.fromTo(st, { n: 0 }, { n: text.length, duration: text.length / cps, ease: "none", onUpdate: () => { el.textContent = text.slice(0, Math.round(st.n)); } }, at); };
+      const countTo = (sel, to, at, dur, fmt = (v) => String(Math.round(v))) => { const el = document.querySelector(sel + " .v"); const st = { v: 0 }; tl.fromTo(st, { v: 0 }, { v: to, duration: dur, ease: "power3.out", onUpdate: () => { el.textContent = fmt(st.v); } }, at); };
 
 
-      winIn("#es-win", 0); tagIn("#es-win-tag", 0.5);
-      wordIn("#es-1", 0.3); subIn("#es-s1", 1.6);
-      camSet("#es-win-cam", 1.5, 820, 560);
-      camTo("#es-win-cam", 1.5, 820, 600, 0.6, 4.2, "none");
-      // the grade clip: click "Avaliar resposta", the 10/10 lands (clip ≈1.5 s → scene 6.4)
-      tl.to("#es-win", { opacity: 0, filter: "blur(8px)", duration: 0.25, ease: "power2.in" }, 4.9);
-      tl.fromTo("#es-win2", { opacity: 0, filter: "blur(8px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.25, ease: "power2.out" }, 4.95);
-      camSet("#es-win2-cam", 1.5, 760, 640);
-      camTo("#es-win2-cam", 1.9, 1040, 760, 6.2, 0.6);
-      wordOut("#es-1", 5.3); tl.to("#es-s1", { opacity: 0, duration: 0.2 }, 5.3);
-      wordIn("#es-2", 5.6); wordIn("#es-3", 5.9);
-      // swap to the full-page capture and ride down: Avaliação → Resposta de referência → Revisão analítica
-      camSet("#es-win3-cam", 1.1, 720, 900);
-      tl.to("#es-win2", { opacity: 0, duration: 0.2, ease: "power2.in" }, 9.3);
-      tl.fromTo("#es-win3", { opacity: 0, filter: "blur(8px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.25, ease: "power2.out" }, 9.35);
-      camTo("#es-win3-cam", 1.1, 720, 1750, 9.8, 5.2, "power1.inOut");
-      subIn("#es-s2", 9.6);
-      tl.to("#es-win3", { x: 160, opacity: 0, filter: "blur(10px)", duration: 0.4, ease: "power3.in" }, 15.0);
-      tl.to("#es-2 .w, #es-3 .w, #es-s2, #es-win-tag", { opacity: 0, duration: 0.25, ease: "power2.in" }, 15.05);
+      // A: the answer being typed, 4x, close on the text box; a quick re-frame to the timer at 3.6
+      camSet("#es-a-cam", 1.7, 760, 620);
+      camTo("#es-a-cam", 1.7, 760, 680, 0.4, 3.0, "none");
+      camCut("#es-a-cam", 2.2, 1170, 300, 3.6);                 // the timer and the Normal/Rápido/Turbo chips
+      camTo("#es-a-cam", 2.2, 1170, 330, 3.65, 2.6, "none");
+      chipIn("#es-c1", 0.9); chipOut("#es-c1", 3.4); chipIn("#es-c2", 3.7); chipOut("#es-c2", 6.2);
+      // B: hard cut to "Avaliar resposta" and the 10/10 landing (clip 12.3 → grade pops ≈ 2.3 s in)
+      hide("#es-a", 6.4); show("#es-b", 6.4);
+      camSet("#es-b-cam", 1.9, 820, 740);
+      camTo("#es-b-cam", 2.4, 1150, 790, 8.4, 0.5);               // punch on the green 10/10
+      // C: cut to black backdrop with the giant number counting up, then the chip line
+      hide("#es-b", 9.8);
+      countTo("#es-num", 10, 9.8, 1.2);
+      tl.fromTo("#es-num", { scale: 0.7, filter: "blur(12px)" }, { scale: 1, filter: "blur(0px)", duration: 0.5, ease: "back.out(1.4)", transformOrigin: "50% 50%" }, 9.8);
+      wordIn("#es-k1", 10.3, 0.07);
+      tl.to("#es-num, #es-k1 .w", { opacity: 0, filter: "blur(10px)", duration: 0.25, ease: "power2.in" }, 12.15);
+      // D: the full-page capture scrolling fast with the three chips popping
+      show("#es-c", 12.4);
+      camSet("#es-c-cam", 1.15, 720, 950, 2346);
+      camTo("#es-c-cam", 1.15, 720, 1850, 12.4, 2.9, "power1.inOut", 2346);
+      chipIn("#es-c3", 12.5); chipIn("#es-c4", 13.3); chipIn("#es-c5", 14.1);
+      tl.to("#es-c", { opacity: 0, filter: "blur(10px)", scale: 1.08, duration: 0.3, ease: "power3.in", transformOrigin: "50% 50%" }, 15.1);
+      tl.to("#es-c3, #es-c4, #es-c5", { opacity: 0, duration: 0.2 }, 15.1);
 
       window.__timelines["estudo"] = tl;
     })();

@@ -1,17 +1,23 @@
 <template>
   <style>
-    #root { position: absolute; inset: 0; font-family: var(--font-display, "Inter"), sans-serif; color: #fff; }
-    .t { position: absolute; left: 120px; width: 720px; font-weight: 700; font-size: 68px; line-height: 1.04; letter-spacing: -0.03em; }
-    .t .w { display: inline-block; margin-right: 0.22em; opacity: 0; }
-    .t .acc { color: var(--color-accent-light, #60a5fa); }
-    .sub { position: absolute; left: 124px; width: 620px; font-size: 30px; line-height: 1.4; font-weight: 500; color: #9aa3b2; opacity: 0; }
-    .win { position: absolute; left: 780px; top: 190px; width: 1100px; height: 688px; border-radius: 20px; overflow: hidden; background: #0b1220; border: 2px solid rgba(96,165,250,.22); box-shadow: 0 30px 80px rgba(0,0,0,.7); }
+    #root { position: absolute; inset: 0; font-family: var(--font-display, "Inter"), sans-serif; color: #fff; overflow: hidden; }
+    .stage { position: absolute; inset: 0; overflow: hidden; background: #0b1220; }
     .cam { position: absolute; left: 0; top: 0; width: 1440px; height: 900px; transform-origin: 0 0; }
     .cam > video, .cam > img { position: absolute; left: 0; top: 0; width: 1440px; height: 900px; display: block; }
-    .tag { position: absolute; left: 780px; top: 898px; font-size: 26px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: #9aa3b2; opacity: 0; }
+    .photo { position: absolute; left: -60px; top: -34px; width: 2040px; height: 1148px; }
+    .photo img { width: 2040px; height: 1148px; display: block; }
+    .kin { position: absolute; left: 0; width: 1920px; text-align: center; font-weight: 800; font-size: 220px; line-height: 1; letter-spacing: -0.045em; color: #fff; }
+    .kin .acc { color: var(--color-accent-light, #60a5fa); }
+    .kin.left { left: 120px; width: 1680px; text-align: left; }
+    .kin.sm { font-size: 96px; font-weight: 700; letter-spacing: -0.03em; }
+    .kin .w { display: inline-block; margin: 0 0.12em; opacity: 0; }
+    .chip { position: absolute; display: inline-block; padding: 16px 28px; border-radius: 14px; background: rgba(15,23,42,.9); border: 2px solid rgba(96,165,250,.55); color: #fff; font-size: 34px; font-weight: 700; letter-spacing: -0.01em; opacity: 0; white-space: nowrap; }
+    .chip .acc { color: var(--color-accent-light, #60a5fa); }
+    .num { position: absolute; left: 0; width: 1920px; text-align: center; font-weight: 800; font-size: 360px; line-height: 1; letter-spacing: -0.05em; color: #fff; font-variant-numeric: tabular-nums; }
+    .num small { font-size: 120px; font-weight: 700; color: #9aa3b2; letter-spacing: -0.02em; }
+    .typed { position: absolute; left: 0; width: 1920px; text-align: center; font-size: 44px; font-weight: 500; color: #9aa3b2; }
+    .typed .caret { display: inline-block; width: 3px; height: 1em; background: #60a5fa; vertical-align: -0.12em; margin-left: 4px; }
 
-    #ec-img { position: absolute; left: -40px; top: -22px; width: 2000px; height: 1125px; }
-    #ec-img img { width: 2000px; height: 1125px; display: block; }
     #ec-lockup { position: absolute; left: 0; top: 300px; width: 1920px; display: flex; align-items: center; justify-content: center; gap: 36px; }
     #ec-mark { width: 168px; height: 168px; flex: none; }
     #ec-word { font-weight: 700; font-size: 156px; line-height: 1; letter-spacing: -0.04em; color: #fff; white-space: nowrap; }
@@ -19,41 +25,49 @@
     #ec-cta { position: absolute; left: 0; top: 560px; width: 1920px; display: flex; justify-content: center; }
     #ec-btn { display: inline-block; background: var(--color-accent, #2563eb); color: #fff; font-weight: 600; font-size: 40px; padding: 26px 56px; border-radius: 18px; box-shadow: 0 14px 40px rgba(0,0,0,.45); }
     #ec-sub { position: absolute; left: 0; top: 690px; width: 1920px; text-align: center; font-size: 34px; font-weight: 500; color: #e6e8ec; }
-    #ec-url { position: absolute; left: 0; top: 770px; width: 1920px; text-align: center; font-size: 44px; font-weight: 700; color: #fff; letter-spacing: -0.01em; }
+    #ec-url { font-size: 52px; font-weight: 700; color: #fff; }
   </style>
   <div id="root" data-composition-id="endcard" data-width="1920" data-height="1080">
-    <div id="ec-img" data-layout-allow-overflow><img src="assets/gen/dawn-campus-dark.jpg" alt="Universidade ao amanhecer" /></div>
+    <div id="ec-p" class="photo" data-layout-allow-overflow><img src="assets/gen/dawn-campus-dark.jpg" alt="" /></div>
     <div id="ec-lockup"><img id="ec-mark" src="assets/brand/ivest-cap.svg" alt="iVest" /><div id="ec-word"><span class="i">i</span>Vest</div></div>
     <div id="ec-cta" class="clip" data-start="1.2" data-duration="8.4" data-hold><span id="ec-btn" data-var-text="cta-label">Criar conta grátis →</span></div>
-    <p id="ec-sub" class="clip" data-start="1.5" data-duration="8.1">Grátis para sempre · 3 dias de Pro no cadastro · Pro por R$ 39/mês</p>
-    <p id="ec-url" class="clip" data-start="1.7" data-duration="7.9" data-var-text="site-url">iveststudy.com</p>
+    <p id="ec-sub" class="clip" data-start="1.5" data-duration="8.1">Grátis para sempre · 3 dias de Pro no cadastro</p>
+    <p id="ec-url" class="clip typed" data-start="1.9" data-duration="7.7" style="top:770px"><span class="tx"></span><span class="caret"></span></p>
 
   </div>
   <script>
     (() => {
       const tl = gsap.timeline({ paused: true });
 
-      const wordIn = (sel, at) => document.querySelectorAll(sel + " .w").forEach((w, i) =>
-        tl.fromTo(w, { opacity: 0, filter: "blur(6px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.13, ease: "power2.out" }, at + i * 0.07));
-      const wordOut = (sel, at) => tl.to(sel + " .w", { opacity: 0, filter: "blur(6px)", duration: 0.18, ease: "power2.in", stagger: 0.03 }, at);
-      const subIn = (sel, at) => tl.fromTo(sel, { opacity: 0, filter: "blur(6px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.2, ease: "power2.out" }, at);
-      const K = 1100 / 1440;
-      const cam = (s, fx, fy) => ({ scale: K * s, x: 550 - fx * K * s, y: 344 - fy * K * s });
-      const camSet = (sel, s, fx, fy) => tl.fromTo(sel, cam(s, fx, fy), { ...cam(s, fx, fy), duration: 0.01 }, 0);
-      const camTo = (sel, s, fx, fy, at, dur = 0.6, ease = "power2.inOut") => tl.to(sel, { ...cam(s, fx, fy), duration: dur, ease }, at);
-      const winIn = (sel, at, fromX = 900) => tl.fromTo(sel, { x: fromX, opacity: 0, filter: "blur(10px)" }, { x: 0, opacity: 1, filter: "blur(0px)", duration: 0.55, ease: "power4.out" }, at);
-      const winOut = (sel, at, toX = 160) => tl.to(sel, { x: toX, opacity: 0, filter: "blur(10px)", duration: 0.4, ease: "power3.in" }, at);
-      const tagIn = (sel, at) => tl.fromTo(sel, { opacity: 0 }, { opacity: 1, duration: 0.3 }, at);
+      const wordIn = (sel, at, step = 0.09) => document.querySelectorAll(sel + " .w").forEach((w, i) =>
+        tl.fromTo(w, { opacity: 0, scale: 1.25, filter: "blur(10px)" }, { opacity: 1, scale: 1, filter: "blur(0px)", duration: 0.28, ease: "back.out(1.6)", transformOrigin: "50% 60%" }, at + i * step));
+      const wordOut = (sel, at) => tl.to(sel + " .w", { opacity: 0, filter: "blur(8px)", duration: 0.18, ease: "power2.in", stagger: 0.03 }, at);
+      const chipIn = (sel, at) => tl.fromTo(sel, { opacity: 0, scale: 0.8, y: 16 }, { opacity: 1, scale: 1, y: 0, duration: 0.32, ease: "back.out(1.7)", transformOrigin: "0% 100%" }, at);
+      const chipOut = (sel, at) => tl.to(sel, { opacity: 0, y: -10, duration: 0.18, ease: "power2.in" }, at);
+      // full-frame camera over a 1440x900 plate; the view never leaves the plate
+      const cam = (s, fx, fy, H = 900) => { const S = s * 4 / 3; const hw = 960 / S, hh = 540 / S; fx = Math.min(Math.max(fx, hw), 1440 - hw); fy = Math.min(Math.max(fy, hh), H - hh); return { scale: S, x: 960 - fx * S, y: 540 - fy * S }; };
+      const camSet = (sel, s, fx, fy, H) => tl.fromTo(sel, cam(s, fx, fy, H), { ...cam(s, fx, fy, H), duration: 0.01 }, 0);
+      const camTo = (sel, s, fx, fy, at, dur = 0.6, ease = "power2.inOut", H) => tl.to(sel, { ...cam(s, fx, fy, H), duration: dur, ease }, at);
+      const camCut = (sel, s, fx, fy, at, H) => tl.set(sel, cam(s, fx, fy, H), at);
+      const show = (sel, at) => tl.set(sel, { opacity: 1 }, at);
+      const hide = (sel, at) => tl.set(sel, { opacity: 0 }, at);
+      const dip = (sel, at) => { tl.to(sel, { opacity: 0, filter: "blur(8px)", duration: 0.16, ease: "power2.in" }, at); };
+      const rise = (sel, at) => { tl.fromTo(sel, { opacity: 0, filter: "blur(8px)", scale: 1.05 }, { opacity: 1, filter: "blur(0px)", scale: 1, duration: 0.22, ease: "power2.out", transformOrigin: "50% 50%" }, at); };
+      const push = (sel, from, to, at, dur) => tl.fromTo(sel, { scale: from }, { scale: to, duration: dur, ease: "none", transformOrigin: "50% 50%" }, at);
+      const typeInto = (sel, text, at, cps = 22) => { const el = document.querySelector(sel + " .tx"); const st = { n: 0 }; tl.fromTo(st, { n: 0 }, { n: text.length, duration: text.length / cps, ease: "none", onUpdate: () => { el.textContent = text.slice(0, Math.round(st.n)); } }, at); };
+      const countTo = (sel, to, at, dur, fmt = (v) => String(Math.round(v))) => { const el = document.querySelector(sel + " .v"); const st = { v: 0 }; tl.fromTo(st, { v: 0 }, { v: to, duration: dur, ease: "power3.out", onUpdate: () => { el.textContent = fmt(st.v); } }, at); };
 
 
-      tl.fromTo("#ec-img", { opacity: 0, scale: 1.08 }, { opacity: 1, scale: 1.0, duration: 1.2, ease: "power2.out", transformOrigin: "50% 40%" }, 0);
-      tl.to("#ec-img", { scale: 1.04, duration: 8.4, ease: "none", transformOrigin: "50% 40%" }, 1.2);
-      tl.fromTo("#ec-mark", { scale: 0.2, opacity: 0, rotate: -8 }, { scale: 1, opacity: 1, rotate: 0, duration: 0.6, ease: "back.out(1.4)", transformOrigin: "50% 50%" }, 0.4);
+      tl.fromTo("#ec-p", { opacity: 0, scale: 1.1 }, { opacity: 1, scale: 1.0, duration: 1.0, ease: "power2.out", transformOrigin: "50% 40%" }, 0);
+      tl.to("#ec-p", { scale: 1.05, duration: 8.6, ease: "none", transformOrigin: "50% 40%" }, 1.0);
+      tl.fromTo("#ec-mark", { scale: 0.2, opacity: 0, rotate: -10 }, { scale: 1, opacity: 1, rotate: 0, duration: 0.6, ease: "back.out(1.5)", transformOrigin: "50% 50%" }, 0.4);
       tl.fromTo("#ec-word", { x: -420, opacity: 0 }, { x: 0, opacity: 1, duration: 0.35, ease: "power3.out" }, 0.65);
       tl.fromTo("#ec-btn", { y: 40, opacity: 0, scale: 0.96, transformOrigin: "50% 50%" }, { y: 0, opacity: 1, scale: 1, duration: 0.4, ease: "power4.out" }, 1.2);
-      tl.to("#ec-btn", { scale: 0.97, duration: 0.07, yoyo: true, repeat: 1, ease: "power2.inOut" }, 1.75);
+      tl.to("#ec-btn", { scale: 0.96, duration: 0.07, yoyo: true, repeat: 1, ease: "power2.inOut" }, 1.75);
       tl.fromTo("#ec-sub", { opacity: 0, filter: "blur(6px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.2, ease: "power2.out" }, 1.5);
-      tl.fromTo("#ec-url", { opacity: 0, filter: "blur(6px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.2, ease: "power2.out" }, 1.7);
+      typeInto("#ec-url", "iveststudy.com", 1.9, 14);
+      const caret = document.querySelector("#ec-url .caret"); const cs = { t: 0 };
+      tl.fromTo(cs, { t: 0 }, { t: 9.6, duration: 9.6, ease: "none", onUpdate: () => { caret.style.opacity = Math.floor(cs.t * 2.5) % 2 === 0 ? 1 : 0; } }, 0);
 
       window.__timelines["endcard"] = tl;
     })();

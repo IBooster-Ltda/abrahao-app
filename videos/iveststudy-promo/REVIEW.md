@@ -1,19 +1,20 @@
-# REVIEW · iVest promo desktop · modo noturno (97 s, 1920×1080, 30 fps, narrado)
+# REVIEW · iVest promo · corte dinâmico, modo noturno (97 s, 1920×1080, 30 fps, narrado)
 
 ## O que mudou nesta versão
-- Voz masculina: ElevenLabs "Brian", grave e calma, mesmas 12 falas.
-- Modo noturno de ponta a ponta: regravei todos os fluxos do app com o tema escuro ativado (Modo Estudo com duas respostas 10/10 em História, Quiz de Geografia, Flashcards de Química, Simulado FUVEST, Redação 920/1000 sobre juventude e clima, Mentor, Dashboard, Ranks, Conquistas, Turma, home em EN/ES).
-- Imagens novas, geradas por IA no Runway (nano-banana-pro) a pedido: abertura com um estudante estudando à noite à luz do notebook; encerramento com estudantes subindo a escadaria de uma universidade ao amanhecer; e uma textura escura com bokeh sutil como fundo das cenas de janela. As três foram escurecidas em pós (0,8 / 0,62 / 0,9) para o texto ler bem.
-- Mais efeitos sonoros, cada um sobre uma ação visível: teclas e digitação (abertura do reveal, digitação da resposta, pergunta ao Mentor), clique em "Avaliar resposta", riser + impacto + brilho no 10/10 e no 920/1000, pops nos cards da home e no "Sabia!", clique e pop no "Correto!" do quiz, clique + ping ao iniciar o simulado, notificação quando o Mentor responde, whooshes nas trocas de janela, whoosh cinematográfico nas duas transições de foto, teclas nos chips de idioma, pop na marca e clique no botão final.
-- Look: fundo com a textura gerada, janelas do app escuro com borda azul sutil e sombra forte, títulos Inter 700 68 px, acento #60A5FA. Sem end card branco: o fechamento é sobre a foto do campus.
+- Pedido: menos parado e repetitivo, sem a etiqueta "tela real do app", mais ambientes, zooms, digitação, gancho forte.
+- Nova montagem: cerca de 40 cortes em 97 s. O app agora ocupa a tela inteira com câmera (punch-ins de 1,25× a 3×, travellings, cortes secos entre enquadramentos), intercalado com quatro fotos geradas (estudante à noite, mãos digitando, campus ao amanhecer, textura de fundo), tipografia gigante que entra na batida (HORAS · pontos? · ENEM/FUVEST/UNICAMP/PAES/SAT · PT/EN/ES · do Bronze ao Elite), números que contam (10/10, 363 dias, 920/1000), legendas em chips que pipocam com som de tecla, e texto digitado com cursor (subtítulo do reveal e o domínio no fim).
+- Gancho: foto noturna + "HORAS" gigante em 0,5 s; corte seco para as mãos digitando com "Onde você perde pontos?" em 2,6 s; zoom-through para a marca.
+- Sem etiqueta "Tela real do app": todo o material do app continua real (gravações e capturas em modo escuro), mas sem rótulo.
+- Voz: ElevenLabs "Brian" (masculina). Som: ~110 cues (teclas, digitação, cliques, pops, risers, impactos, brilhos, whooshes, ping, notificação) sincronizados às ações.
+- Câmera com limite: o enquadramento nunca sai da tela capturada (bug da faixa branca da versão anterior corrigido).
 
 ## Medido e olhado
-- `hyperframes check`: ok; um aviso mantido de propósito (o clipe da correção começa em 4,9 s dentro da cena, para o 10/10 cair na fala "corrige na hora").
-- `snapshot --review` + 8 quadros intermediários: olhados; corrigidos o início do clipe de Flashcards (mostrava a seleção), o quadro claro no início do Simulado e o enquadramento do Dashboard (agora começa no mapa de atividade, sem a linha de KPIs).
+- `hyperframes check`: ok; quatro avisos mantidos de propósito (clipes que começam no meio da cena para cair na fala certa).
+- 28 quadros intermediários olhados antes do render e uma folha de contato do MP4 final.
 - Áudio medido com `hyperframes audio`; ninguém ouviu.
 
 ## Pontos fracos
-- Dashboard do cliente ainda tem dados antigos de teste (média 3,5); a câmera evita a linha de números.
-- "Ranks" mostra "Sem rank" (menos de 10 respostas no Modo Estudo nesta conta).
-- Música continua o loop gerado de 22 s; voz "Brian" é uma voz padrão em inglês falando português. Voz nativa exige plano pago da ElevenLabs.
-- As fotos geradas mostram pessoas genéricas criadas por IA, não alunos reais do iVest; se preferir, trocamos por fotos reais do cliente.
+- A voz "Brian" é uma voz padrão em inglês falando português; voz nativa exige plano pago da ElevenLabs.
+- Música: loop gerado de 22 s; uma trilha com drops marcados deixaria os cortes ainda mais fortes.
+- Dashboard do cliente com dados antigos de teste; a câmera evita a linha de números.
+- As fotos são pessoas genéricas geradas por IA.
