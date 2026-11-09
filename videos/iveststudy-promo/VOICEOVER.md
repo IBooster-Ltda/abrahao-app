@@ -6,9 +6,11 @@ Ritmo alvo: ~2,2 palavras/s. 54 palavras em 26 s.
 | # | Entra em | Fala | Beat na tela |
 |---|---|---|---|
 | 1 | 0,6 s | Horas de estudo. E a dúvida continua: onde você perde pontos? | digitação + "Você estudou horas. Mas sabe onde errou?" |
-| 2 | 6,9 s | No iVest, você escreve a resposta como na prova, e a IA corrige na hora, mostrando o que ficou faltando. | cartão "Correção por IA", linha "Faltou" |
-| 3 | 13,0 s | Quiz rápido, simulados no formato oficial, e um rank que acompanha sua evolução. | telas reais do app |
+| 2 | 6,4 s | No iVest, você escreve a resposta como na prova, e a IA corrige na hora, mostrando o que ficou faltando. | cartão "Correção por IA", linha "Faltou" |
+| 3 | 13,8 s | Quiz rápido, simulados no formato oficial, e um rank que acompanha sua evolução. | telas reais do app |
 | 4 | 19,9 s | ENEM, Fuvest, Unicamp, PAES e SAT. | "Prepare-se para o exame que muda tudo." |
 | 5 | 23,2 s | Crie sua conta grátis em iveststudy.com. | end card |
 
 Fonte de cada afirmação: landing (simulados "no formato oficial", "Suba de Bronze até Elite", "Comece grátis", provas cobertas).
+
+Voz: ElevenLabs "Sarah" (voz padrão, modelo eleven_multilingual_v2, idioma pt). Alternativa masculina "Brian" em `assets/audio/alt/`. A conta gratuita não permite vozes da biblioteca brasileira pela API; com plano pago, "Roberta" (RGymW84CSmfVugnA5tvA) ou "Paulo" (Qrdut83w0Cr152Yb4Xn3) já estão adicionadas à conta.
