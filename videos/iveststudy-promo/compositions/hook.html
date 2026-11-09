@@ -1,82 +1,53 @@
 <template>
   <style>
-    #root { position: absolute; inset: 0; font-family: var(--font-display, "Inter"), sans-serif; color: var(--color-app-ink, #e6e8ec); }
-    .hook-title { position: absolute; left: 120px; top: 300px; width: 760px; font-weight: 700; font-size: 92px; line-height: 1.04; letter-spacing: -0.03em; }
-    .hook-title .w { display: inline-block; margin-right: 0.22em; opacity: 0; }
-    .hook-title .acc { color: var(--color-accent-light, #60a5fa); }
-    #hook-line2 { top: 505px; }
+    #root { position: absolute; inset: 0; font-family: var(--font-display, "Inter"), sans-serif; color: #fff; }
+    .t { position: absolute; left: 120px; width: 720px; font-weight: 700; font-size: 68px; line-height: 1.04; letter-spacing: -0.03em; }
+    .t .w { display: inline-block; margin-right: 0.22em; opacity: 0; }
+    .t .acc { color: var(--color-accent-light, #60a5fa); }
+    .sub { position: absolute; left: 124px; width: 620px; font-size: 30px; line-height: 1.4; font-weight: 500; color: #9aa3b2; opacity: 0; }
+    .win { position: absolute; left: 780px; top: 190px; width: 1100px; height: 688px; border-radius: 20px; overflow: hidden; background: #fff; border: 2px solid rgba(255,255,255,.10); box-shadow: 0 30px 80px rgba(0,0,0,.55); }
+    .cam { position: absolute; left: 0; top: 0; width: 1440px; height: 900px; transform-origin: 0 0; }
+    .cam > video, .cam > img { position: absolute; left: 0; top: 0; width: 1440px; height: 900px; display: block; }
+    .tag { position: absolute; left: 780px; top: 898px; font-size: 26px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: #9aa3b2; opacity: 0; }
 
-    /* The app's answer box, rebuilt from the real screen at 2x */
-    #hook-camwrap { position: absolute; left: 1000px; top: 130px; width: 820px; height: 820px; }
-    #hook-card { position: absolute; inset: 0; background: var(--color-app-card, #171a21); border: 2px solid #262b35; border-radius: 24px; box-shadow: 0 24px 60px rgba(0,0,0,.45); padding: 44px 48px; display: flex; flex-direction: column; gap: 22px; }
-    .ui-label { font-size: 28px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: #9aa3b2; }
-    #hook-timerbox { background: #0f1115; border: 2px solid #262b35; border-radius: 16px; padding: 18px 28px; font-family: "JetBrains Mono", monospace; font-weight: 700; font-size: 64px; line-height: 1; color: #fff; width: 100%; }
-    .chips { display: flex; gap: 14px; }
-    .chip { font-size: 28px; font-weight: 600; padding: 12px 24px; border-radius: 12px; background: #0f1115; border: 2px solid #262b35; color: #9aa3b2; }
-    .chip.on { background: #fff; color: #0f1115; border-color: #fff; }
-    .chip .pt { color: var(--color-accent-light, #60a5fa); }
-    .chip.on .pt { color: var(--color-accent, #2563eb); }
-    #hook-answer { flex: 1; background: #0f1115; border: 2px solid #262b35; border-radius: 16px; padding: 26px 30px; font-size: 34px; line-height: 1.42; color: #fff; overflow: hidden; }
-    #hook-caret { display: inline-block; width: 3px; height: 1em; background: #fff; vertical-align: -0.15em; margin-left: 2px; }
-    .ui-foot { display: flex; align-items: center; gap: 28px; font-size: 28px; color: #9aa3b2; }
-    .ui-foot .lang { display: flex; gap: 6px; }
-    .ui-foot .lang span { padding: 6px 14px; border-radius: 8px; border: 2px solid #262b35; }
-    .ui-foot .lang span.on { background: #fff; color: #0f1115; border-color: #fff; }
-    .ui-foot .right { margin-left: auto; }
   </style>
   <div id="root" data-composition-id="hook" data-width="1920" data-height="1080">
-    <h1 id="hook-line1" class="hook-title clip" data-start="0.3" data-duration="5.9" data-layout-allow-overflow>
-      <span class="w">Você</span><span class="w">estudou</span><span class="w">horas.</span>
-    </h1>
-    <h1 id="hook-line2" class="hook-title clip" data-start="2.4" data-duration="3.8" data-layout-allow-overflow>
-      <span class="w">Mas</span><span class="w">sabe</span><span class="w acc">onde</span><span class="w">errou?</span>
-    </h1>
+    <h1 id="hk-1" class="t clip" data-start="0.3" data-duration="5.3" style="top:300px" data-layout-allow-overflow><span class="w">Você</span><span class="w">estudou</span><span class="w">horas.</span></h1>
+    <h1 id="hk-2" class="t clip" data-start="2.2" data-duration="3.4" style="top:380px" data-layout-allow-overflow><span class="w">Mas</span><span class="w">sabe</span><span class="w acc">onde</span><span class="w">errou?</span></h1>
+    <div id="hk-win" class="win" data-layout-allow-overflow><div id="hk-win-cam" class="cam"><video id="hk-win-m" class="clip" src="assets/app/clips/estudo-typing.mp4" data-start="0" data-duration="5.6" data-playback-rate="4" data-media-start="2" muted playsinline data-track-index="2"></video></div></div>
+    <p id="hk-win-tag" class="tag" data-layout-ignore>Tela real do app · desktop</p>
 
-    <div id="hook-camwrap">
-      <div id="hook-card">
-        <div class="ui-label">Cronômetro da pergunta</div>
-        <div id="hook-timerbox">2:52</div>
-        <div class="chips">
-          <div class="chip on">Normal</div>
-          <div class="chip">Rápido <span class="pt">+1pt</span></div>
-          <div class="chip">Turbo <span class="pt">+2pt</span></div>
-        </div>
-        <div id="hook-answer" data-layout-ignore><span id="hook-typed"></span><span id="hook-caret"></span></div>
-        <div class="ui-foot">
-          <span>✎ Responder por voz</span>
-          <span class="lang"><span class="on">PT</span><span>EN</span></span>
-          <span class="right">Limpar</span>
-        </div>
-      </div>
-    </div>
   </div>
   <script>
     (() => {
       const tl = gsap.timeline({ paused: true });
-      const wordIn = (sel, at) => {
-        document.querySelectorAll(sel + " .w").forEach((w, i) => {
-          tl.fromTo(w, { opacity: 0, filter: "blur(6px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.13, ease: "power2.out" }, at + i * 0.07);
-        });
-      };
-      wordIn("#hook-line1", 0.3);
-      wordIn("#hook-line2", 2.4);
 
-      // The student's answer, from the site's own illustrative example, typed at 47 chars/s.
-      const text = "A fluidez deixa proteínas e lipídios se moverem na bicamada, o que permite endocitose, exocitose e transporte. Fatores: ácidos graxos insaturados aumentam a fluidez e o colesterol a regula conforme a temperatura.";
-      const typed = document.getElementById("hook-typed");
-      const state = { n: 0 };
-      tl.fromTo(state, { n: 0 }, { n: text.length, duration: 3.9, ease: "none", onUpdate: () => { typed.textContent = text.slice(0, Math.round(state.n)); } }, 0.8);
-      // Caret: blinks on timeline time (deterministic), 2 per second
-      const caret = document.getElementById("hook-caret");
-      const cs = { t: 0 };
-      tl.fromTo(cs, { t: 0 }, { t: 6.2, duration: 6.2, ease: "none", onUpdate: () => { caret.style.opacity = Math.floor(cs.t * 2) % 2 === 0 ? 1 : 0; } }, 0);
-      // Timer: 2:52 counting down one second at a time
-      const timer = document.getElementById("hook-timerbox");
-      const ts = { s: 172 };
-      tl.fromTo(ts, { s: 172 }, { s: 172 - 6.2, duration: 6.2, ease: "none", onUpdate: () => { const v = Math.ceil(ts.s); timer.textContent = Math.floor(v / 60) + ":" + String(v % 60).padStart(2, "0"); } }, 0);
-      // Hand-off: the box pushes in and softens over the last 12 frames, the correction grows out of it in the next scene.
-      tl.fromTo("#hook-card", { scale: 1, filter: "blur(0px)" }, { scale: 1.08, filter: "blur(6px)", duration: 0.4, ease: "power3.in", transformOrigin: "50% 60%" }, 5.85);
-      tl.fromTo("#hook-line1 .w, #hook-line2 .w", { opacity: 1 }, { opacity: 0, duration: 0.25, ease: "power2.in" }, 5.9);
+      const wordIn = (sel, at) => document.querySelectorAll(sel + " .w").forEach((w, i) =>
+        tl.fromTo(w, { opacity: 0, filter: "blur(6px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.13, ease: "power2.out" }, at + i * 0.07));
+      const wordOut = (sel, at) => tl.to(sel + " .w", { opacity: 0, filter: "blur(6px)", duration: 0.18, ease: "power2.in", stagger: 0.03 }, at);
+      const subIn = (sel, at) => tl.fromTo(sel, { opacity: 0, filter: "blur(6px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.2, ease: "power2.out" }, at);
+      // camera: scale s on a 1440x900 plate shown in a 1040x650 window, centred on (fx, fy) plate px
+      const K = 1100 / 1440;
+      const cam = (s, fx, fy) => ({ scale: K * s, x: 550 - fx * K * s, y: 344 - fy * K * s });
+      const camSet = (sel, s, fx, fy) => gsap.set(sel, cam(s, fx, fy));
+      const camTo = (sel, s, fx, fy, at, dur = 0.6, ease = "power2.inOut") => tl.to(sel, { ...cam(s, fx, fy), duration: dur, ease }, at);
+      const camFrom = (sel, s, fx, fy, s2, fx2, fy2, at, dur = 0.6, ease = "power2.inOut") => tl.fromTo(sel, cam(s, fx, fy), { ...cam(s2, fx2, fy2), duration: dur, ease }, at);
+      const winIn = (sel, at, fromX = 900) => tl.fromTo(sel, { x: fromX, opacity: 0, filter: "blur(10px)" }, { x: 0, opacity: 1, filter: "blur(0px)", duration: 0.55, ease: "power4.out" }, at);
+      const winOut = (sel, at, toX = 160) => tl.to(sel, { x: toX, opacity: 0, filter: "blur(10px)", duration: 0.4, ease: "power3.in" }, at);
+      const tagIn = (sel, at) => tl.fromTo(sel, { opacity: 0 }, { opacity: 1, duration: 0.3 }, at);
+
+
+      wordIn("#hk-1", 0.3); wordIn("#hk-2", 2.2);
+      tl.fromTo("#hk-win", { opacity: 1, scale: 1 }, { opacity: 1, scale: 1, duration: 0.01 }, 0);
+      tagIn("#hk-win-tag", 0.5);
+      // on the answer box while the student types; the timer top-right stays in frame
+      camSet("#hk-win-cam", 1.0, 720, 450);
+      camTo("#hk-win-cam", 1.55, 800, 560, 0.3, 1.1);
+      camTo("#hk-win-cam", 1.55, 800, 600, 1.6, 3.6, "none");
+      // hand-off: zoom through the window into the reveal
+      tl.to("#hk-1 .w, #hk-2 .w, #hk-win-tag", { opacity: 0, duration: 0.25, ease: "power2.in" }, 4.95);
+      tl.to("#hk-win", { scale: 1.06, opacity: 0, filter: "blur(10px)", duration: 0.4, ease: "power3.in", transformOrigin: "50% 50%" }, 5.2);
+
       window.__timelines["hook"] = tl;
     })();
   </script>

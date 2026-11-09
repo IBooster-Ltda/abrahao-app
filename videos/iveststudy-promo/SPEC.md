@@ -1,17 +1,15 @@
-GOAL:    um estudante de vestibular entende tudo que o iVest faz (escreve, a IA corrige, treino diário, trilhas, painel, rank, Pro, provas, idiomas) e cria a conta grátis.
+GOAL:    um estudante entende tudo que o iVest faz, vendo o app desktop de verdade funcionando, e cria a conta grátis.
 OUTPUT:  HyperFrames, 1920 x 1080, 30 fps
-TIME:    76 s x 30 = 2280 quadros; a narração (9 falas, VOICEOVER.md) é o relógio; música gerada a 118 BPM sob a voz a 0,2
-LOOK:    mundo app (0–34 s): chão #0F1115, cartões #171A21 borda 2 px #262B35 raio 24 px, tinta #E6E8EC, cinza #9AA3B2, acento #60A5FA (uma palavra por título), âmbar #FBBF24 só no "Faltou", verde #22C55E só nos checks;
-         mundo landing (34–76 s): chão #FFFFFF, tinta #0F172A, acento #2563EB. Flood do chão em 0,4 s em 33,6 s.
-         Display Inter 700 92 px (84 px nas cenas de página inteira) tracking -0,03em; linhas de apoio Inter 500 30–32 px; UI reconstruída em 2x: corpo 34 px, rótulos 28 px caixa alta tracking 0,12em, cronômetro JetBrains Mono 700 64 px.
-         Realces de UI: borda 3 px #60A5FA raio 14 px, só enquanto a voz nomeia o controle. Sombras 0 24px 60px rgba(0,0,0,.45). Sem textura, sem glow, sem gradiente.
-OBJECTS: caixa de resposta (cronômetro, chips Normal/Rápido/Turbo, texto, "Responder por voz"); cartão "Correção por IA" (anel 7/10, 2 checks, 1 linha âmbar); tela inicial real (nível/XP, meta do dia, sequência, Treino do dia);
-         grade real das 11 trilhas; 4 cards reais de performance; faixa real de medalhas Bronze→Elite; card real "Pro Mensal R$39"; 8 chips de provas; 3 tours oficiais (PT/EN/ES); marca: capelo azul + wordmark "iVest" com "i" azul.
-MOTION:  títulos por palavra blur 6→0 em 0,13 s, 0,07 s entre palavras, parados depois; cartões chegam em power4.out 0,5–0,6 s; punch-ins de câmera power2.inOut 0,5 s com origem no canto do objeto, segurando enquanto a voz fala;
-         saídas 0,3–0,4 s power3.in com blur; marca back.out(1.4) 0,6 s; medalhas em travelling de 4 s power1.inOut; nada em loop; algo novo a cada 2–4 s.
-SHOTS:   0–6,2 HOOK digitação + cronômetro, "Você estudou horas. Mas sabe onde errou?" · 6,2–10,6 REVEAL marca + "iVest" + "Plataforma de estudo com correção por IA" · 10,6–23,2 CORREÇÃO: punch em "Responder por voz", travel ao cronômetro e modos, caixa → cartão, anel 0→7, checks, "Faltou" com punch e impacto (20,5 s)
-         · 23,2–34 TREINO DO DIA tela real: card Treino do dia → nível/XP → chama da sequência · 34–42,6 TRILHAS grade real com drift · 42,6–53,4 PAINEL cards em travelling → faixa de medalhas Bronze→Elite · 53,4–61,4 PRO card real R$39 + "Mentor iVest e simulados" + "3 DIAS GRÁTIS NO CADASTRO"
-         · 61,4–68 PROVAS chips ENEM…SAT pipocando + 3 tours reais PT/EN/ES · 68–76 END CARD marca, "Criar conta grátis →", "Grátis para sempre · 3 dias de Pro no cadastro", iveststudy.com, parado 3 s.
-BANNED:  vazio escuro com coisas pequenas no meio; glow, partículas, gradientes; três cards em linha como cena (os cards reais da landing só aparecem como captura, com câmera); KPI grid; logo no canto; tudo entrando por fade+slide-up;
-         título que continua se movendo; dashboard ou tela inventados; botão ou rótulo que o site não tem; cursor clicando no que não existe; a tela repetindo a frase falada palavra por palavra.
-QA:      f0 caixa + cronômetro; f190 reveal lockup; f400 realce "Responder por voz" legível; f630 "Faltou" em 2x; f765 Treino do dia; f1080 grade inteira sem corte lateral; f1450 medalhas; f1700 card Pro; f1900 três telefones + chips; f2200 end card parado.
+TIME:    98 s x 30 = 2940 quadros; a narração (12 falas, VOICEOVER.md) é o relógio; música gerada a 118 BPM a 0,2 sob a voz; flood para o branco em 88,4 s
+LOOK:    chão #0F172A (faixa escura da landing), tinta #FFF, cinza #9AA3B2, acento #60A5FA (uma palavra por título); janelas do app 1100x688 (16:10) em left 780 / top 190, raio 20 px, borda 2 px rgba(255,255,255,.1),
+         sombra 0 30px 80px rgba(0,0,0,.55); dentro, a gravação ou captura 1440x900 do app desktop com câmera (scale 1,0–2,1, punch de 0,6–0,9 s power2.inOut, origem no controle nomeado pela voz);
+         títulos Inter 700 68 px tracking -0,03em em duas linhas (top 300 / 380), linhas de apoio Inter 500 30 px (top 500); etiqueta "TELA REAL DO APP · DESKTOP" 26 px caixa alta sob a janela; end card branco com tinta #0F172A e acento #2563EB.
+OBJECTS: só telas reais do app logado: Modo Estudo (pergunta, cronômetro, símbolos, caixa de resposta, "Responder por voz", "Avaliar resposta", 10/10, Avaliação, Resposta de referência, Revisão analítica), tela inicial em modo escuro
+         (Nível 3, meta, 1 dia, Treino do dia, Missões, Reta final 363 dias), Flashcards (frente, verso, Não sabia/Quase lá/Sabia!), Quiz ("Correto!"), Simulados (bancas, ENEM 75 min), Redação (920/1000, C1–C5), Mentor,
+         Dashboard, Progressão de Ranks, Conquistas, Turma & Ranking, home em EN/ES; marca: capelo + wordmark "iVest".
+MOTION:  janelas entram em 0,55 s power4.out deslizando de fora (alternando lado), saem em 0,4 s power3.in com blur; títulos por palavra blur 6→0 em 0,13 s; a câmera só se move quando a voz nomeia algo; vídeo em 1,0–4× conforme a cena; nada em loop.
+SHOTS:   ver VOICEOVER.md (12 cenas, uma por fala): hook 0–5,6 · reveal 5,6–11,5 · estudo 11,5–27 · home 27–38,5 · flashcards 38,5–46,6 · quiz 46,6–51,4 · simulados 51,4–59,9 · redação 59,9–66,5 · mentor 66,5–72,1 · progresso 72,1–82,2 · turma/idiomas 82,2–88,8 · end card 88,8–98.
+BANNED:  mockups ou telas inventadas; dados pessoais do cliente (e-mail mascarado, Admin oculto); vazio escuro com coisas pequenas (a janela ocupa 57% da largura e sempre há um título); glow, partículas, gradientes; três cards em linha;
+         logo no canto; tudo entrando por fade+slide-up; título que continua se movendo; a tela repetindo a frase falada palavra por palavra; quadro cinza de captura (removido da cena de correção).
+QA:      f0 janela + título visíveis; f170 reveal; f500 realce 10/10 inteiro no quadro; f660 Avaliação legível; f900 Treino do dia; f1250 verso do flashcard; f1460 "Correto!"; f1700 simulado ENEM 75 min; f1860 920/1000; f2050 Mentor; f2250 heatmap;
+         f2400 Bronze→Elite; f2560 Turma; f2880 end card parado.

@@ -1,23 +1,21 @@
-# REVIEW · iVest promo (76 s, 1920×1080, 30 fps, narrado)
+# REVIEW · iVest promo desktop (98 s, 1920×1080, 30 fps, narrado)
 
-## Decisões criativas
-- Versão longa pedida: "todos os features", ~1 min, música nova, pronúncia "aiVest". A narração ficou em 74 s no ritmo natural da voz, então o filme tem 76 s; encurtar exigiria cortar funcionalidades.
-- Estrutura: a voz é o relógio. Nove cenas: gancho (digitação + cronômetro) → reveal da marca → correção por IA (voz, modos, nota, checks, "Faltou") → treino do dia / XP / sequência → 11 trilhas → painel + rank Bronze→Elite → plano Pro (Mentor, simulados) → provas + 3 idiomas → end card.
-- Dois mundos: o app escuro (0–34 s) e a landing branca (34–76 s), com um flood de cor na entrada das trilhas.
-- Tudo que aparece como produto é real: caixa de resposta e cartão de correção reconstruídos em 2× a partir do tour oficial e do exemplo ilustrativo do site; tela inicial real do app (still do tour); grade de trilhas, cards de performance, medalhas e card do plano Pro são capturas da landing; os três tours oficiais (PT/EN/ES) lado a lado. Nenhum dashboard ou tela inventados.
-- Copy dos títulos é do site: "Você estudou horas. Mas sabe onde errou?", "Escreva como na prova.", "Veja o que faltou.", "Treino do dia", "Tudo que cai nas grandes provas.", "O que é medido, é melhorado.", "Cada treino te aproxima de virar Elite.", "3 DIAS GRÁTIS NO CADASTRO", "Criar conta grátis →".
-- Música: loop instrumental gerado pelo gerador de som da ElevenLabs (prompt: eletrônico otimista, 118 BPM), repetido 4× e a 0,2 sob a voz. A API de música da ElevenLabs e a geração no Runway exigem plano pago. O analisador classificou o arquivo como música (confiança 0,9); ninguém ouviu.
-- Pronúncia: "aiVest" escrito no roteiro; em português a leitura natural é "ai-vést". Os títulos na tela mantêm a grafia oficial "iVest".
+## O que mudou nesta versão
+- Pedido: capturas e takes novos do app na versão desktop, cobrindo todos os recursos e benefícios. Entrei no app com a conta do cliente e gravei os fluxos reais em 1440×900 (vídeo) e 2× (capturas): Modo Estudo com três respostas corrigidas pela IA ao vivo (todas 10/10), Quiz, Flashcards, Simulado ENEM, Redação avaliada por competência (920/1000), Mentor respondendo, Dashboard, Ranks, Conquistas, Turma & Ranking, tela inicial em modo escuro e em EN/ES.
+- Privacidade: o e-mail do cliente foi substituído por "ana@exemplo.com" e o link Admin ocultado via injeção de script nas capturas. A senha ficou só no diretório temporário da sessão, fora do repositório. As respostas, a redação e os cliques ficaram registrados na conta (3 tentativas 10/10 em Biologia, 2 quizzes certos, 1 redação, 2 flashcards).
+- Look: chão navy #0F172A (a faixa escura da própria landing), janelas do app com raio 20 px e sombra ocupando 57% da largura, títulos Inter 700 68 px à esquerda com uma palavra em #60A5FA, câmera com punch-ins de 1,2× a 2,1× nos controles que a voz nomeia, etiqueta "Tela real do app · desktop". End card branco.
+- Estrutura em 12 cenas guiadas pela narração (VOICEOVER.md). Música: loop gerado pela ElevenLabs a 118 BPM, 0,2 sob a voz.
 
-## O que foi medido e o que só foi olhado
+## Medido e olhado
 - `hyperframes check`: ok, sem erros nem avisos na versão final.
-- `snapshot --review` (18 beats, 8 emendas, folha de celular) + 16 quadros intermediários: olhados; corrigidos: faixa preta no quadro da tela inicial, realce dos modos deslocado, primeira coluna da grade cortada, cards do painel pequenos demais, título "Feedback estruturado." quebrando sobre a linha de baixo.
-- Áudio do MP4 medido com `hyperframes audio` (loudness, picos, silêncio). Ninguém ouviu a mixagem nem a voz.
+- `snapshot --review` (24 beats) + quadros intermediários: olhados. Corrigido: um trecho da gravação do Modo Estudo em que a captura de página inteira deixou meio quadro cinza; a cena passa a usar a captura estática da página completa com a câmera rolando pela Avaliação, Resposta de referência e Revisão analítica.
+- Áudio do MP4 medido com `hyperframes audio`; ninguém ouviu a mixagem nem a voz.
 
-## Ponto mais fraco
-- A música é um loop de 22 s gerado por IA; pode soar repetitivo em 76 s. Com uma trilha licenciada do cliente, troca em um minuto (`assets/audio/music-loop.m4a`).
-- A voz "Sarah" é uma voz padrão em inglês falando português; pode ter leve sotaque. Com plano pago da ElevenLabs, "Roberta" ou "Paulo" (nativos) já estão na conta.
-- Mentor iVest não tem tela capturável sem login; aparece só no título e na fala.
+## Pontos fracos
+- O Dashboard do cliente carrega dados antigos de teste (média 2,5 de 10, 23% de acerto); a câmera foca no mapa de atividade e no desempenho por trilha, mas a linha de KPIs aparece por um instante. Responder mais questões com nota alta na conta melhora isso.
+- "Ranks" mostra "Sem rank" porque a conta tem menos de 10 respostas no modo Estudo; a tela inicial mostra "Elite". Usei a faixa Bronze→Elite da página de Ranks, sem o status.
+- A voz "Sarah" é uma voz padrão em inglês falando português. Voz nativa exige o plano Starter da ElevenLabs.
+- A música é um loop de 22 s gerado por IA; uma trilha licenciada seria melhor em 98 s.
 
 ## Avisos mantidos de propósito
-- Nenhum. O end card tem `data-hold` (parado de propósito nos últimos 3 s).
+- Nenhum. `data-hold` na linha de apoio do reveal e no botão do end card marcam as paradas deliberadas.

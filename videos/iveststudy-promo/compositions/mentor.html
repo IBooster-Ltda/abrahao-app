@@ -1,0 +1,49 @@
+<template>
+  <style>
+    #root { position: absolute; inset: 0; font-family: var(--font-display, "Inter"), sans-serif; color: #fff; }
+    .t { position: absolute; left: 120px; width: 720px; font-weight: 700; font-size: 68px; line-height: 1.04; letter-spacing: -0.03em; }
+    .t .w { display: inline-block; margin-right: 0.22em; opacity: 0; }
+    .t .acc { color: var(--color-accent-light, #60a5fa); }
+    .sub { position: absolute; left: 124px; width: 620px; font-size: 30px; line-height: 1.4; font-weight: 500; color: #9aa3b2; opacity: 0; }
+    .win { position: absolute; left: 780px; top: 190px; width: 1100px; height: 688px; border-radius: 20px; overflow: hidden; background: #fff; border: 2px solid rgba(255,255,255,.10); box-shadow: 0 30px 80px rgba(0,0,0,.55); }
+    .cam { position: absolute; left: 0; top: 0; width: 1440px; height: 900px; transform-origin: 0 0; }
+    .cam > video, .cam > img { position: absolute; left: 0; top: 0; width: 1440px; height: 900px; display: block; }
+    .tag { position: absolute; left: 780px; top: 898px; font-size: 26px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: #9aa3b2; opacity: 0; }
+
+  </style>
+  <div id="root" data-composition-id="mentor" data-width="1920" data-height="1080">
+    <h1 id="mt-1" class="t clip" data-start="0.3" data-duration="5.3" style="top:300px" data-layout-allow-overflow><span class="w">Mentor</span><span class="w acc">iVest.</span></h1>
+    <p id="mt-s" class="sub clip" data-start="1.6" data-duration="4.0" style="top:500px">Tira dúvidas de qualquer matéria, com base no banco de questões</p>
+    <div id="mt-win" class="win" data-layout-allow-overflow><div id="mt-win-cam" class="cam"><video id="mt-win-m" class="clip" src="assets/app/clips/mentor.mp4" data-start="0" data-duration="5.6" data-playback-rate="2.0" data-media-start="1.6" muted playsinline data-track-index="2"></video></div></div>
+    <p id="mt-win-tag" class="tag" data-layout-ignore>Tela real do app · desktop</p>
+
+  </div>
+  <script>
+    (() => {
+      const tl = gsap.timeline({ paused: true });
+
+      const wordIn = (sel, at) => document.querySelectorAll(sel + " .w").forEach((w, i) =>
+        tl.fromTo(w, { opacity: 0, filter: "blur(6px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.13, ease: "power2.out" }, at + i * 0.07));
+      const wordOut = (sel, at) => tl.to(sel + " .w", { opacity: 0, filter: "blur(6px)", duration: 0.18, ease: "power2.in", stagger: 0.03 }, at);
+      const subIn = (sel, at) => tl.fromTo(sel, { opacity: 0, filter: "blur(6px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.2, ease: "power2.out" }, at);
+      // camera: scale s on a 1440x900 plate shown in a 1040x650 window, centred on (fx, fy) plate px
+      const K = 1100 / 1440;
+      const cam = (s, fx, fy) => ({ scale: K * s, x: 550 - fx * K * s, y: 344 - fy * K * s });
+      const camSet = (sel, s, fx, fy) => gsap.set(sel, cam(s, fx, fy));
+      const camTo = (sel, s, fx, fy, at, dur = 0.6, ease = "power2.inOut") => tl.to(sel, { ...cam(s, fx, fy), duration: dur, ease }, at);
+      const camFrom = (sel, s, fx, fy, s2, fx2, fy2, at, dur = 0.6, ease = "power2.inOut") => tl.fromTo(sel, cam(s, fx, fy), { ...cam(s2, fx2, fy2), duration: dur, ease }, at);
+      const winIn = (sel, at, fromX = 900) => tl.fromTo(sel, { x: fromX, opacity: 0, filter: "blur(10px)" }, { x: 0, opacity: 1, filter: "blur(0px)", duration: 0.55, ease: "power4.out" }, at);
+      const winOut = (sel, at, toX = 160) => tl.to(sel, { x: toX, opacity: 0, filter: "blur(10px)", duration: 0.4, ease: "power3.in" }, at);
+      const tagIn = (sel, at) => tl.fromTo(sel, { opacity: 0 }, { opacity: 1, duration: 0.3 }, at);
+
+
+      winIn("#mt-win", 0, -900); tagIn("#mt-win-tag", 0.5);
+      wordIn("#mt-1", 0.3); subIn("#mt-s", 1.6);
+      camSet("#mt-win-cam", 1.0, 720, 450);
+      camTo("#mt-win-cam", 1.3, 720, 430, 0.6, 1.0);
+      winOut("#mt-win", 5.2, -160); tl.to("#mt-1 .w, #mt-s, #mt-win-tag", { opacity: 0, duration: 0.25, ease: "power2.in" }, 5.25);
+
+      window.__timelines["mentor"] = tl;
+    })();
+  </script>
+</template>
