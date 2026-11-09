@@ -56,15 +56,15 @@
 
 
       // A: the answer being typed, 4x, close on the text box; a quick re-frame to the timer at 3.6
-      camSet("#es-a-cam", 1.7, 760, 620);
-      camTo("#es-a-cam", 1.7, 760, 680, 0.4, 3.0, "none");
-      camCut("#es-a-cam", 2.2, 1170, 300, 3.6);                 // the timer and the Normal/Rápido/Turbo chips
-      camTo("#es-a-cam", 2.2, 1170, 330, 3.65, 2.6, "none");
+      camSet("#es-a-cam", 1.0, 720, 450);
+      camTo("#es-a-cam", 1.08, 720, 480, 0.4, 3.0, "none");
+      camCut("#es-a-cam", 1.2, 760, 420, 3.6);                  // question, timer and the Normal/Rápido/Turbo chips all in frame
+      camTo("#es-a-cam", 1.2, 760, 450, 3.65, 2.6, "none");
       chipIn("#es-c1", 0.9); chipOut("#es-c1", 3.4); chipIn("#es-c2", 3.7); chipOut("#es-c2", 6.2);
       // B: hard cut to "Avaliar resposta" and the 10/10 landing (clip 12.3 → grade pops ≈ 2.3 s in)
       hide("#es-a", 6.4); show("#es-b", 6.4);
-      camSet("#es-b-cam", 1.9, 820, 740);
-      camTo("#es-b-cam", 2.4, 1150, 790, 8.4, 0.5);               // punch on the green 10/10
+      camSet("#es-b-cam", 1.1, 720, 520);
+      camTo("#es-b-cam", 1.25, 760, 600, 8.4, 0.5);               // the answer, the buttons and the green 10/10 stay in frame
       // C: cut to black backdrop with the giant number counting up, then the chip line
       hide("#es-b", 9.8);
       countTo("#es-num", 10, 9.8, 1.2);
@@ -73,8 +73,8 @@
       tl.to("#es-num, #es-k1 .w", { opacity: 0, filter: "blur(10px)", duration: 0.25, ease: "power2.in" }, 12.15);
       // D: the full-page capture scrolling fast with the three chips popping
       show("#es-c", 12.4);
-      camSet("#es-c-cam", 1.15, 720, 950, 2346);
-      camTo("#es-c-cam", 1.15, 720, 1850, 12.4, 2.9, "power1.inOut", 2346);
+      camSet("#es-c-cam", 1.0, 720, 950, 2346);
+      camTo("#es-c-cam", 1.0, 720, 1850, 12.4, 2.9, "power1.inOut", 2346);
       chipIn("#es-c3", 12.5); chipIn("#es-c4", 13.3); chipIn("#es-c5", 14.1);
       tl.to("#es-c", { opacity: 0, filter: "blur(10px)", scale: 1.08, duration: 0.3, ease: "power3.in", transformOrigin: "50% 50%" }, 15.1);
       tl.to("#es-c3, #es-c4, #es-c5", { opacity: 0, duration: 0.2 }, 15.1);

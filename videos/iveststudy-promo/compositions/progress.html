@@ -52,17 +52,17 @@
       const countTo = (sel, to, at, dur, fmt = (v) => String(Math.round(v))) => { const el = document.querySelector(sel + " .v"); const st = { v: 0 }; tl.fromTo(st, { v: 0 }, { v: to, duration: dur, ease: "power3.out", onUpdate: () => { el.textContent = fmt(st.v); } }, at); };
 
 
-      camSet("#pg-a-cam", 1.6, 820, 620, 1700);
-      camTo("#pg-a-cam", 1.6, 820, 980, 0.2, 3.2, "power1.inOut", 1700);
+      camSet("#pg-a-cam", 1.1, 760, 560, 1700);
+      camTo("#pg-a-cam", 1.1, 760, 900, 0.2, 3.2, "power1.inOut", 1700);
       chipIn("#pg-c1", 0.5); chipOut("#pg-c1", 3.3);
       hide("#pg-a", 3.6); show("#pg-b", 3.6); rise("#pg-b", 3.6);
-      camSet("#pg-b-cam", 2.0, 900, 330);                          // the Bronze→Elite band
-      camTo("#pg-b-cam", 2.0, 1000, 330, 3.65, 2.9, "power1.inOut");
+      camSet("#pg-b-cam", 1.1, 760, 420);                          // the Bronze→Elite band and the rank rules
+      camTo("#pg-b-cam", 1.2, 800, 400, 3.65, 2.9, "power1.inOut");
       wordIn("#pg-k", 3.9); wordOut("#pg-k", 6.5);
       chipIn("#pg-c2", 4.2); chipOut("#pg-c2", 6.4);
       hide("#pg-b", 6.8); show("#pg-c", 6.8); rise("#pg-c", 6.8);
-      camSet("#pg-c-cam", 1.5, 720, 520, 2000);
-      camTo("#pg-c-cam", 1.5, 720, 900, 6.85, 2.6, "power1.inOut", 2000);
+      camSet("#pg-c-cam", 1.05, 720, 500, 2000);
+      camTo("#pg-c-cam", 1.05, 720, 820, 6.85, 2.6, "power1.inOut", 2000);
       chipIn("#pg-c3", 7.1); chipOut("#pg-c3", 9.2);
       tl.to("#pg-c", { opacity: 0, filter: "blur(10px)", duration: 0.25, ease: "power2.in" }, 9.6);
 

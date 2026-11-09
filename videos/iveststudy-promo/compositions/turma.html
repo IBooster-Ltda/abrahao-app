@@ -52,12 +52,12 @@
       const countTo = (sel, to, at, dur, fmt = (v) => String(Math.round(v))) => { const el = document.querySelector(sel + " .v"); const st = { v: 0 }; tl.fromTo(st, { v: 0 }, { v: to, duration: dur, ease: "power3.out", onUpdate: () => { el.textContent = fmt(st.v); } }, at); };
 
 
-      camSet("#tu-a-cam", 1.6, 760, 560);
-      camTo("#tu-a-cam", 1.6, 760, 600, 0.0, 2.4, "none");
+      camSet("#tu-a-cam", 1.05, 760, 450);
+      camTo("#tu-a-cam", 1.12, 760, 480, 0.0, 2.4, "none");
       chipIn("#tu-c1", 0.4); chipOut("#tu-c1", 2.3);
       hide("#tu-a", 2.5); show("#tu-b", 2.5); rise("#tu-b", 2.5);
-      camSet("#tu-b-cam", 1.5, 760, 300);                          // the greeting switches language live
-      camTo("#tu-b-cam", 1.5, 760, 340, 2.55, 2.9, "none");
+      camSet("#tu-b-cam", 1.05, 760, 420);                         // the whole home switches language live
+      camTo("#tu-b-cam", 1.1, 760, 440, 2.55, 2.9, "none");
       wordIn("#tu-k1", 2.7); wordIn("#tu-k2", 3.5); wordIn("#tu-k3", 4.3);
       tl.to("#tu-b, #tu-k3 .w", { opacity: 0, filter: "blur(10px)", duration: 0.25, ease: "power2.in" }, 5.4);
 

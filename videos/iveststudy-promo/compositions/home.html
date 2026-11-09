@@ -53,17 +53,17 @@
       const countTo = (sel, to, at, dur, fmt = (v) => String(Math.round(v))) => { const el = document.querySelector(sel + " .v"); const st = { v: 0 }; tl.fromTo(st, { v: 0 }, { v: to, duration: dur, ease: "power3.out", onUpdate: () => { el.textContent = fmt(st.v); } }, at); };
 
 
-      camSet("#hm-a-cam", 1.6, 720, 560);                         // Treino do dia card
-      camTo("#hm-a-cam", 1.6, 760, 640, 0.3, 2.6, "none");
-      camCut("#hm-a-cam", 1.8, 820, 700, 3.2);                    // Missões do dia (the recording scrolls)
-      camTo("#hm-a-cam", 1.8, 820, 760, 3.25, 1.7, "none");
+      camSet("#hm-a-cam", 1.0, 720, 450);
+      camTo("#hm-a-cam", 1.1, 740, 520, 0.3, 2.6, "none");
+      camCut("#hm-a-cam", 1.15, 780, 600, 3.2);                   // Missões do dia (the recording scrolls)
+      camTo("#hm-a-cam", 1.15, 780, 640, 3.25, 1.7, "none");
       chipIn("#hm-c1", 0.6); chipOut("#hm-c1", 3.0); chipIn("#hm-c2", 3.4); chipOut("#hm-c2", 4.8);
       // cut to the still: level card, then the streak flame
       hide("#hm-a", 5.0); show("#hm-b", 5.0);
-      camSet("#hm-b-cam", 2.0, 780, 230);
-      camTo("#hm-b-cam", 2.0, 780, 260, 5.05, 1.9, "none");
-      camCut("#hm-b-cam", 2.8, 1300, 290, 7.0);
-      camTo("#hm-b-cam", 3.0, 1300, 290, 7.05, 1.2, "power2.out");
+      camSet("#hm-b-cam", 1.2, 780, 330);
+      camTo("#hm-b-cam", 1.2, 780, 360, 5.05, 1.9, "none");
+      camCut("#hm-b-cam", 1.25, 900, 330, 7.0);
+      camTo("#hm-b-cam", 1.45, 1150, 300, 7.05, 1.2, "power2.out");  // one soft push toward the streak flame, the level card still in frame
       chipIn("#hm-c3", 5.3); chipOut("#hm-c3", 6.8); chipIn("#hm-c4", 6.9); chipOut("#hm-c4", 8.25);
       // cut to black: 363 counts up in red
       hide("#hm-b", 8.3);

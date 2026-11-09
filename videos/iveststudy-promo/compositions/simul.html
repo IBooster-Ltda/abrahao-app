@@ -55,10 +55,10 @@
 
       ["#sm-1", "#sm-2", "#sm-3", "#sm-4", "#sm-5"].forEach((s, i) => wordIn(s, 0.1 + i * 0.5));
       show("#sm-a", 2.6); rise("#sm-a", 2.6);
-      camSet("#sm-a-cam", 1.3, 720, 480);
-      camTo("#sm-a-cam", 1.3, 720, 560, 2.7, 3.2, "none");
-      camCut("#sm-a-cam", 1.9, 760, 300, 6.4);                    // the FUVEST question with the exam clock
-      camTo("#sm-a-cam", 1.9, 760, 360, 6.45, 2.6, "none");
+      camSet("#sm-a-cam", 1.0, 720, 450);
+      camTo("#sm-a-cam", 1.05, 720, 480, 2.7, 3.2, "none");
+      camCut("#sm-a-cam", 1.1, 720, 440, 6.4);                    // the FUVEST question with the exam clock, whole screen
+      camTo("#sm-a-cam", 1.15, 720, 460, 6.45, 2.6, "none");
       chipIn("#sm-c1", 3.0); chipOut("#sm-c1", 5.6); chipIn("#sm-c2", 6.6); chipOut("#sm-c2", 8.9);
       tl.to("#sm-a", { opacity: 0, filter: "blur(10px)", duration: 0.25, ease: "power2.in" }, 9.35);
 

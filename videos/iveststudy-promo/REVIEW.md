@@ -8,6 +8,9 @@
 - Voz: ElevenLabs "Brian" (masculina). Som: ~110 cues (teclas, digitação, cliques, pops, risers, impactos, brilhos, whooshes, ping, notificação) sincronizados às ações.
 - Câmera com limite: o enquadramento nunca sai da tela capturada (bug da faixa branca da versão anterior corrigido).
 
+## Ajuste de câmera (pedido)
+- Os takes do app perderam os zooms fortes: a câmera fica entre 1,0× e 1,25× (um único push suave a 1,45× na chama da ofensiva), sempre com a tela inteira, respostas e botões no quadro. Os zooms ficaram só na tipografia e nos números.
+
 ## Medido e olhado
 - `hyperframes check`: ok; quatro avisos mantidos de propósito (clipes que começam no meio da cena para cair na fala certa).
 - 28 quadros intermediários olhados antes do render e uma folha de contato do MP4 final.
