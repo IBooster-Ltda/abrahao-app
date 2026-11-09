@@ -25,10 +25,10 @@
     .ui-foot .right { margin-left: auto; }
   </style>
   <div id="root" data-composition-id="hook" data-width="1920" data-height="1080">
-    <h1 id="hook-line1" class="hook-title clip" data-start="0.3" data-duration="6.3" data-layout-allow-overflow>
+    <h1 id="hook-line1" class="hook-title clip" data-start="0.3" data-duration="5.9" data-layout-allow-overflow>
       <span class="w">Você</span><span class="w">estudou</span><span class="w">horas.</span>
     </h1>
-    <h1 id="hook-line2" class="hook-title clip" data-start="2.6" data-duration="4.0" data-layout-allow-overflow>
+    <h1 id="hook-line2" class="hook-title clip" data-start="2.4" data-duration="3.8" data-layout-allow-overflow>
       <span class="w">Mas</span><span class="w">sabe</span><span class="w acc">onde</span><span class="w">errou?</span>
     </h1>
 
@@ -59,24 +59,24 @@
         });
       };
       wordIn("#hook-line1", 0.3);
-      wordIn("#hook-line2", 2.6);
+      wordIn("#hook-line2", 2.4);
 
       // The student's answer, from the site's own illustrative example, typed at 47 chars/s.
       const text = "A fluidez deixa proteínas e lipídios se moverem na bicamada, o que permite endocitose, exocitose e transporte. Fatores: ácidos graxos insaturados aumentam a fluidez e o colesterol a regula conforme a temperatura.";
       const typed = document.getElementById("hook-typed");
       const state = { n: 0 };
-      tl.fromTo(state, { n: 0 }, { n: text.length, duration: 4.6, ease: "none", onUpdate: () => { typed.textContent = text.slice(0, Math.round(state.n)); } }, 0.8);
+      tl.fromTo(state, { n: 0 }, { n: text.length, duration: 3.9, ease: "none", onUpdate: () => { typed.textContent = text.slice(0, Math.round(state.n)); } }, 0.8);
       // Caret: blinks on timeline time (deterministic), 2 per second
       const caret = document.getElementById("hook-caret");
       const cs = { t: 0 };
-      tl.fromTo(cs, { t: 0 }, { t: 6.6, duration: 6.6, ease: "none", onUpdate: () => { caret.style.opacity = Math.floor(cs.t * 2) % 2 === 0 ? 1 : 0; } }, 0);
+      tl.fromTo(cs, { t: 0 }, { t: 6.2, duration: 6.2, ease: "none", onUpdate: () => { caret.style.opacity = Math.floor(cs.t * 2) % 2 === 0 ? 1 : 0; } }, 0);
       // Timer: 2:52 counting down one second at a time
       const timer = document.getElementById("hook-timerbox");
       const ts = { s: 172 };
-      tl.fromTo(ts, { s: 172 }, { s: 172 - 6.6, duration: 6.6, ease: "none", onUpdate: () => { const v = Math.ceil(ts.s); timer.textContent = Math.floor(v / 60) + ":" + String(v % 60).padStart(2, "0"); } }, 0);
+      tl.fromTo(ts, { s: 172 }, { s: 172 - 6.2, duration: 6.2, ease: "none", onUpdate: () => { const v = Math.ceil(ts.s); timer.textContent = Math.floor(v / 60) + ":" + String(v % 60).padStart(2, "0"); } }, 0);
       // Hand-off: the box pushes in and softens over the last 12 frames, the correction grows out of it in the next scene.
-      tl.fromTo("#hook-card", { scale: 1, filter: "blur(0px)" }, { scale: 1.08, filter: "blur(6px)", duration: 0.4, ease: "power3.in", transformOrigin: "50% 60%" }, 6.2);
-      tl.fromTo("#hook-line1 .w, #hook-line2 .w", { opacity: 1 }, { opacity: 0, duration: 0.25, ease: "power2.in" }, 6.3);
+      tl.fromTo("#hook-card", { scale: 1, filter: "blur(0px)" }, { scale: 1.08, filter: "blur(6px)", duration: 0.4, ease: "power3.in", transformOrigin: "50% 60%" }, 5.85);
+      tl.fromTo("#hook-line1 .w, #hook-line2 .w", { opacity: 1 }, { opacity: 0, duration: 0.25, ease: "power2.in" }, 5.9);
       window.__timelines["hook"] = tl;
     })();
   </script>

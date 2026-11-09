@@ -1,0 +1,37 @@
+<template>
+  <style>
+    #root { position: absolute; inset: 0; font-family: var(--font-display, "Inter"), sans-serif; color: var(--color-ink, #0f172a); }
+    .tr-title { position: absolute; left: 120px; top: 110px; width: 1680px; font-weight: 700; font-size: 84px; line-height: 1.04; letter-spacing: -0.03em; }
+    .tr-title .w { display: inline-block; margin-right: 0.22em; opacity: 0; }
+    .tr-title .acc { color: var(--color-accent, #2563eb); }
+    #tr-sub { position: absolute; left: 124px; top: 222px; font-size: 32px; font-weight: 500; color: #4b5563; opacity: 0; }
+    /* The real "11 trilhas" grid from the landing page */
+    #tr-frame { position: absolute; left: 80px; top: 300px; width: 1760px; height: 724px; overflow: hidden; border-radius: 20px; }
+    #tr-cam { position: absolute; left: 30px; top: 0; width: 1700px; height: 717px; }
+    #tr-img { position: absolute; left: 0; top: 0; width: 1700px; height: 717px; }
+  </style>
+  <div id="root" data-composition-id="tracks" data-width="1920" data-height="1080">
+    <h1 id="tr-t" class="tr-title clip" data-start="0.3" data-duration="8.3" data-layout-allow-overflow>
+      <span class="w">Tudo</span><span class="w">que</span><span class="w">cai</span><span class="w">nas</span><span class="w acc">grandes</span><span class="w acc">provas.</span>
+    </h1>
+    <p id="tr-sub" class="clip" data-start="1.2" data-duration="7.4">Gabarito comentado e correção por IA em todas as trilhas</p>
+    <div id="tr-frame" data-layout-allow-overflow>
+      <div id="tr-cam"><img id="tr-img" src="assets/landing/grid-tracks.png" alt="11 trilhas de estudo" /></div>
+    </div>
+  </div>
+  <script>
+    (() => {
+      const tl = gsap.timeline({ paused: true });
+      document.querySelectorAll("#tr-t .w").forEach((w, i) =>
+        tl.fromTo(w, { opacity: 0, filter: "blur(6px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.13, ease: "power2.out" }, 0.3 + i * 0.07));
+      tl.fromTo("#tr-sub", { opacity: 0, filter: "blur(6px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.2, ease: "power2.out" }, 1.2);
+      // The grid rises in from below as the ground floods white, then the camera drifts down the rows
+      tl.fromTo("#tr-frame", { y: 500, opacity: 0, filter: "blur(10px)" }, { y: 0, opacity: 1, filter: "blur(0px)", duration: 0.6, ease: "power4.out" }, 0.05);
+      tl.fromTo("#tr-cam", { scale: 1.0, y: 0, transformOrigin: "50% 0%" }, { scale: 1.06, y: -30, duration: 7.4, ease: "none" }, 0.6);
+      // Leaves up as the dashboard arrives
+      tl.to("#tr-frame", { y: -200, opacity: 0, filter: "blur(10px)", duration: 0.4, ease: "power3.in" }, 8.15);
+      tl.to("#tr-t .w, #tr-sub", { opacity: 0, duration: 0.25, ease: "power2.in" }, 8.3);
+      window.__timelines["tracks"] = tl;
+    })();
+  </script>
+</template>

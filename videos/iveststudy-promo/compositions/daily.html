@@ -1,0 +1,71 @@
+<template>
+  <style>
+    #root { position: absolute; inset: 0; font-family: var(--font-display, "Inter"), sans-serif; color: var(--color-app-ink, #e6e8ec); }
+    .dl-title { position: absolute; left: 120px; top: 300px; width: 820px; font-weight: 700; font-size: 92px; line-height: 1.04; letter-spacing: -0.03em; }
+    .dl-title .w { display: inline-block; margin-right: 0.22em; opacity: 0; }
+    .dl-title .acc { color: var(--color-accent-light, #60a5fa); }
+    .dl-title.l2 { top: 400px; }
+    #dl-sub { position: absolute; left: 124px; top: 560px; width: 760px; font-size: 30px; line-height: 1.4; font-weight: 500; color: #9aa3b2; opacity: 0; }
+    /* The real home screen of the app (still from the official tour), cropped to the UI */
+    #dl-frame { position: absolute; left: 1086px; top: 150px; width: 648px; height: 770px; border-radius: 28px; overflow: hidden; background: #0b0d12; border: 2px solid #262b35; box-shadow: 0 24px 60px rgba(0,0,0,.5); }
+    #dl-cam { position: absolute; left: 0; top: 0; width: 648px; height: 770px; }
+    #dl-img { position: absolute; left: 0; top: 0; width: 648px; height: 765px; }
+    #dl-tag { position: absolute; left: 1086px; top: 940px; font-size: 28px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: #9aa3b2; opacity: 0; }
+    .hl { position: absolute; border: 3px solid var(--color-accent-light, #60a5fa); border-radius: 14px; opacity: 0; }
+    #hl-treino { left: 18px; top: 416px; width: 612px; height: 300px; }
+    #hl-xp { left: 18px; top: 140px; width: 612px; height: 120px; }
+    #hl-streak { left: 420px; top: 300px; width: 200px; height: 60px; }
+  </style>
+  <div id="root" data-composition-id="daily" data-width="1920" data-height="1080">
+    <h1 id="dl-a" class="dl-title clip" data-start="0.3" data-duration="4.9" data-layout-allow-overflow>
+      <span class="w">Treino</span><span class="w">do</span><span class="w acc">dia.</span>
+    </h1>
+    <h1 id="dl-b1" class="dl-title clip" data-start="5.4" data-duration="5.4" data-layout-allow-overflow>
+      <span class="w">XP,</span><span class="w">níveis</span>
+    </h1>
+    <h1 id="dl-b2" class="dl-title l2 clip" data-start="5.7" data-duration="5.1" data-layout-allow-overflow>
+      <span class="w">e</span><span class="w acc">sequência.</span>
+    </h1>
+    <p id="dl-sub" class="clip" data-start="7.6" data-duration="3.2">Consistência bate talento.</p>
+    <div id="dl-frame" data-layout-allow-overflow>
+      <div id="dl-cam">
+        <img id="dl-img" src="assets/app/home-ui.png" alt="Tela inicial do iVest" />
+        <div id="hl-treino" class="hl" data-layout-ignore></div>
+        <div id="hl-xp" class="hl" data-layout-ignore></div>
+        <div id="hl-streak" class="hl" data-layout-ignore></div>
+      </div>
+    </div>
+    <p id="dl-tag" data-layout-ignore>Tela real do app</p>
+  </div>
+  <script>
+    (() => {
+      const tl = gsap.timeline({ paused: true });
+      const wordIn = (sel, at) => document.querySelectorAll(sel + " .w").forEach((w, i) =>
+        tl.fromTo(w, { opacity: 0, filter: "blur(6px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.13, ease: "power2.out" }, at + i * 0.07));
+      const wordOut = (sel, at) => tl.to(sel + " .w", { opacity: 0, filter: "blur(6px)", duration: 0.18, ease: "power2.in", stagger: 0.03 }, at);
+      tl.fromTo("#dl-frame", { x: 900, filter: "blur(10px)" }, { x: 0, filter: "blur(0px)", duration: 0.55, ease: "power4.out" }, 0);
+      tl.fromTo("#dl-tag", { opacity: 0 }, { opacity: 1, duration: 0.3 }, 0.5);
+      wordIn("#dl-a", 0.3);
+      // "um treino sob medida: seu tema fraco, um quiz e flashcards" → push in on the Treino do dia card (1.0–4.9)
+      tl.fromTo("#dl-cam", { scale: 1, x: 0, y: 0, transformOrigin: "50% 100%" }, { scale: 1.3, x: 0, y: 60, duration: 0.6, ease: "power2.inOut" }, 1.0);
+      tl.fromTo("#hl-treino", { opacity: 0, scale: 1.1 }, { opacity: 1, scale: 1, duration: 0.25, ease: "power3.out", transformOrigin: "50% 50%" }, 1.5);
+      tl.to("#dl-cam", { y: 100, duration: 3.2, ease: "none" }, 1.6);
+      // "Você ganha XP, sobe de nível" → travel up to the level card (5.0–7.6)
+      tl.to("#hl-treino", { opacity: 0, duration: 0.15 }, 4.8);
+      wordOut("#dl-a", 4.9);
+      tl.to("#dl-cam", { scale: 1.3, x: 0, y: 540, transformOrigin: "50% 100%", duration: 0.6, ease: "power2.inOut" }, 5.0);
+      wordIn("#dl-b1", 5.4); wordIn("#dl-b2", 5.7);
+      tl.fromTo("#hl-xp", { opacity: 0, scale: 1.1 }, { opacity: 1, scale: 1, duration: 0.25, ease: "power3.out", transformOrigin: "50% 50%" }, 5.6);
+      // "e mantém a sequência" → the streak flame (7.6–10.3)
+      tl.to("#hl-xp", { opacity: 0, duration: 0.15 }, 7.4);
+      tl.to("#dl-cam", { scale: 1.5, x: -200, y: 330, transformOrigin: "50% 100%", duration: 0.5, ease: "power2.inOut" }, 7.5);
+      tl.fromTo("#hl-streak", { opacity: 0, scale: 1.1 }, { opacity: 1, scale: 1, duration: 0.25, ease: "power3.out", transformOrigin: "50% 50%" }, 8.0);
+      tl.fromTo("#dl-sub", { opacity: 0, filter: "blur(6px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.2, ease: "power2.out" }, 7.6);
+      // Hand-off to the flood: the screen leaves right, titles out
+      tl.to("#dl-b1 .w, #dl-b2 .w, #dl-sub", { opacity: 0, duration: 0.25, ease: "power2.in" }, 10.3);
+      tl.to("#dl-frame", { x: 160, opacity: 0, filter: "blur(10px)", duration: 0.4, ease: "power3.in" }, 10.3);
+      tl.to("#dl-tag", { opacity: 0, duration: 0.2 }, 10.3);
+      window.__timelines["daily"] = tl;
+    })();
+  </script>
+</template>

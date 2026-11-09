@@ -1,0 +1,51 @@
+<template>
+  <style>
+    #root { position: absolute; inset: 0; font-family: var(--font-display, "Inter"), sans-serif; color: var(--color-ink, #0f172a); }
+    .ds-title { position: absolute; left: 120px; top: 110px; width: 1680px; font-weight: 700; font-size: 84px; line-height: 1.04; letter-spacing: -0.03em; }
+    .ds-title .w { display: inline-block; margin-right: 0.22em; opacity: 0; }
+    .ds-title .acc { color: var(--color-accent, #2563eb); }
+    #ds-sub { position: absolute; left: 124px; top: 222px; font-size: 32px; font-weight: 500; color: #4b5563; opacity: 0; }
+    /* The landing's performance cards, then its rank band */
+    #ds-perf { position: absolute; left: -140px; top: 330px; width: 2200px; height: 342px; }
+    #ds-perf img { width: 2200px; height: 342px; display: block; }
+    #ds-band { position: absolute; left: 0; top: 620px; width: 1920px; height: 460px; background: #0f172a; overflow: hidden; opacity: 0; }
+    #ds-medals { position: absolute; left: 60px; top: 90px; width: 1800px; height: 245px; }
+    #ds-medals img { width: 1800px; height: 245px; display: block; }
+  </style>
+  <div id="root" data-composition-id="dash" data-width="1920" data-height="1080">
+    <h1 id="ds-a" class="ds-title clip" data-start="0.3" data-duration="5.2" data-layout-allow-overflow>
+      <span class="w">O</span><span class="w">que</span><span class="w">é</span><span class="w">medido,</span><span class="w acc">é</span><span class="w acc">melhorado.</span>
+    </h1>
+    <p id="ds-sub" class="clip" data-start="1.2" data-duration="4.3">Dashboard analítico · sem achismo</p>
+    <h1 id="ds-b" class="ds-title clip" data-start="5.8" data-duration="5.0" data-layout-allow-overflow>
+      <span class="w">Cada</span><span class="w">treino</span><span class="w">te</span><span class="w">aproxima</span><span class="w">de</span><span class="w">virar</span><span class="w acc">Elite.</span>
+    </h1>
+    <div id="ds-perf" data-layout-allow-overflow><img src="assets/landing/grid-perf.png" alt="Score por disciplina, streak, evolução, progressão" /></div>
+    <div id="ds-band" data-layout-allow-overflow>
+      <div id="ds-medals"><img src="assets/landing/medals.png" alt="Bronze a Elite" /></div>
+    </div>
+  </div>
+  <script>
+    (() => {
+      const tl = gsap.timeline({ paused: true });
+      const wordIn = (sel, at) => document.querySelectorAll(sel + " .w").forEach((w, i) =>
+        tl.fromTo(w, { opacity: 0, filter: "blur(6px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.13, ease: "power2.out" }, at + i * 0.07));
+      const wordOut = (sel, at) => tl.to(sel + " .w", { opacity: 0, filter: "blur(6px)", duration: 0.18, ease: "power2.in", stagger: 0.03 }, at);
+      wordIn("#ds-a", 0.3);
+      tl.fromTo("#ds-sub", { opacity: 0, filter: "blur(6px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.2, ease: "power2.out" }, 1.2);
+      // The four cards land one after another (0.1–1.3), then hold
+      tl.fromTo("#ds-perf", { y: 300, x: 180, opacity: 0, filter: "blur(10px)" }, { y: 0, x: 180, opacity: 1, filter: "blur(0px)", duration: 0.6, ease: "power4.out" }, 0.1);
+      tl.to("#ds-perf", { x: -220, duration: 5.0, ease: "power1.inOut" }, 0.7);
+      // "vira um rank, do Bronze ao Elite" → the dark rank band rises from the bottom (5.8), the camera rides the medals
+      tl.fromTo("#ds-band", { y: 460, opacity: 0 }, { y: 0, opacity: 1, duration: 0.6, ease: "power4.out" }, 5.8);
+      tl.to("#ds-perf", { y: -140, opacity: 0.0, filter: "blur(6px)", duration: 0.5, ease: "power2.inOut" }, 5.8);
+      wordOut("#ds-a", 5.3); tl.to("#ds-sub", { opacity: 0, duration: 0.2 }, 5.3);
+      wordIn("#ds-b", 5.8);
+      tl.fromTo("#ds-medals", { scale: 1.25, x: 380, transformOrigin: "0% 50%" }, { scale: 1.25, x: -460, duration: 4.0, ease: "power1.inOut" }, 6.4);
+      // Leaves: band drops, title out
+      tl.to("#ds-band", { y: 460, duration: 0.4, ease: "power3.in" }, 10.4);
+      tl.to("#ds-b .w", { opacity: 0, duration: 0.25, ease: "power2.in" }, 10.5);
+      window.__timelines["dash"] = tl;
+    })();
+  </script>
+</template>

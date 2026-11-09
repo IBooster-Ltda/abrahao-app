@@ -1,5 +1,7 @@
 # iVest · promo · três storylines
 
+> Versão atual (76 s, narrada): a storyline A estendida para cobrir todas as funcionalidades; ver SPEC.md e VOICEOVER.md. A versão curta de 26 s está no histórico do git.
+
 Fonte: iveststudy.com (landing em PT, tour de 23 s gravado nas telas reais do app, bundle do app, OG card).
 Uma coisa: **você escreve a resposta, a IA mostra o que faltou.** O que fica: "o iVest me diz exatamente o que faltou na minha resposta".
 Um viewer, uma tarefa: um aluno responde uma discursiva de Biologia (o exemplo ilustrativo do próprio site) com o cronômetro correndo e recebe a correção.

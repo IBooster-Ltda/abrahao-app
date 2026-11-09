@@ -4,10 +4,32 @@
     .cor-title { position: absolute; left: 120px; top: 300px; width: 760px; font-weight: 700; font-size: 92px; line-height: 1.04; letter-spacing: -0.03em; }
     .cor-title .w { display: inline-block; margin-right: 0.22em; opacity: 0; }
     .cor-title .acc { color: var(--color-accent-light, #60a5fa); }
-    #cor-line2 { top: 400px; }
-    #cor-note { position: absolute; left: 124px; top: 560px; font-size: 30px; font-weight: 500; color: #9aa3b2; letter-spacing: 0.02em; opacity: 0; }
+    .cor-title.l2 { top: 400px; }
+    #cor-note, #cor-anote { position: absolute; left: 124px; top: 560px; width: 760px; font-size: 30px; line-height: 1.4; font-weight: 500; color: #9aa3b2; opacity: 0; }
+    #cor-anote { top: 530px; }
 
-    #cor-cam { position: absolute; left: 1000px; top: 200px; width: 820px; height: 620px; }
+    /* Phase A: the answer box, rebuilt from the real screen at 2x (same as the hook) */
+    #ans-cam { position: absolute; left: 1000px; top: 130px; width: 820px; height: 820px; }
+    #ans-card { position: absolute; inset: 0; background: var(--color-app-card, #171a21); border: 2px solid #262b35; border-radius: 24px; box-shadow: 0 24px 60px rgba(0,0,0,.45); padding: 44px 48px; display: flex; flex-direction: column; gap: 22px; }
+    .ui-label { font-size: 28px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: #9aa3b2; }
+    #ans-timer { background: #0f1115; border: 2px solid #262b35; border-radius: 16px; padding: 18px 28px; font-family: "JetBrains Mono", monospace; font-weight: 700; font-size: 64px; line-height: 1; color: #fff; }
+    .chips { display: flex; gap: 14px; }
+    .chip { font-size: 28px; font-weight: 600; padding: 12px 24px; border-radius: 12px; background: #0f1115; border: 2px solid #262b35; color: #9aa3b2; }
+    .chip.on { background: #fff; color: #0f1115; border-color: #fff; }
+    .chip .pt { color: var(--color-accent-light, #60a5fa); }
+    #ans-text { flex: 1; background: #0f1115; border: 2px solid #262b35; border-radius: 16px; padding: 26px 30px; font-size: 34px; line-height: 1.42; color: #fff; overflow: hidden; }
+    .ui-foot { display: flex; align-items: center; gap: 28px; font-size: 28px; color: #9aa3b2; }
+    .ui-foot .lang { display: flex; gap: 6px; }
+    .ui-foot .lang span { padding: 6px 14px; border-radius: 8px; border: 2px solid #262b35; }
+    .ui-foot .lang span.on { background: #fff; color: #0f1115; border-color: #fff; }
+    .ui-foot .right { margin-left: auto; }
+    #ans-voice { position: relative; padding: 6px 14px; margin: -6px -14px; border-radius: 10px; }
+    .hl { position: absolute; border: 3px solid var(--color-accent-light, #60a5fa); border-radius: 14px; opacity: 0; pointer-events: none; }
+    #hl-voice { left: 34px; top: 718px; width: 326px; height: 58px; }
+    #hl-chips { left: 34px; top: 212px; width: 596px; height: 86px; }
+
+    /* Phase B: the correction card */
+    #cor-cam { position: absolute; left: 1000px; top: 200px; width: 820px; height: 620px; opacity: 0; }
     #cor-card { position: absolute; inset: 0; background: var(--color-app-card, #171a21); border: 2px solid #262b35; border-radius: 24px; box-shadow: 0 24px 60px rgba(0,0,0,.45); padding: 48px; display: flex; flex-direction: column; gap: 26px; }
     .cor-head { display: flex; align-items: center; gap: 28px; }
     #cor-ring { width: 128px; height: 128px; flex: none; }
@@ -15,24 +37,46 @@
     #cor-ring .bg { stroke: #262b35; }
     #cor-ring .fg { stroke: var(--color-accent-light, #60a5fa); stroke-linecap: round; }
     #cor-score { font-weight: 700; font-size: 44px; line-height: 1; }
-    #cor-score small { font-size: 28px; color: #9aa3b2; font-weight: 600; }
     .cor-head h2 { font-size: 42px; font-weight: 700; line-height: 1.1; }
     .cor-head p { font-size: 28px; color: #9aa3b2; font-weight: 500; margin-top: 6px; }
     .cor-line { display: flex; align-items: flex-start; gap: 20px; font-size: 32px; line-height: 1.3; padding: 20px 24px; border-radius: 16px; background: #0f1115; border: 2px solid #262b35; opacity: 0; }
     .cor-line .ic { flex: none; width: 44px; height: 44px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 26px; }
     .cor-line.ok .ic { background: rgba(34,197,94,.18); color: #22c55e; }
-    .cor-line.ok { color: #e6e8ec; }
     .cor-line.miss { border-color: rgba(251,191,36,.6); background: rgba(251,191,36,.08); color: #fbbf24; font-weight: 600; }
     .cor-line.miss .ic { background: rgba(251,191,36,.2); color: #fbbf24; }
   </style>
   <div id="root" data-composition-id="correct" data-width="1920" data-height="1080">
-    <h1 id="cor-line1" class="cor-title clip" data-start="0.5" data-duration="5.5" data-layout-allow-overflow>
-      <span class="w">A</span><span class="w">IA</span><span class="w">corrige.</span>
+    <h1 id="cor-a1" class="cor-title clip" data-start="0.4" data-duration="5.4" data-layout-allow-overflow>
+      <span class="w">Escreva</span><span class="w">como</span><span class="w">na</span><span class="w acc">prova.</span>
     </h1>
-    <h1 id="cor-line2" class="cor-title clip" data-start="0.9" data-duration="5.1" data-layout-allow-overflow>
+    <p id="cor-anote" class="clip" data-start="2.4" data-duration="3.4">Digitando ou por voz · Normal, Rápido ou Turbo</p>
+    <h1 id="cor-b1" class="cor-title clip" data-start="6.2" data-duration="6.4" data-layout-allow-overflow>
+      <span class="w">Nota</span><span class="w">e</span><span class="w">feedback.</span>
+    </h1>
+    <h1 id="cor-b2" class="cor-title l2 clip" data-start="6.6" data-duration="6.0" data-layout-allow-overflow>
       <span class="w">Veja</span><span class="w">o</span><span class="w">que</span><span class="w acc">faltou.</span>
     </h1>
-    <p id="cor-note" class="clip" data-start="3.0" data-duration="3.0">Nota, pontos cobertos e o que estudar em seguida.</p>
+    <p id="cor-note" class="clip" data-start="8.6" data-duration="4.0">Score de 0 a 10 · pontos cobertos · red flags</p>
+
+    <div id="ans-cam">
+      <div id="ans-card">
+        <div class="ui-label">Cronômetro da pergunta</div>
+        <div id="ans-timer">2:46</div>
+        <div class="chips">
+          <div class="chip on">Normal</div>
+          <div class="chip">Rápido <span class="pt">+1pt</span></div>
+          <div class="chip">Turbo <span class="pt">+2pt</span></div>
+        </div>
+        <div id="ans-text" data-layout-ignore>A fluidez deixa proteínas e lipídios se moverem na bicamada, o que permite endocitose, exocitose e transporte. Fatores: ácidos graxos insaturados aumentam a fluidez e o colesterol a regula conforme a temperatura.</div>
+        <div class="ui-foot">
+          <span id="ans-voice">✎ Responder por voz</span>
+          <span class="lang"><span class="on">PT</span><span>EN</span></span>
+          <span class="right">Limpar</span>
+        </div>
+        <div id="hl-voice" class="hl" data-layout-ignore></div>
+        <div id="hl-chips" class="hl" data-layout-ignore></div>
+      </div>
+    </div>
 
     <div id="cor-cam">
       <div id="cor-card">
@@ -56,37 +100,45 @@
   <script>
     (() => {
       const tl = gsap.timeline({ paused: true });
-      // Scene clock starts at host start (6.6 s). Film times below are scene times.
-      // Arrival: the card grows out of where the answer box was (carry across).
-      tl.fromTo("#cor-card", { scale: 0.6, opacity: 0, filter: "blur(8px)" }, { scale: 1, opacity: 1, filter: "blur(0px)", duration: 0.5, ease: "power4.out", transformOrigin: "50% 60%" }, 0.0);
-      const wordIn = (sel, at) => {
-        document.querySelectorAll(sel + " .w").forEach((w, i) => {
-          tl.fromTo(w, { opacity: 0, filter: "blur(6px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.13, ease: "power2.out" }, at + i * 0.07);
-        });
-      };
-      wordIn("#cor-line1", 0.5);
-      wordIn("#cor-line2", 0.9);
-      tl.fromTo("#cor-note", { opacity: 0, filter: "blur(6px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.2, ease: "power2.out" }, 3.0);
+      const wordIn = (sel, at) => document.querySelectorAll(sel + " .w").forEach((w, i) =>
+        tl.fromTo(w, { opacity: 0, filter: "blur(6px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.13, ease: "power2.out" }, at + i * 0.07));
+      const wordOut = (sel, at) => tl.to(sel + " .w", { opacity: 0, filter: "blur(6px)", duration: 0.18, ease: "power2.in", stagger: 0.03 }, at);
 
-      // Score ring 0 → 7/10 over 0.8 s (film 7.0–7.8 s)
-      const fg = document.getElementById("cor-ringfg");
-      const score = document.getElementById("cor-score");
-      const rs = { v: 0 };
-      tl.fromTo(rs, { v: 0 }, { v: 7, duration: 0.8, ease: "power2.out", onUpdate: () => {
-        fg.setAttribute("stroke-dashoffset", String(100 - rs.v * 10));
-        score.firstChild.nodeValue = String(Math.round(rs.v));
-      } }, 0.4);
+      // Phase A — the answer box arrives from the reveal's zoom (scene 0–5.4)
+      tl.fromTo("#ans-card", { scale: 0.7, opacity: 0, filter: "blur(10px)" }, { scale: 1, opacity: 1, filter: "blur(0px)", duration: 0.5, ease: "power4.out", transformOrigin: "50% 50%" }, 0);
+      wordIn("#cor-a1", 0.4);
+      tl.fromTo("#cor-anote", { opacity: 0, filter: "blur(6px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.2, ease: "power2.out" }, 2.4);
+      // "digitando ou por voz" → punch in on the voice control (2.3–3.9)
+      tl.fromTo("#ans-cam", { scale: 1, x: 0, y: 0, transformOrigin: "0% 100%" }, { scale: 1.45, x: -60, y: 60, duration: 0.5, ease: "power2.inOut" }, 2.3);
+      tl.fromTo("#hl-voice", { opacity: 0, scale: 1.15 }, { opacity: 1, scale: 1, duration: 0.25, ease: "power3.out", transformOrigin: "50% 50%" }, 2.75);
+      // "com o cronômetro correndo" → travel up to the timer and modes (3.9–5.3)
+      tl.to("#hl-voice", { opacity: 0, duration: 0.15 }, 3.8);
+      tl.to("#ans-cam", { scale: 1.45, x: -60, y: 560, transformOrigin: "0% 100%", duration: 0.55, ease: "power2.inOut" }, 3.9);
+      tl.fromTo("#hl-chips", { opacity: 0, scale: 1.15 }, { opacity: 1, scale: 1, duration: 0.25, ease: "power3.out", transformOrigin: "50% 50%" }, 4.4);
+      // Timer keeps running
+      const timer = document.getElementById("ans-timer"); const ts = { s: 166 };
+      tl.fromTo(ts, { s: 166 }, { s: 166 - 6, duration: 6, ease: "none", onUpdate: () => { const v = Math.ceil(ts.s); timer.textContent = Math.floor(v / 60) + ":" + String(v % 60).padStart(2, "0"); } }, 0);
+      // Hand-off: the answer box pushes in and softens, the correction grows out of it (5.4–6.0)
+      tl.to("#hl-chips", { opacity: 0, duration: 0.15 }, 5.3);
+      tl.to("#ans-cam", { scale: 1.0, x: 0, y: 0, duration: 0.45, ease: "power2.inOut" }, 5.35);
+      tl.to("#ans-card", { scale: 1.08, opacity: 0, filter: "blur(8px)", duration: 0.35, ease: "power3.in", transformOrigin: "50% 60%" }, 5.6);
+      wordOut("#cor-a1", 5.5);
+      tl.to("#cor-anote", { opacity: 0, duration: 0.2 }, 5.5);
 
-      // Checks pop in on the beat (film 8.0, 8.5), the miss lands on the impact (film 9.2)
+      // Phase B — the correction card (5.9–12.6)
+      tl.fromTo("#cor-cam", { opacity: 0 }, { opacity: 1, duration: 0.01 }, 5.88);
+      tl.fromTo("#cor-card", { scale: 0.6, filter: "blur(8px)" }, { scale: 1, filter: "blur(0px)", duration: 0.5, ease: "power4.out", transformOrigin: "50% 60%" }, 5.9);
+      wordIn("#cor-b1", 6.2); wordIn("#cor-b2", 6.6);
+      tl.fromTo("#cor-note", { opacity: 0, filter: "blur(6px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.2, ease: "power2.out" }, 8.6);
+      const fg = document.getElementById("cor-ringfg"); const score = document.getElementById("cor-score"); const rs = { v: 0 };
+      tl.fromTo(rs, { v: 0 }, { v: 7, duration: 0.8, ease: "power2.out", onUpdate: () => { fg.setAttribute("stroke-dashoffset", String(100 - rs.v * 10)); score.firstChild.nodeValue = String(Math.round(rs.v)); } }, 7.2);
       const popIn = (sel, at) => tl.fromTo(sel, { opacity: 0, scale: 0.92, y: 10 }, { opacity: 1, scale: 1, y: 0, duration: 0.3, ease: "back.out(1.6)", transformOrigin: "0% 50%" }, at);
-      popIn("#cor-l1", 1.4);
-      popIn("#cor-l2", 1.9);
-      tl.fromTo("#cor-l3", { opacity: 0, scale: 0.9, y: 14 }, { opacity: 1, scale: 1, y: 0, duration: 0.001, ease: "none" }, 2.6);
-
-      // Payoff: punch in on the "Faltou" line (film 9.4–9.9), hold, then carry out.
-      tl.fromTo("#cor-cam", { scale: 1, x: 0, y: 0, filter: "blur(0px)", opacity: 1, transformOrigin: "100% 100%" }, { scale: 1.18, x: 60, y: -10, duration: 0.5, ease: "power2.inOut" }, 2.8);
-      tl.to("#cor-cam", { scale: 0.6, x: 60, y: 40, filter: "blur(6px)", opacity: 0, duration: 0.45, ease: "power2.inOut" }, 5.55);
-      tl.fromTo("#cor-line1 .w, #cor-line2 .w, #cor-note", { opacity: 1 }, { opacity: 0, duration: 0.25, ease: "power2.in" }, 5.7);
+      popIn("#cor-l1", 8.8); popIn("#cor-l2", 9.3);
+      tl.fromTo("#cor-l3", { opacity: 0, scale: 0.9, y: 14 }, { opacity: 1, scale: 1, y: 0, duration: 0.001, ease: "none" }, 9.9);
+      // Payoff: punch in on the "Faltou" line (10.8–11.3), hold, then carry out
+      tl.fromTo("#cor-cam", { scale: 1, x: 0, y: 0, transformOrigin: "100% 100%" }, { scale: 1.18, x: 60, y: -10, duration: 0.5, ease: "power2.inOut" }, 10.2);
+      tl.to("#cor-cam", { scale: 0.6, x: 60, y: 40, filter: "blur(6px)", opacity: 0, duration: 0.3, ease: "power2.inOut" }, 12.5);
+      tl.to("#cor-b1 .w, #cor-b2 .w, #cor-note", { opacity: 0, duration: 0.25, ease: "power2.in" }, 12.4);
       window.__timelines["correct"] = tl;
     })();
   </script>
