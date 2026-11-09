@@ -5,7 +5,7 @@
     .t .w { display: inline-block; margin-right: 0.22em; opacity: 0; }
     .t .acc { color: var(--color-accent-light, #60a5fa); }
     .sub { position: absolute; left: 124px; width: 620px; font-size: 30px; line-height: 1.4; font-weight: 500; color: #9aa3b2; opacity: 0; }
-    .win { position: absolute; left: 780px; top: 190px; width: 1100px; height: 688px; border-radius: 20px; overflow: hidden; background: #fff; border: 2px solid rgba(255,255,255,.10); box-shadow: 0 30px 80px rgba(0,0,0,.55); }
+    .win { position: absolute; left: 780px; top: 190px; width: 1100px; height: 688px; border-radius: 20px; overflow: hidden; background: #0b1220; border: 2px solid rgba(96,165,250,.22); box-shadow: 0 30px 80px rgba(0,0,0,.7); }
     .cam { position: absolute; left: 0; top: 0; width: 1440px; height: 900px; transform-origin: 0 0; }
     .cam > video, .cam > img { position: absolute; left: 0; top: 0; width: 1440px; height: 900px; display: block; }
     .tag { position: absolute; left: 780px; top: 898px; font-size: 26px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: #9aa3b2; opacity: 0; }
@@ -19,7 +19,7 @@
   </style>
   <div id="root" data-composition-id="reveal" data-width="1920" data-height="1080">
     <div id="rv-lockup"><img id="rv-mark" src="assets/brand/ivest-cap.svg" alt="iVest" /><div id="rv-word"><span class="i">i</span>Vest</div></div>
-    <p id="rv-sub" class="clip" data-start="0.9" data-duration="4.7" data-hold data-layout-allow-overflow><span class="w">Plataforma</span><span class="w">de</span><span class="w">estudo</span><span class="w">com</span><span class="w">correção</span><span class="w">por</span><span class="w">IA</span></p>
+    <p id="rv-sub" class="clip" data-start="0.9" data-duration="4.4" data-hold data-layout-allow-overflow><span class="w">Plataforma</span><span class="w">de</span><span class="w">estudo</span><span class="w">com</span><span class="w">correção</span><span class="w">por</span><span class="w">IA</span></p>
 
   </div>
   <script>
@@ -30,12 +30,10 @@
         tl.fromTo(w, { opacity: 0, filter: "blur(6px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.13, ease: "power2.out" }, at + i * 0.07));
       const wordOut = (sel, at) => tl.to(sel + " .w", { opacity: 0, filter: "blur(6px)", duration: 0.18, ease: "power2.in", stagger: 0.03 }, at);
       const subIn = (sel, at) => tl.fromTo(sel, { opacity: 0, filter: "blur(6px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.2, ease: "power2.out" }, at);
-      // camera: scale s on a 1440x900 plate shown in a 1040x650 window, centred on (fx, fy) plate px
       const K = 1100 / 1440;
       const cam = (s, fx, fy) => ({ scale: K * s, x: 550 - fx * K * s, y: 344 - fy * K * s });
-      const camSet = (sel, s, fx, fy) => gsap.set(sel, cam(s, fx, fy));
+      const camSet = (sel, s, fx, fy) => tl.fromTo(sel, cam(s, fx, fy), { ...cam(s, fx, fy), duration: 0.01 }, 0);
       const camTo = (sel, s, fx, fy, at, dur = 0.6, ease = "power2.inOut") => tl.to(sel, { ...cam(s, fx, fy), duration: dur, ease }, at);
-      const camFrom = (sel, s, fx, fy, s2, fx2, fy2, at, dur = 0.6, ease = "power2.inOut") => tl.fromTo(sel, cam(s, fx, fy), { ...cam(s2, fx2, fy2), duration: dur, ease }, at);
       const winIn = (sel, at, fromX = 900) => tl.fromTo(sel, { x: fromX, opacity: 0, filter: "blur(10px)" }, { x: 0, opacity: 1, filter: "blur(0px)", duration: 0.55, ease: "power4.out" }, at);
       const winOut = (sel, at, toX = 160) => tl.to(sel, { x: toX, opacity: 0, filter: "blur(10px)", duration: 0.4, ease: "power3.in" }, at);
       const tagIn = (sel, at) => tl.fromTo(sel, { opacity: 0 }, { opacity: 1, duration: 0.3 }, at);
@@ -44,8 +42,8 @@
       tl.fromTo("#rv-mark", { scale: 0.2, opacity: 0, rotate: -8 }, { scale: 1, opacity: 1, rotate: 0, duration: 0.6, ease: "back.out(1.4)", transformOrigin: "50% 50%" }, 0.1);
       tl.fromTo("#rv-word", { x: -420, opacity: 0 }, { x: 0, opacity: 1, duration: 0.35, ease: "power3.out" }, 0.35);
       document.querySelectorAll("#rv-sub .w").forEach((w, i) => tl.fromTo(w, { opacity: 0, filter: "blur(6px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.13, ease: "power2.out" }, 0.9 + i * 0.07));
-      tl.to("#rv-lockup", { scale: 1.6, opacity: 0, filter: "blur(10px)", duration: 0.35, ease: "power3.in", transformOrigin: "50% 50%" }, 5.5);
-      tl.to("#rv-sub .w", { opacity: 0, duration: 0.2, ease: "power2.in" }, 5.45);
+      tl.to("#rv-lockup", { scale: 1.6, opacity: 0, filter: "blur(10px)", duration: 0.35, ease: "power3.in", transformOrigin: "50% 50%" }, 5.2);
+      tl.to("#rv-sub .w", { opacity: 0, duration: 0.2, ease: "power2.in" }, 5.15);
 
       window.__timelines["reveal"] = tl;
     })();

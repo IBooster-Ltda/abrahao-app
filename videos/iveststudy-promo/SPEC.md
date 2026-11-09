@@ -1,7 +1,7 @@
-GOAL:    um estudante entende tudo que o iVest faz, vendo o app desktop de verdade funcionando, e cria a conta grátis.
+GOAL:    um estudante entende tudo que o iVest faz, vendo o app desktop em modo noturno funcionando de verdade, e cria a conta grátis.
 OUTPUT:  HyperFrames, 1920 x 1080, 30 fps
-TIME:    98 s x 30 = 2940 quadros; a narração (12 falas, VOICEOVER.md) é o relógio; música gerada a 118 BPM a 0,2 sob a voz; flood para o branco em 88,4 s
-LOOK:    chão #0F172A (faixa escura da landing), tinta #FFF, cinza #9AA3B2, acento #60A5FA (uma palavra por título); janelas do app 1100x688 (16:10) em left 780 / top 190, raio 20 px, borda 2 px rgba(255,255,255,.1),
+TIME:    97 s x 30 = 2910 quadros; a narração (12 falas, VOICEOVER.md) é o relógio; música gerada a 118 BPM a 0,2 sob a voz; flood para o branco em 88,4 s
+LOOK:    chão: textura gerada (navy com bokeh sutil, assets/gen/backdrop-dark.jpg) sobre #0F172A; abertura e fechamento em fotos geradas (estudante à noite, campus ao amanhecer) escurecidas, tinta #FFF, cinza #9AA3B2, acento #60A5FA (uma palavra por título); janelas do app 1100x688 (16:10) em left 780 / top 190, raio 20 px, borda 2 px rgba(255,255,255,.1),
          sombra 0 30px 80px rgba(0,0,0,.55); dentro, a gravação ou captura 1440x900 do app desktop com câmera (scale 1,0–2,1, punch de 0,6–0,9 s power2.inOut, origem no controle nomeado pela voz);
          títulos Inter 700 68 px tracking -0,03em em duas linhas (top 300 / 380), linhas de apoio Inter 500 30 px (top 500); etiqueta "TELA REAL DO APP · DESKTOP" 26 px caixa alta sob a janela; end card branco com tinta #0F172A e acento #2563EB.
 OBJECTS: só telas reais do app logado: Modo Estudo (pergunta, cronômetro, símbolos, caixa de resposta, "Responder por voz", "Avaliar resposta", 10/10, Avaliação, Resposta de referência, Revisão analítica), tela inicial em modo escuro

@@ -5,18 +5,18 @@
     .t .w { display: inline-block; margin-right: 0.22em; opacity: 0; }
     .t .acc { color: var(--color-accent-light, #60a5fa); }
     .sub { position: absolute; left: 124px; width: 620px; font-size: 30px; line-height: 1.4; font-weight: 500; color: #9aa3b2; opacity: 0; }
-    .win { position: absolute; left: 780px; top: 190px; width: 1100px; height: 688px; border-radius: 20px; overflow: hidden; background: #fff; border: 2px solid rgba(255,255,255,.10); box-shadow: 0 30px 80px rgba(0,0,0,.55); }
+    .win { position: absolute; left: 780px; top: 190px; width: 1100px; height: 688px; border-radius: 20px; overflow: hidden; background: #0b1220; border: 2px solid rgba(96,165,250,.22); box-shadow: 0 30px 80px rgba(0,0,0,.7); }
     .cam { position: absolute; left: 0; top: 0; width: 1440px; height: 900px; transform-origin: 0 0; }
     .cam > video, .cam > img { position: absolute; left: 0; top: 0; width: 1440px; height: 900px; display: block; }
     .tag { position: absolute; left: 780px; top: 898px; font-size: 26px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: #9aa3b2; opacity: 0; }
 
   </style>
   <div id="root" data-composition-id="redacao" data-width="1920" data-height="1080">
-    <h1 id="rd-1" class="t clip" data-start="0.3" data-duration="6.3" style="top:300px" data-layout-allow-overflow><span class="w acc">Redação</span></h1>
-    <h1 id="rd-2" class="t clip" data-start="0.6" data-duration="6.0" style="top:380px" data-layout-allow-overflow><span class="w">por</span><span class="w">competência.</span></h1>
-    <p id="rd-s" class="sub clip" data-start="2.4" data-duration="4.2" style="top:500px">Nota de 0 a 1000 · C1 a C5 comentadas, como no ENEM</p>
-    <div id="rd-win" class="win" data-layout-allow-overflow><div id="rd-win-cam" class="cam"><video id="rd-win-m" class="clip" src="assets/app/clips/redacao-result.mp4" data-start="0" data-duration="6.6" data-playback-rate="1.05" muted playsinline data-track-index="2"></video></div></div>
-    <p id="rd-win-tag" class="tag" data-layout-ignore>Tela real do app · desktop</p>
+    <h1 id="rd-1" class="t clip" data-start="0.3" data-duration="6.6" style="top:300px" data-layout-allow-overflow><span class="w acc">Redação</span></h1>
+    <h1 id="rd-2" class="t clip" data-start="0.6" data-duration="6.3" style="top:380px" data-layout-allow-overflow><span class="w">por</span><span class="w">competência.</span></h1>
+    <p id="rd-s" class="sub clip" data-start="2.4" data-duration="4.5" style="top:500px">Nota de 0 a 1000 · C1 a C5 comentadas, como no ENEM</p>
+    <div id="rd-win" class="win" data-layout-allow-overflow><div id="rd-win-cam" class="cam"><video id="rd-win-m" class="clip" src="assets/app/clips/redacao-result.mp4" data-start="0" data-duration="6.9" data-playback-rate="1.1" muted playsinline data-track-index="2"></video></div></div>
+    <p id="rd-win-tag" class="tag" data-layout-ignore>Tela real do app · modo noturno</p>
 
   </div>
   <script>
@@ -27,23 +27,21 @@
         tl.fromTo(w, { opacity: 0, filter: "blur(6px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.13, ease: "power2.out" }, at + i * 0.07));
       const wordOut = (sel, at) => tl.to(sel + " .w", { opacity: 0, filter: "blur(6px)", duration: 0.18, ease: "power2.in", stagger: 0.03 }, at);
       const subIn = (sel, at) => tl.fromTo(sel, { opacity: 0, filter: "blur(6px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.2, ease: "power2.out" }, at);
-      // camera: scale s on a 1440x900 plate shown in a 1040x650 window, centred on (fx, fy) plate px
       const K = 1100 / 1440;
       const cam = (s, fx, fy) => ({ scale: K * s, x: 550 - fx * K * s, y: 344 - fy * K * s });
-      const camSet = (sel, s, fx, fy) => gsap.set(sel, cam(s, fx, fy));
+      const camSet = (sel, s, fx, fy) => tl.fromTo(sel, cam(s, fx, fy), { ...cam(s, fx, fy), duration: 0.01 }, 0);
       const camTo = (sel, s, fx, fy, at, dur = 0.6, ease = "power2.inOut") => tl.to(sel, { ...cam(s, fx, fy), duration: dur, ease }, at);
-      const camFrom = (sel, s, fx, fy, s2, fx2, fy2, at, dur = 0.6, ease = "power2.inOut") => tl.fromTo(sel, cam(s, fx, fy), { ...cam(s2, fx2, fy2), duration: dur, ease }, at);
       const winIn = (sel, at, fromX = 900) => tl.fromTo(sel, { x: fromX, opacity: 0, filter: "blur(10px)" }, { x: 0, opacity: 1, filter: "blur(0px)", duration: 0.55, ease: "power4.out" }, at);
       const winOut = (sel, at, toX = 160) => tl.to(sel, { x: toX, opacity: 0, filter: "blur(10px)", duration: 0.4, ease: "power3.in" }, at);
       const tagIn = (sel, at) => tl.fromTo(sel, { opacity: 0 }, { opacity: 1, duration: 0.3 }, at);
 
 
-      winIn("#rd-win", 0); tagIn("#rd-win-tag", 0.5);
+      winIn("#rd-win", 0, -900); tagIn("#rd-win-tag", 0.5);
       wordIn("#rd-1", 0.3); wordIn("#rd-2", 0.6); subIn("#rd-s", 2.4);
       camSet("#rd-win-cam", 1.0, 720, 450);
-      camTo("#rd-win-cam", 1.8, 720, 300, 0.8, 0.9);      // NOTA TOTAL 920/1000 lands
-      camTo("#rd-win-cam", 1.25, 720, 500, 3.6, 1.0);     // the competências scroll past
-      winOut("#rd-win", 6.2); tl.to("#rd-1 .w, #rd-2 .w, #rd-s, #rd-win-tag", { opacity: 0, duration: 0.25, ease: "power2.in" }, 6.25);
+      camTo("#rd-win-cam", 1.8, 720, 300, 0.8, 0.9);
+      camTo("#rd-win-cam", 1.25, 720, 500, 3.8, 1.0);
+      winOut("#rd-win", 6.5, -160); tl.to("#rd-1 .w, #rd-2 .w, #rd-s, #rd-win-tag", { opacity: 0, duration: 0.25, ease: "power2.in" }, 6.55);
 
       window.__timelines["redacao"] = tl;
     })();

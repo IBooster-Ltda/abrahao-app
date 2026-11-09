@@ -1,4 +1,4 @@
-# Narração · iVest promo desktop (98 s, pt-BR)
+# Narração · iVest promo desktop, modo noturno (97 s, pt-BR)
 
 A voz é o relógio: cada cena começa com a sua fala. "aiVest" está escrito assim para a pronúncia em inglês ("ai-vést"); na tela a grafia oficial "iVest" é mantida. A tela nunca repete a frase falada palavra por palavra.
 
@@ -17,5 +17,5 @@ A voz é o relógio: cada cena começa com a sua fala. "aiVest" está escrito as
 | 11 | 82,1 s | Crie uma turma, dispute o ranking com os colegas, e use tudo em português, inglês ou espanhol. | capturas: Turma & Ranking, home em EN e ES |
 | 12 | 88,7 s | Comece grátis e ganhe três dias de Pro. aiVest. Prepare-se para o exame que muda tudo. | end card |
 
-Voz: ElevenLabs "Sarah" (voz padrão), eleven_multilingual_v2, pt, previous_text/next_text; clipes com silêncio aparado, loudnorm -16 LUFS, atempo 1,05. Conta gratuita: 4.715 de 10.000 caracteres usados no mês.
+Voz: ElevenLabs "Brian" (masculina, grave), eleven_multilingual_v2, pt, previous_text/next_text; clipes com silêncio aparado, loudnorm -16 LUFS, atempo 1,04. A versão "Sarah" (feminina) está no histórico do git.
 Fonte das afirmações: o próprio app logado (conta do cliente) e a landing. Com plano pago da ElevenLabs, as vozes nativas "Roberta" e "Paulo" já estão na conta.

@@ -5,21 +5,22 @@
     .t .w { display: inline-block; margin-right: 0.22em; opacity: 0; }
     .t .acc { color: var(--color-accent-light, #60a5fa); }
     .sub { position: absolute; left: 124px; width: 620px; font-size: 30px; line-height: 1.4; font-weight: 500; color: #9aa3b2; opacity: 0; }
-    .win { position: absolute; left: 780px; top: 190px; width: 1100px; height: 688px; border-radius: 20px; overflow: hidden; background: #fff; border: 2px solid rgba(255,255,255,.10); box-shadow: 0 30px 80px rgba(0,0,0,.55); }
+    .win { position: absolute; left: 780px; top: 190px; width: 1100px; height: 688px; border-radius: 20px; overflow: hidden; background: #0b1220; border: 2px solid rgba(96,165,250,.22); box-shadow: 0 30px 80px rgba(0,0,0,.7); }
     .cam { position: absolute; left: 0; top: 0; width: 1440px; height: 900px; transform-origin: 0 0; }
     .cam > video, .cam > img { position: absolute; left: 0; top: 0; width: 1440px; height: 900px; display: block; }
     .tag { position: absolute; left: 780px; top: 898px; font-size: 26px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: #9aa3b2; opacity: 0; }
 
   </style>
   <div id="root" data-composition-id="estudo" data-width="1920" data-height="1080">
-    <h1 id="es-1" class="t clip" data-start="0.3" data-duration="6.0" style="top:300px" data-layout-allow-overflow><span class="w">Como</span><span class="w">na</span><span class="w acc">prova.</span></h1>
-    <p id="es-s1" class="sub clip" data-start="2.0" data-duration="4.3" style="top:500px">Digitando ou por voz · cronômetro · símbolos matemáticos</p>
-    <h1 id="es-2" class="t clip" data-start="6.5" data-duration="9.0" style="top:300px" data-layout-allow-overflow><span class="w">Nota,</span><span class="w">avaliação</span></h1>
-    <h1 id="es-3" class="t clip" data-start="6.8" data-duration="8.7" style="top:380px" data-layout-allow-overflow><span class="w">e</span><span class="w">o</span><span class="w">que</span><span class="w acc">faltou.</span></h1>
-    <p id="es-s2" class="sub clip" data-start="10.0" data-duration="5.5" style="top:500px">Resposta de referência · revisão analítica · chat para aprofundar</p>
-    <div id="es-win" class="win" data-layout-allow-overflow><div id="es-win-cam" class="cam"><video id="es-win-m" class="clip" src="assets/app/clips/estudo-grade1.mp4" data-start="0" data-duration="7.4" data-playback-rate="1.0" muted playsinline data-track-index="2"></video></div></div>
-    <div id="es-win2" class="win" data-layout-allow-overflow style="opacity:0"><div id="es-win2-cam" class="cam"><img id="es-win2-m" src="assets/app/stills/estudo-q1-graded-full.png" alt="" style="height:auto" /></div></div>
-    <p id="es-win-tag" class="tag" data-layout-ignore>Tela real do app · desktop</p>
+    <h1 id="es-1" class="t clip" data-start="0.3" data-duration="5.0" style="top:300px" data-layout-allow-overflow><span class="w">Como</span><span class="w">na</span><span class="w acc">prova.</span></h1>
+    <p id="es-s1" class="sub clip" data-start="1.6" data-duration="3.7" style="top:500px">Digitando ou por voz · cronômetro · símbolos matemáticos</p>
+    <h1 id="es-2" class="t clip" data-start="5.6" data-duration="9.8" style="top:300px" data-layout-allow-overflow><span class="w">Nota,</span><span class="w">avaliação</span></h1>
+    <h1 id="es-3" class="t clip" data-start="5.9" data-duration="9.5" style="top:380px" data-layout-allow-overflow><span class="w">e</span><span class="w">o</span><span class="w">que</span><span class="w acc">faltou.</span></h1>
+    <p id="es-s2" class="sub clip" data-start="9.6" data-duration="5.8" style="top:500px">Resposta de referência · revisão analítica · chat para aprofundar</p>
+    <div id="es-win" class="win" data-layout-allow-overflow><div id="es-win-cam" class="cam"><video id="es-win-m" class="clip" src="assets/app/clips/estudo-typing.mp4" data-start="0" data-duration="5.0" data-playback-rate="3" data-media-start="2" muted playsinline data-track-index="2"></video></div></div>
+    <p id="es-win-tag" class="tag" data-layout-ignore>Tela real do app · modo noturno</p>
+    <div id="es-win2" class="win" data-layout-allow-overflow style="opacity:0"><div id="es-win2-cam" class="cam"><video id="es-win2-m" class="clip" src="assets/app/clips/estudo-grade.mp4" data-start="4.9" data-duration="5.0" data-playback-rate="1.0" data-media-start="0.8" muted playsinline data-track-index="2"></video></div></div>
+    <div id="es-win3" class="win" data-layout-allow-overflow style="opacity:0"><div id="es-win3-cam" class="cam"><img id="es-win3-m" src="assets/app/stills/estudo-q2-graded-full.png" alt="" style="height:auto" /></div></div>
 
   </div>
   <script>
@@ -30,35 +31,34 @@
         tl.fromTo(w, { opacity: 0, filter: "blur(6px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.13, ease: "power2.out" }, at + i * 0.07));
       const wordOut = (sel, at) => tl.to(sel + " .w", { opacity: 0, filter: "blur(6px)", duration: 0.18, ease: "power2.in", stagger: 0.03 }, at);
       const subIn = (sel, at) => tl.fromTo(sel, { opacity: 0, filter: "blur(6px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.2, ease: "power2.out" }, at);
-      // camera: scale s on a 1440x900 plate shown in a 1040x650 window, centred on (fx, fy) plate px
       const K = 1100 / 1440;
       const cam = (s, fx, fy) => ({ scale: K * s, x: 550 - fx * K * s, y: 344 - fy * K * s });
-      const camSet = (sel, s, fx, fy) => gsap.set(sel, cam(s, fx, fy));
+      const camSet = (sel, s, fx, fy) => tl.fromTo(sel, cam(s, fx, fy), { ...cam(s, fx, fy), duration: 0.01 }, 0);
       const camTo = (sel, s, fx, fy, at, dur = 0.6, ease = "power2.inOut") => tl.to(sel, { ...cam(s, fx, fy), duration: dur, ease }, at);
-      const camFrom = (sel, s, fx, fy, s2, fx2, fy2, at, dur = 0.6, ease = "power2.inOut") => tl.fromTo(sel, cam(s, fx, fy), { ...cam(s2, fx2, fy2), duration: dur, ease }, at);
       const winIn = (sel, at, fromX = 900) => tl.fromTo(sel, { x: fromX, opacity: 0, filter: "blur(10px)" }, { x: 0, opacity: 1, filter: "blur(0px)", duration: 0.55, ease: "power4.out" }, at);
       const winOut = (sel, at, toX = 160) => tl.to(sel, { x: toX, opacity: 0, filter: "blur(10px)", duration: 0.4, ease: "power3.in" }, at);
       const tagIn = (sel, at) => tl.fromTo(sel, { opacity: 0 }, { opacity: 1, duration: 0.3 }, at);
 
 
       winIn("#es-win", 0); tagIn("#es-win-tag", 0.5);
-      wordIn("#es-1", 0.3); subIn("#es-s1", 2.0);
-      // the typed answer and its controls: voice, timer, "Avaliar resposta"
-      camSet("#es-win-cam", 1.0, 720, 450);
-      camTo("#es-win-cam", 1.55, 700, 640, 0.6, 0.9);
-      // the grade lands (clip t≈4 → scene 6.6): punch on the green 10/10
-      camTo("#es-win-cam", 1.9, 1040, 830, 5.2, 0.6);
-      wordOut("#es-1", 5.6); tl.to("#es-s1", { opacity: 0, duration: 0.2 }, 5.6);
-      wordIn("#es-2", 6.2); wordIn("#es-3", 6.5);
-      // the page scrolls through Avaliação, Resposta de referência, Revisão analítica: pull back and ride it
-      // swap to the full-page capture of the graded answer and ride down it: Avaliação → Resposta de referência → Revisão analítica
-      camSet("#es-win2-cam", 1.1, 720, 900);
-      tl.to("#es-win", { opacity: 0, duration: 0.2, ease: "power2.in" }, 7.3);
-      tl.fromTo("#es-win2", { opacity: 0, filter: "blur(8px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.25, ease: "power2.out" }, 7.35);
-      camTo("#es-win2-cam", 1.1, 720, 1750, 7.8, 6.6, "power1.inOut");
-      subIn("#es-s2", 10.0);
-      tl.to("#es-win2", { x: 160, opacity: 0, filter: "blur(10px)", duration: 0.4, ease: "power3.in" }, 15.1);
-      tl.to("#es-2 .w, #es-3 .w, #es-s2, #es-win-tag", { opacity: 0, duration: 0.25, ease: "power2.in" }, 15.15);
+      wordIn("#es-1", 0.3); subIn("#es-s1", 1.6);
+      camSet("#es-win-cam", 1.5, 820, 560);
+      camTo("#es-win-cam", 1.5, 820, 600, 0.6, 4.2, "none");
+      // the grade clip: click "Avaliar resposta", the 10/10 lands (clip ≈1.5 s → scene 6.4)
+      tl.to("#es-win", { opacity: 0, filter: "blur(8px)", duration: 0.25, ease: "power2.in" }, 4.9);
+      tl.fromTo("#es-win2", { opacity: 0, filter: "blur(8px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.25, ease: "power2.out" }, 4.95);
+      camSet("#es-win2-cam", 1.5, 760, 640);
+      camTo("#es-win2-cam", 1.9, 1040, 760, 6.2, 0.6);
+      wordOut("#es-1", 5.3); tl.to("#es-s1", { opacity: 0, duration: 0.2 }, 5.3);
+      wordIn("#es-2", 5.6); wordIn("#es-3", 5.9);
+      // swap to the full-page capture and ride down: Avaliação → Resposta de referência → Revisão analítica
+      camSet("#es-win3-cam", 1.1, 720, 900);
+      tl.to("#es-win2", { opacity: 0, duration: 0.2, ease: "power2.in" }, 9.3);
+      tl.fromTo("#es-win3", { opacity: 0, filter: "blur(8px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.25, ease: "power2.out" }, 9.35);
+      camTo("#es-win3-cam", 1.1, 720, 1750, 9.8, 5.2, "power1.inOut");
+      subIn("#es-s2", 9.6);
+      tl.to("#es-win3", { x: 160, opacity: 0, filter: "blur(10px)", duration: 0.4, ease: "power3.in" }, 15.0);
+      tl.to("#es-2 .w, #es-3 .w, #es-s2, #es-win-tag", { opacity: 0, duration: 0.25, ease: "power2.in" }, 15.05);
 
       window.__timelines["estudo"] = tl;
     })();
