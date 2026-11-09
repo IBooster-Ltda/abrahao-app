@@ -1,16 +1,18 @@
-# REVIEW · iVest promo · corte "tcham" (97 s, 1920×1080, 30 fps, narrado)
+# REVIEW · iVest promo · corte "pitch" (77 s, 1920×1080, 30 fps, narrado)
 
-## Referência do cliente
-Um TikTok de 15,7 s: um notebook numa sala escura com o app rodando na tela, frases curtas digitadas com brilho sobre a cena, câmera lenta empurrando para dentro da tela, uma construção de tiques que termina num impacto quando o logo aparece (11,7 s) e silêncio no cartão final. Medido com `hyperframes audio`: música mínima, onsets a cada 0,21 s na subida, pico único em 11,69 s, silêncio de 12,7 s ao fim.
+## Referências do cliente
+1. TikTok de 15,7 s: notebook no escuro, frases digitadas, tiques → impacto no logo, silêncio.
+2. TikTok de 38 s: um pitch de slides tocando num notebook. Fundo navy com orbe azul, frases de dor ("Você se identifica?"), logo com arco de luz, "O que você ganha" com 4 cards numerados (um aceso), números contando (+90, +R$11M), "Simples assim, em 3 passos", CTA, flood azul com um único impacto forte (34,0 s, −9 dB) e silêncio. Quase nenhuma captura do produto.
 
 ## O que foi aplicado
-- Cena real: gerei uma foto de um notebook de frente numa sala escura (Runway) e mapeei o app real na tela (690×431 px na placa 1920×1080). Nove momentos usam esse plano: gancho, reveal, treino do dia, flashcards, simulados, mentor e idiomas. A câmera empurra para dentro da tela até o app preencher o quadro, e o corte cai no mesmo clipe em tela cheia (match cut).
-- Frases digitadas com brilho azul e cursor, no lugar dos chips: "Você estudou horas.", "Mas sabe onde errou?", "Plataforma de estudo com correção por IA", "Escreva como na prova.", etc. Cada letra tem som de tecla.
-- "Tcham": quatro construções de tiques acelerando (9 cliques de 0,30 s a 0,07 s) com riser, terminando em impacto grave + brilho: logo no notebook (5,95 s), nota 10/10 (19,3 s), 920/1000 (60,2 s) e logo final (87,45 s). A música abaixa a 8–12% nesses momentos e cai a zero depois do logo final, deixando só a voz e as teclas da URL digitada.
-- Logo entra em "slam": escala 2,6 → 1 em 0,26 s com blur, brilho na tela do notebook pulsando.
-- Mantidos: narração masculina, tipografia gigante nas bancas e idiomas, números contando, fotos geradas, câmera nos takes do app limitada a 1,25×.
+- Estrutura espelhada na referência 2: gancho com notificações → 4 dores → logo → 6 cards de features → 1 captura real → 4 números → 3 passos → CTA → flood.
+- Os ícones são os da barra lateral do próprio app (extraídos do DOM logado, lucide), então quem nunca abriu o iVest entende o que é Modo Estudo, Quiz, Flashcards, Simulados, Redação e Mentor.
+- Só uma captura real (a correção 10/10), a única que o argumento precisa.
+- O card aceso e os números entram no instante em que a voz diz a palavra (timestamps por caractere da ElevenLabs).
+- "Tcham" duplo: tiques acelerando + riser → slam do logo (16,1 s, −5 dB RMS) e → flood azul (71,0 s, −6 dB), música a zero, 5 s de cartão em silêncio.
+- Nenhum número inventado: 5 bancas, 0–1000, ranks Bronze→Elite e PT/EN/ES vêm do app.
 
 ## Medido e olhado
-- `hyperframes check`: ok (avisos mantidos: clipes que começam no meio da cena; arquivo da cena estudo com 316 linhas).
-- 19 quadros intermediários e folha de contato do MP4 olhados.
-- Áudio medido; ninguém ouviu. A trilha segue o loop gerado; com uma música com drops reais os impactos ficam ainda mais fortes.
+- `hyperframes check`: ok. Avisos restantes: holds curtos nos 3 passos (1,6–1,7 s) e a heurística de "última linha" do cartão final (o cartão fica 5 s parado; o aviso vem do cursor piscando).
+- 21 snapshots + folha de contato do MP4 olhados; áudio medido (−14,2 LUFS integrado, pico real −1,2 dB, sem clipping). Ninguém ouviu.
+- Para o TikTok: tocar este MP4 em tela cheia no notebook, filmar no escuro com o celular, como nas referências.

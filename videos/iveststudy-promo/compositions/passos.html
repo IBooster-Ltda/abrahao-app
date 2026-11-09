@@ -1,0 +1,66 @@
+<template>
+  <style>
+    #root { position: absolute; inset: 0; font-family: var(--font-display, "Inter"), sans-serif; color: #fff; overflow: hidden; }
+    .bg { position: absolute; inset: 0; background: #070b14; overflow: hidden; }
+    .orb { position: absolute; width: 1700px; height: 1700px; border-radius: 50%; transform-origin: 50% 50%;
+           background: radial-gradient(circle, rgba(120,180,255,1) 0%, rgba(37,99,235,.8) 16%, rgba(30,64,175,.4) 38%, rgba(7,11,20,0) 66%); filter: blur(48px); }
+    .eyebrow { position: absolute; left: 0; width: 1920px; text-align: center; font-size: 28px; font-weight: 600; letter-spacing: .3em; text-transform: uppercase; color: #9db5ff; }
+    .h1 { position: absolute; left: 0; width: 1920px; text-align: center; font-weight: 700; font-size: 96px; line-height: 1.08; letter-spacing: -0.035em; color: #fff; }
+    .h1 .acc { color: var(--color-accent-light, #60a5fa); }
+    .h1 .w { display: inline-block; margin: 0 .11em; opacity: 0; }
+    .h1.md { font-size: 80px; } .h1.sm { font-size: 64px; }
+    .card { position: absolute; border-radius: 26px; background: rgba(255,255,255,.055); border: 1px solid rgba(255,255,255,.13); }
+    .ty { position: absolute; left: 0; width: 1920px; text-align: center; font-size: 48px; font-weight: 600; color: #fff; letter-spacing: -0.01em; }
+    .ty .caret { display: inline-block; width: 3px; height: 1em; background: #60a5fa; vertical-align: -0.12em; margin-left: 5px; box-shadow: 0 0 12px rgba(96,165,250,1); }
+    .logo { position: absolute; display: flex; align-items: center; justify-content: center; gap: 0.22em; font-weight: 700; letter-spacing: -0.04em; line-height: 1; color: #fff; white-space: nowrap; }
+    .logo svg { width: 1.0em; height: 1.0em; }
+    .logo .i { color: var(--color-accent-light, #60a5fa); }
+
+    .circ { position: absolute; left: 186px; top: 0; width: 88px; height: 88px; border-radius: 50%; background: #2563eb; color: #fff; font-size: 40px; font-weight: 800; display: flex; align-items: center; justify-content: center; box-shadow: 0 0 40px rgba(37,99,235,.7); }
+    .sl { position: absolute; left: 0; width: 460px; top: 124px; text-align: center; font-size: 30px; font-weight: 700; letter-spacing: -0.02em; color: #fff; }
+    .ss { position: absolute; left: 10px; width: 440px; top: 176px; text-align: center; font-size: 28px; line-height: 1.25; font-weight: 500; color: #b8c1d3; }
+
+  </style>
+  <div id="root" data-composition-id="passos" data-width="1920" data-height="1080">
+    <div class="bg"><div id="ps-orb" class="orb" style="left:210px;top:-120px"></div></div>
+    <div id="ps-t" class="h1 md clip" data-start="0.1" data-duration="6.1" style="top:250px" data-layout-allow-overflow><span class="w">Simples</span><span class="w">assim,</span><span class="w">em</span><span class="w acc">3</span><span class="w acc">passos.</span></div>
+    <div id="ps-line" style="position:absolute;left:460px;top:558px;width:1000px;height:4px;background:rgba(96,165,250,.22);border-radius:2px"></div>
+    <div id="ps-fill" style="position:absolute;left:460px;top:558px;width:1000px;height:4px;background:#60a5fa;border-radius:2px;transform-origin:0 50%;transform:scaleX(0);box-shadow:0 0 16px rgba(96,165,250,.9)"></div>
+    <div id="ps-s0" class="clip" data-start="1.2" data-duration="5.00" style="position:absolute;left:230px;top:516px;width:460px;height:300px;opacity:0" data-layout-allow-overflow>
+      <div class="circ">1</div><div class="sl">Crie a conta grátis</div><div class="ss">Sem cartão. 3 dias de Pro.</div></div>
+    <div id="ps-s1" class="clip" data-start="2.7" data-duration="3.50" style="position:absolute;left:730px;top:516px;width:460px;height:300px;opacity:0" data-layout-allow-overflow>
+      <div class="circ">2</div><div class="sl">Escolha a prova e a matéria</div><div class="ss">ENEM, Fuvest, Unicamp, PAES ou SAT.</div></div>
+    <div id="ps-s2" class="clip" data-start="4.15" data-duration="2.05" style="position:absolute;left:1230px;top:516px;width:460px;height:300px;opacity:0" data-layout-allow-overflow>
+      <div class="circ">3</div><div class="sl">Responda e receba a correção</div><div class="ss">Nota, avaliação e revisão na hora.</div></div>
+
+  </div>
+  <script>
+    (() => {
+      const tl = gsap.timeline({ paused: true });
+
+      const wordIn = (sel, at, step = 0.085) => document.querySelectorAll(sel + " .w").forEach((w, i) =>
+        tl.fromTo(w, { opacity: 0, y: 26, filter: "blur(10px)" }, { opacity: 1, y: 0, filter: "blur(0px)", duration: 0.42, ease: "power3.out" }, at + i * step));
+      const wordOut = (sel, at) => tl.to(sel + " .w", { opacity: 0, y: -18, filter: "blur(8px)", duration: 0.22, ease: "power2.in", stagger: 0.025 }, at);
+      const rise = (sel, at, y = 40, dur = 0.55) => tl.fromTo(sel, { opacity: 0, y, filter: "blur(6px)" }, { opacity: 1, y: 0, filter: "blur(0px)", duration: dur, ease: "power3.out", immediateRender: false }, at);
+      const dip = (sel, at, dur = 0.25) => tl.to(sel, { opacity: 0, filter: "blur(8px)", duration: dur, ease: "power2.in" }, at);
+      const show = (sel, at) => tl.set(sel, { opacity: 1 }, at);
+      const hide = (sel, at) => tl.set(sel, { opacity: 0 }, at);
+      const drift = (sel, from, to, dur, at = 0) => tl.fromTo(sel, from, { ...to, duration: dur, ease: "none" }, at);
+      const typeInto = (sel, text, at, cps = 16) => { const el = document.querySelector(sel + " .tx"); const st = { n: 0 }; tl.fromTo(st, { n: 0 }, { n: text.length, duration: text.length / cps, ease: "none", onUpdate: () => { el.textContent = text.slice(0, Math.round(st.n)); } }, at); };
+      const blink = (sel, dur) => { const c = document.querySelector(sel + " .caret"); const cs = { t: 0 }; tl.fromTo(cs, { t: 0 }, { t: dur, duration: dur, ease: "none", onUpdate: () => { c.style.opacity = Math.floor(cs.t * 2.5) % 2 === 0 ? 1 : 0; } }, 0); };
+      const countTo = (sel, to, at, dur, fmt = (v) => String(Math.round(v))) => { const el = document.querySelector(sel); const st = { v: 0 }; tl.fromTo(st, { v: 0 }, { v: to, duration: dur, ease: "power3.out", onUpdate: () => { el.textContent = fmt(st.v); } }, at); };
+      const slam = (sel, at) => tl.fromTo(sel, { scale: 2.4, opacity: 0, filter: "blur(16px)" }, { scale: 1, opacity: 1, filter: "blur(0px)", duration: 0.28, ease: "power4.out", transformOrigin: "50% 50%", immediateRender: false }, at);
+
+
+      drift("#ps-orb", { scale: 1.0 }, { scale: 1.1 }, 6.2);
+      wordIn("#ps-t", 0.2, 0.08);
+      tl.fromTo("#ps-line", { opacity: 0 }, { opacity: 1, duration: 0.4 }, 0.9);
+      tl.fromTo("#ps-fill", { scaleX: 0 }, { scaleX: 1, duration: 3.4, ease: "power1.inOut" }, 1.2);
+      const SP = [1.2, 2.7, 4.15];
+      for (let i = 0; i < 3; i++) { rise("#ps-s" + i, SP[i], 40, 0.5); tl.fromTo("#ps-s" + i + " .circ", { scale: 0.4 }, { scale: 1, duration: 0.5, ease: "back.out(2)" }, SP[i]); }
+      tl.to("#ps-s0, #ps-s1, #ps-s2, #ps-t, #ps-line, #ps-fill", { opacity: 0, filter: "blur(8px)", duration: 0.3, ease: "power2.in" }, 5.9);
+
+      window.__timelines["passos"] = tl;
+    })();
+  </script>
+</template>

@@ -1,71 +1,66 @@
 <template>
   <style>
     #root { position: absolute; inset: 0; font-family: var(--font-display, "Inter"), sans-serif; color: #fff; overflow: hidden; }
-    .stage { position: absolute; inset: 0; overflow: hidden; background: #0b1220; }
-    .cam { position: absolute; left: 0; top: 0; width: 1440px; height: 900px; transform-origin: 0 0; }
-    .cam > video, .cam > img { position: absolute; left: 0; top: 0; width: 1440px; height: 900px; display: block; }
-    .photo { position: absolute; left: -60px; top: -34px; width: 2040px; height: 1148px; }
-    .photo img { width: 2040px; height: 1148px; display: block; }
-    .lap { position: absolute; inset: 0; transform-origin: 957.0px 531.0px; }
-    .lap > img.plate { position: absolute; left: 0; top: 0; width: 1920px; height: 1080px; display: block; }
-    .screen { position: absolute; left: 612px; top: 300px; width: 690px; height: 462px; overflow: hidden; background: #000; box-shadow: 0 0 70px rgba(96,165,250,.22); }
-    .scr { position: absolute; left: 0; top: 15px; width: 690px; height: 431px; overflow: hidden; }
-    .kin { position: absolute; left: 0; width: 1920px; text-align: center; font-weight: 800; font-size: 220px; line-height: 1; letter-spacing: -0.045em; color: #fff; text-shadow: 0 0 40px rgba(96,165,250,.45); }
-    .kin .acc { color: var(--color-accent-light, #60a5fa); text-shadow: 0 0 40px rgba(96,165,250,.9); }
-    .kin.sm { font-size: 96px; font-weight: 700; letter-spacing: -0.03em; }
-    .kin .w { display: inline-block; margin: 0 0.12em; opacity: 0; }
-    .ty { position: absolute; left: 0; width: 1920px; text-align: center; font-size: 54px; font-weight: 600; color: #fff; letter-spacing: -0.01em; text-shadow: 0 0 26px rgba(96,165,250,.85), 0 2px 12px rgba(0,0,0,.8); }
+    .bg { position: absolute; inset: 0; background: #070b14; overflow: hidden; }
+    .orb { position: absolute; width: 1700px; height: 1700px; border-radius: 50%; transform-origin: 50% 50%;
+           background: radial-gradient(circle, rgba(120,180,255,1) 0%, rgba(37,99,235,.8) 16%, rgba(30,64,175,.4) 38%, rgba(7,11,20,0) 66%); filter: blur(48px); }
+    .eyebrow { position: absolute; left: 0; width: 1920px; text-align: center; font-size: 28px; font-weight: 600; letter-spacing: .3em; text-transform: uppercase; color: #9db5ff; }
+    .h1 { position: absolute; left: 0; width: 1920px; text-align: center; font-weight: 700; font-size: 96px; line-height: 1.08; letter-spacing: -0.035em; color: #fff; }
+    .h1 .acc { color: var(--color-accent-light, #60a5fa); }
+    .h1 .w { display: inline-block; margin: 0 .11em; opacity: 0; }
+    .h1.md { font-size: 80px; } .h1.sm { font-size: 64px; }
+    .card { position: absolute; border-radius: 26px; background: rgba(255,255,255,.055); border: 1px solid rgba(255,255,255,.13); }
+    .ty { position: absolute; left: 0; width: 1920px; text-align: center; font-size: 48px; font-weight: 600; color: #fff; letter-spacing: -0.01em; }
     .ty .caret { display: inline-block; width: 3px; height: 1em; background: #60a5fa; vertical-align: -0.12em; margin-left: 5px; box-shadow: 0 0 12px rgba(96,165,250,1); }
-    .num { position: absolute; left: 0; width: 1920px; text-align: center; font-weight: 800; font-size: 360px; line-height: 1; letter-spacing: -0.05em; color: #fff; font-variant-numeric: tabular-nums; text-shadow: 0 0 60px rgba(96,165,250,.55); }
-    .num small { font-size: 120px; font-weight: 700; color: #9aa3b2; letter-spacing: -0.02em; text-shadow: none; }
-    .logo { position: absolute; display: flex; align-items: center; justify-content: center; gap: 0.22em; font-weight: 700; letter-spacing: -0.04em; line-height: 1; color: #fff; white-space: nowrap; filter: drop-shadow(0 0 30px rgba(96,165,250,.7)); }
-    .logo img { width: 1.08em; height: 1.08em; }
+    .logo { position: absolute; display: flex; align-items: center; justify-content: center; gap: 0.22em; font-weight: 700; letter-spacing: -0.04em; line-height: 1; color: #fff; white-space: nowrap; }
+    .logo svg { width: 1.0em; height: 1.0em; }
     .logo .i { color: var(--color-accent-light, #60a5fa); }
+
+    .note { width: 860px; height: 122px; }
+    .note .av { position: absolute; left: 26px; top: 29px; width: 64px; height: 64px; border-radius: 18px; background: #2563eb; display: flex; align-items: center; justify-content: center; color: #fff; box-shadow: 0 0 30px rgba(37,99,235,.55); }
+    .note .nt { position: absolute; left: 112px; top: 22px; width: 700px; font-size: 28px; font-weight: 700; color: #fff; }
+    .note .nt .ag { position: absolute; right: 0; top: 2px; font-size: 28px; font-weight: 500; color: #b8c1d3; }
+    .note .nb { position: absolute; left: 112px; top: 64px; width: 690px; font-size: 28px; font-weight: 500; color: #c9d2e3; white-space: nowrap; }
+    .note .nb b { color: #fff; font-weight: 700; }
+    .note .dot { position: absolute; right: 30px; top: 72px; width: 14px; height: 14px; border-radius: 50%; background: #22c55e; box-shadow: 0 0 14px rgba(34,197,94,.9); }
 
   </style>
   <div id="root" data-composition-id="hook" data-width="1920" data-height="1080">
-    <div id="hk-l" class="lap" data-layout-allow-overflow><img class="plate" src="assets/gen/laptop-night.jpg" alt="" /><div class="screen" id="hk-l-screen"><div class="scr"><div id="hk-l-cam" class="cam"><video id="hk-l-m" class="clip" src="assets/app/clips/estudo-typing.mp4" data-start="0" data-duration="5.3" data-playback-rate="4" data-media-start="1" muted playsinline data-track-index="2"></video></div></div></div></div>
-    <p id="hk-t1" class="ty clip" data-start="0.3" data-duration="2.3" style="top:880px" data-layout-allow-overflow><span class="tx"></span><span class="caret"></span></p>
-    <p id="hk-t2" class="ty clip" data-start="2.7" data-duration="2.3" style="top:880px" data-layout-allow-overflow><span class="tx"></span><span class="caret"></span></p>
+    <div class="bg"><div id="hk-orb" class="orb" style="left:210px;top:-260px"></div></div>
+    <div id="hk-t1" class="h1 md clip" data-start="0" data-duration="3.3" style="top:150px" data-layout-allow-overflow><span class="w">Toda</span><span class="w">prova</span><span class="w">começa</span><span class="w">com</span><span class="w">uma</span><span class="w acc">questão.</span></div>
+    <div id="hk-t2" class="h1 md clip" data-start="3.2" data-duration="4.4" style="top:150px" data-layout-allow-overflow><span class="w">E</span><span class="w">se</span><span class="w">você</span><span class="w">soubesse,</span><span class="w acc">na</span><span class="w acc">hora,</span><span class="w">o</span><span class="w">que</span><span class="w">faltou?</span></div>
+    <div id="hk-n0" class="card note clip" data-start="0.9" data-duration="6.7" style="left:530px;top:470px;opacity:0" data-layout-allow-overflow>
+      <div class="av"><svg class="ic" width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path></svg></div><div class="nt"><span class="nm">Modo Estudo</span><span class="ag">agora</span></div><div class="nb">Questão 7 corrigida: <b>10/10</b>. Veja o que faltou.</div><div class="dot"></div></div>
+    <div id="hk-n1" class="card note clip" data-start="1.4500000000000002" data-duration="6.15" style="left:530px;top:620px;opacity:0" data-layout-allow-overflow>
+      <div class="av"><svg class="ic" width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" style="color: rgb(234, 88, 12);"><path d="M12 20h9"></path><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4Z"></path></svg></div><div class="nt"><span class="nm">Redação</span><span class="ag">agora</span></div><div class="nb"><b>920/1000</b>. Competência 3 precisa de atenção.</div><div class="dot"></div></div>
+    <div id="hk-n2" class="card note clip" data-start="2.0" data-duration="5.6" style="left:530px;top:770px;opacity:0" data-layout-allow-overflow>
+      <div class="av"><svg class="ic" width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" height="14" rx="2"></rect><line x1="2" y1="10" x2="22" y2="10"></line></svg></div><div class="nt"><span class="nm">Flashcards</span><span class="ag">agora</span></div><div class="nb"><b>12 cards</b> para revisar hoje. Leva 4 min.</div><div class="dot"></div></div>
 
   </div>
   <script>
     (() => {
       const tl = gsap.timeline({ paused: true });
 
-      const wordIn = (sel, at, step = 0.09) => document.querySelectorAll(sel + " .w").forEach((w, i) =>
-        tl.fromTo(w, { opacity: 0, scale: 1.25, filter: "blur(10px)" }, { opacity: 1, scale: 1, filter: "blur(0px)", duration: 0.28, ease: "back.out(1.6)", transformOrigin: "50% 60%" }, at + i * step));
-      const wordOut = (sel, at) => tl.to(sel + " .w", { opacity: 0, filter: "blur(8px)", duration: 0.18, ease: "power2.in", stagger: 0.03 }, at);
-      const cam = (s, fx, fy, H = 900) => { const S = s * 4 / 3; const hw = 960 / S, hh = 540 / S; fx = Math.min(Math.max(fx, hw), 1440 - hw); fy = Math.min(Math.max(fy, hh), H - hh); return { scale: S, x: 960 - fx * S, y: 540 - fy * S }; };
-      const camSet = (sel, s, fx, fy, H) => tl.fromTo(sel, cam(s, fx, fy, H), { ...cam(s, fx, fy, H), duration: 0.01 }, 0);
-      const camTo = (sel, s, fx, fy, at, dur = 0.6, ease = "power2.inOut", H) => tl.to(sel, { ...cam(s, fx, fy, H), duration: dur, ease }, at);
-      const camCut = (sel, s, fx, fy, at, H) => tl.set(sel, cam(s, fx, fy, H), at);
-      // laptop screen: plate 1440x900 shown at 690x431
-      const KL = 0.47917;
-      const lcam = (s, fx, fy) => { const S = KL * s; const hw = 345.0 / S, hh = 215.5 / S; fx = Math.min(Math.max(fx, hw), 1440 - hw); fy = Math.min(Math.max(fy, hh), 900 - hh); return { scale: S, x: 345.0 - fx * S, y: 215.5 - fy * S }; };
-      const lcamSet = (sel, s, fx, fy) => tl.fromTo(sel, lcam(s, fx, fy), { ...lcam(s, fx, fy), duration: 0.01 }, 0);
-      const lcamTo = (sel, s, fx, fy, at, dur = 0.6, ease = "power2.inOut") => tl.to(sel, { ...lcam(s, fx, fy), duration: dur, ease }, at);
-      const pushIn = (sel, at, dur, from = 1.0, to = 2.783, ease = "power2.in") => tl.fromTo(sel, { scale: from }, { scale: to, duration: dur, ease }, at);
+      const wordIn = (sel, at, step = 0.085) => document.querySelectorAll(sel + " .w").forEach((w, i) =>
+        tl.fromTo(w, { opacity: 0, y: 26, filter: "blur(10px)" }, { opacity: 1, y: 0, filter: "blur(0px)", duration: 0.42, ease: "power3.out" }, at + i * step));
+      const wordOut = (sel, at) => tl.to(sel + " .w", { opacity: 0, y: -18, filter: "blur(8px)", duration: 0.22, ease: "power2.in", stagger: 0.025 }, at);
+      const rise = (sel, at, y = 40, dur = 0.55) => tl.fromTo(sel, { opacity: 0, y, filter: "blur(6px)" }, { opacity: 1, y: 0, filter: "blur(0px)", duration: dur, ease: "power3.out", immediateRender: false }, at);
+      const dip = (sel, at, dur = 0.25) => tl.to(sel, { opacity: 0, filter: "blur(8px)", duration: dur, ease: "power2.in" }, at);
       const show = (sel, at) => tl.set(sel, { opacity: 1 }, at);
       const hide = (sel, at) => tl.set(sel, { opacity: 0 }, at);
-      const dip = (sel, at) => tl.to(sel, { opacity: 0, filter: "blur(8px)", duration: 0.16, ease: "power2.in" }, at);
-      const rise = (sel, at) => tl.fromTo(sel, { opacity: 0, filter: "blur(8px)", scale: 1.05 }, { opacity: 1, filter: "blur(0px)", scale: 1, duration: 0.22, ease: "power2.out", transformOrigin: "50% 50%", immediateRender: false }, at);
-      const push = (sel, from, to, at, dur) => tl.fromTo(sel, { scale: from }, { scale: to, duration: dur, ease: "none", transformOrigin: "50% 50%" }, at);
-      const typeInto = (sel, text, at, cps = 22) => { const el = document.querySelector(sel + " .tx"); const st = { n: 0 }; tl.fromTo(st, { n: 0 }, { n: text.length, duration: text.length / cps, ease: "none", onUpdate: () => { el.textContent = text.slice(0, Math.round(st.n)); } }, at); };
-      const typeOut = (sel, at) => tl.to(sel, { opacity: 0, filter: "blur(6px)", duration: 0.2, ease: "power2.in" }, at);
+      const drift = (sel, from, to, dur, at = 0) => tl.fromTo(sel, from, { ...to, duration: dur, ease: "none" }, at);
+      const typeInto = (sel, text, at, cps = 16) => { const el = document.querySelector(sel + " .tx"); const st = { n: 0 }; tl.fromTo(st, { n: 0 }, { n: text.length, duration: text.length / cps, ease: "none", onUpdate: () => { el.textContent = text.slice(0, Math.round(st.n)); } }, at); };
       const blink = (sel, dur) => { const c = document.querySelector(sel + " .caret"); const cs = { t: 0 }; tl.fromTo(cs, { t: 0 }, { t: dur, duration: dur, ease: "none", onUpdate: () => { c.style.opacity = Math.floor(cs.t * 2.5) % 2 === 0 ? 1 : 0; } }, 0); };
-      const countTo = (sel, to, at, dur, fmt = (v) => String(Math.round(v))) => { const el = document.querySelector(sel + " .v"); const st = { v: 0 }; tl.fromTo(st, { v: 0 }, { v: to, duration: dur, ease: "power3.out", onUpdate: () => { el.textContent = fmt(st.v); } }, at); };
-      const slam = (sel, at) => tl.fromTo(sel, { scale: 2.6, opacity: 0, filter: "blur(16px)" }, { scale: 1, opacity: 1, filter: "blur(0px)", duration: 0.26, ease: "power4.out", transformOrigin: "50% 50%", immediateRender: false }, at);
+      const countTo = (sel, to, at, dur, fmt = (v) => String(Math.round(v))) => { const el = document.querySelector(sel); const st = { v: 0 }; tl.fromTo(st, { v: 0 }, { v: to, duration: dur, ease: "power3.out", onUpdate: () => { el.textContent = fmt(st.v); } }, at); };
+      const slam = (sel, at) => tl.fromTo(sel, { scale: 2.4, opacity: 0, filter: "blur(16px)" }, { scale: 1, opacity: 1, filter: "blur(0px)", duration: 0.28, ease: "power4.out", transformOrigin: "50% 50%", immediateRender: false }, at);
 
 
-      lcamSet("#hk-l-cam", 1.0, 720, 450);
-      lcamTo("#hk-l-cam", 1.12, 740, 470, 0.3, 4.8, "none");
-      push("#hk-l", 1.0, 1.07, 0, 5.0);
-      typeInto("#hk-t1", "Você estudou horas.", 0.4, 18); blink("#hk-t1", 5.3);
-      typeOut("#hk-t1", 2.4);
-      typeInto("#hk-t2", "Mas sabe onde errou?", 2.8, 18); blink("#hk-t2", 5.3);
-      typeOut("#hk-t2", 4.8);
-      tl.to("#hk-l", { opacity: 0, filter: "blur(10px)", duration: 0.35, ease: "power3.in" }, 4.95);
+      drift("#hk-orb", { scale: 1.0, x: 0 }, { scale: 1.14, x: 40 }, 7.8);
+      document.querySelectorAll("#hk-t1 .w").forEach((w, i) => tl.fromTo(w, { opacity: 1, y: 30, filter: "blur(12px)" }, { opacity: 1, y: 0, filter: "blur(0px)", duration: 0.5, ease: "power3.out" }, 0.0 + i * 0.08)); wordOut("#hk-t1", 2.95);
+      wordIn("#hk-t2", 3.3, 0.07);
+      [0,1,2].forEach(i => { rise("#hk-n" + i, 0.95 + 0.55 * i, 50, 0.5); tl.fromTo("#hk-n" + i, { scale: 0.94 }, { scale: 1, duration: 0.5, ease: "back.out(1.6)", transformOrigin: "50% 50%" }, 0.95 + 0.55 * i); });
+      tl.to("#hk-n0, #hk-n1, #hk-n2", { opacity: 0.0, y: -24, filter: "blur(8px)", duration: 0.3, ease: "power2.in", stagger: 0.04 }, 7.3);
+      dip("#hk-t2", 7.45);
 
       window.__timelines["hook"] = tl;
     })();
