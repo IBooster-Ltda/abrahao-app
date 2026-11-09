@@ -1,10 +1,11 @@
-# REVIEW · iVest promo (26,4 s, 1920×1080, 30 fps)
+# REVIEW · iVest promo (26,4 s, 1920×1080, 30 fps, narrado)
 
 ## Decisões criativas
 - Storyline A ("Faltou") construída; B ("Horas sem feedback", antes/depois em split screen) e C ("Três provas, uma tela", tipografia na batida) ficaram em `STORYLINES.md`.
 - Tudo que aparece como produto vem do site: a caixa de resposta e o cartão "Correção por IA" foram reconstruídos em 2× a partir do tour oficial e do exemplo ilustrativo da landing (rótulo "Exemplo ilustrativo" mantido, como o site faz); as telas de quiz e rank são o vídeo real do tour (`/video/ivest-pt.mp4`), recortado para esconder os títulos do próprio tour.
 - Copy verbatim do site e do tour: "Você estudou horas. Mas sabe onde errou?", "A IA corrige. Veja o que faltou.", "Quiz rápido. Correção na hora.", "Suba de nível, do Bronze ao Elite.", "Prepare-se para o exame que muda tudo.", "Criar conta grátis →", "Cadastre-se grátis e ganhe 3 dias de Pro.". Números: 2600+ questões, 11 disciplinas, 5 provas (da landing).
 - Marca: o capelo azul do favicon/OG do site e o wordmark "iVest" com o "i" azul, como no cabeçalho do site. Só no end card.
+- Narração: cinco falas em pt-BR (`VOICEOVER.md`) com a voz local Kokoro `pf_dora`, gratuita, porque não há credencial HeyGen; a tela nunca repete a frase falada. Alternativas prontas: `pm_alex` (masculina) ou HeyGen com chave. A música ficou a 0,2 sob a voz.
 - Música: a trilha do próprio tour (120 BPM, pico em 19,56 s), porque não há credencial HeyGen nem chave Gemini nesta sessão; o flood para o branco cai sobre esse pico. Efeitos: teclas na digitação, pops nos checks, riser + impacto no "Faltou", whoosh nas entradas e no flood, pop na marca, clique no botão.
 
 ## O que foi medido e o que só foi olhado
