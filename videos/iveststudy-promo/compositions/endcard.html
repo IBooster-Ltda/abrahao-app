@@ -6,33 +6,32 @@
     .cam > video, .cam > img { position: absolute; left: 0; top: 0; width: 1440px; height: 900px; display: block; }
     .photo { position: absolute; left: -60px; top: -34px; width: 2040px; height: 1148px; }
     .photo img { width: 2040px; height: 1148px; display: block; }
-    .kin { position: absolute; left: 0; width: 1920px; text-align: center; font-weight: 800; font-size: 220px; line-height: 1; letter-spacing: -0.045em; color: #fff; }
-    .kin .acc { color: var(--color-accent-light, #60a5fa); }
-    .kin.left { left: 120px; width: 1680px; text-align: left; }
+    .lap { position: absolute; inset: 0; transform-origin: 957.0px 531.0px; }
+    .lap > img.plate { position: absolute; left: 0; top: 0; width: 1920px; height: 1080px; display: block; }
+    .screen { position: absolute; left: 612px; top: 300px; width: 690px; height: 462px; overflow: hidden; background: #000; box-shadow: 0 0 70px rgba(96,165,250,.22); }
+    .scr { position: absolute; left: 0; top: 15px; width: 690px; height: 431px; overflow: hidden; }
+    .kin { position: absolute; left: 0; width: 1920px; text-align: center; font-weight: 800; font-size: 220px; line-height: 1; letter-spacing: -0.045em; color: #fff; text-shadow: 0 0 40px rgba(96,165,250,.45); }
+    .kin .acc { color: var(--color-accent-light, #60a5fa); text-shadow: 0 0 40px rgba(96,165,250,.9); }
     .kin.sm { font-size: 96px; font-weight: 700; letter-spacing: -0.03em; }
     .kin .w { display: inline-block; margin: 0 0.12em; opacity: 0; }
-    .chip { position: absolute; display: inline-block; padding: 16px 28px; border-radius: 14px; background: rgba(15,23,42,.9); border: 2px solid rgba(96,165,250,.55); color: #fff; font-size: 34px; font-weight: 700; letter-spacing: -0.01em; opacity: 0; white-space: nowrap; }
-    .chip .acc { color: var(--color-accent-light, #60a5fa); }
-    .num { position: absolute; left: 0; width: 1920px; text-align: center; font-weight: 800; font-size: 360px; line-height: 1; letter-spacing: -0.05em; color: #fff; font-variant-numeric: tabular-nums; }
-    .num small { font-size: 120px; font-weight: 700; color: #9aa3b2; letter-spacing: -0.02em; }
-    .typed { position: absolute; left: 0; width: 1920px; text-align: center; font-size: 44px; font-weight: 500; color: #9aa3b2; }
-    .typed .caret { display: inline-block; width: 3px; height: 1em; background: #60a5fa; vertical-align: -0.12em; margin-left: 4px; }
+    .ty { position: absolute; left: 0; width: 1920px; text-align: center; font-size: 54px; font-weight: 600; color: #fff; letter-spacing: -0.01em; text-shadow: 0 0 26px rgba(96,165,250,.85), 0 2px 12px rgba(0,0,0,.8); }
+    .ty .caret { display: inline-block; width: 3px; height: 1em; background: #60a5fa; vertical-align: -0.12em; margin-left: 5px; box-shadow: 0 0 12px rgba(96,165,250,1); }
+    .num { position: absolute; left: 0; width: 1920px; text-align: center; font-weight: 800; font-size: 360px; line-height: 1; letter-spacing: -0.05em; color: #fff; font-variant-numeric: tabular-nums; text-shadow: 0 0 60px rgba(96,165,250,.55); }
+    .num small { font-size: 120px; font-weight: 700; color: #9aa3b2; letter-spacing: -0.02em; text-shadow: none; }
+    .logo { position: absolute; display: flex; align-items: center; justify-content: center; gap: 0.22em; font-weight: 700; letter-spacing: -0.04em; line-height: 1; color: #fff; white-space: nowrap; filter: drop-shadow(0 0 30px rgba(96,165,250,.7)); }
+    .logo img { width: 1.08em; height: 1.08em; }
+    .logo .i { color: var(--color-accent-light, #60a5fa); }
 
-    #ec-lockup { position: absolute; left: 0; top: 300px; width: 1920px; display: flex; align-items: center; justify-content: center; gap: 36px; }
-    #ec-mark { width: 168px; height: 168px; flex: none; }
-    #ec-word { font-weight: 700; font-size: 156px; line-height: 1; letter-spacing: -0.04em; color: #fff; white-space: nowrap; }
-    #ec-word .i { color: var(--color-accent-light, #60a5fa); }
     #ec-cta { position: absolute; left: 0; top: 560px; width: 1920px; display: flex; justify-content: center; }
-    #ec-btn { display: inline-block; background: var(--color-accent, #2563eb); color: #fff; font-weight: 600; font-size: 40px; padding: 26px 56px; border-radius: 18px; box-shadow: 0 14px 40px rgba(0,0,0,.45); }
+    #ec-btn { display: inline-block; background: var(--color-accent, #2563eb); color: #fff; font-weight: 600; font-size: 40px; padding: 26px 56px; border-radius: 18px; box-shadow: 0 0 40px rgba(37,99,235,.55); }
     #ec-sub { position: absolute; left: 0; top: 690px; width: 1920px; text-align: center; font-size: 34px; font-weight: 500; color: #e6e8ec; }
-    #ec-url { font-size: 52px; font-weight: 700; color: #fff; }
+    #ec-url { font-size: 60px; font-weight: 700; }
   </style>
   <div id="root" data-composition-id="endcard" data-width="1920" data-height="1080">
-    <div id="ec-p" class="photo" data-layout-allow-overflow><img src="assets/gen/dawn-campus-dark.jpg" alt="" /></div>
-    <div id="ec-lockup"><img id="ec-mark" src="assets/brand/ivest-cap.svg" alt="iVest" /><div id="ec-word"><span class="i">i</span>Vest</div></div>
-    <div id="ec-cta" class="clip" data-start="1.2" data-duration="8.4" data-hold><span id="ec-btn" data-var-text="cta-label">Criar conta grátis →</span></div>
-    <p id="ec-sub" class="clip" data-start="1.5" data-duration="8.1">Grátis para sempre · 3 dias de Pro no cadastro</p>
-    <p id="ec-url" class="clip typed" data-start="1.9" data-duration="7.7" style="top:770px"><span class="tx"></span><span class="caret"></span></p>
+    <div id="ec-logo" class="logo" style="left:0; width:1920px; top:330px; font-size:156px; opacity:0;" data-layout-allow-overflow><img src="assets/brand/ivest-cap.svg" alt="" /><span><span class="i">i</span>Vest</span></div>
+    <div id="ec-cta" class="clip" data-start="1.6" data-duration="8.0" data-hold><span id="ec-btn" data-var-text="cta-label">Criar conta grátis →</span></div>
+    <p id="ec-sub" class="clip" data-start="1.9" data-duration="7.7">Grátis para sempre · 3 dias de Pro no cadastro</p>
+    <p id="ec-url" class="ty clip" data-start="2.3" data-duration="7.3" style="top:790px" data-layout-allow-overflow><span class="tx"></span><span class="caret"></span></p>
 
   </div>
   <script>
@@ -42,32 +41,33 @@
       const wordIn = (sel, at, step = 0.09) => document.querySelectorAll(sel + " .w").forEach((w, i) =>
         tl.fromTo(w, { opacity: 0, scale: 1.25, filter: "blur(10px)" }, { opacity: 1, scale: 1, filter: "blur(0px)", duration: 0.28, ease: "back.out(1.6)", transformOrigin: "50% 60%" }, at + i * step));
       const wordOut = (sel, at) => tl.to(sel + " .w", { opacity: 0, filter: "blur(8px)", duration: 0.18, ease: "power2.in", stagger: 0.03 }, at);
-      const chipIn = (sel, at) => tl.fromTo(sel, { opacity: 0, scale: 0.8, y: 16 }, { opacity: 1, scale: 1, y: 0, duration: 0.32, ease: "back.out(1.7)", transformOrigin: "0% 100%" }, at);
-      const chipOut = (sel, at) => tl.to(sel, { opacity: 0, y: -10, duration: 0.18, ease: "power2.in" }, at);
-      // full-frame camera over a 1440x900 plate; the view never leaves the plate
       const cam = (s, fx, fy, H = 900) => { const S = s * 4 / 3; const hw = 960 / S, hh = 540 / S; fx = Math.min(Math.max(fx, hw), 1440 - hw); fy = Math.min(Math.max(fy, hh), H - hh); return { scale: S, x: 960 - fx * S, y: 540 - fy * S }; };
       const camSet = (sel, s, fx, fy, H) => tl.fromTo(sel, cam(s, fx, fy, H), { ...cam(s, fx, fy, H), duration: 0.01 }, 0);
       const camTo = (sel, s, fx, fy, at, dur = 0.6, ease = "power2.inOut", H) => tl.to(sel, { ...cam(s, fx, fy, H), duration: dur, ease }, at);
       const camCut = (sel, s, fx, fy, at, H) => tl.set(sel, cam(s, fx, fy, H), at);
+      // laptop screen: plate 1440x900 shown at 690x431
+      const KL = 0.47917;
+      const lcam = (s, fx, fy) => { const S = KL * s; const hw = 345.0 / S, hh = 215.5 / S; fx = Math.min(Math.max(fx, hw), 1440 - hw); fy = Math.min(Math.max(fy, hh), 900 - hh); return { scale: S, x: 345.0 - fx * S, y: 215.5 - fy * S }; };
+      const lcamSet = (sel, s, fx, fy) => tl.fromTo(sel, lcam(s, fx, fy), { ...lcam(s, fx, fy), duration: 0.01 }, 0);
+      const lcamTo = (sel, s, fx, fy, at, dur = 0.6, ease = "power2.inOut") => tl.to(sel, { ...lcam(s, fx, fy), duration: dur, ease }, at);
+      const pushIn = (sel, at, dur, from = 1.0, to = 2.783, ease = "power2.in") => tl.fromTo(sel, { scale: from }, { scale: to, duration: dur, ease }, at);
       const show = (sel, at) => tl.set(sel, { opacity: 1 }, at);
       const hide = (sel, at) => tl.set(sel, { opacity: 0 }, at);
-      const dip = (sel, at) => { tl.to(sel, { opacity: 0, filter: "blur(8px)", duration: 0.16, ease: "power2.in" }, at); };
-      const rise = (sel, at) => { tl.fromTo(sel, { opacity: 0, filter: "blur(8px)", scale: 1.05 }, { opacity: 1, filter: "blur(0px)", scale: 1, duration: 0.22, ease: "power2.out", transformOrigin: "50% 50%", immediateRender: false }, at); };
+      const dip = (sel, at) => tl.to(sel, { opacity: 0, filter: "blur(8px)", duration: 0.16, ease: "power2.in" }, at);
+      const rise = (sel, at) => tl.fromTo(sel, { opacity: 0, filter: "blur(8px)", scale: 1.05 }, { opacity: 1, filter: "blur(0px)", scale: 1, duration: 0.22, ease: "power2.out", transformOrigin: "50% 50%", immediateRender: false }, at);
       const push = (sel, from, to, at, dur) => tl.fromTo(sel, { scale: from }, { scale: to, duration: dur, ease: "none", transformOrigin: "50% 50%" }, at);
       const typeInto = (sel, text, at, cps = 22) => { const el = document.querySelector(sel + " .tx"); const st = { n: 0 }; tl.fromTo(st, { n: 0 }, { n: text.length, duration: text.length / cps, ease: "none", onUpdate: () => { el.textContent = text.slice(0, Math.round(st.n)); } }, at); };
+      const typeOut = (sel, at) => tl.to(sel, { opacity: 0, filter: "blur(6px)", duration: 0.2, ease: "power2.in" }, at);
+      const blink = (sel, dur) => { const c = document.querySelector(sel + " .caret"); const cs = { t: 0 }; tl.fromTo(cs, { t: 0 }, { t: dur, duration: dur, ease: "none", onUpdate: () => { c.style.opacity = Math.floor(cs.t * 2.5) % 2 === 0 ? 1 : 0; } }, 0); };
       const countTo = (sel, to, at, dur, fmt = (v) => String(Math.round(v))) => { const el = document.querySelector(sel + " .v"); const st = { v: 0 }; tl.fromTo(st, { v: 0 }, { v: to, duration: dur, ease: "power3.out", onUpdate: () => { el.textContent = fmt(st.v); } }, at); };
+      const slam = (sel, at) => tl.fromTo(sel, { scale: 2.6, opacity: 0, filter: "blur(16px)" }, { scale: 1, opacity: 1, filter: "blur(0px)", duration: 0.26, ease: "power4.out", transformOrigin: "50% 50%", immediateRender: false }, at);
 
 
-      tl.fromTo("#ec-p", { opacity: 0, scale: 1.1 }, { opacity: 1, scale: 1.0, duration: 1.0, ease: "power2.out", transformOrigin: "50% 40%" }, 0);
-      tl.to("#ec-p", { scale: 1.05, duration: 8.6, ease: "none", transformOrigin: "50% 40%" }, 1.0);
-      tl.fromTo("#ec-mark", { scale: 0.2, opacity: 0, rotate: -10 }, { scale: 1, opacity: 1, rotate: 0, duration: 0.6, ease: "back.out(1.5)", transformOrigin: "50% 50%" }, 0.4);
-      tl.fromTo("#ec-word", { x: -420, opacity: 0 }, { x: 0, opacity: 1, duration: 0.35, ease: "power3.out" }, 0.65);
-      tl.fromTo("#ec-btn", { y: 40, opacity: 0, scale: 0.96, transformOrigin: "50% 50%" }, { y: 0, opacity: 1, scale: 1, duration: 0.4, ease: "power4.out" }, 1.2);
-      tl.to("#ec-btn", { scale: 0.96, duration: 0.07, yoyo: true, repeat: 1, ease: "power2.inOut" }, 1.75);
-      tl.fromTo("#ec-sub", { opacity: 0, filter: "blur(6px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.2, ease: "power2.out" }, 1.5);
-      typeInto("#ec-url", "iveststudy.com", 1.9, 14);
-      const caret = document.querySelector("#ec-url .caret"); const cs = { t: 0 };
-      tl.fromTo(cs, { t: 0 }, { t: 9.6, duration: 9.6, ease: "none", onUpdate: () => { caret.style.opacity = Math.floor(cs.t * 2.5) % 2 === 0 ? 1 : 0; } }, 0);
+      slam("#ec-logo", 0.05);
+      tl.fromTo("#ec-btn", { y: 40, opacity: 0, scale: 0.96, transformOrigin: "50% 50%" }, { y: 0, opacity: 1, scale: 1, duration: 0.4, ease: "power4.out" }, 1.6);
+      tl.to("#ec-btn", { scale: 0.96, duration: 0.07, yoyo: true, repeat: 1, ease: "power2.inOut" }, 2.15);
+      tl.fromTo("#ec-sub", { opacity: 0, filter: "blur(6px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.2, ease: "power2.out" }, 1.9);
+      typeInto("#ec-url", "iveststudy.com", 2.4, 14); blink("#ec-url", 9.6);
 
       window.__timelines["endcard"] = tl;
     })();

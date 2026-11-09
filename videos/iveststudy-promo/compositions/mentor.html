@@ -6,25 +6,29 @@
     .cam > video, .cam > img { position: absolute; left: 0; top: 0; width: 1440px; height: 900px; display: block; }
     .photo { position: absolute; left: -60px; top: -34px; width: 2040px; height: 1148px; }
     .photo img { width: 2040px; height: 1148px; display: block; }
-    .kin { position: absolute; left: 0; width: 1920px; text-align: center; font-weight: 800; font-size: 220px; line-height: 1; letter-spacing: -0.045em; color: #fff; }
-    .kin .acc { color: var(--color-accent-light, #60a5fa); }
-    .kin.left { left: 120px; width: 1680px; text-align: left; }
+    .lap { position: absolute; inset: 0; transform-origin: 957.0px 531.0px; }
+    .lap > img.plate { position: absolute; left: 0; top: 0; width: 1920px; height: 1080px; display: block; }
+    .screen { position: absolute; left: 612px; top: 300px; width: 690px; height: 462px; overflow: hidden; background: #000; box-shadow: 0 0 70px rgba(96,165,250,.22); }
+    .scr { position: absolute; left: 0; top: 15px; width: 690px; height: 431px; overflow: hidden; }
+    .kin { position: absolute; left: 0; width: 1920px; text-align: center; font-weight: 800; font-size: 220px; line-height: 1; letter-spacing: -0.045em; color: #fff; text-shadow: 0 0 40px rgba(96,165,250,.45); }
+    .kin .acc { color: var(--color-accent-light, #60a5fa); text-shadow: 0 0 40px rgba(96,165,250,.9); }
     .kin.sm { font-size: 96px; font-weight: 700; letter-spacing: -0.03em; }
     .kin .w { display: inline-block; margin: 0 0.12em; opacity: 0; }
-    .chip { position: absolute; display: inline-block; padding: 16px 28px; border-radius: 14px; background: rgba(15,23,42,.9); border: 2px solid rgba(96,165,250,.55); color: #fff; font-size: 34px; font-weight: 700; letter-spacing: -0.01em; opacity: 0; white-space: nowrap; }
-    .chip .acc { color: var(--color-accent-light, #60a5fa); }
-    .num { position: absolute; left: 0; width: 1920px; text-align: center; font-weight: 800; font-size: 360px; line-height: 1; letter-spacing: -0.05em; color: #fff; font-variant-numeric: tabular-nums; }
-    .num small { font-size: 120px; font-weight: 700; color: #9aa3b2; letter-spacing: -0.02em; }
-    .typed { position: absolute; left: 0; width: 1920px; text-align: center; font-size: 44px; font-weight: 500; color: #9aa3b2; }
-    .typed .caret { display: inline-block; width: 3px; height: 1em; background: #60a5fa; vertical-align: -0.12em; margin-left: 4px; }
+    .ty { position: absolute; left: 0; width: 1920px; text-align: center; font-size: 54px; font-weight: 600; color: #fff; letter-spacing: -0.01em; text-shadow: 0 0 26px rgba(96,165,250,.85), 0 2px 12px rgba(0,0,0,.8); }
+    .ty .caret { display: inline-block; width: 3px; height: 1em; background: #60a5fa; vertical-align: -0.12em; margin-left: 5px; box-shadow: 0 0 12px rgba(96,165,250,1); }
+    .num { position: absolute; left: 0; width: 1920px; text-align: center; font-weight: 800; font-size: 360px; line-height: 1; letter-spacing: -0.05em; color: #fff; font-variant-numeric: tabular-nums; text-shadow: 0 0 60px rgba(96,165,250,.55); }
+    .num small { font-size: 120px; font-weight: 700; color: #9aa3b2; letter-spacing: -0.02em; text-shadow: none; }
+    .logo { position: absolute; display: flex; align-items: center; justify-content: center; gap: 0.22em; font-weight: 700; letter-spacing: -0.04em; line-height: 1; color: #fff; white-space: nowrap; filter: drop-shadow(0 0 30px rgba(96,165,250,.7)); }
+    .logo img { width: 1.08em; height: 1.08em; }
+    .logo .i { color: var(--color-accent-light, #60a5fa); }
 
   </style>
   <div id="root" data-composition-id="mentor" data-width="1920" data-height="1080">
     <div id="mt-p" class="photo" data-layout-allow-overflow><img src="assets/gen/hands-typing-dark.jpg" alt="" /></div>
-    <div id="mt-k" class="kin sm clip" data-start="0.2" data-duration="1.5" style="top:450px" data-layout-allow-overflow><span class="w">Ficou</span><span class="w">com</span><span class="w acc">dúvida?</span></div>
-    <div id="mt-a" class="stage" style="opacity:0" data-layout-allow-overflow><div id="mt-a-cam" class="cam"><video id="mt-a-m" class="clip" src="assets/app/clips/mentor.mp4" data-start="1.6" data-duration="4.8" data-playback-rate="1.6" data-media-start="5.6" muted playsinline data-track-index="2"></video></div></div>
-    <div id="mt-c1" class="chip clip" data-start="2.0" data-duration="2.0" style="left:120px; top:900px">Mentor <span class="acc">iVest</span> · qualquer matéria</div>
-    <div id="mt-c2" class="chip clip" data-start="4.2" data-duration="1.9" style="left:120px; top:900px">Com base no <span class="acc">banco de questões</span></div>
+    <p id="mt-t0" class="ty clip" data-start="0.2" data-duration="1.4" style="top:480px" data-layout-allow-overflow><span class="tx"></span><span class="caret"></span></p>
+    <div id="mt-l" class="lap" style="opacity:0" data-layout-allow-overflow><img class="plate" src="assets/gen/laptop-night.jpg" alt="" /><div class="screen" id="mt-l-screen"><div class="scr"><div id="mt-l-cam" class="cam"><video id="mt-l-m" class="clip" src="assets/app/clips/mentor.mp4" data-start="1.6" data-duration="2.6" data-playback-rate="1.6" data-media-start="5.6" muted playsinline data-track-index="2"></video></div></div></div></div>
+    <div id="mt-a" class="stage" style="opacity:0" data-layout-allow-overflow><div id="mt-a-cam" class="cam"><video id="mt-a-m" class="clip" src="assets/app/clips/mentor.mp4" data-start="4.2" data-duration="2.2" data-playback-rate="1.6" data-media-start="9.8" muted playsinline data-track-index="2"></video></div></div>
+    <p id="mt-t1" class="ty clip" data-start="2.0" data-duration="4.2" style="top:900px" data-layout-allow-overflow><span class="tx"></span><span class="caret"></span></p>
 
   </div>
   <script>
@@ -34,30 +38,35 @@
       const wordIn = (sel, at, step = 0.09) => document.querySelectorAll(sel + " .w").forEach((w, i) =>
         tl.fromTo(w, { opacity: 0, scale: 1.25, filter: "blur(10px)" }, { opacity: 1, scale: 1, filter: "blur(0px)", duration: 0.28, ease: "back.out(1.6)", transformOrigin: "50% 60%" }, at + i * step));
       const wordOut = (sel, at) => tl.to(sel + " .w", { opacity: 0, filter: "blur(8px)", duration: 0.18, ease: "power2.in", stagger: 0.03 }, at);
-      const chipIn = (sel, at) => tl.fromTo(sel, { opacity: 0, scale: 0.8, y: 16 }, { opacity: 1, scale: 1, y: 0, duration: 0.32, ease: "back.out(1.7)", transformOrigin: "0% 100%" }, at);
-      const chipOut = (sel, at) => tl.to(sel, { opacity: 0, y: -10, duration: 0.18, ease: "power2.in" }, at);
-      // full-frame camera over a 1440x900 plate; the view never leaves the plate
       const cam = (s, fx, fy, H = 900) => { const S = s * 4 / 3; const hw = 960 / S, hh = 540 / S; fx = Math.min(Math.max(fx, hw), 1440 - hw); fy = Math.min(Math.max(fy, hh), H - hh); return { scale: S, x: 960 - fx * S, y: 540 - fy * S }; };
       const camSet = (sel, s, fx, fy, H) => tl.fromTo(sel, cam(s, fx, fy, H), { ...cam(s, fx, fy, H), duration: 0.01 }, 0);
       const camTo = (sel, s, fx, fy, at, dur = 0.6, ease = "power2.inOut", H) => tl.to(sel, { ...cam(s, fx, fy, H), duration: dur, ease }, at);
       const camCut = (sel, s, fx, fy, at, H) => tl.set(sel, cam(s, fx, fy, H), at);
+      // laptop screen: plate 1440x900 shown at 690x431
+      const KL = 0.47917;
+      const lcam = (s, fx, fy) => { const S = KL * s; const hw = 345.0 / S, hh = 215.5 / S; fx = Math.min(Math.max(fx, hw), 1440 - hw); fy = Math.min(Math.max(fy, hh), 900 - hh); return { scale: S, x: 345.0 - fx * S, y: 215.5 - fy * S }; };
+      const lcamSet = (sel, s, fx, fy) => tl.fromTo(sel, lcam(s, fx, fy), { ...lcam(s, fx, fy), duration: 0.01 }, 0);
+      const lcamTo = (sel, s, fx, fy, at, dur = 0.6, ease = "power2.inOut") => tl.to(sel, { ...lcam(s, fx, fy), duration: dur, ease }, at);
+      const pushIn = (sel, at, dur, from = 1.0, to = 2.783, ease = "power2.in") => tl.fromTo(sel, { scale: from }, { scale: to, duration: dur, ease }, at);
       const show = (sel, at) => tl.set(sel, { opacity: 1 }, at);
       const hide = (sel, at) => tl.set(sel, { opacity: 0 }, at);
-      const dip = (sel, at) => { tl.to(sel, { opacity: 0, filter: "blur(8px)", duration: 0.16, ease: "power2.in" }, at); };
-      const rise = (sel, at) => { tl.fromTo(sel, { opacity: 0, filter: "blur(8px)", scale: 1.05 }, { opacity: 1, filter: "blur(0px)", scale: 1, duration: 0.22, ease: "power2.out", transformOrigin: "50% 50%", immediateRender: false }, at); };
+      const dip = (sel, at) => tl.to(sel, { opacity: 0, filter: "blur(8px)", duration: 0.16, ease: "power2.in" }, at);
+      const rise = (sel, at) => tl.fromTo(sel, { opacity: 0, filter: "blur(8px)", scale: 1.05 }, { opacity: 1, filter: "blur(0px)", scale: 1, duration: 0.22, ease: "power2.out", transformOrigin: "50% 50%", immediateRender: false }, at);
       const push = (sel, from, to, at, dur) => tl.fromTo(sel, { scale: from }, { scale: to, duration: dur, ease: "none", transformOrigin: "50% 50%" }, at);
       const typeInto = (sel, text, at, cps = 22) => { const el = document.querySelector(sel + " .tx"); const st = { n: 0 }; tl.fromTo(st, { n: 0 }, { n: text.length, duration: text.length / cps, ease: "none", onUpdate: () => { el.textContent = text.slice(0, Math.round(st.n)); } }, at); };
+      const typeOut = (sel, at) => tl.to(sel, { opacity: 0, filter: "blur(6px)", duration: 0.2, ease: "power2.in" }, at);
+      const blink = (sel, dur) => { const c = document.querySelector(sel + " .caret"); const cs = { t: 0 }; tl.fromTo(cs, { t: 0 }, { t: dur, duration: dur, ease: "none", onUpdate: () => { c.style.opacity = Math.floor(cs.t * 2.5) % 2 === 0 ? 1 : 0; } }, 0); };
       const countTo = (sel, to, at, dur, fmt = (v) => String(Math.round(v))) => { const el = document.querySelector(sel + " .v"); const st = { v: 0 }; tl.fromTo(st, { v: 0 }, { v: to, duration: dur, ease: "power3.out", onUpdate: () => { el.textContent = fmt(st.v); } }, at); };
+      const slam = (sel, at) => tl.fromTo(sel, { scale: 2.6, opacity: 0, filter: "blur(16px)" }, { scale: 1, opacity: 1, filter: "blur(0px)", duration: 0.26, ease: "power4.out", transformOrigin: "50% 50%", immediateRender: false }, at);
 
 
       push("#mt-p", 1.05, 1.12, 0, 1.6);
-      wordIn("#mt-k", 0.2); 
-      tl.to("#mt-k .w", { opacity: 0, filter: "blur(8px)", duration: 0.18, ease: "power2.in" }, 1.4);
-      dip("#mt-p", 1.45); show("#mt-a", 1.6); rise("#mt-a", 1.6);
-      camSet("#mt-a-cam", 1.1, 720, 560);                          // chat and the question box in frame
-      camTo("#mt-a-cam", 1.05, 720, 480, 3.1, 0.6);                // the answer streams in
-      camTo("#mt-a-cam", 1.05, 720, 500, 3.7, 2.4, "none");
-      chipIn("#mt-c1", 2.0); chipOut("#mt-c1", 3.9); chipIn("#mt-c2", 4.2); chipOut("#mt-c2", 6.0);
+      typeInto("#mt-t0", "Ficou com dúvida?", 0.25, 22); typeOut("#mt-t0", 1.3);
+      dip("#mt-p", 1.45); show("#mt-l", 1.6); rise("#mt-l", 1.6);
+      lcamSet("#mt-l-cam", 1.1, 720, 560); pushIn("#mt-l", 1.6, 2.6, 1.0, 2.783, "power2.in");
+      typeInto("#mt-t1", "Mentor iVest: qualquer matéria, com base no banco de questões.", 2.1, 30); blink("#mt-t1", 6.4); typeOut("#mt-t1", 6.0);
+      tl.to("#mt-l", { opacity: 0, duration: 0.1 }, 4.15); show("#mt-a", 4.2);
+      camSet("#mt-a-cam", 1.05, 720, 480); camTo("#mt-a-cam", 1.05, 720, 500, 4.25, 2.1, "none");
       tl.to("#mt-a", { opacity: 0, filter: "blur(10px)", duration: 0.25, ease: "power2.in" }, 6.15);
 
       window.__timelines["mentor"] = tl;
