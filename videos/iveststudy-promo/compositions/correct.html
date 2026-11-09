@@ -1,0 +1,93 @@
+<template>
+  <style>
+    #root { position: absolute; inset: 0; font-family: var(--font-display, "Inter"), sans-serif; color: var(--color-app-ink, #e6e8ec); }
+    .cor-title { position: absolute; left: 120px; top: 300px; width: 760px; font-weight: 700; font-size: 92px; line-height: 1.04; letter-spacing: -0.03em; }
+    .cor-title .w { display: inline-block; margin-right: 0.22em; opacity: 0; }
+    .cor-title .acc { color: var(--color-accent-light, #60a5fa); }
+    #cor-line2 { top: 400px; }
+    #cor-note { position: absolute; left: 124px; top: 560px; font-size: 30px; font-weight: 500; color: #9aa3b2; letter-spacing: 0.02em; opacity: 0; }
+
+    #cor-cam { position: absolute; left: 1000px; top: 200px; width: 820px; height: 620px; }
+    #cor-card { position: absolute; inset: 0; background: var(--color-app-card, #171a21); border: 2px solid #262b35; border-radius: 24px; box-shadow: 0 24px 60px rgba(0,0,0,.45); padding: 48px; display: flex; flex-direction: column; gap: 26px; }
+    .cor-head { display: flex; align-items: center; gap: 28px; }
+    #cor-ring { width: 128px; height: 128px; flex: none; }
+    #cor-ring circle { fill: none; stroke-width: 10; }
+    #cor-ring .bg { stroke: #262b35; }
+    #cor-ring .fg { stroke: var(--color-accent-light, #60a5fa); stroke-linecap: round; }
+    #cor-score { font-weight: 700; font-size: 44px; line-height: 1; }
+    #cor-score small { font-size: 28px; color: #9aa3b2; font-weight: 600; }
+    .cor-head h2 { font-size: 42px; font-weight: 700; line-height: 1.1; }
+    .cor-head p { font-size: 28px; color: #9aa3b2; font-weight: 500; margin-top: 6px; }
+    .cor-line { display: flex; align-items: flex-start; gap: 20px; font-size: 32px; line-height: 1.3; padding: 20px 24px; border-radius: 16px; background: #0f1115; border: 2px solid #262b35; opacity: 0; }
+    .cor-line .ic { flex: none; width: 44px; height: 44px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 26px; }
+    .cor-line.ok .ic { background: rgba(34,197,94,.18); color: #22c55e; }
+    .cor-line.ok { color: #e6e8ec; }
+    .cor-line.miss { border-color: rgba(251,191,36,.6); background: rgba(251,191,36,.08); color: #fbbf24; font-weight: 600; }
+    .cor-line.miss .ic { background: rgba(251,191,36,.2); color: #fbbf24; }
+  </style>
+  <div id="root" data-composition-id="correct" data-width="1920" data-height="1080">
+    <h1 id="cor-line1" class="cor-title clip" data-start="0.5" data-duration="5.5" data-layout-allow-overflow>
+      <span class="w">A</span><span class="w">IA</span><span class="w">corrige.</span>
+    </h1>
+    <h1 id="cor-line2" class="cor-title clip" data-start="0.9" data-duration="5.1" data-layout-allow-overflow>
+      <span class="w">Veja</span><span class="w">o</span><span class="w">que</span><span class="w acc">faltou.</span>
+    </h1>
+    <p id="cor-note" class="clip" data-start="3.0" data-duration="3.0">Nota, pontos cobertos e o que estudar em seguida.</p>
+
+    <div id="cor-cam">
+      <div id="cor-card">
+        <div class="cor-head">
+          <svg id="cor-ring" viewBox="0 0 128 128">
+            <circle class="bg" cx="64" cy="64" r="54"></circle>
+            <circle class="fg" id="cor-ringfg" cx="64" cy="64" r="54" pathLength="100" stroke-dasharray="100 200" stroke-dashoffset="100" transform="rotate(-90 64 64)"></circle>
+            <text id="cor-score" x="64" y="76" text-anchor="middle" fill="#fff">0<tspan font-size="28" fill="#9aa3b2">/10</tspan></text>
+          </svg>
+          <div>
+            <h2>Correção por IA</h2>
+            <p>Exemplo ilustrativo</p>
+          </div>
+        </div>
+        <div class="cor-line ok" id="cor-l1"><span class="ic">✓</span><span>A fluidez permite transporte e endocitose</span></div>
+        <div class="cor-line ok" id="cor-l2"><span class="ic">✓</span><span>O colesterol regula a fluidez</span></div>
+        <div class="cor-line miss" id="cor-l3"><span class="ic">!</span><span>Faltou: por que caudas insaturadas dão fluidez</span></div>
+      </div>
+    </div>
+  </div>
+  <script>
+    (() => {
+      const tl = gsap.timeline({ paused: true });
+      // Scene clock starts at host start (6.6 s). Film times below are scene times.
+      // Arrival: the card grows out of where the answer box was (carry across).
+      tl.fromTo("#cor-card", { scale: 0.6, opacity: 0, filter: "blur(8px)" }, { scale: 1, opacity: 1, filter: "blur(0px)", duration: 0.5, ease: "power4.out", transformOrigin: "50% 60%" }, 0.0);
+      const wordIn = (sel, at) => {
+        document.querySelectorAll(sel + " .w").forEach((w, i) => {
+          tl.fromTo(w, { opacity: 0, filter: "blur(6px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.13, ease: "power2.out" }, at + i * 0.07);
+        });
+      };
+      wordIn("#cor-line1", 0.5);
+      wordIn("#cor-line2", 0.9);
+      tl.fromTo("#cor-note", { opacity: 0, filter: "blur(6px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.2, ease: "power2.out" }, 3.0);
+
+      // Score ring 0 → 7/10 over 0.8 s (film 7.0–7.8 s)
+      const fg = document.getElementById("cor-ringfg");
+      const score = document.getElementById("cor-score");
+      const rs = { v: 0 };
+      tl.fromTo(rs, { v: 0 }, { v: 7, duration: 0.8, ease: "power2.out", onUpdate: () => {
+        fg.setAttribute("stroke-dashoffset", String(100 - rs.v * 10));
+        score.firstChild.nodeValue = String(Math.round(rs.v));
+      } }, 0.4);
+
+      // Checks pop in on the beat (film 8.0, 8.5), the miss lands on the impact (film 9.2)
+      const popIn = (sel, at) => tl.fromTo(sel, { opacity: 0, scale: 0.92, y: 10 }, { opacity: 1, scale: 1, y: 0, duration: 0.3, ease: "back.out(1.6)", transformOrigin: "0% 50%" }, at);
+      popIn("#cor-l1", 1.4);
+      popIn("#cor-l2", 1.9);
+      tl.fromTo("#cor-l3", { opacity: 0, scale: 0.9, y: 14 }, { opacity: 1, scale: 1, y: 0, duration: 0.001, ease: "none" }, 2.6);
+
+      // Payoff: punch in on the "Faltou" line (film 9.4–9.9), hold, then carry out.
+      tl.fromTo("#cor-cam", { scale: 1, x: 0, y: 0, filter: "blur(0px)", opacity: 1, transformOrigin: "100% 100%" }, { scale: 1.18, x: 60, y: -10, duration: 0.5, ease: "power2.inOut" }, 2.8);
+      tl.to("#cor-cam", { scale: 0.6, x: 60, y: 40, filter: "blur(6px)", opacity: 0, duration: 0.45, ease: "power2.inOut" }, 5.55);
+      tl.fromTo("#cor-line1 .w, #cor-line2 .w, #cor-note", { opacity: 1 }, { opacity: 0, duration: 0.25, ease: "power2.in" }, 5.7);
+      window.__timelines["correct"] = tl;
+    })();
+  </script>
+</template>
