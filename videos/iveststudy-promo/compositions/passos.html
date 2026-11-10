@@ -1,7 +1,7 @@
 <template>
   <style>
     #root { position: absolute; inset: 0; font-family: var(--font-display, "Inter"), sans-serif; color: #fff; overflow: hidden; }
-    .bg { position: absolute; inset: 0; background: #070b14; overflow: hidden; }
+    .bg { position: absolute; inset: 0; overflow: hidden; }
     .stc { position: absolute; inset: 0; transform-origin: 50% 50%; }
     .orb { position: absolute; width: 1700px; height: 1700px; border-radius: 50%; transform-origin: 50% 50%;
            background: radial-gradient(circle, rgba(120,180,255,1) 0%, rgba(37,99,235,.8) 16%, rgba(30,64,175,.4) 38%, rgba(7,11,20,0) 66%); filter: blur(48px); }
@@ -23,7 +23,7 @@
 
   </style>
   <div id="root" data-composition-id="passos" data-width="1920" data-height="1080">
-    <div class="bg"><div id="ps-orb" class="orb" style="left:210px;top:-120px"></div></div>
+    <div class="bg"></div>
     <div id="passos-st" class="stc">
     <div id="ps-t" class="h1 md clip" data-start="0.1" data-duration="6.1" style="top:250px" data-layout-allow-overflow><span class="w">Simples</span><span class="w">assim,</span><span class="w">em</span><span class="w acc">3</span><span class="w acc">passos.</span></div>
     <div id="ps-line" style="position:absolute;left:460px;top:558px;width:1000px;height:4px;background:rgba(96,165,250,.22);border-radius:2px"></div>
@@ -49,7 +49,7 @@
       const show = (sel, at) => tl.set(sel, { opacity: 1 }, at);
       const hide = (sel, at) => tl.set(sel, { opacity: 0 }, at);
       const drift = (sel, from, to, dur, at = 0) => tl.fromTo(sel, from, { ...to, duration: dur, ease: "none" }, at);
-      const orbLife = (sel, dur) => { tl.fromTo(sel, { x: -60, y: 20 }, { x: 60, y: -30, duration: dur, ease: "sine.inOut" }, 0); tl.fromTo(sel, { scale: 0.96, opacity: 0.88 }, { scale: 1.12, opacity: 1, duration: 2.6, ease: "sine.inOut", yoyo: true, repeat: Math.ceil(dur / 2.6) }, 0); };
+      const orbLife = () => {}; // the orb lives in the root timeline now
       const pushSlow = (sel, dur, to = 1.045, at = 0, from = 1.0) => tl.fromTo(sel, { scale: from }, { scale: to, duration: dur, ease: "none" }, at);
       const lean = (sel, cx, cy, at, k = 0.07, s = 1.07, dur = 0.8) => tl.to(sel, { x: -(cx - 960) * k, y: -(cy - 540) * k, scale: s, duration: dur, ease: "power2.inOut" }, at);
       const typeInto = (sel, text, at, cps = 16) => { const el = document.querySelector(sel + " .tx"); const st = { n: 0 }; tl.fromTo(st, { n: 0 }, { n: text.length, duration: text.length / cps, ease: "none", onUpdate: () => { el.textContent = text.slice(0, Math.round(st.n)); } }, at); };
