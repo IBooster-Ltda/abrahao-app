@@ -14,6 +14,7 @@
 
 ## Revisão: "trava em alguns pontos"
 Medido com `freezedetect` no primeiro render: nenhum quadro duplicado, mas trechos de até 3 s em que a imagem mudava quase nada (só o orbe derivando): o logo depois do slam, a grade de features entre um destaque e outro, os números, o botão. Correção: o orbe respira (escala e opacidade em seno, 2,6 s) e deriva; cada cena tem um push lento contínuo; a cena inclina para o card, o número ou o passo ativo (lean 0,8–0,9 s); o ícone do card ativo pulsa; o arco do logo gira devagar; o botão pulsa o brilho. O cartão final continua parado de propósito, como na referência.
+Segunda passada: o orbe saiu das cenas e foi para a raiz (uma luz só, com deriva e respiração contínuas nos 77 s e um flash nos dois impactos), então a luz não pula mais nos cortes. Resultado medido no render final: zero trechos parados antes do cartão final (antes eram 37). Revisão de 77 quadros, um por segundo: sem texto cortado, sem sobreposição, destaque sempre no card falado.
 
 ## Medido e olhado
 - `hyperframes check`: ok. Avisos restantes: holds curtos nos 3 passos (1,6–1,7 s) e a heurística de "última linha" do cartão final (o cartão fica 5 s parado; o aviso vem do cursor piscando).
