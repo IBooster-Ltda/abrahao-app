@@ -12,6 +12,9 @@
 - "Tcham" duplo: tiques acelerando + riser → slam do logo (16,1 s, −5 dB RMS) e → flood azul (71,0 s, −6 dB), música a zero, 5 s de cartão em silêncio.
 - Nenhum número inventado: 5 bancas, 0–1000, ranks Bronze→Elite e PT/EN/ES vêm do app.
 
+## Revisão: "trava em alguns pontos"
+Medido com `freezedetect` no primeiro render: nenhum quadro duplicado, mas trechos de até 3 s em que a imagem mudava quase nada (só o orbe derivando): o logo depois do slam, a grade de features entre um destaque e outro, os números, o botão. Correção: o orbe respira (escala e opacidade em seno, 2,6 s) e deriva; cada cena tem um push lento contínuo; a cena inclina para o card, o número ou o passo ativo (lean 0,8–0,9 s); o ícone do card ativo pulsa; o arco do logo gira devagar; o botão pulsa o brilho. O cartão final continua parado de propósito, como na referência.
+
 ## Medido e olhado
 - `hyperframes check`: ok. Avisos restantes: holds curtos nos 3 passos (1,6–1,7 s) e a heurística de "última linha" do cartão final (o cartão fica 5 s parado; o aviso vem do cursor piscando).
 - 21 snapshots + folha de contato do MP4 olhados; áudio medido (−14,2 LUFS integrado, pico real −1,2 dB, sem clipping). Ninguém ouviu.

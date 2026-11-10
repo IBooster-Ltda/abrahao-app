@@ -2,6 +2,7 @@
   <style>
     #root { position: absolute; inset: 0; font-family: var(--font-display, "Inter"), sans-serif; color: #fff; overflow: hidden; }
     .bg { position: absolute; inset: 0; background: #070b14; overflow: hidden; }
+    .stc { position: absolute; inset: 0; transform-origin: 50% 50%; }
     .orb { position: absolute; width: 1700px; height: 1700px; border-radius: 50%; transform-origin: 50% 50%;
            background: radial-gradient(circle, rgba(120,180,255,1) 0%, rgba(37,99,235,.8) 16%, rgba(30,64,175,.4) 38%, rgba(7,11,20,0) 66%); filter: blur(48px); }
     .eyebrow { position: absolute; left: 0; width: 1920px; text-align: center; font-size: 28px; font-weight: 600; letter-spacing: .3em; text-transform: uppercase; color: #9db5ff; }
@@ -25,6 +26,7 @@
   </style>
   <div id="root" data-composition-id="stats" data-width="1920" data-height="1080">
     <div class="bg"><div id="st-orb" class="orb" style="left:210px;top:160px"></div></div>
+    <div id="stats-st" class="stc">
     <p id="st-e" class="eyebrow clip" data-start="0.1" data-duration="9.1" style="top:150px;opacity:0" data-layout-allow-overflow>Preparo completo</p>
     <div id="st-t" class="h1 sm clip" data-start="0.1" data-duration="9.1" style="top:196px" data-layout-allow-overflow><span class="w">Para</span><span class="w">a</span><span class="w acc">sua</span><span class="w">prova,</span><span class="w">do</span><span class="w">seu</span><span class="w">jeito.</span></div>
     <div id="st-c0" class="card tile clip" data-start="0.30" data-duration="8.70" style="left:100px;top:470px;opacity:0" data-layout-allow-overflow>
@@ -36,6 +38,7 @@
     <div id="st-c3" class="card tile clip" data-start="5.88" data-duration="3.12" style="left:1390px;top:470px;opacity:0" data-layout-allow-overflow>
       <div class="v small" id="st-v3">PT · EN · ES</div><div class="l">3 idiomas</div><div class="s">português, inglês e espanhol</div></div>
 
+    </div>
   </div>
   <script>
     (() => {
@@ -49,17 +52,21 @@
       const show = (sel, at) => tl.set(sel, { opacity: 1 }, at);
       const hide = (sel, at) => tl.set(sel, { opacity: 0 }, at);
       const drift = (sel, from, to, dur, at = 0) => tl.fromTo(sel, from, { ...to, duration: dur, ease: "none" }, at);
+      const orbLife = (sel, dur) => { tl.fromTo(sel, { x: -60, y: 20 }, { x: 60, y: -30, duration: dur, ease: "sine.inOut" }, 0); tl.fromTo(sel, { scale: 0.96, opacity: 0.88 }, { scale: 1.12, opacity: 1, duration: 2.6, ease: "sine.inOut", yoyo: true, repeat: Math.ceil(dur / 2.6) }, 0); };
+      const pushSlow = (sel, dur, to = 1.045, at = 0, from = 1.0) => tl.fromTo(sel, { scale: from }, { scale: to, duration: dur, ease: "none" }, at);
+      const lean = (sel, cx, cy, at, k = 0.07, s = 1.07, dur = 0.8) => tl.to(sel, { x: -(cx - 960) * k, y: -(cy - 540) * k, scale: s, duration: dur, ease: "power2.inOut" }, at);
       const typeInto = (sel, text, at, cps = 16) => { const el = document.querySelector(sel + " .tx"); const st = { n: 0 }; tl.fromTo(st, { n: 0 }, { n: text.length, duration: text.length / cps, ease: "none", onUpdate: () => { el.textContent = text.slice(0, Math.round(st.n)); } }, at); };
       const blink = (sel, dur) => { const c = document.querySelector(sel + " .caret"); const cs = { t: 0 }; tl.fromTo(cs, { t: 0 }, { t: dur, duration: dur, ease: "none", onUpdate: () => { c.style.opacity = Math.floor(cs.t * 2.5) % 2 === 0 ? 1 : 0; } }, 0); };
       const countTo = (sel, to, at, dur, fmt = (v) => String(Math.round(v))) => { const el = document.querySelector(sel); const st = { v: 0 }; tl.fromTo(st, { v: 0 }, { v: to, duration: dur, ease: "power3.out", onUpdate: () => { el.textContent = fmt(st.v); } }, at); };
       const slam = (sel, at) => tl.fromTo(sel, { scale: 2.4, opacity: 0, filter: "blur(16px)" }, { scale: 1, opacity: 1, filter: "blur(0px)", duration: 0.28, ease: "power4.out", transformOrigin: "50% 50%", immediateRender: false }, at);
 
 
-      drift("#st-orb", { scale: 1.0, y: 0 }, { scale: 1.12, y: 40 }, 9.2);
+      orbLife("#st-orb", 9.2);
       tl.fromTo("#st-e", { opacity: 0 }, { opacity: 1, duration: 0.4 }, 0.15);
       wordIn("#st-t", 0.2, 0.07);
       const ST = [0.3, 1.58, 3.38, 5.88];
-      for (let i = 0; i < 4; i++) { rise("#st-c" + i, ST[i], 56, 0.55); tl.fromTo("#st-c" + i, { scale: 0.94 }, { scale: 1, duration: 0.55, ease: "back.out(1.5)" }, ST[i]); }
+      for (let i = 0; i < 4; i++) { rise("#st-c" + i, ST[i], 56, 0.55); tl.fromTo("#st-c" + i, { scale: 0.94 }, { scale: 1, duration: 0.55, ease: "back.out(1.5)" }, ST[i]); lean("#stats-st", 100 + 430 * i + 200, 660, ST[i], 0.05, 1.06, 0.9); }
+      tl.to("#stats-st", { x: 0, y: 0, scale: 1.03, duration: 1.2, ease: "power2.inOut" }, ST[3] + 1.2);
       countTo("#st-v0", 5, ST[0] + 0.1, 0.9);
       countTo("#st-v1", 1000, ST[1] + 0.1, 1.3);
       const ranks = ["Bronze", "Prata", "Ouro", "Platina", "Diamante", "Mestre", "Elite"]; const rk = { i: 0 }; const rv = document.querySelector("#st-v2");

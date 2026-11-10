@@ -2,6 +2,7 @@
   <style>
     #root { position: absolute; inset: 0; font-family: var(--font-display, "Inter"), sans-serif; color: #fff; overflow: hidden; }
     .bg { position: absolute; inset: 0; background: #070b14; overflow: hidden; }
+    .stc { position: absolute; inset: 0; transform-origin: 50% 50%; }
     .orb { position: absolute; width: 1700px; height: 1700px; border-radius: 50%; transform-origin: 50% 50%;
            background: radial-gradient(circle, rgba(120,180,255,1) 0%, rgba(37,99,235,.8) 16%, rgba(30,64,175,.4) 38%, rgba(7,11,20,0) 66%); filter: blur(48px); }
     .eyebrow { position: absolute; left: 0; width: 1920px; text-align: center; font-size: 28px; font-weight: 600; letter-spacing: .3em; text-transform: uppercase; color: #9db5ff; }
@@ -23,6 +24,7 @@
   </style>
   <div id="root" data-composition-id="cta" data-width="1920" data-height="1080">
     <div class="bg"><div id="ct-orb" class="orb" style="left:210px;top:-40px"></div></div>
+    <div id="cta-st" class="stc">
     <div id="ct-t1" class="h1 md clip" data-start="0.1" data-duration="5.8" style="top:270px" data-layout-allow-overflow><span class="w">Sua</span><span class="w">prova</span><span class="w">está</span><span class="w">chegando.</span></div>
     <div id="ct-t2" class="h1 md clip" data-start="1.5" data-duration="4.4" style="top:380px" data-layout-allow-overflow><span class="w">Seu</span><span class="w">preparo</span><span class="w">começa</span><span class="w acc">agora.</span></div>
     <div id="ct-cta" class="clip" data-start="2.5" data-duration="3.4" data-hold style="position:absolute;left:0;top:600px;width:1920px;display:flex;justify-content:center;opacity:0"><span id="ct-btn" data-var-text="cta-label">Criar conta grátis →</span></div>
@@ -32,6 +34,7 @@
     <p id="fl-url" class="ty clip" data-start="6.6" data-duration="5.2" style="top:650px;font-size:46px;font-weight:600;color:#fff;opacity:0" data-layout-allow-overflow><span class="tx"></span><span class="caret" style="background:#fff;box-shadow:none"></span></p>
     <p id="fl-sub" class="clip" data-start="7.8" data-duration="4.0" style="position:absolute;left:0;top:730px;width:1920px;text-align:center;font-size:28px;font-weight:500;letter-spacing:.3em;text-transform:uppercase;color:rgba(255,255,255,.85);opacity:0">Comece grátis · 3 dias de Pro</p>
 
+    </div>
   </div>
   <script>
     (() => {
@@ -45,20 +48,24 @@
       const show = (sel, at) => tl.set(sel, { opacity: 1 }, at);
       const hide = (sel, at) => tl.set(sel, { opacity: 0 }, at);
       const drift = (sel, from, to, dur, at = 0) => tl.fromTo(sel, from, { ...to, duration: dur, ease: "none" }, at);
+      const orbLife = (sel, dur) => { tl.fromTo(sel, { x: -60, y: 20 }, { x: 60, y: -30, duration: dur, ease: "sine.inOut" }, 0); tl.fromTo(sel, { scale: 0.96, opacity: 0.88 }, { scale: 1.12, opacity: 1, duration: 2.6, ease: "sine.inOut", yoyo: true, repeat: Math.ceil(dur / 2.6) }, 0); };
+      const pushSlow = (sel, dur, to = 1.045, at = 0, from = 1.0) => tl.fromTo(sel, { scale: from }, { scale: to, duration: dur, ease: "none" }, at);
+      const lean = (sel, cx, cy, at, k = 0.07, s = 1.07, dur = 0.8) => tl.to(sel, { x: -(cx - 960) * k, y: -(cy - 540) * k, scale: s, duration: dur, ease: "power2.inOut" }, at);
       const typeInto = (sel, text, at, cps = 16) => { const el = document.querySelector(sel + " .tx"); const st = { n: 0 }; tl.fromTo(st, { n: 0 }, { n: text.length, duration: text.length / cps, ease: "none", onUpdate: () => { el.textContent = text.slice(0, Math.round(st.n)); } }, at); };
       const blink = (sel, dur) => { const c = document.querySelector(sel + " .caret"); const cs = { t: 0 }; tl.fromTo(cs, { t: 0 }, { t: dur, duration: dur, ease: "none", onUpdate: () => { c.style.opacity = Math.floor(cs.t * 2.5) % 2 === 0 ? 1 : 0; } }, 0); };
       const countTo = (sel, to, at, dur, fmt = (v) => String(Math.round(v))) => { const el = document.querySelector(sel); const st = { v: 0 }; tl.fromTo(st, { v: 0 }, { v: to, duration: dur, ease: "power3.out", onUpdate: () => { el.textContent = fmt(st.v); } }, at); };
       const slam = (sel, at) => tl.fromTo(sel, { scale: 2.4, opacity: 0, filter: "blur(16px)" }, { scale: 1, opacity: 1, filter: "blur(0px)", duration: 0.28, ease: "power4.out", transformOrigin: "50% 50%", immediateRender: false }, at);
 
 
-      drift("#ct-orb", { scale: 1.0 }, { scale: 1.3 }, 5.8);
+      orbLife("#ct-orb", 5.8); pushSlow("#cta-st", 4.4, 1.05, 0.0);
+      tl.to("#ct-btn", { boxShadow: "0 0 90px rgba(37,99,235,.95)", duration: 0.9, ease: "sine.inOut", yoyo: true, repeat: 3 }, 2.6);
       wordIn("#ct-t1", 0.2, 0.09);
       wordIn("#ct-t2", 1.6, 0.09);
       tl.fromTo("#ct-cta", { opacity: 0, y: 40, scale: 0.96 }, { opacity: 1, y: 0, scale: 1, duration: 0.45, ease: "power4.out", immediateRender: false }, 2.55);
       tl.to("#ct-btn", { scale: 0.96, duration: 0.07, yoyo: true, repeat: 1, ease: "power2.inOut", transformOrigin: "50% 50%" }, 3.1);
       tl.fromTo("#ct-sub", { opacity: 0, filter: "blur(6px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.3 }, 2.85);
       // the build: everything tightens toward the centre, then the flood
-      tl.to("#ct-t1 .w, #ct-t2 .w, #ct-cta, #ct-sub", { scale: 0.97, duration: 1.4, ease: "power2.in", transformOrigin: "50% 50%" }, 4.4);
+      tl.to("#cta-st", { scale: 1.0, duration: 1.4, ease: "power2.in" }, 4.4);
       tl.fromTo("#fl", { scale: 0 }, { scale: 80, duration: 0.42, ease: "power4.out" }, 5.8);
       slam("#fl-logo", 5.88);
       typeInto("#fl-url", "iveststudy.com", 6.7, 14); blink("#fl-url", 11.8);

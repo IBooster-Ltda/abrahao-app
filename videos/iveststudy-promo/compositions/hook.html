@@ -2,6 +2,7 @@
   <style>
     #root { position: absolute; inset: 0; font-family: var(--font-display, "Inter"), sans-serif; color: #fff; overflow: hidden; }
     .bg { position: absolute; inset: 0; background: #070b14; overflow: hidden; }
+    .stc { position: absolute; inset: 0; transform-origin: 50% 50%; }
     .orb { position: absolute; width: 1700px; height: 1700px; border-radius: 50%; transform-origin: 50% 50%;
            background: radial-gradient(circle, rgba(120,180,255,1) 0%, rgba(37,99,235,.8) 16%, rgba(30,64,175,.4) 38%, rgba(7,11,20,0) 66%); filter: blur(48px); }
     .eyebrow { position: absolute; left: 0; width: 1920px; text-align: center; font-size: 28px; font-weight: 600; letter-spacing: .3em; text-transform: uppercase; color: #9db5ff; }
@@ -27,6 +28,7 @@
   </style>
   <div id="root" data-composition-id="hook" data-width="1920" data-height="1080">
     <div class="bg"><div id="hk-orb" class="orb" style="left:210px;top:-260px"></div></div>
+    <div id="hook-st" class="stc">
     <div id="hk-t1" class="h1 md clip" data-start="0" data-duration="3.3" style="top:150px" data-layout-allow-overflow><span class="w">Toda</span><span class="w">prova</span><span class="w">começa</span><span class="w">com</span><span class="w">uma</span><span class="w acc">questão.</span></div>
     <div id="hk-t2" class="h1 md clip" data-start="3.2" data-duration="4.4" style="top:150px" data-layout-allow-overflow><span class="w">E</span><span class="w">se</span><span class="w">você</span><span class="w">soubesse,</span><span class="w acc">na</span><span class="w acc">hora,</span><span class="w">o</span><span class="w">que</span><span class="w">faltou?</span></div>
     <div id="hk-n0" class="card note clip" data-start="0.9" data-duration="6.7" style="left:530px;top:470px;opacity:0" data-layout-allow-overflow>
@@ -36,6 +38,7 @@
     <div id="hk-n2" class="card note clip" data-start="2.0" data-duration="5.6" style="left:530px;top:770px;opacity:0" data-layout-allow-overflow>
       <div class="av"><svg class="ic" width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" height="14" rx="2"></rect><line x1="2" y1="10" x2="22" y2="10"></line></svg></div><div class="nt"><span class="nm">Flashcards</span><span class="ag">agora</span></div><div class="nb"><b>12 cards</b> para revisar hoje. Leva 4 min.</div><div class="dot"></div></div>
 
+    </div>
   </div>
   <script>
     (() => {
@@ -49,16 +52,20 @@
       const show = (sel, at) => tl.set(sel, { opacity: 1 }, at);
       const hide = (sel, at) => tl.set(sel, { opacity: 0 }, at);
       const drift = (sel, from, to, dur, at = 0) => tl.fromTo(sel, from, { ...to, duration: dur, ease: "none" }, at);
+      const orbLife = (sel, dur) => { tl.fromTo(sel, { x: -60, y: 20 }, { x: 60, y: -30, duration: dur, ease: "sine.inOut" }, 0); tl.fromTo(sel, { scale: 0.96, opacity: 0.88 }, { scale: 1.12, opacity: 1, duration: 2.6, ease: "sine.inOut", yoyo: true, repeat: Math.ceil(dur / 2.6) }, 0); };
+      const pushSlow = (sel, dur, to = 1.045, at = 0, from = 1.0) => tl.fromTo(sel, { scale: from }, { scale: to, duration: dur, ease: "none" }, at);
+      const lean = (sel, cx, cy, at, k = 0.07, s = 1.07, dur = 0.8) => tl.to(sel, { x: -(cx - 960) * k, y: -(cy - 540) * k, scale: s, duration: dur, ease: "power2.inOut" }, at);
       const typeInto = (sel, text, at, cps = 16) => { const el = document.querySelector(sel + " .tx"); const st = { n: 0 }; tl.fromTo(st, { n: 0 }, { n: text.length, duration: text.length / cps, ease: "none", onUpdate: () => { el.textContent = text.slice(0, Math.round(st.n)); } }, at); };
       const blink = (sel, dur) => { const c = document.querySelector(sel + " .caret"); const cs = { t: 0 }; tl.fromTo(cs, { t: 0 }, { t: dur, duration: dur, ease: "none", onUpdate: () => { c.style.opacity = Math.floor(cs.t * 2.5) % 2 === 0 ? 1 : 0; } }, 0); };
       const countTo = (sel, to, at, dur, fmt = (v) => String(Math.round(v))) => { const el = document.querySelector(sel); const st = { v: 0 }; tl.fromTo(st, { v: 0 }, { v: to, duration: dur, ease: "power3.out", onUpdate: () => { el.textContent = fmt(st.v); } }, at); };
       const slam = (sel, at) => tl.fromTo(sel, { scale: 2.4, opacity: 0, filter: "blur(16px)" }, { scale: 1, opacity: 1, filter: "blur(0px)", duration: 0.28, ease: "power4.out", transformOrigin: "50% 50%", immediateRender: false }, at);
 
 
-      drift("#hk-orb", { scale: 1.0, x: 0 }, { scale: 1.14, x: 40 }, 7.8);
+      orbLife("#hk-orb", 7.8); pushSlow("#hook-st", 7.8, 1.05);
+      [0,1,2].forEach(i => tl.to("#hk-n" + i, { y: -6, duration: 1.7 + 0.25 * i, ease: "sine.inOut", yoyo: true, repeat: 5 }, 1.6 + 0.55 * i));
       document.querySelectorAll("#hk-t1 .w").forEach((w, i) => tl.fromTo(w, { opacity: 1, y: 30, filter: "blur(12px)" }, { opacity: 1, y: 0, filter: "blur(0px)", duration: 0.5, ease: "power3.out" }, 0.0 + i * 0.08)); wordOut("#hk-t1", 2.95);
       wordIn("#hk-t2", 3.3, 0.07);
-      [0,1,2].forEach(i => { rise("#hk-n" + i, 0.95 + 0.55 * i, 50, 0.5); tl.fromTo("#hk-n" + i, { scale: 0.94 }, { scale: 1, duration: 0.5, ease: "back.out(1.6)", transformOrigin: "50% 50%" }, 0.95 + 0.55 * i); });
+      [0,1,2].forEach(i => { tl.fromTo("#hk-n" + i, { opacity: 0, scale: 0.9, filter: "blur(6px)" }, { opacity: 1, scale: 1, filter: "blur(0px)", duration: 0.5, ease: "back.out(1.6)", transformOrigin: "50% 50%", immediateRender: false }, 0.95 + 0.55 * i); });
       tl.to("#hk-n0, #hk-n1, #hk-n2", { opacity: 0.0, y: -24, filter: "blur(8px)", duration: 0.3, ease: "power2.in", stagger: 0.04 }, 7.3);
       dip("#hk-t2", 7.45);
 
