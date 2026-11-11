@@ -32,7 +32,7 @@ def build(W,H):
     lw=980; lx=cx-lw/2; ly=cy-90
     logo=f'<div class="logo" style="left:{lx:.0f}px;top:{ly:.0f}px;width:{lw}px;font-size:{150 if not V else 132}px"><span class="cap">{ICON["brand"]}</span><span><span class="i">i</span>Vest <span class="st">Study</span></span></div>'
     at_clip('s1',0,1.95,logo+'<div id="s1flash" class="flash"></div>')
-    p1=f'M {-120} {H*0.86:.0f} C {cx-700:.0f} {H*0.86:.0f}, {cx-760:.0f} {ly+215:.0f}, {cx-470:.0f} {ly+205:.0f} L {cx+470:.0f} {ly+205:.0f} C {cx+640:.0f} {ly+200:.0f}, {cx+700:.0f} {ly+120:.0f}, {cx+720:.0f} {ly-40:.0f}'
+    p1=(f'M {-120} {H*0.86:.0f} C {cx-700:.0f} {H*0.86:.0f}, {cx-760:.0f} {ly+215:.0f}, {cx-470:.0f} {ly+205:.0f}' if not V else f'M {cx-260:.0f} {ly+620:.0f} C {cx-620:.0f} {ly+560:.0f}, {cx-640:.0f} {ly+225:.0f}, {cx-470:.0f} {ly+205:.0f}')+f' L {cx+470:.0f} {ly+205:.0f} C {cx+640:.0f} {ly+200:.0f}, {cx+700:.0f} {ly+120:.0f}, {cx+720:.0f} {ly-40:.0f}'
     trail(p1,0.05,1.1,0,'power2.inOut',persist_to=1.75)
     js.append(f'tl.fromTo("#s1 .logo",{{clipPath:"inset(0 100% 0 0)"}},{{clipPath:"inset(0 0% 0 0)",duration:0.62,ease:"none"}},0.42);')
     js.append(f'tl.fromTo("#s1 .logo",{{scale:1}},{{scale:1.06,duration:0.12,ease:"power3.out",yoyo:true,repeat:1,transformOrigin:"50% 50%"}},{M0:.3f}); tl.fromTo("#s1flash",{{opacity:0}},{{opacity:0.9,duration:0.08}},{M0:.3f}); tl.to("#s1flash",{{opacity:0,duration:0.5}},{M0+0.08:.3f});')
