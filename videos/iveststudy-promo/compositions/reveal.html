@@ -23,8 +23,8 @@
     <div id="reveal-st" class="stc">
     <div id="rv-arc" style="position:absolute;left:260px;top:520px;width:1400px;height:1400px;border-radius:50%;border:5px solid transparent;border-top-color:rgba(147,197,253,.95);filter:blur(5px);opacity:0" data-layout-allow-overflow></div>
     <div id="rv-logo" class="logo" style="left:0;width:1920px;top:360px;font-size:230px;opacity:0;filter:drop-shadow(0 0 40px rgba(96,165,250,.6))" data-layout-allow-overflow><svg class="bm" width="230" height="230" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><rect width="48" height="48" rx="12" fill="#2563EB"></rect><path d="M9 21 L24 13 L39 21 L24 27 Z" fill="#ffffff"></path><path d="M15 24 L15 30.5 Q24 37 33 30.5 L33 24 Z" fill="#ffffff"></path><circle cx="24" cy="20" r="1.7" fill="#2563EB"></circle><path d="M24 20 L38.5 20 L38.5 31" fill="none" stroke="#ffffff" stroke-width="0" stroke-linecap="round" stroke-linejoin="round"></path><circle cx="38.5" cy="33" r="2" fill="#ffffff"></circle></svg><span><span class="i">i</span>Vest</span></div>
-    <p id="rv-e" class="eyebrow clip" data-start="0.9" data-duration="5.1" style="top:660px;opacity:0" data-layout-allow-overflow>Preparação para ENEM · Vestibulares · PAES · SAT</p>
-    <p id="rv-e2" class="eyebrow clip" data-start="2.4" data-duration="3.6" style="top:712px;opacity:0" data-layout-allow-overflow>Correção por inteligência artificial em cada resposta</p>
+    <p id="rv-e" class="eyebrow clip" data-start="0.9" data-duration="5.49" style="top:660px;opacity:0" data-layout-allow-overflow>Preparação para ENEM · Vestibulares · PAES · SAT</p>
+    <p id="rv-e2" class="eyebrow clip" data-start="2.4" data-duration="3.99" style="top:712px;opacity:0" data-layout-allow-overflow>Correção por inteligência artificial em cada resposta</p>
 
     </div>
   </div>
@@ -49,14 +49,14 @@
       const slam = (sel, at) => tl.fromTo(sel, { scale: 2.4, opacity: 0, filter: "blur(16px)" }, { scale: 1, opacity: 1, filter: "blur(0px)", duration: 0.28, ease: "power4.out", transformOrigin: "50% 50%", immediateRender: false }, at);
 
 
-      pushSlow("#reveal-st", 5.2, 1.06, 0.6);
-      tl.to("#rv-arc", { rotation: 14, duration: 5.4, ease: "none" }, 0.6);
+      pushSlow("#reveal-st", 6.39 - 0.8, 1.06, 0.6);
+      tl.to("#rv-arc", { rotation: 14, duration: 6.39 - 0.6, ease: "none" }, 0.6);
       tl.fromTo("#rv-arc", { opacity: 0, y: 260, scale: 0.9 }, { opacity: 1, y: 0, scale: 1, duration: 1.4, ease: "power3.out", transformOrigin: "50% 50%" }, 0.3);
       tl.to("#rv-arc", { opacity: 0.35, duration: 1.5, ease: "power2.out" }, 1.7);
       slam("#rv-logo", 0.3);
       tl.fromTo("#rv-e", { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.5, ease: "power3.out" }, 0.95);
       tl.fromTo("#rv-e2", { opacity: 0, y: 16 }, { opacity: 0.85, y: 0, duration: 0.5, ease: "power3.out" }, 2.45);
-      tl.to("#rv-logo, #rv-e, #rv-e2, #rv-arc", { opacity: 0, filter: "blur(10px)", duration: 0.3, ease: "power2.in" }, 5.65);
+      tl.to("#rv-logo, #rv-e, #rv-e2, #rv-arc", { opacity: 0, filter: "blur(10px)", duration: 0.3, ease: "power2.in" }, 6.39 - 0.35);
 
       window.__timelines["reveal"] = tl;
     })();

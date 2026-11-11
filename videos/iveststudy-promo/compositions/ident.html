@@ -21,11 +21,11 @@
   <div id="root" data-composition-id="ident" data-width="1920" data-height="1080">
     <div class="bg"></div>
     <div id="ident-st" class="stc">
-    <p id="id-e" class="eyebrow clip" data-start="0.1" data-duration="7.9" style="top:330px;opacity:0" data-layout-allow-overflow>Você se identifica?</p>
-    <div id="id-s1" class="h1 md clip" data-start="0.2" data-duration="2.3" style="top:440px" data-layout-allow-overflow><span class="w">Faz</span><span class="w">simulado</span><span class="w">e</span><span class="w">não</span><span class="w">sabe</span><span class="w acc">por</span><span class="w acc">que</span><span class="w">errou.</span></div>
-    <div id="id-s2" class="h1 md clip" data-start="2.5" data-duration="2.0" style="top:440px" data-layout-allow-overflow><span class="w">Lê</span><span class="w">a</span><span class="w">teoria,</span><span class="w">mas</span><span class="w">na</span><span class="w">prova</span><span class="w acc">trava.</span></div>
-    <div id="id-s3" class="h1 md clip" data-start="4.5" data-duration="3.5" style="top:400px" data-layout-allow-overflow><span class="w">O</span><span class="w">problema</span><span class="w">não</span><span class="w">é</span><span class="w">estudar.</span></div>
-    <div id="id-s4" class="h1 md clip" data-start="6.0" data-duration="2.0" style="top:520px" data-layout-allow-overflow><span class="w">É</span><span class="w">estudar</span><span class="w acc">sem</span><span class="w acc">feedback.</span></div>
+    <p id="id-e" class="eyebrow clip" data-start="0.1" data-duration="8.72" style="top:330px;opacity:0" data-layout-allow-overflow>Você se identifica?</p>
+    <div id="id-s1" class="h1 md clip" data-start="0.2" data-duration="2.61" style="top:440px" data-layout-allow-overflow><span class="w">Faz</span><span class="w">simulado</span><span class="w">e</span><span class="w">não</span><span class="w">sabe</span><span class="w acc">por</span><span class="w acc">que</span><span class="w">errou.</span></div>
+    <div id="id-s2" class="h1 md clip" data-start="2.81" data-duration="2.4" style="top:440px" data-layout-allow-overflow><span class="w">Lê</span><span class="w">a</span><span class="w">teoria,</span><span class="w">mas</span><span class="w">na</span><span class="w">prova</span><span class="w acc">trava.</span></div>
+    <div id="id-s3" class="h1 md clip" data-start="5.21" data-duration="3.61" style="top:400px" data-layout-allow-overflow><span class="w">O</span><span class="w">problema</span><span class="w">não</span><span class="w">é</span><span class="w">estudar.</span></div>
+    <div id="id-s4" class="h1 md clip" data-start="6.7" data-duration="2.12" style="top:520px" data-layout-allow-overflow><span class="w">É</span><span class="w">estudar</span><span class="w acc">sem</span><span class="w acc">feedback.</span></div>
 
     </div>
   </div>
@@ -50,14 +50,14 @@
       const slam = (sel, at) => tl.fromTo(sel, { scale: 2.4, opacity: 0, filter: "blur(16px)" }, { scale: 1, opacity: 1, filter: "blur(0px)", duration: 0.28, ease: "power4.out", transformOrigin: "50% 50%", immediateRender: false }, at);
 
 
-      orbLife("#id-orb", 8.0);
-      pushSlow("#id-s1", 2.3, 1.05, 0.2); pushSlow("#id-s2", 2.0, 1.05, 2.5); pushSlow("#id-s3", 3.5, 1.04, 4.5); pushSlow("#id-s4", 2.0, 1.04, 6.0);
+      orbLife("#id-orb", 8.82);
+      pushSlow("#id-s1", 2.81 - 0.2, 1.05, 0.2); pushSlow("#id-s2", 5.21 - 2.81, 1.05, 2.81); pushSlow("#id-s3", 8.82 - 5.21, 1.04, 5.21); pushSlow("#id-s4", 8.82 - 6.7, 1.04, 6.7);
       tl.fromTo("#id-e", { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.6, ease: "power3.out" }, 0.15);
-      wordIn("#id-s1", 0.3); wordOut("#id-s1", 2.25);
-      wordIn("#id-s2", 2.6); wordOut("#id-s2", 4.25);
-      wordIn("#id-s3", 4.6);
-      wordIn("#id-s4", 6.1, 0.1);
-      tl.to("#id-s3 .w, #id-s4 .w, #id-e", { opacity: 0, filter: "blur(8px)", duration: 0.25, ease: "power2.in" }, 7.5);
+      wordIn("#id-s1", 0.3); wordOut("#id-s1", 2.81 - 0.25);
+      wordIn("#id-s2", 2.81 + 0.1); wordOut("#id-s2", 5.21 - 0.25);
+      wordIn("#id-s3", 5.21 + 0.1);
+      wordIn("#id-s4", 6.7 + 0.1, 0.1);
+      tl.to("#id-s3 .w, #id-s4 .w, #id-e", { opacity: 0, filter: "blur(8px)", duration: 0.25, ease: "power2.in" }, 8.82 - 0.5);
 
       window.__timelines["ident"] = tl;
     })();

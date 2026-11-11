@@ -16,6 +16,11 @@
 Medido com `freezedetect` no primeiro render: nenhum quadro duplicado, mas trechos de até 3 s em que a imagem mudava quase nada (só o orbe derivando): o logo depois do slam, a grade de features entre um destaque e outro, os números, o botão. Correção: o orbe respira (escala e opacidade em seno, 2,6 s) e deriva; cada cena tem um push lento contínuo; a cena inclina para o card, o número ou o passo ativo (lean 0,8–0,9 s); o ícone do card ativo pulsa; o arco do logo gira devagar; o botão pulsa o brilho. O cartão final continua parado de propósito, como na referência.
 Segunda passada: o orbe saiu das cenas e foi para a raiz (uma luz só, com deriva e respiração contínuas nos 77 s e um flash nos dois impactos), então a luz não pula mais nos cortes. Resultado medido no render final: zero trechos parados antes do cartão final (antes eram 37). Revisão de 77 quadros, um por segundo: sem texto cortado, sem sobreposição, destaque sempre no card falado.
 
+## Com a conta paga da ElevenLabs
+- Voz: Paulo, nativa de português brasileiro (biblioteca ElevenLabs), no lugar do Brian. Falas regravadas com timestamps por caractere.
+- Corte guiado pela voz: as durações das cenas, a troca do título do gancho, as 4 dores, os 6 destaques, os 4 números, os 3 passos, o botão e o flood são calculados a partir dos tempos reais das palavras. Nada esticado.
+- Trilha: ElevenLabs Music com plano de 8 seções nas durações exatas das cenas (quieta no gancho, impacto no reveal, groove nas features, breakdown na captura, subida nos números e passos, riser no CTA, queda no flood). Medido: impacto de 13,8 dB em 16,30 s na faixa; a faixa entra com 0,41 s de atraso para ele cair no slam do logo (16,71 s). Duas variantes geradas, escolhida pela medição.
+
 ## Medido e olhado
 - `hyperframes check`: ok. Avisos restantes: holds curtos nos 3 passos (1,6–1,7 s) e a heurística de "última linha" do cartão final (o cartão fica 5 s parado; o aviso vem do cursor piscando).
 - 21 snapshots + folha de contato do MP4 olhados; áudio medido (−14,2 LUFS integrado, pico real −1,2 dB, sem clipping). Ninguém ouviu.

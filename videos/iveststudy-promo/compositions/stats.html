@@ -27,15 +27,15 @@
   <div id="root" data-composition-id="stats" data-width="1920" data-height="1080">
     <div class="bg"></div>
     <div id="stats-st" class="stc">
-    <p id="st-e" class="eyebrow clip" data-start="0.1" data-duration="9.1" style="top:150px;opacity:0" data-layout-allow-overflow>Preparo completo</p>
-    <div id="st-t" class="h1 sm clip" data-start="0.1" data-duration="9.1" style="top:196px" data-layout-allow-overflow><span class="w">Para</span><span class="w">a</span><span class="w acc">sua</span><span class="w">prova,</span><span class="w">do</span><span class="w">seu</span><span class="w">jeito.</span></div>
-    <div id="st-c0" class="card tile clip" data-start="0.30" data-duration="8.70" style="left:100px;top:470px;opacity:0" data-layout-allow-overflow>
+    <p id="st-e" class="eyebrow clip" data-start="0.1" data-duration="8.64" style="top:150px;opacity:0" data-layout-allow-overflow>Preparo completo</p>
+    <div id="st-t" class="h1 sm clip" data-start="0.1" data-duration="8.64" style="top:196px" data-layout-allow-overflow><span class="w">Para</span><span class="w">a</span><span class="w acc">sua</span><span class="w">prova,</span><span class="w">do</span><span class="w">seu</span><span class="w">jeito.</span></div>
+    <div id="st-c0" class="card tile clip" data-start="0.30" data-duration="8.24" style="left:100px;top:470px;opacity:0" data-layout-allow-overflow>
       <div class="v" id="st-v0">5</div><div class="l">bancas</div><div class="s">ENEM · Fuvest · Unicamp · PAES · SAT</div></div>
-    <div id="st-c1" class="card tile clip" data-start="1.58" data-duration="7.42" style="left:530px;top:470px;opacity:0" data-layout-allow-overflow>
+    <div id="st-c1" class="card tile clip" data-start="1.50" data-duration="7.04" style="left:530px;top:470px;opacity:0" data-layout-allow-overflow>
       <div class="v" id="st-v1">1000</div><div class="l">pontos na redação</div><div class="s">corrigida por competência, C1–C5</div></div>
-    <div id="st-c2" class="card tile clip" data-start="3.38" data-duration="5.62" style="left:960px;top:470px;opacity:0" data-layout-allow-overflow>
+    <div id="st-c2" class="card tile clip" data-start="3.42" data-duration="5.12" style="left:960px;top:470px;opacity:0" data-layout-allow-overflow>
       <div class="v" id="st-v2">Elite</div><div class="l">do Bronze ao Elite</div><div class="s">ranks pelo Índice de Preparo</div></div>
-    <div id="st-c3" class="card tile clip" data-start="5.88" data-duration="3.12" style="left:1390px;top:470px;opacity:0" data-layout-allow-overflow>
+    <div id="st-c3" class="card tile clip" data-start="5.41" data-duration="3.13" style="left:1390px;top:470px;opacity:0" data-layout-allow-overflow>
       <div class="v small" id="st-v3">PT · EN · ES</div><div class="l">3 idiomas</div><div class="s">português, inglês e espanhol</div></div>
 
     </div>
@@ -61,10 +61,10 @@
       const slam = (sel, at) => tl.fromTo(sel, { scale: 2.4, opacity: 0, filter: "blur(16px)" }, { scale: 1, opacity: 1, filter: "blur(0px)", duration: 0.28, ease: "power4.out", transformOrigin: "50% 50%", immediateRender: false }, at);
 
 
-      orbLife("#st-orb", 9.2);
+      orbLife("#st-orb", 8.74);
       tl.fromTo("#st-e", { opacity: 0 }, { opacity: 1, duration: 0.4 }, 0.15);
       wordIn("#st-t", 0.2, 0.07);
-      const ST = [0.3, 1.58, 3.38, 5.88];
+      const ST = [0.3, 1.5, 3.42, 5.41];
       for (let i = 0; i < 4; i++) { rise("#st-c" + i, ST[i], 56, 0.55); tl.fromTo("#st-c" + i, { scale: 0.94 }, { scale: 1, duration: 0.55, ease: "back.out(1.5)" }, ST[i]); lean("#stats-st", 100 + 430 * i + 200, 660, ST[i], 0.05, 1.06, 0.9); }
       tl.to("#stats-st", { x: 0, y: 0, scale: 1.03, duration: 1.2, ease: "power2.inOut" }, ST[3] + 1.2);
       countTo("#st-v0", 5, ST[0] + 0.1, 0.9);
@@ -72,7 +72,7 @@
       const ranks = ["Bronze", "Prata", "Ouro", "Platina", "Diamante", "Mestre", "Elite"]; const rk = { i: 0 }; const rv = document.querySelector("#st-v2");
       tl.fromTo(rk, { i: 0 }, { i: 6, duration: 1.4, ease: "power1.inOut", onUpdate: () => { rv.textContent = ranks[Math.round(rk.i)]; } }, ST[2] + 0.1);
       tl.to("#st-v2", { color: "#60a5fa", duration: 0.3 }, ST[2] + 1.5);
-      tl.to("#st-c0, #st-c1, #st-c2, #st-c3, #st-e, #st-t", { opacity: 0, filter: "blur(8px)", duration: 0.3, ease: "power2.in" }, 8.85);
+      tl.to("#st-c0, #st-c1, #st-c2, #st-c3, #st-e, #st-t", { opacity: 0, filter: "blur(8px)", duration: 0.3, ease: "power2.in" }, 8.74 - 0.35);
 
       window.__timelines["stats"] = tl;
     })();

@@ -25,14 +25,14 @@
   <div id="root" data-composition-id="cta" data-width="1920" data-height="1080">
     <div class="bg"></div>
     <div id="cta-st" class="stc">
-    <div id="ct-t1" class="h1 md clip" data-start="0.1" data-duration="5.8" style="top:270px" data-layout-allow-overflow><span class="w">Sua</span><span class="w">prova</span><span class="w">está</span><span class="w">chegando.</span></div>
-    <div id="ct-t2" class="h1 md clip" data-start="1.5" data-duration="4.4" style="top:380px" data-layout-allow-overflow><span class="w">Seu</span><span class="w">preparo</span><span class="w">começa</span><span class="w acc">agora.</span></div>
-    <div id="ct-cta" class="clip" data-start="2.5" data-duration="3.4" data-hold style="position:absolute;left:0;top:600px;width:1920px;display:flex;justify-content:center;opacity:0"><span id="ct-btn" data-var-text="cta-label">Criar conta grátis →</span></div>
-    <p id="ct-sub" class="clip" data-start="2.8" data-duration="3.1" style="position:absolute;left:0;top:722px;width:1920px;text-align:center;font-size:30px;font-weight:500;color:#d5dcea;opacity:0">Grátis para sempre · 3 dias de Pro no cadastro</p>
+    <div id="ct-t1" class="h1 md clip" data-start="0.1" data-duration="5.99" style="top:270px" data-layout-allow-overflow><span class="w">Sua</span><span class="w">prova</span><span class="w">está</span><span class="w">chegando.</span></div>
+    <div id="ct-t2" class="h1 md clip" data-start="1.76" data-duration="4.23" style="top:380px" data-layout-allow-overflow><span class="w">Seu</span><span class="w">preparo</span><span class="w">começa</span><span class="w acc">agora.</span></div>
+    <div id="ct-cta" class="clip" data-start="3.12" data-duration="2.87" data-hold style="position:absolute;left:0;top:600px;width:1920px;display:flex;justify-content:center;opacity:0"><span id="ct-btn" data-var-text="cta-label">Criar conta grátis →</span></div>
+    <p id="ct-sub" class="clip" data-start="3.42" data-duration="2.57" style="position:absolute;left:0;top:722px;width:1920px;text-align:center;font-size:30px;font-weight:500;color:#d5dcea;opacity:0">Grátis para sempre · 3 dias de Pro no cadastro</p>
     <div id="fl" style="position:absolute;left:960px;top:540px;width:60px;height:60px;margin-left:-30px;margin-top:-30px;border-radius:50%;background:#2563eb;transform:scale(0);transform-origin:50% 50%"></div>
     <div id="fl-logo" class="logo" style="left:0;width:1920px;top:380px;font-size:200px;opacity:0;color:#fff" data-layout-allow-overflow><svg class="bm" width="200" height="200" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><rect width="48" height="48" rx="12" fill="#ffffff"></rect><path d="M9 21 L24 13 L39 21 L24 27 Z" fill="#2563EB"></path><path d="M15 24 L15 30.5 Q24 37 33 30.5 L33 24 Z" fill="#2563EB"></path><circle cx="24" cy="20" r="1.7" fill="#ffffff"></circle><path d="M24 20 L38.5 20 L38.5 31" fill="none" stroke="#2563EB" stroke-width="0" stroke-linecap="round" stroke-linejoin="round"></path><circle cx="38.5" cy="33" r="2" fill="#2563EB"></circle></svg><span>iVest</span></div>
-    <p id="fl-url" class="ty clip" data-start="6.6" data-duration="5.2" style="top:650px;font-size:46px;font-weight:600;color:#fff;opacity:0" data-layout-allow-overflow><span class="tx"></span><span class="caret" style="background:#fff;box-shadow:none"></span></p>
-    <p id="fl-sub" class="clip" data-start="7.8" data-duration="4.0" style="position:absolute;left:0;top:730px;width:1920px;text-align:center;font-size:28px;font-weight:500;letter-spacing:.3em;text-transform:uppercase;color:rgba(255,255,255,.85);opacity:0">Comece grátis · 3 dias de Pro</p>
+    <p id="fl-url" class="ty clip" data-start="6.79" data-duration="5.2" style="top:650px;font-size:46px;font-weight:600;color:#fff;opacity:0" data-layout-allow-overflow><span class="tx"></span><span class="caret" style="background:#fff;box-shadow:none"></span></p>
+    <p id="fl-sub" class="clip" data-start="7.99" data-duration="4.0" style="position:absolute;left:0;top:730px;width:1920px;text-align:center;font-size:28px;font-weight:500;letter-spacing:.3em;text-transform:uppercase;color:rgba(255,255,255,.85);opacity:0">Comece grátis · 3 dias de Pro</p>
 
     </div>
   </div>
@@ -57,20 +57,20 @@
       const slam = (sel, at) => tl.fromTo(sel, { scale: 2.4, opacity: 0, filter: "blur(16px)" }, { scale: 1, opacity: 1, filter: "blur(0px)", duration: 0.28, ease: "power4.out", transformOrigin: "50% 50%", immediateRender: false }, at);
 
 
-      orbLife("#ct-orb", 5.8); pushSlow("#cta-st", 4.4, 1.05, 0.0);
-      tl.to("#ct-btn", { boxShadow: "0 0 90px rgba(37,99,235,.95)", duration: 0.9, ease: "sine.inOut", yoyo: true, repeat: 3 }, 2.6);
+      orbLife("#ct-orb", 5.99); pushSlow("#cta-st", 5.99 - 1.4, 1.05, 0.0);
+      tl.to("#ct-btn", { boxShadow: "0 0 90px rgba(37,99,235,.95)", duration: 0.9, ease: "sine.inOut", yoyo: true, repeat: 3 }, 3.17 + 0.1);
       wordIn("#ct-t1", 0.2, 0.09);
-      wordIn("#ct-t2", 1.6, 0.09);
-      tl.fromTo("#ct-cta", { opacity: 0, y: 40, scale: 0.96 }, { opacity: 1, y: 0, scale: 1, duration: 0.45, ease: "power4.out", immediateRender: false }, 2.55);
-      tl.to("#ct-btn", { scale: 0.96, duration: 0.07, yoyo: true, repeat: 1, ease: "power2.inOut", transformOrigin: "50% 50%" }, 3.1);
-      tl.fromTo("#ct-sub", { opacity: 0, filter: "blur(6px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.3 }, 2.85);
+      wordIn("#ct-t2", 1.86, 0.09);
+      tl.fromTo("#ct-cta", { opacity: 0, y: 40, scale: 0.96 }, { opacity: 1, y: 0, scale: 1, duration: 0.45, ease: "power4.out", immediateRender: false }, 3.17);
+      tl.to("#ct-btn", { scale: 0.96, duration: 0.07, yoyo: true, repeat: 1, ease: "power2.inOut", transformOrigin: "50% 50%" }, 3.17 + 0.55);
+      tl.fromTo("#ct-sub", { opacity: 0, filter: "blur(6px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.3 }, 3.17 + 0.3);
       // the build: everything tightens toward the centre, then the flood
-      tl.to("#cta-st", { scale: 1.0, duration: 1.4, ease: "power2.in" }, 4.4);
-      tl.fromTo("#fl", { scale: 0 }, { scale: 80, duration: 0.42, ease: "power4.out" }, 5.8);
-      slam("#fl-logo", 5.88);
-      typeInto("#fl-url", "iveststudy.com", 6.7, 14); blink("#fl-url", 11.8);
-      tl.fromTo("#fl-url", { opacity: 0 }, { opacity: 1, duration: 0.2 }, 6.6);
-      tl.fromTo("#fl-sub", { opacity: 0, y: 10 }, { opacity: 1, y: 0, duration: 0.4 }, 7.85);
+      tl.to("#cta-st", { scale: 1.0, duration: 1.4, ease: "power2.in" }, 5.99 - 1.4);
+      tl.fromTo("#fl", { scale: 0 }, { scale: 80, duration: 0.42, ease: "power4.out" }, 5.99);
+      slam("#fl-logo", 5.99 + 0.08);
+      typeInto("#fl-url", "iveststudy.com", 5.99 + 0.9, 14); blink("#fl-url", 11.99);
+      tl.fromTo("#fl-url", { opacity: 0 }, { opacity: 1, duration: 0.2 }, 5.99 + 0.8);
+      tl.fromTo("#fl-sub", { opacity: 0, y: 10 }, { opacity: 1, y: 0, duration: 0.4 }, 5.99 + 2.05);
 
       window.__timelines["cta"] = tl;
     })();
