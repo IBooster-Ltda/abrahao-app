@@ -1,0 +1,277 @@
+<!doctype html>
+<html lang="pt-BR">
+<head><meta charset="UTF-8" /><meta name="viewport" content="width=1920, height=1080" /><script src="assets/vendor/gsap.min.js"></script>
+<style>
+      :root { --blue:#2563eb; --blue2:#60a5fa; --ok:#22c55e; --miss:#f87171; }
+      * { margin:0; padding:0; box-sizing:border-box; }
+      html, body { width:1920px; height:1080px; overflow:hidden; background:#070b14; font-family:"Inter",sans-serif; }
+      #root { position:relative; width:1920px; height:1080px; overflow:hidden; background:#070b14; color:#fff; }
+      .bgc { position:absolute; inset:0; }
+      .bgc.navy { background: radial-gradient(120% 80% at 50% 30%, #152a5c 0%, #0b1220 55%, #070b14 100%); }
+      .bgc.blue { background:#2563eb; }
+      .photo { position:absolute; inset:0; overflow:hidden; } .photo img { position:absolute; left:0; top:0; width:100%; height:100%; object-fit:cover; transform-origin:50% 50%; }
+      .photo .shade { position:absolute; inset:0; background:linear-gradient(180deg, rgba(5,8,16,.75) 0%, rgba(5,8,16,.35) 45%, rgba(5,8,16,.85) 100%); }
+      .ph { position:absolute; left:1280px; top:104px; width:400px; height:867px; border-radius:34px; overflow:hidden; background:#000; border:6px solid #1a2030; box-shadow:0 40px 90px rgba(0,0,0,.6), 0 0 0 2px rgba(255,255,255,.06); transform-origin:50% 50%; }
+      .ph .island { position:absolute; left:50%; top:12px; width:112px; height:28px; margin-left:-56px; border-radius:999px; background:#000; z-index:5; }
+      .ph .cam { position:absolute; left:0; top:0; width:1290px; height:2796px; transform-origin:0 0; }
+      .ph .cam video { position:absolute; left:0; top:0; width:1290px; height:2796px; display:block; }
+      .ttl { position:absolute; font-weight:800; line-height:1.08; letter-spacing:-0.035em; color:#fff; text-shadow:0 2px 24px rgba(0,0,0,.6); z-index:6; }
+      .ttl .ln { display:block; } .ttl .w { display:inline-block; margin-right:.22em; } .ttl .acc { color:var(--blue2); } .ttl.ok .acc { color:var(--ok); } .ttl.miss .acc { color:var(--miss); }
+      .ttl.big { font-size:121px; }
+      .subt { position:absolute; font-weight:600; line-height:1.25; color:#e6ebf5; text-shadow:0 2px 16px rgba(0,0,0,.6); z-index:6; }
+      .chip { position:absolute; display:flex; align-items:center; gap:14px; padding:16px 24px; border-radius:18px; font-size:38px; font-weight:700; color:#fff; background:rgba(8,12,22,.92); border:2px solid; box-shadow:0 14px 40px rgba(0,0,0,.5); z-index:7; max-width:1840px; line-height:1.2; }
+      .chip .ic { width:46px; height:46px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:30px; flex:0 0 46px; color:#06101c; }
+      .chip.ok { border-color:var(--ok); } .chip.ok .ic { background:var(--ok); } .chip.miss { border-color:var(--miss); } .chip.miss .ic { background:var(--miss); }
+      .cap { position:absolute; left:50%; transform:translateX(-50%); padding:12px 26px; border-radius:16px; background:rgba(5,8,16,.74); color:#fff; font-size:42px; font-weight:700; line-height:1.25; text-align:center; z-index:9; white-space:nowrap; }
+      .wm { position:absolute; right:120px; font-size:32px; font-weight:700; color:#fff; opacity:.92; letter-spacing:-0.01em; z-index:8; padding:8px 14px; border-radius:10px; background:rgba(5,8,16,.5); }
+      .ring { position:absolute; border:6px solid var(--miss); border-radius:18px; box-shadow:0 0 30px rgba(248,113,113,.9); }
+      .quote { position:absolute; z-index:7; background:rgba(8,12,22,.94); border:2px solid rgba(255,255,255,.12); border-radius:26px; padding:28px 32px; line-height:1.3; font-weight:600; color:#e6ebf5; box-shadow:0 20px 60px rgba(0,0,0,.55); }
+      .quote .lab { font-size:28px; font-weight:700; letter-spacing:.14em; text-transform:uppercase; color:#9db5ff; margin-bottom:.5em; }
+      .quote b { font-weight:800; }
+      .num { position:absolute; font-weight:800; color:#fff; letter-spacing:-0.04em; line-height:1; }
+      .logo { position:absolute; display:flex; align-items:center; justify-content:center; gap:.26em; font-weight:800; letter-spacing:-0.04em; color:#fff; z-index:6; }
+      .logo .st { font-weight:500; color:#fff; } .logo.onblue .i { color:#fff; } .logo .i { color:var(--blue2); }
+      .logo svg { width:1em; height:1em; border-radius:.24em; }
+      .btn { position:absolute; left:50%; transform:translateX(-50%); background:var(--blue); color:#fff; font-weight:700; border-radius:22px; padding:26px 54px; box-shadow:0 0 50px rgba(37,99,235,.55); z-index:6; white-space:nowrap; }
+      .url { position:absolute; left:0; width:100%; text-align:center; font-weight:800; color:#fff; letter-spacing:-0.03em; z-index:6; }
+      .badge { position:absolute; display:flex; align-items:center; justify-content:center; font-weight:800; color:#fff; background:rgba(255,255,255,.08); border:2px solid rgba(255,255,255,.18); border-radius:22px; z-index:6; }
+      .step { position:absolute; display:flex; align-items:center; gap:22px; z-index:6; } .step .n { width:72px; height:72px; border-radius:50%; background:var(--blue); display:flex; align-items:center; justify-content:center; font-weight:800; font-size:36px; flex:0 0 72px; box-shadow:0 0 30px rgba(37,99,235,.6); }
+      .step .tx { font-weight:700; font-size:46px; line-height:1.15; }
+</style></head>
+<body>
+<div id="root" data-composition-id="ad45-1920x1080" data-start="0" data-duration="45.0" data-width="1920" data-height="1080" data-fps="30">
+<div id="bg1" class="bgc navy clip" data-start="0" data-duration="2.0"></div>
+<div id="ph2" class="ph" style="z-index:2;visibility:hidden;opacity:0"><div class="island"></div><div id="ph2c" class="cam"><video id="ph2v" class="clip" src="assets/app/m3/redacao.mp4" data-start="0" data-duration="2.0" data-media-start="31.30" muted playsinline data-track-index="2"></video><div id="cnt" class="num clip" data-start="0" data-duration="1.15" style="left:400px;top:738px;width:302px;height:149px;background:rgb(20,23,32);font-size:145px;text-align:right;padding-right:0;line-height:149px"><span class="v">0</span></div><div id="ring1" class="ring clip" data-start="1.10" data-duration="0.9" style="left:1030px;top:1560px;width:190px;height:110px;opacity:0"></div></div></div>
+<div id="t3" class="ttl  clip" data-start="0" data-duration="2.0" style="left:120px;top:300px;width:1040px;font-size:84px;text-align:left" data-layout-allow-overflow><div class="ln"><span class="w">Redação</span> <span class="w">corrigida:</span></div><div class="ln"><span class="w acc">480</span> <span class="w">de</span> <span class="w">1000.</span></div></div>
+<div id="im4" class="photo clip" data-start="2.0" data-duration="1.5"><img src="assets/gen/m/desk-night-1.png" alt="" /><div class="shade" style="opacity:0.4"></div></div>
+<div id="t5" class="ttl  clip" data-start="2.0" data-duration="1.5" style="left:120px;top:420px;width:1040px;font-size:84px;text-align:left" data-layout-allow-overflow><div class="ln"><span class="w">Faz</span> <span class="w">simulado</span> <span class="w">e</span> <span class="w">não</span> <span class="w">sabe</span></div><div class="ln"><span class="w">por</span> <span class="w">que</span> <span class="w acc">errou.</span></div></div>
+<div id="im6" class="photo clip" data-start="3.5" data-duration="1.5"><img src="assets/gen/m/student-frustrated-1.png" alt="" /><div class="shade" style="opacity:0.35"></div></div>
+<div id="t7" class="ttl  clip" data-start="3.5" data-duration="1.5" style="left:120px;top:420px;width:1040px;font-size:84px;text-align:left" data-layout-allow-overflow><div class="ln"><span class="w">Lê</span> <span class="w">a</span> <span class="w">teoria,</span></div><div class="ln"><span class="w">mas</span> <span class="w">na</span> <span class="w">prova</span> <span class="w acc">trava.</span></div></div>
+<div id="bg8" class="bgc navy clip" data-start="5.0" data-duration="1.5"></div>
+<div id="t9" class="ttl  clip" data-start="5.0" data-duration="1.5" style="left:120px;top:460px;width:1040px;font-size:84px;text-align:left" data-layout-allow-overflow><div class="ln"><span class="w">O</span> <span class="w">problema</span> <span class="w">não</span> <span class="w">é</span> <span class="w">estudar.</span></div><div class="ln"><span class="w">É</span> <span class="w">estudar</span> <span class="w acc">sem</span> <span class="w acc">feedback.</span></div></div>
+<div id="bg10" class="bgc navy clip" data-start="6.5" data-duration="10.5"></div>
+<div id="ph11" class="ph" style="z-index:2;visibility:hidden;opacity:0"><div class="island"></div><div id="ph11c" class="cam"><video id="ph11v" class="clip" src="assets/app/m3/estudo.mp4" data-start="6.5" data-duration="1.5" data-media-start="2.69" muted playsinline data-track-index="2"></video></div></div>
+<div id="t12" class="ttl  clip" data-start="6.5" data-duration="1.5" style="left:120px;top:300px;width:1040px;font-size:75px;text-align:left" data-layout-allow-overflow><div class="ln"><span class="w">Pergunta</span> <span class="w">de</span> <span class="w">História.</span></div></div>
+<div id="ph13" class="ph" style="z-index:2;visibility:hidden;opacity:0"><div class="island"></div><div id="ph13c" class="cam"><video id="ph13v" class="clip" src="assets/app/m3/estudo.mp4" data-start="8.0" data-duration="4.0" data-media-start="9.29" data-playback-rate="1.6" muted playsinline data-track-index="2"></video></div></div>
+<div id="t14" class="ttl  clip" data-start="8.0" data-duration="4.0" style="left:120px;top:300px;width:1040px;font-size:75px;text-align:left" data-layout-allow-overflow><div class="ln"><span class="w">Você</span> <span class="w">responde.</span></div><div class="ln"><span class="w">O</span> <span class="w">cronômetro</span> <span class="w">corre.</span></div></div>
+<div id="ph15" class="ph" style="z-index:2;visibility:hidden;opacity:0"><div class="island"></div><div id="ph15c" class="cam"><video id="ph15v" class="clip" src="assets/app/m3/estudo.mp4" data-start="12.0" data-duration="1.0" data-media-start="16.96" muted playsinline data-track-index="2"></video></div></div>
+<div id="ph16" class="ph" style="z-index:2;visibility:hidden;opacity:0"><div class="island"></div><div id="ph16c" class="cam"><video id="ph16v" class="clip" src="assets/app/m3/estudo.mp4" data-start="13.0" data-duration="1.5" data-media-start="30.66" muted playsinline data-track-index="2"></video></div></div>
+<div id="t17" class="ttl  clip" data-start="13.0" data-duration="1.5" style="left:120px;top:300px;width:1040px;font-size:75px;text-align:left" data-layout-allow-overflow><div class="ln"><span class="w">Nota</span> <span class="w">na</span> <span class="w acc">hora.</span></div></div>
+<div id="ph18" class="ph" style="z-index:2;visibility:hidden;opacity:0"><div class="island"></div><div id="ph18c" class="cam"><video id="ph18v" class="clip" src="assets/app/m3/estudo.mp4" data-start="14.5" data-duration="2.5" data-media-start="32.16" muted playsinline data-track-index="2"></video></div></div>
+<div id="t19" class="ttl  clip" data-start="14.5" data-duration="2.5" style="left:120px;top:300px;width:1040px;font-size:65px;text-align:left" data-layout-allow-overflow><div class="ln"><span class="w">O</span> <span class="w">que</span> <span class="w">acertou.</span> <span class="w">O</span> <span class="w">que</span> <span class="w">faltou.</span></div></div>
+<div id="q20" class="quote clip" data-start="14.75" data-duration="2.25" style="left:120px;top:470px;width:1040px;font-size:36px"><div class="lab">Avaliação da IA · resposta real</div>Acertou <b class="g">o núcleo da proporcionalidade</b> (punição igual ao crime), mas cometeu <b class="r">dois erros</b>: chamou o talião de <b class="r">"justiça de vingança"</b> e disse que as leis valiam <b class="r">"para todo mundo"</b>.</div>
+<div id="bg21" class="bgc navy clip" data-start="17.0" data-duration="6.0"></div>
+<div id="ph22" class="ph" style="z-index:2;visibility:hidden;opacity:0"><div class="island"></div><div id="ph22c" class="cam"><video id="ph22v" class="clip" src="assets/app/m3/redacao.mp4" data-start="17.0" data-duration="1.5" data-media-start="32.20" muted playsinline data-track-index="2"></video></div></div>
+<div id="t23" class="ttl  clip" data-start="17.0" data-duration="1.5" style="left:120px;top:300px;width:1040px;font-size:105px;text-align:left" data-layout-allow-overflow><div class="ln"><span class="w">Redação</span></div></div>
+<div id="s24" class="subt clip" data-start="17.0" data-duration="1.5" style="left:120px;top:431px;width:1040px;font-size:40px;text-align:left" data-layout-allow-overflow>Nota de 0 a 1000</div>
+<div id="ph25" class="ph" style="z-index:2;visibility:hidden;opacity:0"><div class="island"></div><div id="ph25c" class="cam"><video id="ph25v" class="clip" src="assets/app/m3/simulados.mp4" data-start="18.5" data-duration="1.5" data-media-start="11.85" muted playsinline data-track-index="2"></video></div></div>
+<div id="t26" class="ttl  clip" data-start="18.5" data-duration="1.5" style="left:120px;top:300px;width:1040px;font-size:105px;text-align:left" data-layout-allow-overflow><div class="ln"><span class="w">Simulados</span></div></div>
+<div id="s27" class="subt clip" data-start="18.5" data-duration="1.5" style="left:120px;top:431px;width:1040px;font-size:40px;text-align:left" data-layout-allow-overflow>Formato de cada banca</div>
+<div id="ph28" class="ph" style="z-index:2;visibility:hidden;opacity:0"><div class="island"></div><div id="ph28c" class="cam"><video id="ph28v" class="clip" src="assets/app/m3/flashcards.mp4" data-start="20.0" data-duration="1.5" data-media-start="0.92" muted playsinline data-track-index="2"></video></div></div>
+<div id="t29" class="ttl  clip" data-start="20.0" data-duration="1.5" style="left:120px;top:300px;width:1040px;font-size:105px;text-align:left" data-layout-allow-overflow><div class="ln"><span class="w">Flashcards</span></div></div>
+<div id="s30" class="subt clip" data-start="20.0" data-duration="1.5" style="left:120px;top:431px;width:1040px;font-size:40px;text-align:left" data-layout-allow-overflow>Revisão espaçada</div>
+<div id="ph31" class="ph" style="z-index:2;visibility:hidden;opacity:0"><div class="island"></div><div id="ph31c" class="cam"><video id="ph31v" class="clip" src="assets/app/m3/mentor.mp4" data-start="21.5" data-duration="1.5" data-media-start="4.15" muted playsinline data-track-index="2"></video></div></div>
+<div id="t32" class="ttl  clip" data-start="21.5" data-duration="1.5" style="left:120px;top:300px;width:1040px;font-size:105px;text-align:left" data-layout-allow-overflow><div class="ln"><span class="w">Mentor</span> <span class="w">IA</span></div></div>
+<div id="s33" class="subt clip" data-start="21.5" data-duration="1.5" style="left:120px;top:431px;width:1040px;font-size:40px;text-align:left" data-layout-allow-overflow>Tira suas dúvidas</div>
+<div id="bg34" class="bgc navy clip" data-start="23.0" data-duration="8.0"></div>
+<div id="ph35" class="ph" style="z-index:2;visibility:hidden;opacity:0"><div class="island"></div><div id="ph35c" class="cam"><video id="ph35v" class="clip" src="assets/app/m3/signup.mp4" data-start="23.0" data-duration="8.0" data-media-start="7.16" muted playsinline data-track-index="2"></video></div></div>
+<div id="t36" class="ttl  clip" data-start="23.0" data-duration="8.0" style="left:120px;top:300px;width:1040px;font-size:79px;text-align:left" data-layout-allow-overflow><div class="ln"><span class="w">Em</span> <span class="w">3</span> <span class="w">passos:</span></div></div>
+<div id="st37" class="step clip" data-start="23.60" data-duration="7.40" style="left:120px;top:419px"><div class="n">1</div><div class="tx">Crie a conta grátis</div></div>
+<div id="st38" class="step clip" data-start="25.80" data-duration="5.20" style="left:120px;top:529px"><div class="n">2</div><div class="tx">Escolha a prova e a matéria</div></div>
+<div id="st39" class="step clip" data-start="28.00" data-duration="3.00" style="left:120px;top:639px"><div class="n">3</div><div class="tx">Responda e receba a correção</div></div>
+<div id="bg40" class="bgc navy clip" data-start="31.0" data-duration="5.0"></div>
+<div id="t41" class="ttl  clip" data-start="31.0" data-duration="5.0" style="left:120px;top:300px;width:1040px;font-size:75px;text-align:left" data-layout-allow-overflow><div class="ln"><span class="w">As</span> <span class="w">provas</span> <span class="w">que</span> <span class="w">decidem</span> <span class="w">sua</span> <span class="w">vaga.</span></div></div>
+<div id="bd42" class="badge clip" data-start="31.30" data-duration="4.70" style="left:120px;top:500px;width:300px;height:120px;font-size:45px">ENEM</div>
+<div id="bd43" class="badge clip" data-start="31.80" data-duration="4.20" style="left:450px;top:500px;width:300px;height:120px;font-size:45px">FUVEST</div>
+<div id="bd44" class="badge clip" data-start="32.30" data-duration="3.70" style="left:780px;top:500px;width:300px;height:120px;font-size:45px">UNICAMP</div>
+<div id="bd45" class="badge clip" data-start="32.80" data-duration="3.20" style="left:1110px;top:500px;width:300px;height:120px;font-size:45px">PAES</div>
+<div id="bd46" class="badge clip" data-start="33.30" data-duration="2.70" style="left:1440px;top:500px;width:300px;height:120px;font-size:45px">SAT</div>
+<div id="bg47" class="bgc navy clip" data-start="36.0" data-duration="3.0"></div>
+<div id="ph48" class="ph" style="z-index:2;visibility:hidden;opacity:0"><div class="island"></div><div id="ph48c" class="cam"><video id="ph48v" class="clip" src="assets/app/m3/signup.mp4" data-start="36.0" data-duration="3.0" data-media-start="7.36" muted playsinline data-track-index="2"></video></div></div>
+<div id="t49" class="ttl  clip" data-start="36.0" data-duration="1.0" style="left:120px;top:300px;width:1040px;font-size:79px;text-align:left" data-layout-allow-overflow><div class="ln"><span class="w">Grátis</span> <span class="w">para</span> <span class="w">sempre.</span></div></div>
+<div id="t50" class="ttl  clip" data-start="37.0" data-duration="1.0" style="left:120px;top:300px;width:1040px;font-size:79px;text-align:left" data-layout-allow-overflow><div class="ln"><span class="w">3</span> <span class="w">dias</span> <span class="w">de</span> <span class="w">Pro</span> <span class="w">ao</span> <span class="w">criar</span> <span class="w">sua</span> <span class="w">conta.</span></div></div>
+<div id="t51" class="ttl  clip" data-start="38.0" data-duration="1.0" style="left:120px;top:300px;width:1040px;font-size:79px;text-align:left" data-layout-allow-overflow><div class="ln"><span class="w">Sem</span> <span class="w">cartão.</span></div></div>
+<div id="bg52" class="bgc blue clip" data-start="39.0" data-duration="6.0"></div>
+<div id="lg53" class="clip" data-start="39.00" data-duration="6.0" style="position:absolute;inset:0;z-index:6"><div class="logo onblue" style="left:0px;width:1920px;top:180px;font-size:126px"><svg  viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" class="shrink-0"><rect width="48" height="48" rx="12" fill="#ffffff"></rect><path d="M9 21 L24 13 L39 21 L24 27 Z" fill="#2563EB"></path><path d="M15 24 L15 30.5 Q24 37 33 30.5 L33 24 Z" fill="#2563EB"></path><circle cx="24" cy="20" r="1.7" fill="#ffffff"></circle><path d="M24 20 L38.5 20 L38.5 31" fill="none" stroke="#2563EB" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"></path><circle cx="38.5" cy="33" r="2" fill="#2563EB"></circle></svg><span><span class="i">i</span>Vest <span class=st>Study</span></span></div></div>
+<div id="auto1" class="url clip" data-start="39.00" data-duration="6.0" style="top:376px;font-size:92px">iveststudy.com</div>
+<div id="auto2" class="btn clip" data-start="39.40" data-duration="5.60" style="top:528px;font-size:50px;background:#fff;color:#1d4ed8;box-shadow:0 20px 60px rgba(0,0,0,.25)">Criar conta grátis →</div>
+<div id="auto3" class="subt clip" data-start="39.60" data-duration="5.40" style="left:0;width:1920px;top:668px;text-align:center;font-size:40px;color:#e0ecff">Grátis para sempre · 3 dias de Pro · Sem cartão</div>
+<div id="auto4" class="wm clip" data-start="6.5" data-duration="29.5" style="top:40px">iveststudy.com</div>
+<div id="auto5" class="cap clip" data-start="0.3" data-duration="0.65" style="top:940px;max-width:920px">Você estuda,</div>
+<div id="auto6" class="cap clip" data-start="0.99" data-duration="0.95" style="top:940px;max-width:920px">faz simulado...</div>
+<div id="auto7" class="cap clip" data-start="2.01" data-duration="0.82" style="top:940px;max-width:920px">e continua sem saber</div>
+<div id="auto8" class="cap clip" data-start="2.87" data-duration="1.45" style="top:940px;max-width:920px">onde erra.</div>
+<div id="auto9" class="cap clip" data-start="6.6" data-duration="0.77" style="top:940px;max-width:920px">No iVest Study,</div>
+<div id="auto10" class="cap clip" data-start="7.41" data-duration="1.11" style="top:940px;max-width:920px">cada resposta é corrigida</div>
+<div id="auto11" class="cap clip" data-start="8.56" data-duration="1.04" style="top:940px;max-width:920px">na hora por IA.</div>
+<div id="auto12" class="cap clip" data-start="13.1" data-duration="0.84" style="top:940px;max-width:920px">Você vê a nota,</div>
+<div id="auto13" class="cap clip" data-start="13.98" data-duration="0.76" style="top:940px;max-width:920px">o que faltou e</div>
+<div id="auto14" class="cap clip" data-start="14.78" data-duration="1.13" style="top:940px;max-width:920px">o que revisar.</div>
+<div id="auto15" class="cap clip" data-start="17.0" data-duration="1.07" style="top:940px;max-width:920px">Redação com nota por</div>
+<div id="auto16" class="cap clip" data-start="18.11" data-duration="0.77" style="top:940px;max-width:920px">competência,</div>
+<div id="auto17" class="cap clip" data-start="18.92" data-duration="1.3" style="top:940px;max-width:920px">simulados de cada banca</div>
+<div id="auto18" class="cap clip" data-start="20.26" data-duration="0.75" style="top:940px;max-width:920px">e um mentor que</div>
+<div id="auto19" class="cap clip" data-start="21.05" data-duration="1.32" style="top:940px;max-width:920px">tira suas dúvidas.</div>
+<div id="auto20" class="cap clip" data-start="23.2" data-duration="1.2" style="top:940px;max-width:920px">São três passos: cria</div>
+<div id="auto21" class="cap clip" data-start="24.44" data-duration="0.5" style="top:940px;max-width:920px">a conta,</div>
+<div id="auto22" class="cap clip" data-start="24.98" data-duration="0.8" style="top:940px;max-width:920px">escolhe a prova e</div>
+<div id="auto23" class="cap clip" data-start="25.82" data-duration="0.46" style="top:940px;max-width:920px">a matéria,</div>
+<div id="auto24" class="cap clip" data-start="26.32" data-duration="1.27" style="top:940px;max-width:920px">e começa a responder.</div>
+<div id="auto25" class="cap clip" data-start="31.1" data-duration="0.52" style="top:940px;max-width:920px">ENEM,</div>
+<div id="auto26" class="cap clip" data-start="31.66" data-duration="0.56" style="top:940px;max-width:920px">Fuvest,</div>
+<div id="auto27" class="cap clip" data-start="32.26" data-duration="0.74" style="top:940px;max-width:920px">Unicamp,</div>
+<div id="auto28" class="cap clip" data-start="33.04" data-duration="1.17" style="top:940px;max-width:920px">PAES e SAT.</div>
+<div id="auto29" class="cap clip" data-start="34.25" data-duration="0.87" style="top:940px;max-width:920px">Tudo em um lugar.</div>
+<div id="auto30" class="cap clip" data-start="36.0" data-duration="0.95" style="top:940px;max-width:920px">Grátis para sempre,</div>
+<div id="auto31" class="cap clip" data-start="36.99" data-duration="0.71" style="top:940px;max-width:920px">com três dias de</div>
+<div id="auto32" class="cap clip" data-start="37.74" data-duration="0.74" style="top:940px;max-width:920px">Pro ao criar sua</div>
+<div id="auto33" class="cap clip" data-start="38.52" data-duration="0.57" style="top:940px;max-width:920px">conta.</div>
+<div id="auto34" class="cap clip" data-start="39.16" data-duration="0.95" style="top:940px;max-width:920px">Sem cartão.</div>
+<div id="auto35" class="cap clip" data-start="40.3" data-duration="1.21" style="top:940px;max-width:920px">Crie sua conta grátis</div>
+<div id="auto36" class="cap clip" data-start="41.55" data-duration="0.4" style="top:940px;max-width:920px">em</div>
+<div id="auto37" class="cap clip" data-start="41.84" data-duration="1.97" style="top:940px;max-width:920px">iveststudy.com</div>
+<audio id="auto38" class="clip" src="assets/audio/vo30/pt1.wav" data-start="0.30" data-duration="3.90" data-volume="1.0" data-track-index="7"></audio>
+<audio id="auto39" class="clip" src="assets/audio/vo30/pt2.wav" data-start="6.60" data-duration="2.88" data-volume="1.0" data-track-index="7"></audio>
+<audio id="auto40" class="clip" src="assets/audio/vo30/pt3.wav" data-start="13.10" data-duration="2.69" data-volume="1.0" data-track-index="7"></audio>
+<audio id="auto41" class="clip" src="assets/audio/vo30/pt4.wav" data-start="17.00" data-duration="5.25" data-volume="1.0" data-track-index="7"></audio>
+<audio id="auto42" class="clip" src="assets/audio/vo30/pt7.wav" data-start="23.20" data-duration="4.27" data-volume="1.0" data-track-index="7"></audio>
+<audio id="auto43" class="clip" src="assets/audio/vo30/pt8.wav" data-start="31.10" data-duration="3.90" data-volume="1.0" data-track-index="7"></audio>
+<audio id="auto44" class="clip" src="assets/audio/vo30/pt5.wav" data-start="36.00" data-duration="3.99" data-volume="1.0" data-track-index="7"></audio>
+<audio id="auto45" class="clip" src="assets/audio/vo30/pt6.wav" data-start="40.30" data-duration="3.39" data-volume="1.0" data-track-index="7"></audio>
+<audio id="auto46" class="clip" src="assets/audio/music30.mp3" data-start="0.00" data-duration="23.44" data-media-start="0.06" data-volume="0.42" data-fade-in="0.0" data-fade-out="0.35" data-track-index="3" data-automation='{"version": 1, "lanes": [{"target": "volume", "points": [{"t": 0, "v": 1}, {"t": 12.48, "v": 1}, {"t": 12.5, "v": 0}, {"t": 12.98, "v": 0}, {"t": 13.0, "v": 1}, {"t": 23.44, "v": 1}]}]}'></audio>
+<audio id="auto47" class="clip" src="assets/audio/music30.mp3" data-start="23.44" data-duration="6.00" data-media-start="16.00" data-volume="0.42" data-fade-in="0.3" data-fade-out="0.0" data-track-index="3"></audio>
+<audio id="auto48" class="clip" src="assets/audio/music30.mp3" data-start="29.44" data-duration="6.00" data-media-start="16.00" data-volume="0.42" data-fade-in="0.3" data-fade-out="0.0" data-track-index="3"></audio>
+<audio id="auto49" class="clip" src="assets/audio/music30.mp3" data-start="35.44" data-duration="6.00" data-media-start="16.00" data-volume="0.42" data-fade-in="0.3" data-fade-out="0.0" data-track-index="3"></audio>
+<audio id="auto50" class="clip" src="assets/audio/music30.mp3" data-start="41.44" data-duration="3.56" data-media-start="16.00" data-volume="0.42" data-fade-in="0.3" data-fade-out="0.6" data-track-index="3"></audio>
+<audio id="auto51" class="clip" src="assets/sfx/whoosh-short.mp3" data-start="0.05" data-duration="0.57" data-volume="0.35" data-track-index="8"></audio>
+<audio id="auto52" class="clip" src="assets/sfx/ding-correct.mp3" data-start="1.0" data-duration="0.84" data-volume="0.6" data-track-index="8"></audio>
+<audio id="auto53" class="clip" src="assets/sfx/error-blip.mp3" data-start="1.15" data-duration="0.63" data-volume="0.55" data-track-index="9"></audio>
+<audio id="auto54" class="clip" src="assets/sfx/whoosh-short.mp3" data-start="2.0" data-duration="0.57" data-volume="0.4" data-track-index="8"></audio>
+<audio id="auto55" class="clip" src="assets/sfx/whoosh-short.mp3" data-start="3.5" data-duration="0.57" data-volume="0.4" data-track-index="8"></audio>
+<audio id="auto56" class="clip" src="assets/sfx/whoosh-short.mp3" data-start="5.0" data-duration="0.57" data-volume="0.4" data-track-index="8"></audio>
+<audio id="auto57" class="clip" src="assets/sfx/typing.mp3" data-start="8.0" data-duration="1.54" data-volume="0.45" data-track-index="8"></audio>
+<audio id="auto58" class="clip" src="assets/sfx/typing.mp3" data-start="9.5" data-duration="1.54" data-volume="0.45" data-track-index="9"></audio>
+<audio id="auto59" class="clip" src="assets/sfx/typing.mp3" data-start="11.0" data-duration="1.54" data-volume="0.45" data-track-index="8"></audio>
+<audio id="auto60" class="clip" src="assets/sfx/send-tap.mp3" data-start="12.25" data-duration="0.63" data-volume="0.7" data-track-index="9"></audio>
+<audio id="auto61" class="clip" src="assets/sfx/ding-correct.mp3" data-start="13.0" data-duration="0.84" data-volume="0.8" data-track-index="8"></audio>
+<audio id="auto62" class="clip" src="assets/sfx/impact-bass-2.mp3" data-start="13.0" data-duration="2.59" data-volume="0.55" data-track-index="9"></audio>
+<audio id="auto63" class="clip" src="assets/sfx/sparkle.mp3" data-start="13.1" data-duration="1.80" data-volume="0.4" data-track-index="10"></audio>
+<audio id="auto64" class="clip" src="assets/sfx/ding-correct.mp3" data-start="15.4" data-duration="0.84" data-volume="0.5" data-track-index="8"></audio>
+<audio id="auto65" class="clip" src="assets/sfx/error-blip.mp3" data-start="15.85" data-duration="0.63" data-volume="0.5" data-track-index="9"></audio>
+<audio id="auto66" class="clip" src="assets/sfx/error-blip.mp3" data-start="16.3" data-duration="0.63" data-volume="0.5" data-track-index="8"></audio>
+<audio id="auto67" class="clip" src="assets/sfx/error-blip.mp3" data-start="16.75" data-duration="0.63" data-volume="0.5" data-track-index="9"></audio>
+<audio id="auto68" class="clip" src="assets/sfx/whoosh-short.mp3" data-start="17.0" data-duration="0.57" data-volume="0.4" data-track-index="8"></audio>
+<audio id="auto69" class="clip" src="assets/sfx/whoosh-short.mp3" data-start="18.5" data-duration="0.57" data-volume="0.4" data-track-index="8"></audio>
+<audio id="auto70" class="clip" src="assets/sfx/whoosh-short.mp3" data-start="20.0" data-duration="0.57" data-volume="0.4" data-track-index="8"></audio>
+<audio id="auto71" class="clip" src="assets/sfx/whoosh-short.mp3" data-start="21.5" data-duration="0.57" data-volume="0.4" data-track-index="8"></audio>
+<audio id="auto72" class="clip" src="assets/sfx/ping.mp3" data-start="23.6" data-duration="1.32" data-volume="0.45" data-track-index="8"></audio>
+<audio id="auto73" class="clip" src="assets/sfx/ping.mp3" data-start="25.8" data-duration="1.32" data-volume="0.45" data-track-index="8"></audio>
+<audio id="auto74" class="clip" src="assets/sfx/ping.mp3" data-start="28.0" data-duration="1.32" data-volume="0.45" data-track-index="8"></audio>
+<audio id="auto75" class="clip" src="assets/sfx/pop.mp3" data-start="31.3" data-duration="0.72" data-volume="0.45" data-track-index="8"></audio>
+<audio id="auto76" class="clip" src="assets/sfx/pop.mp3" data-start="31.8" data-duration="0.72" data-volume="0.45" data-track-index="9"></audio>
+<audio id="auto77" class="clip" src="assets/sfx/pop.mp3" data-start="32.3" data-duration="0.72" data-volume="0.45" data-track-index="8"></audio>
+<audio id="auto78" class="clip" src="assets/sfx/pop.mp3" data-start="32.8" data-duration="0.72" data-volume="0.45" data-track-index="9"></audio>
+<audio id="auto79" class="clip" src="assets/sfx/pop.mp3" data-start="33.3" data-duration="0.72" data-volume="0.45" data-track-index="8"></audio>
+<audio id="auto80" class="clip" src="assets/sfx/pop.mp3" data-start="36.0" data-duration="0.72" data-volume="0.5" data-track-index="8"></audio>
+<audio id="auto81" class="clip" src="assets/sfx/pop.mp3" data-start="37.0" data-duration="0.72" data-volume="0.5" data-track-index="8"></audio>
+<audio id="auto82" class="clip" src="assets/sfx/pop.mp3" data-start="38.0" data-duration="0.72" data-volume="0.5" data-track-index="8"></audio>
+<audio id="auto83" class="clip" src="assets/sfx/whoosh-cinematic.mp3" data-start="38.7" data-duration="4.00" data-volume="0.35" data-track-index="9"></audio>
+<audio id="auto84" class="clip" src="assets/sfx/impact-bass-1.mp3" data-start="39.0" data-duration="2.12" data-volume="0.7" data-track-index="8"></audio>
+<audio id="auto85" class="clip" src="assets/sfx/sonic-logo.mp3" data-start="43.4" data-duration="1.52" data-volume="0.8" data-track-index="8"></audio>
+</div>
+<script>
+  window.__timelines = window.__timelines || {};
+  const tl = gsap.timeline({ paused: true });
+  tl.set("#ph2c", { scale: 0.40310, x: -106.4, y: -9.9 }, 0.000);
+tl.to("#ph2c", { ...{ scale: 0.42171, x: -120.5, y: -51.5 }, duration: 2.0, ease: "none" }, 0.000);
+tl.set("#ph2", { autoAlpha: 1 }, 0.000); tl.fromTo("#ph2", { scale: 0.97 }, { scale: 1, duration: 0.3, ease: "power3.out", immediateRender: false }, 0.000); tl.set("#ph2", { autoAlpha: 0 }, 1.999);
+{ const el=document.querySelector("#cnt .v"); const st={v:0}; tl.fromTo(st,{v:0},{v:480,duration:0.85,ease:"power2.out",onUpdate:()=>{el.textContent=String(Math.round(st.v));}},0.150); }
+tl.fromTo("#ring1",{opacity:0,scale:1.25},{opacity:1,scale:1,duration:0.18,ease:"power3.out",transformOrigin:"50% 50%",immediateRender:false},1.100); tl.to("#ring1",{opacity:0.35,duration:0.18,yoyo:true,repeat:3},1.300);
+document.querySelectorAll("#t3 .w").forEach((w,i)=>tl.fromTo(w,{opacity:0,y:28,filter:"blur(8px)"},{opacity:1,y:0,filter:"blur(0px)",duration:0.32,ease:"power3.out"},0.000+i*0.045));
+tl.to("#t3", { opacity: 0, y: -16, filter: "blur(6px)", duration: 0.22, ease: "power2.in" }, 1.760);
+tl.fromTo("#im4 img",{scale:1.05,x:0,y:0},{scale:1.12,x:0,y:0,duration:1.5,ease:"none"},2.000);
+document.querySelectorAll("#t5 .w").forEach((w,i)=>tl.fromTo(w,{opacity:0,y:28,filter:"blur(8px)"},{opacity:1,y:0,filter:"blur(0px)",duration:0.32,ease:"power3.out"},2.000+i*0.045));
+tl.to("#t5", { opacity: 0, y: -16, filter: "blur(6px)", duration: 0.22, ease: "power2.in" }, 3.260);
+tl.fromTo("#im6 img",{scale:1.12,x:0,y:0},{scale:1.04,x:0,y:0,duration:1.5,ease:"none"},3.500);
+document.querySelectorAll("#t7 .w").forEach((w,i)=>tl.fromTo(w,{opacity:0,y:28,filter:"blur(8px)"},{opacity:1,y:0,filter:"blur(0px)",duration:0.32,ease:"power3.out"},3.500+i*0.045));
+tl.to("#t7", { opacity: 0, y: -16, filter: "blur(6px)", duration: 0.22, ease: "power2.in" }, 4.760);
+document.querySelectorAll("#t9 .w").forEach((w,i)=>tl.fromTo(w,{opacity:0,y:28,filter:"blur(8px)"},{opacity:1,y:0,filter:"blur(0px)",duration:0.32,ease:"power3.out"},5.000+i*0.045));
+tl.to("#t9", { opacity: 0, y: -16, filter: "blur(6px)", duration: 0.22, ease: "power2.in" }, 6.260);
+tl.set("#ph11c", { scale: 0.41860, x: -70.0, y: 0.0 }, 6.500);
+tl.to("#ph11c", { ...{ scale: 0.44031, x: -84.0, y: 0.0 }, duration: 1.5, ease: "none" }, 6.500);
+tl.set("#ph11", { autoAlpha: 1 }, 6.500); tl.fromTo("#ph11", { scale: 0.97 }, { scale: 1, duration: 0.3, ease: "power3.out", immediateRender: false }, 6.500); tl.set("#ph11", { autoAlpha: 0 }, 7.999);
+document.querySelectorAll("#t12 .w").forEach((w,i)=>tl.fromTo(w,{opacity:0,y:28,filter:"blur(8px)"},{opacity:1,y:0,filter:"blur(0px)",duration:0.32,ease:"power3.out"},6.500+i*0.045));
+tl.to("#t12", { opacity: 0, y: -16, filter: "blur(6px)", duration: 0.22, ease: "power2.in" }, 7.760);
+tl.set("#ph13c", { scale: 0.39690, x: -56.0, y: -161.8 }, 8.000);
+tl.to("#ph13c", { ...{ scale: 0.41550, x: -68.0, y: -214.7 }, duration: 4.0, ease: "none" }, 8.000);
+tl.set("#ph13", { autoAlpha: 1 }, 8.000); tl.fromTo("#ph13", { scale: 0.97 }, { scale: 1, duration: 0.3, ease: "power3.out", immediateRender: false }, 8.000); tl.set("#ph13", { autoAlpha: 0 }, 11.999);
+document.querySelectorAll("#t14 .w").forEach((w,i)=>tl.fromTo(w,{opacity:0,y:28,filter:"blur(8px)"},{opacity:1,y:0,filter:"blur(0px)",duration:0.32,ease:"power3.out"},8.000+i*0.045));
+tl.to("#t14", { opacity: 0, y: -16, filter: "blur(6px)", duration: 0.22, ease: "power2.in" }, 11.760);
+tl.set("#ph15c", { scale: 0.44961, x: -90.0, y: -390.1 }, 12.000);
+tl.set("#ph15", { autoAlpha: 1 }, 12.000); tl.fromTo("#ph15", { scale: 0.97 }, { scale: 1, duration: 0.3, ease: "power3.out", immediateRender: false }, 12.000); tl.set("#ph15", { autoAlpha: 0 }, 12.999);
+tl.set("#ph16c", { scale: 0.58915, x: -318.4, y: -244.0 }, 13.000);
+tl.to("#ph16c", { ...{ scale: 0.62016, x: -358.1, y: -292.1 }, duration: 1.5, ease: "none" }, 13.000);
+tl.set("#ph16", { autoAlpha: 1 }, 13.000); tl.fromTo("#ph16", { scale: 0.97 }, { scale: 1, duration: 0.3, ease: "power3.out", immediateRender: false }, 13.000); tl.set("#ph16", { autoAlpha: 0 }, 14.499);
+document.querySelectorAll("#t17 .w").forEach((w,i)=>tl.fromTo(w,{opacity:0,y:28,filter:"blur(8px)"},{opacity:1,y:0,filter:"blur(0px)",duration:0.32,ease:"power3.out"},13.000+i*0.045));
+tl.to("#t17", { opacity: 0, y: -16, filter: "blur(6px)", duration: 0.22, ease: "power2.in" }, 14.260);
+tl.set("#ph18c", { scale: 0.40310, x: -60.0, y: -260.1 }, 14.500);
+tl.to("#ph18c", { ...{ scale: 0.41550, x: -68.0, y: -294.7 }, duration: 2.5, ease: "none" }, 14.500);
+tl.set("#ph18", { autoAlpha: 1 }, 14.500); tl.fromTo("#ph18", { scale: 0.97 }, { scale: 1, duration: 0.3, ease: "power3.out", immediateRender: false }, 14.500); tl.set("#ph18", { autoAlpha: 0 }, 16.999);
+document.querySelectorAll("#t19 .w").forEach((w,i)=>tl.fromTo(w,{opacity:0,y:28,filter:"blur(8px)"},{opacity:1,y:0,filter:"blur(0px)",duration:0.32,ease:"power3.out"},14.500+i*0.045));
+tl.to("#t19", { opacity: 0, y: -16, filter: "blur(6px)", duration: 0.22, ease: "power2.in" }, 16.760);
+tl.fromTo("#q20",{opacity:0,y:30,scale:0.96},{opacity:1,y:0,scale:1,duration:0.4,ease:"power3.out",transformOrigin:"50% 50%"},14.750);
+tl.set("#q20 b", { color: "#e6ebf5", textDecorationColor: "transparent" }, 14.750); const bs=document.querySelectorAll("#q20 b"); bs.forEach((b,i)=>{ tl.to(b, { color: b.classList.contains("g") ? "#4ade80" : "#f87171", duration: 0.25, ease: "power2.out" }, 15.400+i*0.45); });
+tl.set("#ph22c", { scale: 0.36589, x: -36.0, y: -115.3 }, 17.000);
+tl.to("#ph22c", { ...{ scale: 0.37829, x: -44.0, y: -190.7 }, duration: 1.5, ease: "none" }, 17.000);
+tl.set("#ph22", { autoAlpha: 1 }, 17.000); tl.fromTo("#ph22", { scale: 0.97 }, { scale: 1, duration: 0.3, ease: "power3.out", immediateRender: false }, 17.000); tl.set("#ph22", { autoAlpha: 0 }, 18.499);
+document.querySelectorAll("#t23 .w").forEach((w,i)=>tl.fromTo(w,{opacity:0,y:28,filter:"blur(8px)"},{opacity:1,y:0,filter:"blur(0px)",duration:0.32,ease:"power3.out"},17.000+i*0.045));
+tl.to("#t23", { opacity: 0, y: -16, filter: "blur(6px)", duration: 0.22, ease: "power2.in" }, 18.260);
+tl.fromTo("#s24",{opacity:0,y:14},{opacity:1,y:0,duration:0.3,ease:"power3.out"},17.100); tl.to("#s24",{opacity:0,duration:0.2},18.280);
+tl.set("#ph25c", { scale: 0.35659, x: -30.0, y: 0.0 }, 18.500);
+tl.to("#ph25c", { ...{ scale: 0.37209, x: -40.0, y: 0.0 }, duration: 1.5, ease: "none" }, 18.500);
+tl.set("#ph25", { autoAlpha: 1 }, 18.500); tl.fromTo("#ph25", { scale: 0.97 }, { scale: 1, duration: 0.3, ease: "power3.out", immediateRender: false }, 18.500); tl.set("#ph25", { autoAlpha: 0 }, 19.999);
+document.querySelectorAll("#t26 .w").forEach((w,i)=>tl.fromTo(w,{opacity:0,y:28,filter:"blur(8px)"},{opacity:1,y:0,filter:"blur(0px)",duration:0.32,ease:"power3.out"},18.500+i*0.045));
+tl.to("#t26", { opacity: 0, y: -16, filter: "blur(6px)", duration: 0.22, ease: "power2.in" }, 19.760);
+tl.fromTo("#s27",{opacity:0,y:14},{opacity:1,y:0,duration:0.3,ease:"power3.out"},18.600); tl.to("#s27",{opacity:0,duration:0.2},19.780);
+tl.set("#ph28c", { scale: 0.36589, x: -36.0, y: -23.9 }, 20.000);
+tl.to("#ph28c", { ...{ scale: 0.37829, x: -44.0, y: -58.3 }, duration: 1.5, ease: "none" }, 20.000);
+tl.set("#ph28", { autoAlpha: 1 }, 20.000); tl.fromTo("#ph28", { scale: 0.97 }, { scale: 1, duration: 0.3, ease: "power3.out", immediateRender: false }, 20.000); tl.set("#ph28", { autoAlpha: 0 }, 21.499);
+document.querySelectorAll("#t29 .w").forEach((w,i)=>tl.fromTo(w,{opacity:0,y:28,filter:"blur(8px)"},{opacity:1,y:0,filter:"blur(0px)",duration:0.32,ease:"power3.out"},20.000+i*0.045));
+tl.to("#t29", { opacity: 0, y: -16, filter: "blur(6px)", duration: 0.22, ease: "power2.in" }, 21.260);
+tl.fromTo("#s30",{opacity:0,y:14},{opacity:1,y:0,duration:0.3,ease:"power3.out"},20.100); tl.to("#s30",{opacity:0,duration:0.2},21.280);
+tl.set("#ph31c", { scale: 0.36589, x: -36.0, y: 0.0 }, 21.500);
+tl.to("#ph31c", { ...{ scale: 0.37829, x: -44.0, y: -1.5 }, duration: 1.5, ease: "none" }, 21.500);
+tl.set("#ph31", { autoAlpha: 1 }, 21.500); tl.fromTo("#ph31", { scale: 0.97 }, { scale: 1, duration: 0.3, ease: "power3.out", immediateRender: false }, 21.500); tl.set("#ph31", { autoAlpha: 0 }, 22.999);
+document.querySelectorAll("#t32 .w").forEach((w,i)=>tl.fromTo(w,{opacity:0,y:28,filter:"blur(8px)"},{opacity:1,y:0,filter:"blur(0px)",duration:0.32,ease:"power3.out"},21.500+i*0.045));
+tl.to("#t32", { opacity: 0, y: -16, filter: "blur(6px)", duration: 0.22, ease: "power2.in" }, 22.760);
+tl.fromTo("#s33",{opacity:0,y:14},{opacity:1,y:0,duration:0.3,ease:"power3.out"},21.600); tl.to("#s33",{opacity:0,duration:0.2},22.780);
+tl.set("#ph35c", { scale: 0.35659, x: -30.0, y: 0.0 }, 23.000);
+tl.to("#ph35c", { ...{ scale: 0.37209, x: -40.0, y: 0.0 }, duration: 8.0, ease: "none" }, 23.000);
+tl.set("#ph35", { autoAlpha: 1 }, 23.000); tl.fromTo("#ph35", { scale: 0.97 }, { scale: 1, duration: 0.3, ease: "power3.out", immediateRender: false }, 23.000); tl.set("#ph35", { autoAlpha: 0 }, 30.999);
+document.querySelectorAll("#t36 .w").forEach((w,i)=>tl.fromTo(w,{opacity:0,y:28,filter:"blur(8px)"},{opacity:1,y:0,filter:"blur(0px)",duration:0.32,ease:"power3.out"},23.000+i*0.045));
+tl.to("#t36", { opacity: 0, y: -16, filter: "blur(6px)", duration: 0.22, ease: "power2.in" }, 30.760);
+tl.fromTo("#st37",{opacity:0,x:-30},{opacity:1,x:0,duration:0.4,ease:"power3.out"},23.600);
+tl.fromTo("#st38",{opacity:0,x:-30},{opacity:1,x:0,duration:0.4,ease:"power3.out"},25.800);
+tl.fromTo("#st39",{opacity:0,x:-30},{opacity:1,x:0,duration:0.4,ease:"power3.out"},28.000);
+document.querySelectorAll("#t41 .w").forEach((w,i)=>tl.fromTo(w,{opacity:0,y:28,filter:"blur(8px)"},{opacity:1,y:0,filter:"blur(0px)",duration:0.32,ease:"power3.out"},31.000+i*0.045));
+tl.to("#t41", { opacity: 0, y: -16, filter: "blur(6px)", duration: 0.22, ease: "power2.in" }, 35.760);
+tl.fromTo("#bd42",{opacity:0,scale:0.8},{opacity:1,scale:1,duration:0.35,ease:"back.out(1.8)"},31.300);
+tl.fromTo("#bd43",{opacity:0,scale:0.8},{opacity:1,scale:1,duration:0.35,ease:"back.out(1.8)"},31.800);
+tl.fromTo("#bd44",{opacity:0,scale:0.8},{opacity:1,scale:1,duration:0.35,ease:"back.out(1.8)"},32.300);
+tl.fromTo("#bd45",{opacity:0,scale:0.8},{opacity:1,scale:1,duration:0.35,ease:"back.out(1.8)"},32.800);
+tl.fromTo("#bd46",{opacity:0,scale:0.8},{opacity:1,scale:1,duration:0.35,ease:"back.out(1.8)"},33.300);
+tl.set("#ph48c", { scale: 0.37209, x: -40.0, y: 0.0 }, 36.000);
+tl.to("#ph48c", { ...{ scale: 0.39070, x: -52.0, y: 0.0 }, duration: 3.0, ease: "none" }, 36.000);
+tl.set("#ph48", { autoAlpha: 1 }, 36.000); tl.fromTo("#ph48", { scale: 0.97 }, { scale: 1, duration: 0.3, ease: "power3.out", immediateRender: false }, 36.000); tl.set("#ph48", { autoAlpha: 0 }, 38.999);
+document.querySelectorAll("#t49 .w").forEach((w,i)=>tl.fromTo(w,{opacity:0,y:28,filter:"blur(8px)"},{opacity:1,y:0,filter:"blur(0px)",duration:0.32,ease:"power3.out"},36.000+i*0.045));
+tl.to("#t49", { opacity: 0, y: -16, filter: "blur(6px)", duration: 0.22, ease: "power2.in" }, 36.760);
+document.querySelectorAll("#t50 .w").forEach((w,i)=>tl.fromTo(w,{opacity:0,y:28,filter:"blur(8px)"},{opacity:1,y:0,filter:"blur(0px)",duration:0.32,ease:"power3.out"},37.000+i*0.045));
+tl.to("#t50", { opacity: 0, y: -16, filter: "blur(6px)", duration: 0.22, ease: "power2.in" }, 37.760);
+document.querySelectorAll("#t51 .w").forEach((w,i)=>tl.fromTo(w,{opacity:0,y:28,filter:"blur(8px)"},{opacity:1,y:0,filter:"blur(0px)",duration:0.32,ease:"power3.out"},38.000+i*0.045));
+tl.to("#t51", { opacity: 0, y: -16, filter: "blur(6px)", duration: 0.22, ease: "power2.in" }, 38.760);
+tl.fromTo("#lg53 .logo",{scale:2.2,opacity:0,filter:"blur(14px)"},{scale:1,opacity:1,filter:"blur(0px)",duration:0.3,ease:"power4.out",transformOrigin:"50% 50%",immediateRender:false},39.020);
+tl.fromTo(".url",{opacity:0,y:20},{opacity:1,y:0,duration:0.35,ease:"power3.out",immediateRender:false},39.150);
+tl.fromTo(".btn",{opacity:0,y:30,scale:0.94},{opacity:1,y:0,scale:1,duration:0.4,ease:"power4.out",immediateRender:false},39.400); tl.to(".btn",{scale:0.96,duration:0.08,yoyo:true,repeat:1},40.300);
+  window.__timelines["ad45-1920x1080"] = tl;
+</script>
+</body></html>
