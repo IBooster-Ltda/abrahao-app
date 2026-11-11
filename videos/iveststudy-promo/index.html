@@ -1,229 +1,269 @@
 <!doctype html>
-<html lang="pt-BR">
-<head><meta charset="UTF-8" /><meta name="viewport" content="width=1080, height=1920" /><script src="assets/vendor/gsap.min.js"></script>
-<style>
-      :root { --blue:#2563eb; --blue2:#60a5fa; --ok:#22c55e; --miss:#f87171; }
-      * { margin:0; padding:0; box-sizing:border-box; }
-      html, body { width:1080px; height:1920px; overflow:hidden; background:#070b14; font-family:"Inter",sans-serif; }
-      #root { position:relative; width:1080px; height:1920px; overflow:hidden; background:#070b14; color:#fff; }
-      .bgc { position:absolute; inset:0; }
-      .bgc.navy { background: radial-gradient(120% 80% at 50% 30%, #152a5c 0%, #0b1220 55%, #070b14 100%); }
-      .bgc.blue { background:#2563eb; }
-      .photo { position:absolute; inset:0; overflow:hidden; } .photo img { position:absolute; left:0; top:0; width:100%; height:100%; object-fit:cover; transform-origin:50% 50%; }
-      .photo .shade { position:absolute; inset:0; background:linear-gradient(180deg, rgba(5,8,16,.75) 0%, rgba(5,8,16,.35) 45%, rgba(5,8,16,.85) 100%); }
-      .ph { position:absolute; left:240px; top:470px; width:600px; height:1300px; border-radius:51px; overflow:hidden; background:#000; border:8px solid #1a2030; box-shadow:0 40px 90px rgba(0,0,0,.6), 0 0 0 2px rgba(255,255,255,.06); transform-origin:50% 50%; }
-      .ph .island { position:absolute; left:50%; top:18px; width:168px; height:42px; margin-left:-84px; border-radius:999px; background:#000; z-index:5; }
-      .ph .cam { position:absolute; left:0; top:0; width:1290px; height:2796px; transform-origin:0 0; }
-      .ph .cam video { position:absolute; left:0; top:0; width:1290px; height:2796px; display:block; }
-      .ttl { position:absolute; font-weight:800; line-height:1.08; letter-spacing:-0.035em; color:#fff; text-shadow:0 2px 24px rgba(0,0,0,.6); z-index:6; }
-      .ttl .ln { display:block; } .ttl .w { display:inline-block; margin-right:.22em; } .ttl .acc { color:var(--blue2); } .ttl.ok .acc { color:var(--ok); } .ttl.miss .acc { color:var(--miss); }
-      .ttl.big { font-size:121px; }
-      .subt { position:absolute; font-weight:600; line-height:1.25; color:#e6ebf5; text-shadow:0 2px 16px rgba(0,0,0,.6); z-index:6; }
-      .chip { position:absolute; display:flex; align-items:center; gap:14px; padding:16px 24px; border-radius:18px; font-size:41px; font-weight:700; color:#fff; background:rgba(8,12,22,.92); border:2px solid; box-shadow:0 14px 40px rgba(0,0,0,.5); z-index:7; max-width:1000px; line-height:1.2; }
-      .chip .ic { width:46px; height:46px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:30px; flex:0 0 46px; color:#06101c; }
-      .chip.ok { border-color:var(--ok); } .chip.ok .ic { background:var(--ok); } .chip.miss { border-color:var(--miss); } .chip.miss .ic { background:var(--miss); }
-      .cap { position:absolute; left:50%; transform:translateX(-50%); padding:12px 26px; border-radius:16px; background:rgba(5,8,16,.74); color:#fff; font-size:46px; font-weight:700; line-height:1.25; text-align:center; z-index:9; white-space:nowrap; }
-      .wm { position:absolute; right:60px; font-size:35px; font-weight:700; color:#fff; opacity:.92; letter-spacing:-0.01em; z-index:8; padding:8px 14px; border-radius:10px; background:rgba(5,8,16,.5); }
-      .ring { position:absolute; border:6px solid var(--miss); border-radius:18px; box-shadow:0 0 30px rgba(248,113,113,.9); }
-      .quote { position:absolute; z-index:7; background:rgba(8,12,22,.94); border:2px solid rgba(255,255,255,.12); border-radius:26px; padding:28px 32px; line-height:1.3; font-weight:600; color:#e6ebf5; box-shadow:0 20px 60px rgba(0,0,0,.55); }
-      .quote .lab { font-size:28px; font-weight:700; letter-spacing:.14em; text-transform:uppercase; color:#9db5ff; margin-bottom:.5em; }
-      .quote b { font-weight:800; }
-      .num { position:absolute; font-weight:800; color:#fff; letter-spacing:-0.04em; line-height:1; }
-      .logo { position:absolute; display:flex; align-items:center; justify-content:center; gap:.26em; font-weight:800; letter-spacing:-0.04em; color:#fff; z-index:6; }
-      .logo .st { font-weight:500; color:#fff; } .logo.onblue .i { color:#fff; } .logo .i { color:var(--blue2); }
-      .logo svg { width:1em; height:1em; border-radius:.24em; }
-      .btn { position:absolute; left:50%; transform:translateX(-50%); background:var(--blue); color:#fff; font-weight:700; border-radius:22px; padding:26px 54px; box-shadow:0 0 50px rgba(37,99,235,.55); z-index:6; white-space:nowrap; }
-      .url { position:absolute; left:0; width:100%; text-align:center; font-weight:800; color:#fff; letter-spacing:-0.03em; z-index:6; }
-      .badge { position:absolute; display:flex; align-items:center; justify-content:center; font-weight:800; color:#fff; background:rgba(255,255,255,.08); border:2px solid rgba(255,255,255,.18); border-radius:22px; z-index:6; }
-      .step { position:absolute; display:flex; align-items:center; gap:22px; z-index:6; } .step .n { width:72px; height:72px; border-radius:50%; background:var(--blue); display:flex; align-items:center; justify-content:center; font-weight:800; font-size:36px; flex:0 0 72px; box-shadow:0 0 30px rgba(37,99,235,.6); }
-      .step .tx { font-weight:700; font-size:50px; line-height:1.15; }
+<html lang="pt-BR"><head><meta charset="UTF-8" /><meta name="viewport" content="width=1080, height=1920" /><script src="assets/vendor/gsap.min.js"></script><style>
+  *{margin:0;padding:0;box-sizing:border-box} html,body{width:1080px;height:1920px;overflow:hidden;background:#030817;font-family:"Inter",sans-serif}
+  #root{position:relative;width:1080px;height:1920px;overflow:hidden;color:#fff;background:radial-gradient(90% 70% at 50% 45%,#0b1f4a 0%,#06112b 45%,#030817 100%)}
+  #haze{position:absolute;left:-160px;top:200px;width:1400px;height:1400px;border-radius:50%;background:radial-gradient(circle,rgba(37,99,235,.35) 0%,rgba(37,99,235,.12) 35%,rgba(3,8,23,0) 65%);filter:blur(40px)}
+  #grain{position:absolute;inset:0;background:radial-gradient(120% 90% at 50% 50%,rgba(0,0,0,0) 55%,rgba(0,0,0,.55) 100%)}
+  svg.trails{position:absolute;left:0;top:0;z-index:20;pointer-events:none;overflow:visible} svg.trails path{fill:none;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:0 1000000}
+  .head{position:absolute;left:-46px;top:-46px;width:92px;height:92px;border-radius:50%;z-index:21;background:radial-gradient(circle,#fff 0%,#dbeafe 18%,rgba(96,165,250,.85) 34%,rgba(37,99,235,0) 70%)}
+  .clip{position:absolute}
+  .logo{position:absolute;display:flex;align-items:center;justify-content:center;gap:.24em;font-weight:800;letter-spacing:-.045em;line-height:1;color:#fff;white-space:nowrap;text-shadow:0 0 40px rgba(96,165,250,.55)}
+  .logo .cap svg{width:1em;height:1em;display:block;border-radius:.24em;box-shadow:0 0 50px rgba(59,130,246,.9)} .logo .i{color:#93c5fd} .logo .st{font-weight:500;color:#dbeafe}
+  .flash{position:absolute;inset:0;background:radial-gradient(60% 50% at 50% 50%,rgba(191,219,254,.75),rgba(59,130,246,.15) 50%,rgba(0,0,0,0) 75%);opacity:0;pointer-events:none}
+  .chip{width:120px;height:120px;border-radius:30px;display:flex;align-items:center;justify-content:center;font-size:56px;font-weight:800;color:#93c5fd;background:rgba(15,23,42,.9);border:3px solid rgba(147,197,253,.35);opacity:0}
+  .phone{position:absolute;left:0;top:0;border-radius:64px;background:#0b111c;border:10px solid #1b2436;box-shadow:0 50px 120px rgba(0,0,0,.6),0 0 60px rgba(59,130,246,.25);overflow:hidden;transform-style:preserve-3d;padding:90px 34px 0}
+  .isl{position:absolute;left:50%;top:22px;width:150px;height:40px;margin-left:-75px;border-radius:999px;background:#000}
+  .pbar{display:flex;align-items:center;gap:14px;font-size:30px;font-weight:700} .pb-ic svg{width:38px;height:38px;color:#60a5fa;display:block} .pb-r{margin-left:auto;font-size:28px;color:#93c5fd;font-weight:600}
+  .prog{height:10px;border-radius:5px;background:#1e293b;margin:22px 0 28px} .prog i{display:block;width:20%;height:100%;border-radius:5px;background:#3b82f6}
+  .q{font-size:30px;line-height:1.28;font-weight:700;color:#f1f5f9}
+  .timer{margin-top:26px;border:2px solid #1f2a3d;border-radius:22px;padding:16px 22px;display:flex;align-items:center;justify-content:space-between} .tl{font-size:28px;letter-spacing:.12em;color:#94a3b8;font-weight:700} .tv{font-size:48px;font-weight:800;font-variant-numeric:tabular-nums}
+  .ans{margin-top:22px;min-height:150px;border:2px solid #1f2a3d;border-radius:22px;padding:18px 22px;font-size:30px;line-height:1.35;color:#e2e8f0} .caret{display:inline-block;width:3px;height:1em;background:#60a5fa;vertical-align:-.12em;margin-left:3px}
+  .pbtn{margin-top:24px;display:inline-block;background:#2563eb;color:#fff;font-weight:700;font-size:30px;padding:18px 28px;border-radius:18px;transform-origin:0 50%}
+  .pres{margin-top:26px;opacity:0} .score{font-weight:800;color:#f59e0b;line-height:1;margin-bottom:16px;display:inline-block} .score b{font-size:96px} .score span{font-size:44px;color:#fbbf24}
+  .fb{display:flex;align-items:center;gap:14px;font-size:30px;font-weight:700;padding:12px 16px;border-radius:16px;margin-top:10px;background:rgba(15,23,42,.9);opacity:0} .fb i{font-style:normal;width:42px;height:42px;border-radius:50%;display:flex;align-items:center;justify-content:center;color:#04121f;font-size:26px;flex:0 0 42px}
+  .fb.ok{border:2px solid #22c55e} .fb.ok i{background:#22c55e} .fb.miss{border:2px solid #f87171} .fb.miss i{background:#f87171}
+  svg.ring{position:absolute;left:0;top:0}
+  .eyb{position:absolute;display:flex;align-items:center;justify-content:center;gap:14px;font-size:34px;font-weight:800;letter-spacing:.18em;color:#fdba74} .eyb svg{width:40px;height:40px;color:#fb923c}
+  .gnum{position:absolute;text-align:center;line-height:1;font-weight:800;letter-spacing:-.05em} .gnum b{font-size:170px;font-variant-numeric:tabular-nums;text-shadow:0 0 50px rgba(96,165,250,.6)} .gnum span{font-size:44px;color:#94a3b8;margin-left:6px}
+  .glab{position:absolute;text-align:center;font-size:36px;font-weight:600;color:#cbd5e1}
+  .pill{position:absolute;height:84px;border-radius:20px;border:3px solid #334155;background:rgba(15,23,42,.9);display:flex;align-items:center;justify-content:center;gap:12px;font-size:32px;color:#94a3b8;opacity:0} .pill b{color:#fff}
+  .spark{width:12px;height:12px;border-radius:50%;background:#bfdbfe;box-shadow:0 0 16px #60a5fa;opacity:0}
+  .card{position:absolute;left:0;top:0;border-radius:36px;background:rgba(10,17,32,.92);border:2px solid rgba(148,163,184,.18);box-shadow:0 40px 100px rgba(0,0,0,.55);transform-style:preserve-3d}
+  .ct{position:absolute;left:70px;top:56px;font-size:56px;font-weight:800;letter-spacing:-.03em} .cs{position:absolute;left:70px;top:132px;font-size:34px;color:#cbd5e1;font-weight:500}
+  .rk{position:absolute;display:flex;flex-direction:column;align-items:center;gap:16px} .rk .hex{width:100%;aspect-ratio:1/1.08;background:var(--c);clip-path:polygon(50% 0,100% 25%,100% 75%,50% 100%,0 75%,0 25%);opacity:.38} .rk span{font-size:28px;font-weight:700;color:#94a3b8}
+  .mt{position:absolute;left:56px;top:46px;font-size:44px;font-weight:800;display:flex;align-items:baseline;gap:18px;flex-wrap:wrap;width:85%} .mt .dot{width:18px;height:18px;border-radius:50%;background:#22c55e;box-shadow:0 0 16px #22c55e;align-self:center} .ms{font-size:30px;font-weight:500;color:#94a3b8}
+  .ava{position:absolute;width:220px;height:220px} .ava svg{width:220px;height:220px;display:block;border-radius:52px;box-shadow:0 0 90px rgba(59,130,246,.9)}
+  .bub{position:absolute;font-size:36px;line-height:1.3;font-weight:600;padding:24px 30px;border-radius:28px;opacity:0} .bub.me{background:#2563eb;color:#fff;border-bottom-right-radius:8px} .bub.bot{background:#111a2c;border:2px solid #334155;color:#e2e8f0;border-bottom-left-radius:8px}
+  .hub{position:absolute;width:180px;height:180px} .hub svg{width:180px;height:180px;display:block;border-radius:44px;box-shadow:0 0 90px rgba(59,130,246,.95)}
+  .hlab{position:absolute;width:400px;text-align:center;font-size:36px;font-weight:800;color:#dbeafe;letter-spacing:.04em}
+  .lang{position:absolute;width:76px;height:76px;border-radius:50%;background:#0f172a;border:3px solid #60a5fa;display:flex;align-items:center;justify-content:center;font-size:28px;font-weight:800;color:#bfdbfe}
+  .node{position:absolute;width:140px;display:flex;flex-direction:column;align-items:center;gap:16px} .nc{width:140px;height:140px;border-radius:50%;background:rgba(15,23,42,.95);border:3px solid #334155;color:#94a3b8;display:flex;align-items:center;justify-content:center} .nc svg{width:62px;height:62px} .node span{font-size:32px;font-weight:700;color:#94a3b8;white-space:nowrap}
+  .url{position:absolute;text-align:center;font-size:92px;font-weight:800;letter-spacing:-.03em;text-shadow:0 0 30px rgba(96,165,250,.6)}
+  .cta{position:absolute;text-align:center;font-size:40px;font-weight:700;padding:22px 0;border-radius:999px;background:#2563eb;box-shadow:0 0 30px rgba(59,130,246,.6)}
 </style></head>
-<body>
-<div id="root" data-composition-id="ad30a" data-start="0" data-duration="30.0" data-width="1080" data-height="1920" data-fps="30">
-<div id="bg1" class="bgc navy clip" data-start="0" data-duration="2.0"></div>
-<div id="ph2" class="ph" style="z-index:2;visibility:hidden;opacity:0"><div class="island"></div><div id="ph2c" class="cam"><video id="ph2v" class="clip" src="assets/app/m3/redacao.mp4" data-start="0" data-duration="2.0" data-media-start="31.30" muted playsinline data-track-index="2"></video><div id="cnt" class="num clip" data-start="0" data-duration="1.15" style="left:400px;top:738px;width:302px;height:149px;background:rgb(20,23,32);font-size:145px;text-align:right;padding-right:0;line-height:149px"><span class="v">0</span></div><div id="ring1" class="ring clip" data-start="1.10" data-duration="0.9" style="left:1030px;top:1560px;width:190px;height:110px;opacity:0"></div></div></div>
-<div id="t3" class="ttl  clip" data-start="0" data-duration="2.0" style="left:60px;top:255px;width:960px;font-size:84px;text-align:center" data-layout-allow-overflow><div class="ln"><span class="w">Redação</span> <span class="w">corrigida:</span></div><div class="ln"><span class="w acc">480</span> <span class="w">de</span> <span class="w">1000.</span></div></div>
-<div id="im4" class="photo clip" data-start="2.0" data-duration="1.5"><img src="assets/gen/m/desk-night-1.png" alt="" /><div class="shade" style="opacity:0.4"></div></div>
-<div id="t5" class="ttl  clip" data-start="2.0" data-duration="1.5" style="left:60px;top:375px;width:960px;font-size:84px;text-align:center" data-layout-allow-overflow><div class="ln"><span class="w">Faz</span> <span class="w">simulado</span> <span class="w">e</span> <span class="w">não</span> <span class="w">sabe</span></div><div class="ln"><span class="w">por</span> <span class="w">que</span> <span class="w acc">errou.</span></div></div>
-<div id="im6" class="photo clip" data-start="3.5" data-duration="1.5"><img src="assets/gen/m/student-frustrated-1.png" alt="" /><div class="shade" style="opacity:0.35"></div></div>
-<div id="t7" class="ttl  clip" data-start="3.5" data-duration="1.5" style="left:60px;top:375px;width:960px;font-size:84px;text-align:center" data-layout-allow-overflow><div class="ln"><span class="w">Lê</span> <span class="w">a</span> <span class="w">teoria,</span></div><div class="ln"><span class="w">mas</span> <span class="w">na</span> <span class="w">prova</span> <span class="w acc">trava.</span></div></div>
-<div id="bg8" class="bgc navy clip" data-start="5.0" data-duration="1.5"></div>
-<div id="t9" class="ttl  clip" data-start="5.0" data-duration="1.5" style="left:60px;top:415px;width:960px;font-size:84px;text-align:center" data-layout-allow-overflow><div class="ln"><span class="w">O</span> <span class="w">problema</span> <span class="w">não</span> <span class="w">é</span> <span class="w">estudar.</span></div><div class="ln"><span class="w">É</span> <span class="w">estudar</span> <span class="w acc">sem</span> <span class="w acc">feedback.</span></div></div>
-<div id="bg10" class="bgc navy clip" data-start="6.5" data-duration="10.5"></div>
-<div id="ph11" class="ph" style="z-index:2;visibility:hidden;opacity:0"><div class="island"></div><div id="ph11c" class="cam"><video id="ph11v" class="clip" src="assets/app/m3/estudo.mp4" data-start="6.5" data-duration="1.5" data-media-start="2.69" muted playsinline data-track-index="2"></video></div></div>
-<div id="t12" class="ttl  clip" data-start="6.5" data-duration="1.5" style="left:60px;top:255px;width:960px;font-size:75px;text-align:center" data-layout-allow-overflow><div class="ln"><span class="w">Pergunta</span> <span class="w">de</span> <span class="w">História.</span></div></div>
-<div id="ph13" class="ph" style="z-index:2;visibility:hidden;opacity:0"><div class="island"></div><div id="ph13c" class="cam"><video id="ph13v" class="clip" src="assets/app/m3/estudo.mp4" data-start="8.0" data-duration="4.0" data-media-start="9.29" data-playback-rate="1.6" muted playsinline data-track-index="2"></video></div></div>
-<div id="t14" class="ttl  clip" data-start="8.0" data-duration="4.0" style="left:60px;top:255px;width:960px;font-size:75px;text-align:center" data-layout-allow-overflow><div class="ln"><span class="w">Você</span> <span class="w">responde.</span></div><div class="ln"><span class="w">O</span> <span class="w">cronômetro</span> <span class="w">corre.</span></div></div>
-<div id="ph15" class="ph" style="z-index:2;visibility:hidden;opacity:0"><div class="island"></div><div id="ph15c" class="cam"><video id="ph15v" class="clip" src="assets/app/m3/estudo.mp4" data-start="12.0" data-duration="1.0" data-media-start="16.96" muted playsinline data-track-index="2"></video></div></div>
-<div id="ph16" class="ph" style="z-index:2;visibility:hidden;opacity:0"><div class="island"></div><div id="ph16c" class="cam"><video id="ph16v" class="clip" src="assets/app/m3/estudo.mp4" data-start="13.0" data-duration="1.5" data-media-start="30.66" muted playsinline data-track-index="2"></video></div></div>
-<div id="t17" class="ttl  clip" data-start="13.0" data-duration="1.5" style="left:60px;top:255px;width:960px;font-size:75px;text-align:center" data-layout-allow-overflow><div class="ln"><span class="w">Nota</span> <span class="w">na</span> <span class="w acc">hora.</span></div></div>
-<div id="ph18" class="ph" style="z-index:2;visibility:hidden;opacity:0"><div class="island"></div><div id="ph18c" class="cam"><video id="ph18v" class="clip" src="assets/app/m3/estudo.mp4" data-start="14.5" data-duration="2.5" data-media-start="32.16" muted playsinline data-track-index="2"></video></div></div>
-<div id="t19" class="ttl  clip" data-start="14.5" data-duration="2.5" style="left:60px;top:255px;width:960px;font-size:65px;text-align:center" data-layout-allow-overflow><div class="ln"><span class="w">O</span> <span class="w">que</span> <span class="w">acertou.</span> <span class="w">O</span> <span class="w">que</span> <span class="w">faltou.</span></div></div>
-<div id="q20" class="quote clip" data-start="14.75" data-duration="2.25" style="left:60px;top:520px;width:960px;font-size:40px"><div class="lab">Avaliação da IA · resposta real</div>Acertou <b class="g">o núcleo da proporcionalidade</b> (punição igual ao crime), mas cometeu <b class="r">dois erros</b>: chamou o talião de <b class="r">"justiça de vingança"</b> e disse que as leis valiam <b class="r">"para todo mundo"</b>.</div>
-<div id="bg21" class="bgc navy clip" data-start="17.0" data-duration="6.0"></div>
-<div id="ph22" class="ph" style="z-index:2;visibility:hidden;opacity:0"><div class="island"></div><div id="ph22c" class="cam"><video id="ph22v" class="clip" src="assets/app/m3/redacao.mp4" data-start="17.0" data-duration="1.5" data-media-start="32.20" muted playsinline data-track-index="2"></video></div></div>
-<div id="t23" class="ttl  clip" data-start="17.0" data-duration="1.5" style="left:60px;top:255px;width:960px;font-size:105px;text-align:center" data-layout-allow-overflow><div class="ln"><span class="w">Redação</span></div></div>
-<div id="s24" class="subt clip" data-start="17.0" data-duration="1.5" style="left:60px;top:386px;width:960px;font-size:44px;text-align:center" data-layout-allow-overflow>Nota de 0 a 1000</div>
-<div id="ph25" class="ph" style="z-index:2;visibility:hidden;opacity:0"><div class="island"></div><div id="ph25c" class="cam"><video id="ph25v" class="clip" src="assets/app/m3/simulados.mp4" data-start="18.5" data-duration="1.5" data-media-start="11.85" muted playsinline data-track-index="2"></video></div></div>
-<div id="t26" class="ttl  clip" data-start="18.5" data-duration="1.5" style="left:60px;top:255px;width:960px;font-size:105px;text-align:center" data-layout-allow-overflow><div class="ln"><span class="w">Simulados</span></div></div>
-<div id="s27" class="subt clip" data-start="18.5" data-duration="1.5" style="left:60px;top:386px;width:960px;font-size:44px;text-align:center" data-layout-allow-overflow>Formato de cada banca</div>
-<div id="ph28" class="ph" style="z-index:2;visibility:hidden;opacity:0"><div class="island"></div><div id="ph28c" class="cam"><video id="ph28v" class="clip" src="assets/app/m3/flashcards.mp4" data-start="20.0" data-duration="1.5" data-media-start="0.92" muted playsinline data-track-index="2"></video></div></div>
-<div id="t29" class="ttl  clip" data-start="20.0" data-duration="1.5" style="left:60px;top:255px;width:960px;font-size:105px;text-align:center" data-layout-allow-overflow><div class="ln"><span class="w">Flashcards</span></div></div>
-<div id="s30" class="subt clip" data-start="20.0" data-duration="1.5" style="left:60px;top:386px;width:960px;font-size:44px;text-align:center" data-layout-allow-overflow>Revisão espaçada</div>
-<div id="ph31" class="ph" style="z-index:2;visibility:hidden;opacity:0"><div class="island"></div><div id="ph31c" class="cam"><video id="ph31v" class="clip" src="assets/app/m3/mentor.mp4" data-start="21.5" data-duration="1.5" data-media-start="4.15" muted playsinline data-track-index="2"></video></div></div>
-<div id="t32" class="ttl  clip" data-start="21.5" data-duration="1.5" style="left:60px;top:255px;width:960px;font-size:105px;text-align:center" data-layout-allow-overflow><div class="ln"><span class="w">Mentor</span> <span class="w">IA</span></div></div>
-<div id="s33" class="subt clip" data-start="21.5" data-duration="1.5" style="left:60px;top:386px;width:960px;font-size:44px;text-align:center" data-layout-allow-overflow>Tira suas dúvidas</div>
-<div id="bg34" class="bgc navy clip" data-start="23.0" data-duration="3.0"></div>
-<div id="ph35" class="ph" style="z-index:2;visibility:hidden;opacity:0"><div class="island"></div><div id="ph35c" class="cam"><video id="ph35v" class="clip" src="assets/app/m3/signup.mp4" data-start="23.0" data-duration="3.0" data-media-start="7.36" muted playsinline data-track-index="2"></video></div></div>
-<div id="t36" class="ttl  clip" data-start="23.0" data-duration="1.0" style="left:60px;top:255px;width:960px;font-size:79px;text-align:center" data-layout-allow-overflow><div class="ln"><span class="w">Grátis</span> <span class="w">para</span> <span class="w">sempre.</span></div></div>
-<div id="t37" class="ttl  clip" data-start="24.0" data-duration="1.0" style="left:60px;top:255px;width:960px;font-size:79px;text-align:center" data-layout-allow-overflow><div class="ln"><span class="w">3</span> <span class="w">dias</span> <span class="w">de</span> <span class="w">Pro</span> <span class="w">ao</span> <span class="w">criar</span> <span class="w">sua</span> <span class="w">conta.</span></div></div>
-<div id="t38" class="ttl  clip" data-start="25.0" data-duration="1.0" style="left:60px;top:255px;width:960px;font-size:79px;text-align:center" data-layout-allow-overflow><div class="ln"><span class="w">Sem</span> <span class="w">cartão.</span></div></div>
-<div id="bg39" class="bgc blue clip" data-start="26.0" data-duration="4.0"></div>
-<div id="lg40" class="clip" data-start="26.00" data-duration="4.0" style="position:absolute;inset:0;z-index:6"><div class="logo onblue" style="left:0px;width:1080px;top:630px;font-size:126px"><svg  viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" class="shrink-0"><rect width="48" height="48" rx="12" fill="#ffffff"></rect><path d="M9 21 L24 13 L39 21 L24 27 Z" fill="#2563EB"></path><path d="M15 24 L15 30.5 Q24 37 33 30.5 L33 24 Z" fill="#2563EB"></path><circle cx="24" cy="20" r="1.7" fill="#ffffff"></circle><path d="M24 20 L38.5 20 L38.5 31" fill="none" stroke="#2563EB" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"></path><circle cx="38.5" cy="33" r="2" fill="#2563EB"></circle></svg><span><span class="i">i</span>Vest <span class=st>Study</span></span></div></div>
-<div id="auto1" class="url clip" data-start="26.00" data-duration="4.0" style="top:826px;font-size:92px">iveststudy.com</div>
-<div id="auto2" class="btn clip" data-start="26.40" data-duration="3.60" style="top:978px;font-size:50px;background:#fff;color:#1d4ed8;box-shadow:0 20px 60px rgba(0,0,0,.25)">Criar conta grátis →</div>
-<div id="auto3" class="subt clip" data-start="26.60" data-duration="3.40" style="left:0;width:1080px;top:1118px;text-align:center;font-size:44px;color:#e0ecff">Grátis para sempre · 3 dias de Pro · Sem cartão</div>
-<div id="auto4" class="wm clip" data-start="6.5" data-duration="16.5" style="top:1512px">iveststudy.com</div>
-<div id="auto5" class="cap clip" data-start="0.3" data-duration="0.65" style="top:1400px;max-width:920px">Você estuda,</div>
-<div id="auto6" class="cap clip" data-start="0.99" data-duration="0.95" style="top:1400px;max-width:920px">faz simulado...</div>
-<div id="auto7" class="cap clip" data-start="2.01" data-duration="0.82" style="top:1400px;max-width:920px">e continua sem saber</div>
-<div id="auto8" class="cap clip" data-start="2.87" data-duration="1.45" style="top:1400px;max-width:920px">onde erra.</div>
-<div id="auto9" class="cap clip" data-start="6.6" data-duration="0.77" style="top:1400px;max-width:920px">No iVest Study,</div>
-<div id="auto10" class="cap clip" data-start="7.41" data-duration="1.11" style="top:1400px;max-width:920px">cada resposta é corrigida</div>
-<div id="auto11" class="cap clip" data-start="8.56" data-duration="1.04" style="top:1400px;max-width:920px">na hora por IA.</div>
-<div id="auto12" class="cap clip" data-start="13.1" data-duration="0.84" style="top:1400px;max-width:920px">Você vê a nota,</div>
-<div id="auto13" class="cap clip" data-start="13.98" data-duration="0.76" style="top:1400px;max-width:920px">o que faltou e</div>
-<div id="auto14" class="cap clip" data-start="14.78" data-duration="1.13" style="top:1400px;max-width:920px">o que revisar.</div>
-<div id="auto15" class="cap clip" data-start="17.0" data-duration="1.07" style="top:1400px;max-width:920px">Redação com nota por</div>
-<div id="auto16" class="cap clip" data-start="18.11" data-duration="0.77" style="top:1400px;max-width:920px">competência,</div>
-<div id="auto17" class="cap clip" data-start="18.92" data-duration="1.3" style="top:1400px;max-width:920px">simulados de cada banca</div>
-<div id="auto18" class="cap clip" data-start="20.26" data-duration="0.75" style="top:1400px;max-width:920px">e um mentor que</div>
-<div id="auto19" class="cap clip" data-start="21.05" data-duration="1.32" style="top:1400px;max-width:920px">tira suas dúvidas.</div>
-<div id="auto20" class="cap clip" data-start="22.55" data-duration="0.95" style="top:1400px;max-width:920px">Grátis para sempre,</div>
-<div id="auto21" class="cap clip" data-start="23.54" data-duration="0.71" style="top:1400px;max-width:920px">com três dias de</div>
-<div id="auto22" class="cap clip" data-start="24.29" data-duration="0.74" style="top:1400px;max-width:920px">Pro ao criar sua</div>
-<div id="auto23" class="cap clip" data-start="25.07" data-duration="0.57" style="top:1400px;max-width:920px">conta.</div>
-<div id="auto24" class="cap clip" data-start="25.71" data-duration="0.85" style="top:1400px;max-width:920px">Sem cartão.</div>
-<div id="auto25" class="cap clip" data-start="26.6" data-duration="1.21" style="top:1400px;max-width:920px">Crie sua conta grátis</div>
-<div id="auto26" class="cap clip" data-start="27.85" data-duration="0.4" style="top:1400px;max-width:920px">em</div>
-<div id="auto27" class="cap clip" data-start="28.14" data-duration="1.81" style="top:1400px;max-width:920px">iveststudy.com</div>
-<audio id="auto28" class="clip" src="assets/audio/vo30/pt1.wav" data-start="0.30" data-duration="3.90" data-volume="1.0" data-track-index="7"></audio>
-<audio id="auto29" class="clip" src="assets/audio/vo30/pt2.wav" data-start="6.60" data-duration="2.88" data-volume="1.0" data-track-index="7"></audio>
-<audio id="auto30" class="clip" src="assets/audio/vo30/pt3.wav" data-start="13.10" data-duration="2.69" data-volume="1.0" data-track-index="7"></audio>
-<audio id="auto31" class="clip" src="assets/audio/vo30/pt4.wav" data-start="17.00" data-duration="5.25" data-volume="1.0" data-track-index="7"></audio>
-<audio id="auto32" class="clip" src="assets/audio/vo30/pt5.wav" data-start="22.55" data-duration="3.99" data-volume="1.0" data-track-index="7"></audio>
-<audio id="auto33" class="clip" src="assets/audio/vo30/pt6.wav" data-start="26.60" data-duration="3.39" data-volume="1.0" data-track-index="7"></audio>
-<audio id="auto34" class="clip" src="assets/audio/music30.mp3" data-start="0.00" data-duration="23.44" data-media-start="0.06" data-volume="0.42" data-fade-in="0.0" data-fade-out="0.35" data-track-index="3" data-automation='{"version": 1, "lanes": [{"target": "volume", "points": [{"t": 0, "v": 1}, {"t": 12.48, "v": 1}, {"t": 12.5, "v": 0}, {"t": 12.98, "v": 0}, {"t": 13.0, "v": 1}, {"t": 23.44, "v": 1}]}]}'></audio>
-<audio id="auto35" class="clip" src="assets/audio/music30.mp3" data-start="23.44" data-duration="6.00" data-media-start="16.00" data-volume="0.42" data-fade-in="0.3" data-fade-out="0.0" data-track-index="3"></audio>
-<audio id="auto36" class="clip" src="assets/audio/music30.mp3" data-start="29.44" data-duration="0.56" data-media-start="16.00" data-volume="0.42" data-fade-in="0.3" data-fade-out="0.6" data-track-index="3"></audio>
-<audio id="auto37" class="clip" src="assets/sfx/whoosh-short.mp3" data-start="0.05" data-duration="0.57" data-volume="0.35" data-track-index="8"></audio>
-<audio id="auto38" class="clip" src="assets/sfx/ding-correct.mp3" data-start="1.0" data-duration="0.84" data-volume="0.6" data-track-index="8"></audio>
-<audio id="auto39" class="clip" src="assets/sfx/error-blip.mp3" data-start="1.15" data-duration="0.63" data-volume="0.55" data-track-index="9"></audio>
-<audio id="auto40" class="clip" src="assets/sfx/whoosh-short.mp3" data-start="2.0" data-duration="0.57" data-volume="0.4" data-track-index="8"></audio>
-<audio id="auto41" class="clip" src="assets/sfx/whoosh-short.mp3" data-start="3.5" data-duration="0.57" data-volume="0.4" data-track-index="8"></audio>
-<audio id="auto42" class="clip" src="assets/sfx/whoosh-short.mp3" data-start="5.0" data-duration="0.57" data-volume="0.4" data-track-index="8"></audio>
-<audio id="auto43" class="clip" src="assets/sfx/typing.mp3" data-start="8.0" data-duration="1.54" data-volume="0.45" data-track-index="8"></audio>
-<audio id="auto44" class="clip" src="assets/sfx/typing.mp3" data-start="9.5" data-duration="1.54" data-volume="0.45" data-track-index="9"></audio>
-<audio id="auto45" class="clip" src="assets/sfx/typing.mp3" data-start="11.0" data-duration="1.54" data-volume="0.45" data-track-index="8"></audio>
-<audio id="auto46" class="clip" src="assets/sfx/send-tap.mp3" data-start="12.25" data-duration="0.63" data-volume="0.7" data-track-index="9"></audio>
-<audio id="auto47" class="clip" src="assets/sfx/ding-correct.mp3" data-start="13.0" data-duration="0.84" data-volume="0.8" data-track-index="8"></audio>
-<audio id="auto48" class="clip" src="assets/sfx/impact-bass-2.mp3" data-start="13.0" data-duration="2.59" data-volume="0.55" data-track-index="9"></audio>
-<audio id="auto49" class="clip" src="assets/sfx/sparkle.mp3" data-start="13.1" data-duration="1.80" data-volume="0.4" data-track-index="10"></audio>
-<audio id="auto50" class="clip" src="assets/sfx/ding-correct.mp3" data-start="15.4" data-duration="0.84" data-volume="0.5" data-track-index="8"></audio>
-<audio id="auto51" class="clip" src="assets/sfx/error-blip.mp3" data-start="15.85" data-duration="0.63" data-volume="0.5" data-track-index="9"></audio>
-<audio id="auto52" class="clip" src="assets/sfx/error-blip.mp3" data-start="16.3" data-duration="0.63" data-volume="0.5" data-track-index="8"></audio>
-<audio id="auto53" class="clip" src="assets/sfx/error-blip.mp3" data-start="16.75" data-duration="0.63" data-volume="0.5" data-track-index="9"></audio>
-<audio id="auto54" class="clip" src="assets/sfx/whoosh-short.mp3" data-start="17.0" data-duration="0.57" data-volume="0.4" data-track-index="8"></audio>
-<audio id="auto55" class="clip" src="assets/sfx/whoosh-short.mp3" data-start="18.5" data-duration="0.57" data-volume="0.4" data-track-index="8"></audio>
-<audio id="auto56" class="clip" src="assets/sfx/whoosh-short.mp3" data-start="20.0" data-duration="0.57" data-volume="0.4" data-track-index="8"></audio>
-<audio id="auto57" class="clip" src="assets/sfx/whoosh-short.mp3" data-start="21.5" data-duration="0.57" data-volume="0.4" data-track-index="8"></audio>
-<audio id="auto58" class="clip" src="assets/sfx/pop.mp3" data-start="23.0" data-duration="0.72" data-volume="0.5" data-track-index="8"></audio>
-<audio id="auto59" class="clip" src="assets/sfx/pop.mp3" data-start="24.0" data-duration="0.72" data-volume="0.5" data-track-index="8"></audio>
-<audio id="auto60" class="clip" src="assets/sfx/pop.mp3" data-start="25.0" data-duration="0.72" data-volume="0.5" data-track-index="8"></audio>
-<audio id="auto61" class="clip" src="assets/sfx/whoosh-cinematic.mp3" data-start="25.7" data-duration="4.00" data-volume="0.35" data-track-index="9"></audio>
-<audio id="auto62" class="clip" src="assets/sfx/impact-bass-1.mp3" data-start="26.0" data-duration="2.12" data-volume="0.7" data-track-index="8"></audio>
-<audio id="auto63" class="clip" src="assets/sfx/sonic-logo.mp3" data-start="28.4" data-duration="1.52" data-volume="0.8" data-track-index="8"></audio>
+<body><div id="root" data-composition-id="trail" data-start="0" data-duration="16.0" data-width="1080" data-height="1920" data-fps="30">
+<div id="haze"></div><div id="grain"></div>
+<div id="s1" class="clip " data-start="0.00" data-duration="1.95" style=""><div class="logo" style="left:50px;top:810px;width:980px;font-size:132px"><span class="cap"><svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><rect rx="12" fill="#2563EB"></rect><path d="M9 21 L24 13 L39 21 L24 27 Z" fill="#ffffff"></path><path d="M15 24 L15 30.5 Q24 37 33 30.5 L33 24 Z" fill="#ffffff"></path><circle cx="24" cy="20" r="1.7" fill="#2563EB"></circle><path d="M24 20 L38.5 20 L38.5 31" fill="none" stroke="#ffffff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"></path><circle cx="38.5" cy="33" r="2" fill="#ffffff"></circle></svg></span><span><span class="i">i</span>Vest <span class="st">Study</span></span></div><div id="s1flash" class="flash"></div></div>
+<div id="chip0" class="clip " data-start="1.55" data-duration="1.00" style="position:absolute;left:210px;top:1170px;width:120px;height:120px;filter:blur(0.0px)"><div class="chip" data-layout-ignore style="transform:scale(1.00)">A</div></div>
+<div id="chip1" class="clip " data-start="1.55" data-duration="1.00" style="position:absolute;left:390px;top:980px;width:120px;height:120px;filter:blur(1.2px)"><div class="chip" data-layout-ignore style="transform:scale(0.83)">B</div></div>
+<div id="chip2" class="clip " data-start="1.55" data-duration="1.00" style="position:absolute;left:570px;top:790px;width:120px;height:120px;filter:blur(2.4px)"><div class="chip" data-layout-ignore style="transform:scale(0.66)">C</div></div>
+<div id="chip3" class="clip " data-start="1.55" data-duration="1.00" style="position:absolute;left:750px;top:600px;width:120px;height:120px;filter:blur(3.6px)"><div class="chip" data-layout-ignore style="transform:scale(0.49)">D</div></div>
+<div id="s3" class="clip " data-start="2.20" data-duration="3.03" style="position:absolute;left:240px;top:340px;width:600px;height:1120px;perspective:1600px"><div class="phone" style="width:600px;height:1120px">
+      <div class="isl"></div>
+      <div class="pscroll"><div class="pbar"><span class="pb-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path></svg></span><span>Modo Estudo</span><span class="pb-r">História</span></div>
+      <div class="prog"><i></i></div>
+      <div class="q">O que o princípio “olho por olho, dente por dente” revela sobre a justiça babilônica?</div>
+      <div class="timer"><span class="tl">CRONÔMETRO</span><span id="tm" class="tv">1:00</span></div>
+      <div class="ans"><span id="ty"></span><span class="caret"></span></div>
+      <div id="pbtn" class="pbtn">Avaliar resposta →</div>
+      <div id="pres" class="pres"><div class="score"><b id="sc">4</b><span>/10</span></div>
+        <div id="fb1" class="fb ok"><i>✓</i>Proporcionalidade: acertou</div>
+        <div id="fb2" class="fb miss"><i>✗</i>Leis iguais para todos: errou</div></div></div>
+    </div></div>
+<div id="s4" class="clip " data-start="5.13" data-duration="1.97" style="position:absolute;left:0;top:0;width:100%;height:100%"><svg class="ring" width="1080" height="1920" viewBox="0 0 1080 1920"><path d="M 540.0 510.0 A 270 270 0 1 1 539.99 510.0" stroke="rgba(148,163,184,.16)" stroke-width="22" fill="none"/></svg>
+      <div class="eyb" style="left:0;width:1080px;top:410px"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color: rgb(234, 88, 12);"><path d="M12 20h9"></path><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4Z"></path></svg><span>REDAÇÃO</span></div>
+      <div class="gnum" style="left:0;width:1080px;top:685px"><b id="gv">0</b><span>/1000</span></div>
+      <div class="glab" style="left:0;width:1080px;top:875px">nota por competência</div>
+      <div id="cp0" class="pill" style="left:75px;top:1130px;width:170px"><b>C1</b><span>200</span></div><div id="cp1" class="pill" style="left:265px;top:1130px;width:170px"><b>C2</b><span>200</span></div><div id="cp2" class="pill" style="left:455px;top:1130px;width:170px"><b>C3</b><span>160</span></div><div id="cp3" class="pill" style="left:645px;top:1130px;width:170px"><b>C4</b><span>200</span></div><div id="cp4" class="pill" style="left:835px;top:1130px;width:170px"><b>C5</b><span>160</span></div></div>
+<div id="sp0" class="spark clip" data-start="6.6" data-duration="0.6" style="left:534px;top:774px"></div>
+<div id="sp1" class="spark clip" data-start="6.6" data-duration="0.6" style="left:534px;top:774px"></div>
+<div id="sp2" class="spark clip" data-start="6.6" data-duration="0.6" style="left:534px;top:774px"></div>
+<div id="sp3" class="spark clip" data-start="6.6" data-duration="0.6" style="left:534px;top:774px"></div>
+<div id="sp4" class="spark clip" data-start="6.6" data-duration="0.6" style="left:534px;top:774px"></div>
+<div id="sp5" class="spark clip" data-start="6.6" data-duration="0.6" style="left:534px;top:774px"></div>
+<div id="sp6" class="spark clip" data-start="6.6" data-duration="0.6" style="left:534px;top:774px"></div>
+<div id="sp7" class="spark clip" data-start="6.6" data-duration="0.6" style="left:534px;top:774px"></div>
+<div id="sp8" class="spark clip" data-start="6.6" data-duration="0.6" style="left:534px;top:774px"></div>
+<div id="sp9" class="spark clip" data-start="6.6" data-duration="0.6" style="left:534px;top:774px"></div>
+<div id="sp10" class="spark clip" data-start="6.6" data-duration="0.6" style="left:534px;top:774px"></div>
+<div id="sp11" class="spark clip" data-start="6.6" data-duration="0.6" style="left:534px;top:774px"></div>
+<div id="sp12" class="spark clip" data-start="6.6" data-duration="0.6" style="left:534px;top:774px"></div>
+<div id="sp13" class="spark clip" data-start="6.6" data-duration="0.6" style="left:534px;top:774px"></div>
+<div id="s5" class="clip " data-start="7.05" data-duration="2.11" style="position:absolute;left:40px;top:520px;width:1000px;height:760px;perspective:1800px"><div class="card rcard" style="width:1000px;height:760px"><div class="ct">Progressão de Ranks</div><div class="cs">Suba de Bronze até Elite.</div><div id="rk0" class="rk" style="left:70px;top:250px;width:150px;--c:#d97706"><div class="hex"></div><span>Bronze</span></div><div id="rk1" class="rk" style="left:307px;top:250px;width:150px;--c:#94a3b8"><div class="hex"></div><span>Prata</span></div><div id="rk2" class="rk" style="left:543px;top:250px;width:150px;--c:#f59e0b"><div class="hex"></div><span>Ouro</span></div><div id="rk3" class="rk" style="left:780px;top:250px;width:150px;--c:#14b8a6"><div class="hex"></div><span>Platina</span></div><div id="rk4" class="rk" style="left:188px;top:500px;width:150px;--c:#38bdf8"><div class="hex"></div><span>Diamante</span></div><div id="rk5" class="rk" style="left:425px;top:500px;width:150px;--c:#a855f7"><div class="hex"></div><span>Mestre</span></div><div id="rk6" class="rk" style="left:662px;top:500px;width:150px;--c:#ef4444"><div class="hex"></div><span>Elite</span></div></div></div>
+<div id="s6" class="clip " data-start="9.06" data-duration="1.99" style="position:absolute;left:60px;top:430px;width:960px;height:940px;perspective:1600px"><div class="card mcard" style="width:960px;height:940px">
+      <div class="mt"><i class="dot"></i>Mentor iVest<span class="ms">qualquer matéria do vestibular</span></div>
+      <div class="ava" style="left:370px;top:130px"><svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><rect rx="12" fill="#2563EB"></rect><path d="M9 21 L24 13 L39 21 L24 27 Z" fill="#ffffff"></path><path d="M15 24 L15 30.5 Q24 37 33 30.5 L33 24 Z" fill="#ffffff"></path><circle cx="24" cy="20" r="1.7" fill="#2563EB"></circle><path d="M24 20 L38.5 20 L38.5 31" fill="none" stroke="#ffffff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"></path><circle cx="38.5" cy="33" r="2" fill="#ffffff"></circle></svg></div>
+      <div id="u1" class="bub me" style="left:110px;top:410px;width:780px"><span id="uq"></span></div>
+      <div id="m1" class="bub bot" style="left:70px;top:600px;width:820px">Romantismo idealiza. Realismo mostra a vida como ela é.</div></div></div>
+<div id="s7" class="clip " data-start="10.95" data-duration="2.15" style="position:absolute;left:0;top:0;width:100%;height:100%"><div class="hub" style="left:450px;top:380px"><svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><rect rx="12" fill="#2563EB"></rect><path d="M9 21 L24 13 L39 21 L24 27 Z" fill="#ffffff"></path><path d="M15 24 L15 30.5 Q24 37 33 30.5 L33 24 Z" fill="#ffffff"></path><circle cx="24" cy="20" r="1.7" fill="#2563EB"></circle><path d="M24 20 L38.5 20 L38.5 31" fill="none" stroke="#ffffff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"></path><circle cx="38.5" cy="33" r="2" fill="#ffffff"></circle></svg></div><div class="hlab" style="left:340px;top:675px">PT · EN · ES</div><div id="lg0" class="lang" style="left:402px;top:320px">PT</div><div id="lg1" class="lang" style="left:601px;top:319px">EN</div><div id="lg2" class="lang" style="left:391px;top:533px">ES</div><div id="nd0" class="node" style="left:110px;top:790px;--c:#f97316"><div class="nc"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color: rgb(234, 88, 12);"><path d="M12 20h9"></path><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4Z"></path></svg></div><span>Redação</span></div><div id="nd1" class="node" style="left:290px;top:1060px;--c:#c2410c"><div class="nc"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color: rgb(146, 87, 58);"><path d="M9 11l3 3L22 4"></path><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path></svg></div><span>Simulados</span></div><div id="nd2" class="node" style="left:470px;top:810px;--c:#ec4899"><div class="nc"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" rx="2"></rect><line x1="2" y1="10" x2="22" y2="10"></line></svg></div><span>Flashcards</span></div><div id="nd3" class="node" style="left:650px;top:1060px;--c:#ef4444"><div class="nc"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path><line x1="12" y1="17" x2="12.01" y2="17"></line></svg></div><span>Quiz</span></div><div id="nd4" class="node" style="left:830px;top:790px;--c:#a855f7"><div class="nc"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg></div><span>Mentor IA</span></div></div>
+<div id="s8" class="clip " data-start="13.00" data-duration="3.00" style="position:absolute;left:0;top:0;width:100%;height:100%"><div class="logo" style="left:50px;top:700px;width:980px;font-size:124px"><span class="cap"><svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><rect rx="12" fill="#2563EB"></rect><path d="M9 21 L24 13 L39 21 L24 27 Z" fill="#ffffff"></path><path d="M15 24 L15 30.5 Q24 37 33 30.5 L33 24 Z" fill="#ffffff"></path><circle cx="24" cy="20" r="1.7" fill="#2563EB"></circle><path d="M24 20 L38.5 20 L38.5 31" fill="none" stroke="#ffffff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"></path><circle cx="38.5" cy="33" r="2" fill="#ffffff"></circle></svg></span><span><span class="i">i</span>Vest <span class="st">Study</span></span></div>
+      <div class="url" style="left:0;width:1080px;top:915px">iveststudy.com</div>
+      <div class="cta" style="left:210px;top:1040px;width:660px">Comece grátis · 3 dias de Pro</div><div id="s8flash" class="flash"></div></div>
+<svg class="trails" width="1080" height="1920" viewBox="0 0 1080 1920"><defs><filter id="glowA" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="5"/></filter><filter id="glowB" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="16"/></filter></defs>
+<g id="tr1" class="trail" style="opacity:0"><path d="M -120 1651 C -160 1651, -220 1025, 70 1015 L 1010 1015 C 1180 1010, 1240 930, 1260 770" stroke="#3b82f6" stroke-width="26.0" filter="url(#glowB)" opacity=".55"/><path d="M -120 1651 C -160 1651, -220 1025, 70 1015 L 1010 1015 C 1180 1010, 1240 930, 1260 770" stroke="#93c5fd" stroke-width="9.0" filter="url(#glowA)"/><path d="M -120 1651 C -160 1651, -220 1025, 70 1015 L 1010 1015 C 1180 1010, 1240 930, 1260 770" stroke="#eff6ff" stroke-width="3.2"/></g>
+<g id="tr2" class="trail" style="opacity:0"><path d="M 1260 770 C 940 1320, 70 1390, 270 1230 Q 360 910 450 1040 Q 540 720 630 850 Q 720 530 810 660 L 540 840" stroke="#3b82f6" stroke-width="26.0" filter="url(#glowB)" opacity=".55"/><path d="M 1260 770 C 940 1320, 70 1390, 270 1230 Q 360 910 450 1040 Q 540 720 630 850 Q 720 530 810 660 L 540 840" stroke="#93c5fd" stroke-width="9.0" filter="url(#glowA)"/><path d="M 1260 770 C 940 1320, 70 1390, 270 1230 Q 360 910 450 1040 Q 540 720 630 850 Q 720 530 810 660 L 540 840" stroke="#eff6ff" stroke-width="3.2"/></g>
+<g id="tr3" class="trail" style="opacity:0"><path d="M 540 840 C 380 186, 286 286, 282 326 L 798 326 Q 854 326 854 382 L 854 1418 Q 854 1474 798 1474 L 282 1474 Q 226 1474 226 1418 L 226 382 Q 226 326 282 326" stroke="#3b82f6" stroke-width="18.2" filter="url(#glowB)" opacity=".55"/><path d="M 540 840 C 380 186, 286 286, 282 326 L 798 326 Q 854 326 854 382 L 854 1418 Q 854 1474 798 1474 L 282 1474 Q 226 1474 226 1418 L 226 382 Q 226 326 282 326" stroke="#93c5fd" stroke-width="6.3" filter="url(#glowA)"/><path d="M 540 840 C 380 186, 286 286, 282 326 L 798 326 Q 854 326 854 382 L 854 1418 Q 854 1474 798 1474 L 282 1474 Q 226 1474 226 1418 L 226 382 Q 226 326 282 326" stroke="#eff6ff" stroke-width="2.2"/></g>
+<g id="tr4" class="trail" style="opacity:0"><path d="M 854 526 C 1034 924, 800 1164, 540 1124" stroke="#3b82f6" stroke-width="15.6" filter="url(#glowB)" opacity=".55"/><path d="M 854 526 C 1034 924, 800 1164, 540 1124" stroke="#93c5fd" stroke-width="5.4" filter="url(#glowA)"/><path d="M 854 526 C 1034 924, 800 1164, 540 1124" stroke="#eff6ff" stroke-width="1.9"/></g>
+<g id="tr5" class="trail" style="opacity:0"><path d="M 540.0 510.0 A 270 270 0 1 1 409.9 543.4" stroke="#3b82f6" stroke-width="31.2" filter="url(#glowB)" opacity=".55"/><path d="M 540.0 510.0 A 270 270 0 1 1 409.9 543.4" stroke="#93c5fd" stroke-width="10.8" filter="url(#glowA)"/><path d="M 540.0 510.0 A 270 270 0 1 1 409.9 543.4" stroke="#eff6ff" stroke-width="3.8"/></g>
+<g id="tr6" class="trail" style="opacity:0"><path d="M 540 320 C -100 520, 0 1002, 80 1002 L 980 1002 C 1100 1002, 1100 1252, 980 1252 L 120 1252" stroke="#3b82f6" stroke-width="20.8" filter="url(#glowB)" opacity=".55"/><path d="M 540 320 C -100 520, 0 1002, 80 1002 L 980 1002 C 1100 1002, 1100 1252, 980 1252 L 120 1252" stroke="#93c5fd" stroke-width="7.2" filter="url(#glowA)"/><path d="M 540 320 C -100 520, 0 1002, 80 1002 L 980 1002 C 1100 1002, 1100 1252, 980 1252 L 120 1252" stroke="#eff6ff" stroke-width="2.6"/></g>
+<g id="tr7" class="trail" style="opacity:0"><path d="M 88 418 L 992 418 Q 1032 418 1032 458 L 1032 1342 Q 1032 1382 992 1382 L 88 1382 Q 48 1382 48 1342 L 48 458 Q 48 418 88 418" stroke="#3b82f6" stroke-width="18.2" filter="url(#glowB)" opacity=".55"/><path d="M 88 418 L 992 418 Q 1032 418 1032 458 L 1032 1342 Q 1032 1382 992 1382 L 88 1382 Q 48 1382 48 1342 L 48 458 Q 48 418 88 418" stroke="#93c5fd" stroke-width="6.3" filter="url(#glowA)"/><path d="M 88 418 L 992 418 Q 1032 418 1032 458 L 1032 1342 Q 1032 1382 992 1382 L 88 1382 Q 48 1382 48 1342 L 48 458 Q 48 418 88 418" stroke="#eff6ff" stroke-width="2.2"/></g>
+<g id="tr8" class="trail" style="opacity:0"><path d="M 540 470 Q 360 390 180 860" stroke="#3b82f6" stroke-width="14.3" filter="url(#glowB)" opacity=".55"/><path d="M 540 470 Q 360 390 180 860" stroke="#93c5fd" stroke-width="5.0" filter="url(#glowA)"/><path d="M 540 470 Q 360 390 180 860" stroke="#eff6ff" stroke-width="1.8"/></g>
+<g id="tr9" class="trail" style="opacity:0"><path d="M 540 470 Q 450 390 360 1130" stroke="#3b82f6" stroke-width="14.3" filter="url(#glowB)" opacity=".55"/><path d="M 540 470 Q 450 390 360 1130" stroke="#93c5fd" stroke-width="5.0" filter="url(#glowA)"/><path d="M 540 470 Q 450 390 360 1130" stroke="#eff6ff" stroke-width="1.8"/></g>
+<g id="tr10" class="trail" style="opacity:0"><path d="M 540 470 Q 540 390 540 880" stroke="#3b82f6" stroke-width="14.3" filter="url(#glowB)" opacity=".55"/><path d="M 540 470 Q 540 390 540 880" stroke="#93c5fd" stroke-width="5.0" filter="url(#glowA)"/><path d="M 540 470 Q 540 390 540 880" stroke="#eff6ff" stroke-width="1.8"/></g>
+<g id="tr11" class="trail" style="opacity:0"><path d="M 540 470 Q 630 390 720 1130" stroke="#3b82f6" stroke-width="14.3" filter="url(#glowB)" opacity=".55"/><path d="M 540 470 Q 630 390 720 1130" stroke="#93c5fd" stroke-width="5.0" filter="url(#glowA)"/><path d="M 540 470 Q 630 390 720 1130" stroke="#eff6ff" stroke-width="1.8"/></g>
+<g id="tr12" class="trail" style="opacity:0"><path d="M 540 470 Q 720 390 900 860" stroke="#3b82f6" stroke-width="14.3" filter="url(#glowB)" opacity=".55"/><path d="M 540 470 Q 720 390 900 860" stroke="#93c5fd" stroke-width="5.0" filter="url(#glowA)"/><path d="M 540 470 Q 720 390 900 860" stroke="#eff6ff" stroke-width="1.8"/></g>
+<g id="tr13" class="trail" style="opacity:0"><path d="M -100 1160 C 220 1170, -20 875, 90 865 L 990 865" stroke="#3b82f6" stroke-width="26.0" filter="url(#glowB)" opacity=".55"/><path d="M -100 1160 C 220 1170, -20 875, 90 865 L 990 865" stroke="#93c5fd" stroke-width="9.0" filter="url(#glowA)"/><path d="M -100 1160 C 220 1170, -20 875, 90 865 L 990 865" stroke="#eff6ff" stroke-width="3.2"/></g>
+</svg>
+<div id="tr1h" class="head" style="opacity:0"></div>
+<div id="tr2h" class="head" style="opacity:0"></div>
+<div id="tr3h" class="head" style="opacity:0"></div>
+<div id="tr4h" class="head" style="opacity:0"></div>
+<div id="tr5h" class="head" style="opacity:0"></div>
+<div id="tr6h" class="head" style="opacity:0"></div>
+<div id="tr7h" class="head" style="opacity:0"></div>
+<div id="tr8h" class="head" style="opacity:0"></div>
+<div id="tr9h" class="head" style="opacity:0"></div>
+<div id="tr10h" class="head" style="opacity:0"></div>
+<div id="tr11h" class="head" style="opacity:0"></div>
+<div id="tr12h" class="head" style="opacity:0"></div>
+<div id="tr13h" class="head" style="opacity:0"></div>
+<audio id="mus0" class="clip" src="assets/audio/music-trail.mp3" data-start="1.200" data-duration="3.932" data-media-start="7.91" data-volume="0.62" data-fade-out="0" data-track-index="3"></audio>
+<audio id="mus1" class="clip" src="assets/audio/music-trail.mp3" data-start="5.132" data-duration="3.932" data-media-start="7.91" data-volume="0.62" data-fade-out="0" data-track-index="4"></audio>
+<audio id="mus2" class="clip" src="assets/audio/music-trail.mp3" data-start="9.064" data-duration="3.932" data-media-start="7.91" data-volume="0.62" data-fade-out="0" data-track-index="3"></audio>
+<audio id="mus3" class="clip" src="assets/audio/music-trail.mp3" data-start="12.996" data-duration="3.004" data-media-start="7.91" data-volume="0.62" data-fade-out="0.6" data-track-index="4"></audio>
+<audio id="fx0" class="clip" src="assets/sfx/riser.mp3" data-start="0.000" data-duration="1.20" data-media-start="1.75" data-volume="0.6" data-track-index="8"></audio>
+<audio id="fx1" class="clip" src="assets/sfx/whoosh-cinematic.mp3" data-start="0.050" data-duration="4.00" data-media-start="0.0" data-volume="0.4" data-track-index="9"></audio>
+<audio id="fx2" class="clip" src="assets/sfx/impact-bass-2.mp3" data-start="1.200" data-duration="2.59" data-media-start="0.0" data-volume="0.9" data-track-index="10"></audio>
+<audio id="fx3" class="clip" src="assets/sfx/sparkle.mp3" data-start="1.250" data-duration="1.80" data-media-start="0.0" data-volume="0.5" data-track-index="8"></audio>
+<audio id="fx4" class="clip" src="assets/sfx/pop.mp3" data-start="1.949" data-duration="0.72" data-media-start="0.0" data-volume="0.4" data-track-index="11"></audio>
+<audio id="fx5" class="clip" src="assets/sfx/pop.mp3" data-start="2.091" data-duration="0.72" data-media-start="0.0" data-volume="0.4" data-track-index="12"></audio>
+<audio id="fx6" class="clip" src="assets/sfx/pop.mp3" data-start="2.234" data-duration="0.72" data-media-start="0.0" data-volume="0.4" data-track-index="13"></audio>
+<audio id="fx7" class="clip" src="assets/sfx/whoosh-short.mp3" data-start="2.250" data-duration="0.57" data-media-start="0.0" data-volume="0.4" data-track-index="14"></audio>
+<audio id="fx8" class="clip" src="assets/sfx/pop.mp3" data-start="2.377" data-duration="0.72" data-media-start="0.0" data-volume="0.4" data-track-index="15"></audio>
+<audio id="fx9" class="clip" src="assets/sfx/typing.mp3" data-start="2.750" data-duration="0.90" data-media-start="0" data-volume="0.5" data-track-index="11"></audio>
+<audio id="fx10" class="clip" src="assets/sfx/send-tap.mp3" data-start="3.720" data-duration="0.63" data-media-start="0.0" data-volume="0.7" data-track-index="8"></audio>
+<audio id="fx11" class="clip" src="assets/sfx/ding-correct.mp3" data-start="4.000" data-duration="0.84" data-media-start="0.0" data-volume="0.75" data-track-index="10"></audio>
+<audio id="fx12" class="clip" src="assets/sfx/ding-correct.mp3" data-start="4.180" data-duration="0.84" data-media-start="0.0" data-volume="0.4" data-track-index="9"></audio>
+<audio id="fx13" class="clip" src="assets/sfx/error-blip.mp3" data-start="4.360" data-duration="0.63" data-media-start="0.0" data-volume="0.55" data-track-index="11"></audio>
+<audio id="fx14" class="clip" src="assets/sfx/impact-bass-2.mp3" data-start="5.130" data-duration="2.59" data-media-start="0.0" data-volume="0.8" data-track-index="8"></audio>
+<audio id="fx15" class="clip" src="assets/sfx/click-soft.mp3" data-start="5.480" data-duration="0.37" data-media-start="0.0" data-volume="0.45" data-track-index="9"></audio>
+<audio id="fx16" class="clip" src="assets/sfx/click-soft.mp3" data-start="5.680" data-duration="0.37" data-media-start="0.0" data-volume="0.45" data-track-index="10"></audio>
+<audio id="fx17" class="clip" src="assets/sfx/click-soft.mp3" data-start="5.880" data-duration="0.37" data-media-start="0.0" data-volume="0.45" data-track-index="9"></audio>
+<audio id="fx18" class="clip" src="assets/sfx/click-soft.mp3" data-start="6.080" data-duration="0.37" data-media-start="0.0" data-volume="0.45" data-track-index="10"></audio>
+<audio id="fx19" class="clip" src="assets/sfx/click-soft.mp3" data-start="6.280" data-duration="0.37" data-media-start="0.0" data-volume="0.45" data-track-index="9"></audio>
+<audio id="fx20" class="clip" src="assets/sfx/whoosh-short.mp3" data-start="6.600" data-duration="0.57" data-media-start="0.0" data-volume="0.4" data-track-index="10"></audio>
+<audio id="fx21" class="clip" src="assets/sfx/sparkle.mp3" data-start="6.620" data-duration="1.80" data-media-start="0.0" data-volume="0.5" data-track-index="11"></audio>
+<audio id="fx22" class="clip" src="assets/sfx/whoosh-short.mp3" data-start="7.050" data-duration="0.57" data-media-start="0.0" data-volume="0.35" data-track-index="9"></audio>
+<audio id="fx23" class="clip" src="assets/sfx/pop.mp3" data-start="7.700" data-duration="0.72" data-media-start="0.0" data-volume="0.32" data-track-index="9"></audio>
+<audio id="fx24" class="clip" src="assets/sfx/pop.mp3" data-start="7.829" data-duration="0.72" data-media-start="0.0" data-volume="0.35" data-track-index="8"></audio>
+<audio id="fx25" class="clip" src="assets/sfx/pop.mp3" data-start="7.958" data-duration="0.72" data-media-start="0.0" data-volume="0.38" data-track-index="10"></audio>
+<audio id="fx26" class="clip" src="assets/sfx/pop.mp3" data-start="8.088" data-duration="0.72" data-media-start="0.0" data-volume="0.41000000000000003" data-track-index="12"></audio>
+<audio id="fx27" class="clip" src="assets/sfx/pop.mp3" data-start="8.217" data-duration="0.72" data-media-start="0.0" data-volume="0.5" data-track-index="13"></audio>
+<audio id="fx28" class="clip" src="assets/sfx/pop.mp3" data-start="8.346" data-duration="0.72" data-media-start="0.0" data-volume="0.47" data-track-index="14"></audio>
+<audio id="fx29" class="clip" src="assets/sfx/pop.mp3" data-start="8.475" data-duration="0.72" data-media-start="0.0" data-volume="0.44" data-track-index="9"></audio>
+<audio id="fx30" class="clip" src="assets/sfx/sparkle.mp3" data-start="8.550" data-duration="1.80" data-media-start="0.0" data-volume="0.55" data-track-index="11"></audio>
+<audio id="fx31" class="clip" src="assets/sfx/impact-bass-2.mp3" data-start="9.060" data-duration="2.59" data-media-start="0.0" data-volume="0.7" data-track-index="8"></audio>
+<audio id="fx32" class="clip" src="assets/sfx/typing.mp3" data-start="9.360" data-duration="0.50" data-media-start="0" data-volume="0.45" data-track-index="9"></audio>
+<audio id="fx33" class="clip" src="assets/sfx/notification.mp3" data-start="9.910" data-duration="2.46" data-media-start="0.0" data-volume="0.5" data-track-index="9"></audio>
+<audio id="fx34" class="clip" src="assets/sfx/whoosh-short.mp3" data-start="10.950" data-duration="0.57" data-media-start="0.0" data-volume="0.4" data-track-index="10"></audio>
+<audio id="fx35" class="clip" src="assets/sfx/pop.mp3" data-start="11.540" data-duration="0.72" data-media-start="0.0" data-volume="0.45" data-track-index="11"></audio>
+<audio id="fx36" class="clip" src="assets/sfx/pop.mp3" data-start="11.820" data-duration="0.72" data-media-start="0.0" data-volume="0.45" data-track-index="8"></audio>
+<audio id="fx37" class="clip" src="assets/sfx/pop.mp3" data-start="12.100" data-duration="0.72" data-media-start="0.0" data-volume="0.45" data-track-index="10"></audio>
+<audio id="fx38" class="clip" src="assets/sfx/pop.mp3" data-start="12.380" data-duration="0.72" data-media-start="0.0" data-volume="0.45" data-track-index="11"></audio>
+<audio id="fx39" class="clip" src="assets/sfx/whoosh-cinematic.mp3" data-start="12.650" data-duration="3.35" data-media-start="0.0" data-volume="0.4" data-track-index="8"></audio>
+<audio id="fx40" class="clip" src="assets/sfx/pop.mp3" data-start="12.660" data-duration="0.72" data-media-start="0.0" data-volume="0.45" data-track-index="9"></audio>
+<audio id="fx41" class="clip" src="assets/sfx/impact-bass-1.mp3" data-start="13.420" data-duration="2.12" data-media-start="0.0" data-volume="0.85" data-track-index="9"></audio>
+<audio id="fx42" class="clip" src="assets/sfx/sparkle.mp3" data-start="13.450" data-duration="1.80" data-media-start="0.0" data-volume="0.5" data-track-index="10"></audio>
+<audio id="fx43" class="clip" src="assets/sfx/sonic-logo.mp3" data-start="14.250" data-duration="1.52" data-media-start="0.0" data-volume="0.8" data-track-index="11"></audio>
 </div>
 <script>
   window.__timelines = window.__timelines || {};
   const tl = gsap.timeline({ paused: true });
-  tl.set("#ph2c", { scale: 0.60465, x: -159.5, y: -15.1 }, 0.000);
-tl.to("#ph2c", { ...{ scale: 0.63256, x: -180.7, y: -77.4 }, duration: 2.0, ease: "none" }, 0.000);
-tl.set("#ph2", { autoAlpha: 1 }, 0.000); tl.fromTo("#ph2", { scale: 0.97 }, { scale: 1, duration: 0.3, ease: "power3.out", immediateRender: false }, 0.000); tl.set("#ph2", { autoAlpha: 0 }, 1.999);
-{ const el=document.querySelector("#cnt .v"); const st={v:0}; tl.fromTo(st,{v:0},{v:480,duration:0.85,ease:"power2.out",onUpdate:()=>{el.textContent=String(Math.round(st.v));}},0.150); }
-tl.fromTo("#ring1",{opacity:0,scale:1.25},{opacity:1,scale:1,duration:0.18,ease:"power3.out",transformOrigin:"50% 50%",immediateRender:false},1.100); tl.to("#ring1",{opacity:0.35,duration:0.18,yoyo:true,repeat:3},1.300);
-document.querySelectorAll("#t3 .w").forEach((w,i)=>tl.fromTo(w,{opacity:0,y:28,filter:"blur(8px)"},{opacity:1,y:0,filter:"blur(0px)",duration:0.32,ease:"power3.out"},0.000+i*0.045));
-tl.to("#t3", { opacity: 0, y: -16, filter: "blur(6px)", duration: 0.22, ease: "power2.in" }, 1.760);
-tl.fromTo("#im4 img",{scale:1.05,x:0,y:0},{scale:1.12,x:0,y:0,duration:1.5,ease:"none"},2.000);
-document.querySelectorAll("#t5 .w").forEach((w,i)=>tl.fromTo(w,{opacity:0,y:28,filter:"blur(8px)"},{opacity:1,y:0,filter:"blur(0px)",duration:0.32,ease:"power3.out"},2.000+i*0.045));
-tl.to("#t5", { opacity: 0, y: -16, filter: "blur(6px)", duration: 0.22, ease: "power2.in" }, 3.260);
-tl.fromTo("#im6 img",{scale:1.12,x:0,y:0},{scale:1.04,x:0,y:0,duration:1.5,ease:"none"},3.500);
-document.querySelectorAll("#t7 .w").forEach((w,i)=>tl.fromTo(w,{opacity:0,y:28,filter:"blur(8px)"},{opacity:1,y:0,filter:"blur(0px)",duration:0.32,ease:"power3.out"},3.500+i*0.045));
-tl.to("#t7", { opacity: 0, y: -16, filter: "blur(6px)", duration: 0.22, ease: "power2.in" }, 4.760);
-document.querySelectorAll("#t9 .w").forEach((w,i)=>tl.fromTo(w,{opacity:0,y:28,filter:"blur(8px)"},{opacity:1,y:0,filter:"blur(0px)",duration:0.32,ease:"power3.out"},5.000+i*0.045));
-tl.to("#t9", { opacity: 0, y: -16, filter: "blur(6px)", duration: 0.22, ease: "power2.in" }, 6.260);
-tl.fromTo("#t9",{scale:1.0},{scale:1.05,duration:1.5,ease:"none",transformOrigin:"50% 50%"},5.000);
-tl.set("#ph11c", { scale: 0.62791, x: -105.0, y: 0.0 }, 6.500);
-tl.to("#ph11c", { ...{ scale: 0.66047, x: -126.0, y: 0.0 }, duration: 1.5, ease: "none" }, 6.500);
-tl.set("#ph11", { autoAlpha: 1 }, 6.500); tl.fromTo("#ph11", { scale: 0.97 }, { scale: 1, duration: 0.3, ease: "power3.out", immediateRender: false }, 6.500); tl.set("#ph11", { autoAlpha: 0 }, 7.999);
-document.querySelectorAll("#t12 .w").forEach((w,i)=>tl.fromTo(w,{opacity:0,y:28,filter:"blur(8px)"},{opacity:1,y:0,filter:"blur(0px)",duration:0.32,ease:"power3.out"},6.500+i*0.045));
-tl.to("#t12", { opacity: 0, y: -16, filter: "blur(6px)", duration: 0.22, ease: "power2.in" }, 7.760);
-tl.set("#ph13c", { scale: 0.59535, x: -84.0, y: -243.0 }, 8.000);
-tl.to("#ph13c", { ...{ scale: 0.62326, x: -102.0, y: -322.3 }, duration: 4.0, ease: "none" }, 8.000);
-tl.set("#ph13", { autoAlpha: 1 }, 8.000); tl.fromTo("#ph13", { scale: 0.97 }, { scale: 1, duration: 0.3, ease: "power3.out", immediateRender: false }, 8.000); tl.set("#ph13", { autoAlpha: 0 }, 11.999);
-document.querySelectorAll("#t14 .w").forEach((w,i)=>tl.fromTo(w,{opacity:0,y:28,filter:"blur(8px)"},{opacity:1,y:0,filter:"blur(0px)",duration:0.32,ease:"power3.out"},8.000+i*0.045));
-tl.to("#t14", { opacity: 0, y: -16, filter: "blur(6px)", duration: 0.22, ease: "power2.in" }, 11.760);
-tl.set("#ph15c", { scale: 0.67442, x: -135.0, y: -585.7 }, 12.000);
-tl.set("#ph15", { autoAlpha: 1 }, 12.000); tl.fromTo("#ph15", { scale: 0.97 }, { scale: 1, duration: 0.3, ease: "power3.out", immediateRender: false }, 12.000); tl.set("#ph15", { autoAlpha: 0 }, 12.999);
-tl.set("#ph16c", { scale: 0.88372, x: -477.7, y: -366.3 }, 13.000);
-tl.to("#ph16c", { ...{ scale: 0.93023, x: -537.2, y: -438.4 }, duration: 1.5, ease: "none" }, 13.000);
-tl.set("#ph16", { autoAlpha: 1 }, 13.000); tl.fromTo("#ph16", { scale: 0.97 }, { scale: 1, duration: 0.3, ease: "power3.out", immediateRender: false }, 13.000); tl.set("#ph16", { autoAlpha: 0 }, 14.499);
-document.querySelectorAll("#t17 .w").forEach((w,i)=>tl.fromTo(w,{opacity:0,y:28,filter:"blur(8px)"},{opacity:1,y:0,filter:"blur(0px)",duration:0.32,ease:"power3.out"},13.000+i*0.045));
-tl.to("#t17", { opacity: 0, y: -16, filter: "blur(6px)", duration: 0.22, ease: "power2.in" }, 14.260);
-tl.set("#ph18c", { scale: 0.60465, x: -90.0, y: -390.6 }, 14.500);
-tl.to("#ph18c", { ...{ scale: 0.62326, x: -102.0, y: -442.6 }, duration: 2.5, ease: "none" }, 14.500);
-tl.set("#ph18", { autoAlpha: 1 }, 14.500); tl.fromTo("#ph18", { scale: 0.97 }, { scale: 1, duration: 0.3, ease: "power3.out", immediateRender: false }, 14.500); tl.set("#ph18", { autoAlpha: 0 }, 16.999);
-document.querySelectorAll("#t19 .w").forEach((w,i)=>tl.fromTo(w,{opacity:0,y:28,filter:"blur(8px)"},{opacity:1,y:0,filter:"blur(0px)",duration:0.32,ease:"power3.out"},14.500+i*0.045));
-tl.to("#t19", { opacity: 0, y: -16, filter: "blur(6px)", duration: 0.22, ease: "power2.in" }, 16.760);
-tl.fromTo("#q20",{opacity:0,y:30,scale:0.96},{opacity:1,y:0,scale:1,duration:0.4,ease:"power3.out",transformOrigin:"50% 50%"},14.750);
-tl.set("#q20 b", { color: "#e6ebf5", textDecorationColor: "transparent" }, 14.750); const bs=document.querySelectorAll("#q20 b"); bs.forEach((b,i)=>{ tl.to(b, { color: b.classList.contains("g") ? "#4ade80" : "#f87171", duration: 0.25, ease: "power2.out" }, 15.400+i*0.45); });
-tl.set("#ph22c", { scale: 0.54884, x: -54.0, y: -173.3 }, 17.000);
-tl.to("#ph22c", { ...{ scale: 0.56744, x: -66.0, y: -286.6 }, duration: 1.5, ease: "none" }, 17.000);
-tl.set("#ph22", { autoAlpha: 1 }, 17.000); tl.fromTo("#ph22", { scale: 0.97 }, { scale: 1, duration: 0.3, ease: "power3.out", immediateRender: false }, 17.000); tl.set("#ph22", { autoAlpha: 0 }, 18.499);
-document.querySelectorAll("#t23 .w").forEach((w,i)=>tl.fromTo(w,{opacity:0,y:28,filter:"blur(8px)"},{opacity:1,y:0,filter:"blur(0px)",duration:0.32,ease:"power3.out"},17.000+i*0.045));
-tl.to("#t23", { opacity: 0, y: -16, filter: "blur(6px)", duration: 0.22, ease: "power2.in" }, 18.260);
-tl.fromTo("#s24",{opacity:0,y:14},{opacity:1,y:0,duration:0.3,ease:"power3.out"},17.100); tl.to("#s24",{opacity:0,duration:0.2},18.280);
-tl.set("#ph25c", { scale: 0.53488, x: -45.0, y: 0.0 }, 18.500);
-tl.to("#ph25c", { ...{ scale: 0.55814, x: -60.0, y: 0.0 }, duration: 1.5, ease: "none" }, 18.500);
-tl.set("#ph25", { autoAlpha: 1 }, 18.500); tl.fromTo("#ph25", { scale: 0.97 }, { scale: 1, duration: 0.3, ease: "power3.out", immediateRender: false }, 18.500); tl.set("#ph25", { autoAlpha: 0 }, 19.999);
-document.querySelectorAll("#t26 .w").forEach((w,i)=>tl.fromTo(w,{opacity:0,y:28,filter:"blur(8px)"},{opacity:1,y:0,filter:"blur(0px)",duration:0.32,ease:"power3.out"},18.500+i*0.045));
-tl.to("#t26", { opacity: 0, y: -16, filter: "blur(6px)", duration: 0.22, ease: "power2.in" }, 19.760);
-tl.fromTo("#s27",{opacity:0,y:14},{opacity:1,y:0,duration:0.3,ease:"power3.out"},18.600); tl.to("#s27",{opacity:0,duration:0.2},19.780);
-tl.set("#ph28c", { scale: 0.54884, x: -54.0, y: -36.0 }, 20.000);
-tl.to("#ph28c", { ...{ scale: 0.56744, x: -66.0, y: -87.7 }, duration: 1.5, ease: "none" }, 20.000);
-tl.set("#ph28", { autoAlpha: 1 }, 20.000); tl.fromTo("#ph28", { scale: 0.97 }, { scale: 1, duration: 0.3, ease: "power3.out", immediateRender: false }, 20.000); tl.set("#ph28", { autoAlpha: 0 }, 21.499);
-document.querySelectorAll("#t29 .w").forEach((w,i)=>tl.fromTo(w,{opacity:0,y:28,filter:"blur(8px)"},{opacity:1,y:0,filter:"blur(0px)",duration:0.32,ease:"power3.out"},20.000+i*0.045));
-tl.to("#t29", { opacity: 0, y: -16, filter: "blur(6px)", duration: 0.22, ease: "power2.in" }, 21.260);
-tl.fromTo("#s30",{opacity:0,y:14},{opacity:1,y:0,duration:0.3,ease:"power3.out"},20.100); tl.to("#s30",{opacity:0,duration:0.2},21.280);
-tl.set("#ph31c", { scale: 0.54884, x: -54.0, y: 0.0 }, 21.500);
-tl.to("#ph31c", { ...{ scale: 0.56744, x: -66.0, y: -2.6 }, duration: 1.5, ease: "none" }, 21.500);
-tl.set("#ph31", { autoAlpha: 1 }, 21.500); tl.fromTo("#ph31", { scale: 0.97 }, { scale: 1, duration: 0.3, ease: "power3.out", immediateRender: false }, 21.500); tl.set("#ph31", { autoAlpha: 0 }, 22.999);
-document.querySelectorAll("#t32 .w").forEach((w,i)=>tl.fromTo(w,{opacity:0,y:28,filter:"blur(8px)"},{opacity:1,y:0,filter:"blur(0px)",duration:0.32,ease:"power3.out"},21.500+i*0.045));
-tl.to("#t32", { opacity: 0, y: -16, filter: "blur(6px)", duration: 0.22, ease: "power2.in" }, 22.760);
-tl.fromTo("#s33",{opacity:0,y:14},{opacity:1,y:0,duration:0.3,ease:"power3.out"},21.600); tl.to("#s33",{opacity:0,duration:0.2},22.780);
-tl.set("#ph35c", { scale: 0.55814, x: -60.0, y: 0.0 }, 23.000);
-tl.to("#ph35c", { ...{ scale: 0.58605, x: -78.0, y: 0.0 }, duration: 3.0, ease: "none" }, 23.000);
-tl.set("#ph35", { autoAlpha: 1 }, 23.000); tl.fromTo("#ph35", { scale: 0.97 }, { scale: 1, duration: 0.3, ease: "power3.out", immediateRender: false }, 23.000); tl.set("#ph35", { autoAlpha: 0 }, 25.999);
-document.querySelectorAll("#t36 .w").forEach((w,i)=>tl.fromTo(w,{opacity:0,y:28,filter:"blur(8px)"},{opacity:1,y:0,filter:"blur(0px)",duration:0.32,ease:"power3.out"},23.000+i*0.045));
-tl.to("#t36", { opacity: 0, y: -16, filter: "blur(6px)", duration: 0.22, ease: "power2.in" }, 23.760);
-document.querySelectorAll("#t37 .w").forEach((w,i)=>tl.fromTo(w,{opacity:0,y:28,filter:"blur(8px)"},{opacity:1,y:0,filter:"blur(0px)",duration:0.32,ease:"power3.out"},24.000+i*0.045));
-tl.to("#t37", { opacity: 0, y: -16, filter: "blur(6px)", duration: 0.22, ease: "power2.in" }, 24.760);
-document.querySelectorAll("#t38 .w").forEach((w,i)=>tl.fromTo(w,{opacity:0,y:28,filter:"blur(8px)"},{opacity:1,y:0,filter:"blur(0px)",duration:0.32,ease:"power3.out"},25.000+i*0.045));
-tl.to("#t38", { opacity: 0, y: -16, filter: "blur(6px)", duration: 0.22, ease: "power2.in" }, 25.760);
-tl.fromTo("#lg40 .logo",{scale:2.2,opacity:0,filter:"blur(14px)"},{scale:1,opacity:1,filter:"blur(0px)",duration:0.3,ease:"power4.out",transformOrigin:"50% 50%",immediateRender:false},26.020);
-tl.fromTo(".url",{opacity:0,y:20},{opacity:1,y:0,duration:0.35,ease:"power3.out",immediateRender:false},26.150);
-tl.fromTo(".btn",{opacity:0,y:30,scale:0.94},{opacity:1,y:0,scale:1,duration:0.4,ease:"power4.out",immediateRender:false},26.400); tl.to(".btn",{scale:0.96,duration:0.08,yoyo:true,repeat:1},27.300);
-tl.to("#lg40 .logo",{scale:1.035,duration:3.60,ease:"sine.inOut",transformOrigin:"50% 50%"},26.400); tl.to(".btn",{scale:1.03,duration:0.8,ease:"sine.inOut",yoyo:true,repeat:3},27.500);
-  window.__timelines["ad30a"] = tl;
-</script>
-</body></html>
+  const trail = (gid, at, dur, tail, ease, hid, persistTo) => {
+    const g = document.getElementById(gid); const ps = [...g.querySelectorAll('path')]; const L = ps[0].getTotalLength(); const h = hid ? document.getElementById(hid) : null;
+    const st = { p: 0 };
+    const apply = () => { const e = st.p * (L + tail); const s = tail ? Math.max(0, e - tail) : 0; const ee = Math.min(e, L);
+      ps.forEach(p => { p.style.strokeDasharray = `${Math.max(0.01, ee - s)} ${L * 3}`; p.style.strokeDashoffset = `${-s}`; });
+      if (h) { const pt = ps[0].getPointAtLength(ee); h.style.transform = `translate(${pt.x}px, ${pt.y}px)`; } };
+    tl.set(g, { opacity: 1 }, at);
+    tl.fromTo(st, { p: 0 }, { p: 1, duration: dur, ease, onUpdate: apply, immediateRender: false }, at);
+    if (h) { tl.set(h, { opacity: 1 }, at); tl.to(h, { opacity: 0, duration: 0.18 }, at + dur); }
+    if (persistTo !== null) tl.to(g, { opacity: 0, duration: 0.3, ease: "power2.in" }, persistTo); else if (!tail) tl.to(g, { opacity: 0, duration: 0.5 }, at + dur + 1.2);
+  };
+  const typeTo = (sel, text, at, dur) => { const el = document.querySelector(sel); const st = { n: 0 }; tl.fromTo(st, { n: 0 }, { n: text.length, duration: dur, ease: "none", onUpdate: () => { el.textContent = text.slice(0, Math.round(st.n)); }, immediateRender: false }, at); };
+  const countUp = (sel, a, b, at, dur) => { const el = document.querySelector(sel); const st = { v: a }; tl.fromTo(st, { v: a }, { v: b, duration: dur, ease: "power2.out", onUpdate: () => { el.textContent = String(Math.round(st.v)); }, immediateRender: false }, at); };
+  const countDown = (sel, a, b, at, dur) => { const el = document.querySelector(sel); const st = { v: a }; tl.fromTo(st, { v: a }, { v: b, duration: dur, ease: "none", onUpdate: () => { const s = Math.round(st.v); el.textContent = `${Math.floor(s / 60)}:${String(s % 60).padStart(2, "0")}`; }, immediateRender: false }, at); };
+  tl.fromTo("#haze", { x: -80, y: 30, scale: 0.95 }, { x: 80, y: -30, scale: 1.12, duration: 16.0, ease: "sine.inOut" }, 0);
+
+    trail("tr1", 0.050, 1.100, 0, "power2.inOut", "tr1h", 1.75);
+  tl.fromTo("#s1 .logo",{clipPath:"inset(0 100% 0 0)"},{clipPath:"inset(0 0% 0 0)",duration:0.62,ease:"none"},0.42);
+  tl.fromTo("#s1 .logo",{scale:1},{scale:1.06,duration:0.12,ease:"power3.out",yoyo:true,repeat:1,transformOrigin:"50% 50%"},1.200); tl.fromTo("#s1flash",{opacity:0},{opacity:0.9,duration:0.08},1.200); tl.to("#s1flash",{opacity:0,duration:0.5},1.280);
+  tl.to("#s1 .logo",{scale:0.55,opacity:0,filter:"blur(14px)",duration:0.4,ease:"power3.in",transformOrigin:"50% 50%"},1.55);
+  trail("tr2", 1.550, 0.950, 420, "power1.in", "tr2h", null);
+  tl.fromTo("#chip0 .chip",{opacity:0,y:30},{opacity:1,y:0,duration:0.25,ease:"power3.out",immediateRender:false},1.550); tl.to("#chip0 .chip",{backgroundColor:"#2563eb",borderColor:"#bfdbfe",color:"#fff",boxShadow:"0 0 50px #3b82f6",duration:0.12},1.949); tl.to("#chip0",{opacity:0,scale:1.3,duration:0.25},2.199);
+  tl.fromTo("#chip1 .chip",{opacity:0,y:30},{opacity:1,y:0,duration:0.25,ease:"power3.out",immediateRender:false},1.600); tl.to("#chip1 .chip",{backgroundColor:"#2563eb",borderColor:"#bfdbfe",color:"#fff",boxShadow:"0 0 50px #3b82f6",duration:0.12},2.091); tl.to("#chip1",{opacity:0,scale:1.3,duration:0.25},2.341);
+  tl.fromTo("#chip2 .chip",{opacity:0,y:30},{opacity:1,y:0,duration:0.25,ease:"power3.out",immediateRender:false},1.650); tl.to("#chip2 .chip",{backgroundColor:"#2563eb",borderColor:"#bfdbfe",color:"#fff",boxShadow:"0 0 50px #3b82f6",duration:0.12},2.234); tl.to("#chip2",{opacity:0,scale:1.3,duration:0.25},2.484);
+  tl.fromTo("#chip3 .chip",{opacity:0,y:30},{opacity:1,y:0,duration:0.25,ease:"power3.out",immediateRender:false},1.700); tl.to("#chip3 .chip",{backgroundColor:"#2563eb",borderColor:"#bfdbfe",color:"#fff",boxShadow:"0 0 50px #3b82f6",duration:0.12},2.377); tl.to("#chip3",{opacity:0,scale:1.3,duration:0.25},2.627);
+  trail("tr3", 2.300, 0.900, 0, "power2.inOut", "tr3h", 4.93);
+  tl.fromTo("#s3 .phone",{rotationY:-38,rotationX:16,scale:0.78,opacity:0,filter:"blur(10px)"},{rotationY:-10,rotationX:5,scale:0.96,opacity:1,filter:"blur(0px)",duration:0.6,ease:"power3.out",immediateRender:false},2.2); tl.to("#s3 .phone",{rotationY:8,rotationX:2,duration:2.03,ease:"none"},2.8);
+  typeTo("#ty", "A puni\u00e7\u00e3o tinha que ser igual ao crime. E as leis valiam para todo mundo.", 2.75, 0.85);
+  countDown("#tm", 60, 45, 2.4, 2.73);
+  tl.to("#pbtn",{scale:0.94,backgroundColor:"#1d4ed8",duration:0.08,yoyo:true,repeat:1},3.720); tl.set("#pbtn",{textContent:"Avaliando…"},3.770); 
+  tl.to("#s3 .pscroll",{y:-250,duration:0.4,ease:"power3.inOut"},3.800); tl.set("#pbtn",{display:"none"},3.800);
+  tl.fromTo("#pres",{opacity:0,y:30},{opacity:1,y:0,duration:0.3,ease:"power3.out",immediateRender:false},4.000); tl.fromTo("#pres .score",{scale:1.6},{scale:1,duration:0.35,ease:"back.out(2.2)",transformOrigin:"0% 50%",immediateRender:false},4.000);
+  tl.fromTo("#fb1",{opacity:0,x:-20},{opacity:1,x:0,duration:0.25,immediateRender:false},4.180); tl.fromTo("#fb2",{opacity:0,x:-20},{opacity:1,x:0,duration:0.25,immediateRender:false},4.360);
+  tl.to("#s3 .phone",{rotationY:42,rotationX:-6,scale:0.78,opacity:0,filter:"blur(12px)",duration:0.35,ease:"power3.in"},4.830);
+  trail("tr4", 3.370, 0.350, 220, "power2.in", "tr4h", null);
+  trail("tr5", 5.130, 1.050, 0, "power2.out", "tr5h", 6.85);
+  countUp("#gv", 0, 920, 5.130, 1.05);
+  tl.fromTo("#cp0",{opacity:0,y:24},{opacity:1,y:0,duration:0.22,ease:"back.out(2)",immediateRender:false},5.480); tl.to("#cp0",{borderColor:"#22c55e",color:"#bbf7d0",boxShadow:"0 0 30px rgba(34,197,94,.55)",duration:0.15},5.580);
+  tl.fromTo("#cp1",{opacity:0,y:24},{opacity:1,y:0,duration:0.22,ease:"back.out(2)",immediateRender:false},5.680); tl.to("#cp1",{borderColor:"#22c55e",color:"#bbf7d0",boxShadow:"0 0 30px rgba(34,197,94,.55)",duration:0.15},5.780);
+  tl.fromTo("#cp2",{opacity:0,y:24},{opacity:1,y:0,duration:0.22,ease:"back.out(2)",immediateRender:false},5.880); tl.to("#cp2",{borderColor:"#22c55e",color:"#bbf7d0",boxShadow:"0 0 30px rgba(34,197,94,.55)",duration:0.15},5.980);
+  tl.fromTo("#cp3",{opacity:0,y:24},{opacity:1,y:0,duration:0.22,ease:"back.out(2)",immediateRender:false},6.080); tl.to("#cp3",{borderColor:"#22c55e",color:"#bbf7d0",boxShadow:"0 0 30px rgba(34,197,94,.55)",duration:0.15},6.180);
+  tl.fromTo("#cp4",{opacity:0,y:24},{opacity:1,y:0,duration:0.22,ease:"back.out(2)",immediateRender:false},6.280); tl.to("#cp4",{borderColor:"#22c55e",color:"#bbf7d0",boxShadow:"0 0 30px rgba(34,197,94,.55)",duration:0.15},6.380);
+  /*gnum*/tl.fromTo("#s4 .gnum",{scale:0.8,opacity:0},{scale:1,opacity:1,duration:0.3,ease:"back.out(2)",transformOrigin:"50% 50%",immediateRender:false},5.130); tl.fromTo("#s4 .eyb, #s4 .glab",{opacity:0,y:16},{opacity:1,y:0,duration:0.3,immediateRender:false},5.230);
+  tl.fromTo("#sp0",{x:256,y:0,opacity:1,scale:1},{x:513,y:0,opacity:0,scale:0.3,duration:0.5,ease:"power3.out",immediateRender:false},6.62);
+  tl.fromTo("#sp1",{x:231,y:111,opacity:1,scale:1},{x:462,y:223,opacity:0,scale:0.3,duration:0.5,ease:"power3.out",immediateRender:false},6.62);
+  tl.fromTo("#sp2",{x:160,y:201,opacity:1,scale:1},{x:320,y:401,opacity:0,scale:0.3,duration:0.5,ease:"power3.out",immediateRender:false},6.62);
+  tl.fromTo("#sp3",{x:57,y:250,opacity:1,scale:1},{x:114,y:500,opacity:0,scale:0.3,duration:0.5,ease:"power3.out",immediateRender:false},6.62);
+  tl.fromTo("#sp4",{x:-57,y:250,opacity:1,scale:1},{x:-114,y:500,opacity:0,scale:0.3,duration:0.5,ease:"power3.out",immediateRender:false},6.62);
+  tl.fromTo("#sp5",{x:-160,y:201,opacity:1,scale:1},{x:-320,y:401,opacity:0,scale:0.3,duration:0.5,ease:"power3.out",immediateRender:false},6.62);
+  tl.fromTo("#sp6",{x:-231,y:111,opacity:1,scale:1},{x:-462,y:223,opacity:0,scale:0.3,duration:0.5,ease:"power3.out",immediateRender:false},6.62);
+  tl.fromTo("#sp7",{x:-256,y:0,opacity:1,scale:1},{x:-513,y:0,opacity:0,scale:0.3,duration:0.5,ease:"power3.out",immediateRender:false},6.62);
+  tl.fromTo("#sp8",{x:-231,y:-111,opacity:1,scale:1},{x:-462,y:-223,opacity:0,scale:0.3,duration:0.5,ease:"power3.out",immediateRender:false},6.62);
+  tl.fromTo("#sp9",{x:-160,y:-201,opacity:1,scale:1},{x:-320,y:-401,opacity:0,scale:0.3,duration:0.5,ease:"power3.out",immediateRender:false},6.62);
+  tl.fromTo("#sp10",{x:-57,y:-250,opacity:1,scale:1},{x:-114,y:-500,opacity:0,scale:0.3,duration:0.5,ease:"power3.out",immediateRender:false},6.62);
+  tl.fromTo("#sp11",{x:57,y:-250,opacity:1,scale:1},{x:114,y:-500,opacity:0,scale:0.3,duration:0.5,ease:"power3.out",immediateRender:false},6.62);
+  tl.fromTo("#sp12",{x:160,y:-201,opacity:1,scale:1},{x:320,y:-401,opacity:0,scale:0.3,duration:0.5,ease:"power3.out",immediateRender:false},6.62);
+  tl.fromTo("#sp13",{x:231,y:-111,opacity:1,scale:1},{x:462,y:-223,opacity:0,scale:0.3,duration:0.5,ease:"power3.out",immediateRender:false},6.62);
+  tl.to("#s4 > *",{opacity:0,filter:"blur(10px)",scale:1.1,duration:0.35,ease:"power3.in",transformOrigin:"50% 50%"},6.7);
+  tl.fromTo("#s5 .rcard",{rotationX:58,y:120,opacity:0,filter:"blur(8px)"},{rotationX:0,y:0,opacity:1,filter:"blur(0px)",duration:0.55,ease:"power3.out",transformOrigin:"50% 100%",immediateRender:false},7.05);
+  trail("tr6", 7.250, 1.250, 0, "power1.inOut", "tr6h", 8.81);
+  tl.to("#rk0",{scale:1.18,duration:0.12,ease:"power3.out",yoyo:true,repeat:1},7.700); tl.to("#rk0 .hex",{opacity:1,boxShadow:"0 0 46px var(--c)",duration:0.15},7.700); tl.to("#rk0 span",{color:"#fff",duration:0.15},7.700);
+  tl.to("#rk1",{scale:1.18,duration:0.12,ease:"power3.out",yoyo:true,repeat:1},7.829); tl.to("#rk1 .hex",{opacity:1,boxShadow:"0 0 46px var(--c)",duration:0.15},7.829); tl.to("#rk1 span",{color:"#fff",duration:0.15},7.829);
+  tl.to("#rk2",{scale:1.18,duration:0.12,ease:"power3.out",yoyo:true,repeat:1},7.958); tl.to("#rk2 .hex",{opacity:1,boxShadow:"0 0 46px var(--c)",duration:0.15},7.958); tl.to("#rk2 span",{color:"#fff",duration:0.15},7.958);
+  tl.to("#rk3",{scale:1.18,duration:0.12,ease:"power3.out",yoyo:true,repeat:1},8.088); tl.to("#rk3 .hex",{opacity:1,boxShadow:"0 0 46px var(--c)",duration:0.15},8.088); tl.to("#rk3 span",{color:"#fff",duration:0.15},8.088);
+  tl.to("#rk6",{scale:1.18,duration:0.12,ease:"power3.out",yoyo:true,repeat:1},8.217); tl.to("#rk6 .hex",{opacity:1,boxShadow:"0 0 46px var(--c)",duration:0.15},8.217); tl.to("#rk6 span",{color:"#fff",duration:0.15},8.217);
+  tl.to("#rk5",{scale:1.18,duration:0.12,ease:"power3.out",yoyo:true,repeat:1},8.346); tl.to("#rk5 .hex",{opacity:1,boxShadow:"0 0 46px var(--c)",duration:0.15},8.346); tl.to("#rk5 span",{color:"#fff",duration:0.15},8.346);
+  tl.to("#rk4",{scale:1.18,duration:0.12,ease:"power3.out",yoyo:true,repeat:1},8.475); tl.to("#rk4 .hex",{opacity:1,boxShadow:"0 0 46px var(--c)",duration:0.15},8.475); tl.to("#rk4 span",{color:"#fff",duration:0.15},8.475);
+  tl.to("#rk6",{scale:1.32,duration:0.25,ease:"back.out(2)"},8.78); tl.to("#s5 .rcard",{rotationY:-30,scale:0.85,opacity:0,filter:"blur(12px)",duration:0.35,ease:"power3.in"},8.760);
+  trail("tr7", 9.080, 0.700, 0, "power2.inOut", "tr7h", 10.75);
+  tl.fromTo("#s6 .mcard",{scale:0.9,opacity:0,rotationY:18},{scale:1,opacity:1,rotationY:0,duration:0.45,ease:"power3.out",immediateRender:false},9.060); tl.fromTo("#s6 .ava",{scale:0.4,opacity:0},{scale:1,opacity:1,duration:0.4,ease:"back.out(2)",immediateRender:false},9.260); tl.to("#s6 .ava",{y:-14,duration:0.5,ease:"sine.inOut",yoyo:true,repeat:3},9.660);
+  tl.fromTo("#u1",{opacity:0,y:20},{opacity:1,y:0,duration:0.25,immediateRender:false},9.410); typeTo("#uq", "Qual a diferença entre Romantismo e Realismo?", 9.360, 0.5);
+  tl.fromTo("#m1",{opacity:0,y:24,scale:0.96},{opacity:1,y:0,scale:1,duration:0.3,ease:"back.out(1.8)",immediateRender:false},9.910); tl.to("#s6 .mcard",{scale:0.86,opacity:0,filter:"blur(12px)",rotationY:-24,duration:0.3,ease:"power3.in"},10.72);
+  tl.fromTo("#s7 .hub",{scale:0.3,opacity:0},{scale:1,opacity:1,duration:0.4,ease:"back.out(2)",immediateRender:false},10.95); tl.fromTo("#s7 .hlab",{opacity:0},{opacity:1,duration:0.3,immediateRender:false},11.15);
+  tl.fromTo("#lg0",{scale:0,opacity:0},{scale:1,opacity:1,duration:0.3,ease:"back.out(2.4)",immediateRender:false},11.100); tl.to("#lg0",{rotation:360,duration:2.2,ease:"none",transformOrigin:"138px 150px"},11.1);
+  tl.fromTo("#lg1",{scale:0,opacity:0},{scale:1,opacity:1,duration:0.3,ease:"back.out(2.4)",immediateRender:false},11.180); tl.to("#lg1",{rotation:360,duration:2.2,ease:"none",transformOrigin:"-61px 151px"},11.1);
+  tl.fromTo("#lg2",{scale:0,opacity:0},{scale:1,opacity:1,duration:0.3,ease:"back.out(2.4)",immediateRender:false},11.260); tl.to("#lg2",{rotation:360,duration:2.2,ease:"none",transformOrigin:"149px -63px"},11.1);
+  trail("tr8", 11.200, 0.380, 0, "power2.out", "tr8h", 12.85);
+  tl.fromTo("#nd0",{opacity:0.25,scale:0.8},{opacity:1,scale:1,duration:0.25,ease:"back.out(2.4)",immediateRender:false},11.540); tl.to("#nd0 .nc",{backgroundColor:"var(--c)",borderColor:"#fff",color:"#fff",boxShadow:"0 0 60px var(--c)",duration:0.15},11.540); tl.to("#nd0 span",{color:"#fff",duration:0.15},11.540);
+  tl.set("#nd0",{opacity:0.25},10.95);
+  trail("tr9", 11.480, 0.380, 0, "power2.out", "tr9h", 12.85);
+  tl.fromTo("#nd1",{opacity:0.25,scale:0.8},{opacity:1,scale:1,duration:0.25,ease:"back.out(2.4)",immediateRender:false},11.820); tl.to("#nd1 .nc",{backgroundColor:"var(--c)",borderColor:"#fff",color:"#fff",boxShadow:"0 0 60px var(--c)",duration:0.15},11.820); tl.to("#nd1 span",{color:"#fff",duration:0.15},11.820);
+  tl.set("#nd1",{opacity:0.25},10.95);
+  trail("tr10", 11.760, 0.380, 0, "power2.out", "tr10h", 12.85);
+  tl.fromTo("#nd2",{opacity:0.25,scale:0.8},{opacity:1,scale:1,duration:0.25,ease:"back.out(2.4)",immediateRender:false},12.100); tl.to("#nd2 .nc",{backgroundColor:"var(--c)",borderColor:"#fff",color:"#fff",boxShadow:"0 0 60px var(--c)",duration:0.15},12.100); tl.to("#nd2 span",{color:"#fff",duration:0.15},12.100);
+  tl.set("#nd2",{opacity:0.25},10.95);
+  trail("tr11", 12.040, 0.380, 0, "power2.out", "tr11h", 12.85);
+  tl.fromTo("#nd3",{opacity:0.25,scale:0.8},{opacity:1,scale:1,duration:0.25,ease:"back.out(2.4)",immediateRender:false},12.380); tl.to("#nd3 .nc",{backgroundColor:"var(--c)",borderColor:"#fff",color:"#fff",boxShadow:"0 0 60px var(--c)",duration:0.15},12.380); tl.to("#nd3 span",{color:"#fff",duration:0.15},12.380);
+  tl.set("#nd3",{opacity:0.25},10.95);
+  trail("tr12", 12.320, 0.380, 0, "power2.out", "tr12h", 12.85);
+  tl.fromTo("#nd4",{opacity:0.25,scale:0.8},{opacity:1,scale:1,duration:0.25,ease:"back.out(2.4)",immediateRender:false},12.660); tl.to("#nd4 .nc",{backgroundColor:"var(--c)",borderColor:"#fff",color:"#fff",boxShadow:"0 0 60px var(--c)",duration:0.15},12.660); tl.to("#nd4 span",{color:"#fff",duration:0.15},12.660);
+  tl.set("#nd4",{opacity:0.25},10.95);
+  tl.to("#s7 .hub, #s7 .hlab, #s7 .lang, #s7 .node",{opacity:0,scale:0.6,filter:"blur(10px)",duration:0.3,ease:"power3.in",stagger:0.02},12.650);
+  trail("tr13", 12.700, 0.750, 0, "power2.inOut", "tr13h", null);
+  tl.fromTo("#s8 .logo",{clipPath:"inset(0 100% 0 0)"},{clipPath:"inset(0 0% 0 0)",duration:0.45,ease:"none",immediateRender:false},12.980); tl.fromTo("#s8flash",{opacity:0},{opacity:0.85,duration:0.08,immediateRender:false},13.420); tl.to("#s8flash",{opacity:0,duration:0.6},13.500);
+  tl.fromTo("#s8 .url",{opacity:0,y:24},{opacity:1,y:0,duration:0.35,ease:"power3.out",immediateRender:false},13.550); tl.fromTo("#s8 .cta",{opacity:0,scale:0.9},{opacity:1,scale:1,duration:0.35,ease:"back.out(2)",transformOrigin:"50% 50%",immediateRender:false},13.800);
+  tl.to("#s8 .logo",{scale:1.04,duration:2.40,ease:"sine.inOut",transformOrigin:"50% 50%"},13.500); tl.to("#s8 .cta",{boxShadow:"0 0 60px rgba(59,130,246,.9)",duration:0.5,ease:"sine.inOut",yoyo:true,repeat:3},14.200);
+  window.__timelines["trail"] = tl;
+</script></body></html>
