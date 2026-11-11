@@ -4,7 +4,7 @@ P='/home/user/abrahao-app/videos/iveststudy-promo'; os.chdir(P)
 S='tools'
 VOT=json.load(open('assets/audio/vo30/timing.json'))
 M={n:json.load(open(f'assets/app/m3/{n}.json'))['marks'] for n in ['estudo','redacao','simulados','flashcards','mentor','quiz','home','signup','en-estudo','en-simulados','en-home']}
-HK=json.load(open(f'{S}/m/hookA.json'))
+HK=json.load(open('tools/hookA.json'))
 def dur(p): return float(subprocess.run(['ffprobe','-v','error','-show_entries','format=duration','-of','csv=p=0',p],capture_output=True,text=True).stdout)
 RED_RESULT=31.0   # measured: the 480/1000 card appears here in assets/app/m3/redacao.mp4
 ENEM_DATE=datetime.date(2026,11,15)   # INEP: 8 and 15 Nov 2026 (Edital nº 64/2026). Update before publishing.
@@ -223,7 +223,8 @@ def dor(f, t0):   # 4.5 s: three statements, photos then brand field
     f.photo('assets/gen/m/student-frustrated-1.png',t0+1.5,1.5,1.12,1.04,0.35)
     f.title(['Lê a teoria,','mas na prova trava.'] if L else ['You read the theory,','then freeze on test day.'], t0+1.5, 1.5, y=f.TY+120, acc=('trava.',) if L else ('freeze',))
     f.bg(t0+3.0,1.5,'navy')
-    f.title(['O problema não é estudar.','É estudar sem feedback.'] if L else ["The problem isn't studying.","It's studying without feedback."], t0+3.0, 1.5, y=f.TY+160, acc=('sem','feedback.') if L else ('without','feedback.'))
+    t3=f.title(['O problema não é estudar.','É estudar sem feedback.'] if L else ["The problem isn't studying.","It's studying without feedback."], t0+3.0, 1.5, y=f.TY+160, acc=('sem','feedback.') if L else ('without','feedback.'))
+    f.js.append(f'tl.fromTo("#{t3}",{{scale:1.0}},{{scale:1.05,duration:1.5,ease:"none",transformOrigin:"50% 50%"}},{t0+3.0:.3f});')
     for k in (0,1.5,3.0): f.fx('whoosh-short',t0+k,0.4)
 
 def demo(f, t0, fast=False, clip='estudo', resfy=1150):
@@ -314,7 +315,7 @@ def badges_block(f, t0, d=5.0):
         x=x0+c*(bw+gap); y=y0+r*(bh+gap)
         if cols==2 and i==4: x=x0+(bw+gap)//2
         f.els.append(f'<div id="{bid}" class="badge clip" data-start="{at:.2f}" data-duration="{t0+d-at:.2f}" style="left:{x}px;top:{y}px;width:{bw}px;height:{bh}px;font-size:{int(bh*0.38)}px">{nm}</div>')
-        f.js.append(f'tl.fromTo("#{bid}",{{opacity:0,scale:0.8}},{{opacity:1,scale:1,duration:0.35,ease:"back.out(1.8)"}},{at:.3f});')
+        f.js.append(f'tl.fromTo("#{bid}",{{opacity:0,scale:0.8}},{{opacity:1,scale:1,duration:0.35,ease:"back.out(1.8)"}},{at:.3f}); tl.to("#{bid}",{{y:-6,duration:{0.9+0.1*i:.2f},ease:"sine.inOut",yoyo:true,repeat:5}},{at+0.4:.3f});')
         f.fx('pop', at, 0.45)
     return t0+d
 
@@ -339,6 +340,7 @@ def offer(f, t0, d_lines=3.0, d_close=4.0):
     f.js.append(f'tl.fromTo(".url",{{opacity:0,y:20}},{{opacity:1,y:0,duration:0.35,ease:"power3.out",immediateRender:false}},{c+0.15:.3f});')
     f.js.append(f'tl.fromTo(".btn",{{opacity:0,y:30,scale:0.94}},{{opacity:1,y:0,scale:1,duration:0.4,ease:"power4.out",immediateRender:false}},{c+0.4:.3f}); tl.to(".btn",{{scale:0.96,duration:0.08,yoyo:true,repeat:1}},{c+1.3:.3f});')
     f.fx('impact-bass-1', c, 0.7); f.fx('whoosh-cinematic', c-0.3, 0.35); f.fx('sonic-logo', c+d_close-1.6, 0.8)
+    f.js.append(f'tl.to("#{lg} .logo",{{scale:1.035,duration:{d_close-0.4:.2f},ease:"sine.inOut",transformOrigin:"50% 50%"}},{c+0.4:.3f}); tl.to(".btn",{{scale:1.03,duration:0.8,ease:"sine.inOut",yoyo:true,repeat:{int((d_close-1.5)/0.8)}}},{c+1.5:.3f});')
     return c+d_close
 
 def score(f, total, hit_at, close_at, music_src='assets/audio/music30.mp3'):
@@ -377,6 +379,7 @@ def film6():
     f.js.append(f'tl.fromTo("#{lg} .logo",{{scale:2.2,opacity:0,filter:"blur(14px)"}},{{scale:1,opacity:1,filter:"blur(0px)",duration:0.3,ease:"power4.out",transformOrigin:"50% 50%",immediateRender:false}},{c+0.02});')
     f.js.append(f'tl.fromTo(".url",{{opacity:0,y:20}},{{opacity:1,y:0,duration:0.35,ease:"power3.out",immediateRender:false}},{c+0.15});')
     f.fx('impact-bass-1',c,0.7); f.fx('sonic-logo',4.4,0.8); f.vo('pt9',0.2)
+    f.js.append(f'tl.to("#{lg} .logo",{{scale:1.04,duration:3.0,ease:"sine.inOut",transformOrigin:"50% 50%"}},{c+0.4});')
     f.music('assets/audio/music30.mp3',0,6.0,16.0,0.4,0.0,0.8); f.build(6.0)
 def film45(W,H):
     f=Film(f'ad45-{W}x{H}',W,H); hook_A(f,0); dor(f,2.0); demo(f,6.5); montage(f,17.0); steps_block(f,23.0,8.0); badges_block(f,31.0,5.0); offer(f,36.0,3.0,6.0)

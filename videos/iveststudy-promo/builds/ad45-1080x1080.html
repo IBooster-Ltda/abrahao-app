@@ -197,6 +197,7 @@ document.querySelectorAll("#t7 .w").forEach((w,i)=>tl.fromTo(w,{opacity:0,y:28,f
 tl.to("#t7", { opacity: 0, y: -16, filter: "blur(6px)", duration: 0.22, ease: "power2.in" }, 4.760);
 document.querySelectorAll("#t9 .w").forEach((w,i)=>tl.fromTo(w,{opacity:0,y:28,filter:"blur(8px)"},{opacity:1,y:0,filter:"blur(0px)",duration:0.32,ease:"power3.out"},5.000+i*0.045));
 tl.to("#t9", { opacity: 0, y: -16, filter: "blur(6px)", duration: 0.22, ease: "power2.in" }, 6.260);
+tl.fromTo("#t9",{scale:1.0},{scale:1.05,duration:1.5,ease:"none",transformOrigin:"50% 50%"},5.000);
 tl.set("#ph11c", { scale: 0.41860, x: -70.0, y: 0.0 }, 6.500);
 tl.to("#ph11c", { ...{ scale: 0.44031, x: -84.0, y: 0.0 }, duration: 1.5, ease: "none" }, 6.500);
 tl.set("#ph11", { autoAlpha: 1 }, 6.500); tl.fromTo("#ph11", { scale: 0.97 }, { scale: 1, duration: 0.3, ease: "power3.out", immediateRender: false }, 6.500); tl.set("#ph11", { autoAlpha: 0 }, 7.999);
@@ -255,11 +256,11 @@ tl.fromTo("#st38",{opacity:0,x:-30},{opacity:1,x:0,duration:0.4,ease:"power3.out
 tl.fromTo("#st39",{opacity:0,x:-30},{opacity:1,x:0,duration:0.4,ease:"power3.out"},28.000);
 document.querySelectorAll("#t41 .w").forEach((w,i)=>tl.fromTo(w,{opacity:0,y:28,filter:"blur(8px)"},{opacity:1,y:0,filter:"blur(0px)",duration:0.32,ease:"power3.out"},31.000+i*0.045));
 tl.to("#t41", { opacity: 0, y: -16, filter: "blur(6px)", duration: 0.22, ease: "power2.in" }, 35.760);
-tl.fromTo("#bd42",{opacity:0,scale:0.8},{opacity:1,scale:1,duration:0.35,ease:"back.out(1.8)"},31.300);
-tl.fromTo("#bd43",{opacity:0,scale:0.8},{opacity:1,scale:1,duration:0.35,ease:"back.out(1.8)"},31.800);
-tl.fromTo("#bd44",{opacity:0,scale:0.8},{opacity:1,scale:1,duration:0.35,ease:"back.out(1.8)"},32.300);
-tl.fromTo("#bd45",{opacity:0,scale:0.8},{opacity:1,scale:1,duration:0.35,ease:"back.out(1.8)"},32.800);
-tl.fromTo("#bd46",{opacity:0,scale:0.8},{opacity:1,scale:1,duration:0.35,ease:"back.out(1.8)"},33.300);
+tl.fromTo("#bd42",{opacity:0,scale:0.8},{opacity:1,scale:1,duration:0.35,ease:"back.out(1.8)"},31.300); tl.to("#bd42",{y:-6,duration:0.90,ease:"sine.inOut",yoyo:true,repeat:5},31.700);
+tl.fromTo("#bd43",{opacity:0,scale:0.8},{opacity:1,scale:1,duration:0.35,ease:"back.out(1.8)"},31.800); tl.to("#bd43",{y:-6,duration:1.00,ease:"sine.inOut",yoyo:true,repeat:5},32.200);
+tl.fromTo("#bd44",{opacity:0,scale:0.8},{opacity:1,scale:1,duration:0.35,ease:"back.out(1.8)"},32.300); tl.to("#bd44",{y:-6,duration:1.10,ease:"sine.inOut",yoyo:true,repeat:5},32.700);
+tl.fromTo("#bd45",{opacity:0,scale:0.8},{opacity:1,scale:1,duration:0.35,ease:"back.out(1.8)"},32.800); tl.to("#bd45",{y:-6,duration:1.20,ease:"sine.inOut",yoyo:true,repeat:5},33.200);
+tl.fromTo("#bd46",{opacity:0,scale:0.8},{opacity:1,scale:1,duration:0.35,ease:"back.out(1.8)"},33.300); tl.to("#bd46",{y:-6,duration:1.30,ease:"sine.inOut",yoyo:true,repeat:5},33.700);
 tl.set("#ph48c", { scale: 0.37209, x: -40.0, y: 0.0 }, 36.000);
 tl.to("#ph48c", { ...{ scale: 0.39070, x: -52.0, y: 0.0 }, duration: 3.0, ease: "none" }, 36.000);
 tl.set("#ph48", { autoAlpha: 1 }, 36.000); tl.fromTo("#ph48", { scale: 0.97 }, { scale: 1, duration: 0.3, ease: "power3.out", immediateRender: false }, 36.000); tl.set("#ph48", { autoAlpha: 0 }, 38.999);
@@ -272,6 +273,7 @@ tl.to("#t51", { opacity: 0, y: -16, filter: "blur(6px)", duration: 0.22, ease: "
 tl.fromTo("#lg53 .logo",{scale:2.2,opacity:0,filter:"blur(14px)"},{scale:1,opacity:1,filter:"blur(0px)",duration:0.3,ease:"power4.out",transformOrigin:"50% 50%",immediateRender:false},39.020);
 tl.fromTo(".url",{opacity:0,y:20},{opacity:1,y:0,duration:0.35,ease:"power3.out",immediateRender:false},39.150);
 tl.fromTo(".btn",{opacity:0,y:30,scale:0.94},{opacity:1,y:0,scale:1,duration:0.4,ease:"power4.out",immediateRender:false},39.400); tl.to(".btn",{scale:0.96,duration:0.08,yoyo:true,repeat:1},40.300);
+tl.to("#lg53 .logo",{scale:1.035,duration:5.60,ease:"sine.inOut",transformOrigin:"50% 50%"},39.400); tl.to(".btn",{scale:1.03,duration:0.8,ease:"sine.inOut",yoyo:true,repeat:5},40.500);
   window.__timelines["ad45-1080x1080"] = tl;
 </script>
 </body></html>
