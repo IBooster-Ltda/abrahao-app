@@ -3,7 +3,7 @@
 import json, os, sys, math, re, subprocess
 P=os.path.dirname(os.path.dirname(os.path.abspath(__file__))); os.chdir(P)
 def dur(p): return float(subprocess.run(['ffprobe','-v','error','-show_entries','format=duration','-of','csv=p=0',p],capture_output=True,text=True).stdout)
-ICON={n:re.sub(r'\s(width|height|class)="[^"]*"','',open(f'assets/brand/icons/{n}.svg',encoding='utf-8').read()) for n in ['brand','estudo','quiz','flashcards','simulados','redacao','mentor']}
+ICON={n:re.sub(r'^<svg[^>]*>',lambda m: re.sub(r'\s(width|height|class|style)="[^"]*"','',m.group(0)),open(f'assets/brand/icons/{n}.svg',encoding='utf-8').read()) for n in ['brand','estudo','quiz','flashcards','simulados','redacao','mentor']}
 VO=json.load(open('tools/vo-trail.json',encoding='utf-8'))
 BEAT=0.4915; U=2*BEAT; LOOP=8*BEAT; MEDIA0=7.91   # music-trail.mp3: 8-beat drop at media 7.91 (hit on its first frame)
 M0=1.2

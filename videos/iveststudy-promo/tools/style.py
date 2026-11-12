@@ -3,7 +3,7 @@
 import json, os, sys, math, re, subprocess
 P=os.path.dirname(os.path.dirname(os.path.abspath(__file__))); os.chdir(P)
 def dur(p): return float(subprocess.run(['ffprobe','-v','error','-show_entries','format=duration','-of','csv=p=0',p],capture_output=True,text=True).stdout)
-ICON={n:re.sub(r'\s(width|height|class)="[^"]*"','',open(f'assets/brand/icons/{n}.svg',encoding='utf-8').read()) for n in ['brand','estudo','quiz','flashcards','simulados','redacao','mentor']}
+ICON={n:re.sub(r'^<svg[^>]*>',lambda m: re.sub(r'\s(width|height|class|style)="[^"]*"','',m.group(0)),open(f'assets/brand/icons/{n}.svg',encoding='utf-8').read()) for n in ['brand','estudo','quiz','flashcards','simulados','redacao','mentor']}
 BEAT=0.4915; LOOP=8*BEAT  # music-trail.mp3: 8-beat drop at media 7.91–11.84
 M0=1.2                     # film time of the first impact
 B=[round(M0+i*LOOP,2) for i in range(4)]   # 1.2, 5.13, 9.06, 12.99 — every loop starts on the drop hit
