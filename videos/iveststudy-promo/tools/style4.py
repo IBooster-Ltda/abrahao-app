@@ -225,7 +225,7 @@ def build(W,H):
 <body><div id="root" data-composition-id="{CFG['name']}" data-start="0" data-duration="{T}" data-width="{W}" data-height="{H}" data-fps="30">
 <div id="haze"></div><div id="vig"></div>
 {chr(10).join(els)}
-<svg class="trails" width="{W}" height="{H}" viewBox="0 0 {W} {H}"><defs><filter id="glowA" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="5"/></filter><filter id="glowB" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="14"/></filter></defs>
+<svg class="trails" width="{W}" height="{H}" viewBox="0 0 {W} {H}"><defs><filter id="glowA" filterUnits="userSpaceOnUse" x="-200" y="-200" width="{W+400}" height="{H+400}"><feGaussianBlur stdDeviation="5"/></filter><filter id="glowB" filterUnits="userSpaceOnUse" x="-200" y="-200" width="{W+400}" height="{H+400}"><feGaussianBlur stdDeviation="14"/></filter></defs>
 {chr(10).join(trails)}
 </svg>
 {chr(10).join(heads)}
