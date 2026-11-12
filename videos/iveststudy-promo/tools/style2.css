@@ -1,0 +1,47 @@
+
+  *{margin:0;padding:0;box-sizing:border-box} html,body{width:__W__px;height:__H__px;overflow:hidden;background:#030817;font-family:"Inter",sans-serif}
+  #root{position:relative;width:__W__px;height:__H__px;overflow:hidden;color:#fff;background:radial-gradient(90% 70% at 50% 45%,#0b1f4a 0%,#06112b 45%,#030817 100%)}
+  #haze{position:absolute;left:__HX__px;top:__HY__px;width:1400px;height:1400px;border-radius:50%;background:radial-gradient(circle,rgba(37,99,235,.35) 0%,rgba(37,99,235,.12) 35%,rgba(3,8,23,0) 65%);filter:blur(40px)}
+  #vig{position:absolute;inset:0;background:radial-gradient(120% 90% at 50% 50%,rgba(0,0,0,0) 55%,rgba(0,0,0,.55) 100%)}
+  svg.trails{position:absolute;left:0;top:0;z-index:20;pointer-events:none;overflow:visible} svg.trails path{fill:none;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:0 1000000}
+  .head{position:absolute;left:-46px;top:-46px;width:92px;height:92px;border-radius:50%;z-index:21;background:radial-gradient(circle,#fff 0%,#dbeafe 18%,rgba(96,165,250,.85) 34%,rgba(37,99,235,0) 70%)}
+  .clip{position:absolute}
+  .logo{position:absolute;display:flex;align-items:center;justify-content:center;gap:.24em;font-weight:800;letter-spacing:-.045em;line-height:1;color:#fff;white-space:nowrap;text-shadow:0 0 40px rgba(96,165,250,.55)}
+  .logo .cap svg{width:1em;height:1em;display:block;border-radius:.24em;box-shadow:0 0 50px rgba(59,130,246,.9)} .logo .i{color:#93c5fd} .logo .st{font-weight:500;color:#dbeafe}
+  .flash{position:absolute;inset:0;background:radial-gradient(60% 50% at 50% 50%,rgba(191,219,254,.75),rgba(59,130,246,.15) 50%,rgba(0,0,0,0) 75%);opacity:0;pointer-events:none}
+  .chip{width:120px;height:120px;border-radius:30px;display:flex;align-items:center;justify-content:center;font-size:56px;font-weight:800;color:#93c5fd;background:rgba(15,23,42,.9);border:3px solid rgba(147,197,253,.35);opacity:0}
+  .phone{position:absolute;left:0;top:0;border-radius:64px;background:#0b111c;border:10px solid #1b2436;box-shadow:0 50px 120px rgba(0,0,0,.6),0 0 60px rgba(59,130,246,.25);overflow:hidden;transform-style:preserve-3d;padding:90px 34px 0}
+  .isl{position:absolute;left:50%;top:22px;width:150px;height:40px;margin-left:-75px;border-radius:999px;background:#000}
+  .pbar{display:flex;align-items:center;gap:14px;font-size:30px;font-weight:700} .pb-ic svg{width:38px;height:38px;color:#60a5fa;display:block} .pb-r{margin-left:auto;font-size:28px;color:#93c5fd;font-weight:600}
+  .prog{height:10px;border-radius:5px;background:#1e293b;margin:22px 0 28px} .prog i{display:block;width:20%;height:100%;border-radius:5px;background:#3b82f6}
+  .q{font-size:30px;line-height:1.28;font-weight:700;color:#f1f5f9}
+  .timer{margin-top:26px;border:2px solid #1f2a3d;border-radius:22px;padding:16px 22px;display:flex;align-items:center;justify-content:space-between} .tl{font-size:28px;letter-spacing:.12em;color:#94a3b8;font-weight:700} .tv{font-size:48px;font-weight:800;font-variant-numeric:tabular-nums}
+  .ans{margin-top:22px;min-height:150px;border:2px solid #1f2a3d;border-radius:22px;padding:18px 22px;font-size:30px;line-height:1.35;color:#e2e8f0} .caret{display:inline-block;width:3px;height:1em;background:#60a5fa;vertical-align:-.12em;margin-left:3px}
+  .pbtn{margin-top:24px;display:inline-block;background:#2563eb;color:#fff;font-weight:700;font-size:30px;padding:18px 28px;border-radius:18px;transform-origin:0 50%}
+   .score{font-weight:800;color:#f59e0b;line-height:1;margin-bottom:16px;display:inline-block} .score b{font-size:96px} .score span{font-size:44px;color:#fbbf24}
+  .fb{display:flex;align-items:center;gap:14px;font-size:30px;font-weight:700;padding:12px 16px;border-radius:16px;margin-top:10px;background:rgba(15,23,42,.9);opacity:0} .fb i{font-style:normal;width:42px;height:42px;border-radius:50%;display:flex;align-items:center;justify-content:center;color:#04121f;font-size:26px;flex:0 0 42px}
+  .fb.ok{border:2px solid #22c55e} .fb.ok i{background:#22c55e} .fb.miss{border:2px solid #f87171} .fb.miss i{background:#f87171}
+  svg.ring{position:absolute;left:0;top:0}
+  .eyb{position:absolute;display:flex;align-items:center;justify-content:center;gap:14px;font-size:34px;font-weight:800;letter-spacing:.18em;color:#fdba74} .eyb svg{width:40px;height:40px;color:#fb923c}
+  .gnum{position:absolute;text-align:center;line-height:1;font-weight:800;letter-spacing:-.05em} .gnum b{font-size:170px;font-variant-numeric:tabular-nums;text-shadow:0 0 50px rgba(96,165,250,.6)} .gnum span{font-size:44px;color:#94a3b8;margin-left:6px}
+  .glab{position:absolute;text-align:center;font-size:36px;font-weight:600;color:#cbd5e1}
+  .pill{position:absolute;height:84px;border-radius:20px;border:3px solid #334155;background:rgba(15,23,42,.9);display:flex;align-items:center;justify-content:center;gap:12px;font-size:32px;color:#94a3b8;opacity:0} .pill b{color:#fff}
+  .spark{width:12px;height:12px;border-radius:50%;background:#bfdbfe;box-shadow:0 0 16px #60a5fa;opacity:0}
+  .card{position:absolute;left:0;top:0;border-radius:36px;background:rgba(10,17,32,.92);border:2px solid rgba(148,163,184,.18);box-shadow:0 40px 100px rgba(0,0,0,.55);transform-style:preserve-3d}
+  .ct{position:absolute;left:70px;top:56px;font-size:56px;font-weight:800;letter-spacing:-.03em} .cs{position:absolute;left:70px;top:132px;font-size:34px;color:#cbd5e1;font-weight:500}
+  .rk{position:absolute;display:flex;flex-direction:column;align-items:center;gap:16px} .rk .hex{width:100%;aspect-ratio:1/1.08;background:var(--c);clip-path:polygon(50% 0,100% 25%,100% 75%,50% 100%,0 75%,0 25%);opacity:.38} .rk span{font-size:28px;font-weight:700;color:#94a3b8}
+  .mt{position:absolute;left:56px;top:46px;font-size:44px;font-weight:800;display:flex;align-items:baseline;gap:18px;flex-wrap:wrap;width:85%} .mt .dot{width:18px;height:18px;border-radius:50%;background:#22c55e;box-shadow:0 0 16px #22c55e;align-self:center} .ms{font-size:30px;font-weight:500;color:#94a3b8}
+  .ava{position:absolute;width:220px;height:220px} .ava svg{width:220px;height:220px;display:block;border-radius:52px;box-shadow:0 0 90px rgba(59,130,246,.9)}
+  .bub{position:absolute;font-size:36px;line-height:1.3;font-weight:600;padding:24px 30px;border-radius:28px;opacity:0} .bub.me{background:#2563eb;color:#fff;border-bottom-right-radius:8px} .bub.bot{background:#111a2c;border:2px solid #334155;color:#e2e8f0;border-bottom-left-radius:8px}
+  .hub{position:absolute;width:180px;height:180px} .hub svg{width:180px;height:180px;display:block;border-radius:44px;box-shadow:0 0 90px rgba(59,130,246,.95)}
+  .hlab{position:absolute;width:400px;text-align:center;font-size:36px;font-weight:800;color:#dbeafe;letter-spacing:.04em}
+  .lang{position:absolute;width:76px;height:76px;border-radius:50%;background:#0f172a;border:3px solid #60a5fa;display:flex;align-items:center;justify-content:center;font-size:28px;font-weight:800;color:#bfdbfe}
+  .node{position:absolute;width:140px;display:flex;flex-direction:column;align-items:center;gap:16px} .nc{width:140px;height:140px;border-radius:50%;background:rgba(15,23,42,.95);border:3px solid #334155;color:#94a3b8;display:flex;align-items:center;justify-content:center} .nc svg{width:62px;height:62px} .node span{font-size:32px;font-weight:700;color:#94a3b8;white-space:nowrap}
+  .url{position:absolute;text-align:center;font-size:92px;font-weight:800;letter-spacing:-.03em;text-shadow:0 0 30px rgba(96,165,250,.6)}
+  .cta{position:absolute;text-align:center;font-size:40px;font-weight:700;padding:22px 0;border-radius:999px;background:#2563eb;box-shadow:0 0 30px rgba(59,130,246,.6)}
+
+  .pwrap,.rwrap,.mwrap{position:absolute;left:0;top:0;transform-style:preserve-3d}
+  .phone{padding:92px 34px 0} .slot{position:relative;margin-top:24px} .pres{opacity:0;position:absolute;left:0;right:0;top:0}
+  svg.ltr{position:absolute;overflow:visible;pointer-events:none} svg.ltr path{fill:none;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:0 1000000}
+  .subcap{position:absolute;left:50%;transform:translateX(-50%);z-index:30;white-space:nowrap;padding:12px 26px;border-radius:16px;background:rgba(3,8,23,.78);border:1px solid rgba(147,197,253,.25);color:#fff;font-size:__CAPF__px;font-weight:700;letter-spacing:-.01em}
+  .bub{font-size:38px} .ava svg{width:200px;height:200px} .ava{width:200px;height:200px}
