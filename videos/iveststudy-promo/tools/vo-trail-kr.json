@@ -1,0 +1,430 @@
+{
+"logo": {
+"text": "Conheça o aiVest Study.",
+"dur": 1.44,
+"marks": {
+"Conheça": 0.0,
+"Study": 0.94
+},
+"words": [
+[
+"Conheça",
+0.0,
+0.35
+],
+[
+"o",
+0.37,
+0.41
+],
+[
+"aiVest",
+0.46,
+0.85
+],
+[
+"Study.",
+0.94,
+1.44
+]
+]
+},
+"estudo": {
+"text": "Você responde como na prova. E a IA corrige na hora: o que você acertou, e o que faltou.",
+"dur": 5.71,
+"marks": {
+"responde": 0.29,
+"corrige": 2.09,
+"hora": 2.55,
+"acertou": 3.71,
+"faltou": 4.79
+},
+"words": [
+[
+"Você",
+0.0,
+0.23
+],
+[
+"responde",
+0.29,
+0.64
+],
+[
+"como",
+0.69,
+0.85
+],
+[
+"na",
+0.88,
+0.95
+],
+[
+"prova.",
+1.01,
+1.44
+],
+[
+"E",
+1.65,
+1.76
+],
+[
+"a",
+1.83,
+1.86
+],
+[
+"IA",
+1.88,
+2.03
+],
+[
+"corrige",
+2.09,
+2.4
+],
+[
+"na",
+2.45,
+2.52
+],
+[
+"hora:",
+2.55,
+2.97
+],
+[
+"o",
+3.22,
+3.27
+],
+[
+"que",
+3.34,
+3.42
+],
+[
+"você",
+3.47,
+3.67
+],
+[
+"acertou,",
+3.71,
+4.34
+],
+[
+"e",
+4.47,
+4.56
+],
+[
+"o",
+4.6,
+4.62
+],
+[
+"que",
+4.67,
+4.75
+],
+[
+"faltou.",
+4.79,
+5.71
+]
+]
+},
+"redacao": {
+"text": "Sua redação ganha nota de zero a mil, competência por competência.",
+"dur": 4.04,
+"marks": {
+"redação": 0.28,
+"zero": 1.35,
+"competência": 2.1
+},
+"words": [
+[
+"Sua",
+0.0,
+0.24
+],
+[
+"redação",
+0.28,
+0.69
+],
+[
+"ganha",
+0.71,
+0.91
+],
+[
+"nota",
+0.95,
+1.16
+],
+[
+"de",
+1.21,
+1.28
+],
+[
+"zero",
+1.35,
+1.6
+],
+[
+"a",
+1.64,
+1.66
+],
+[
+"mil,",
+1.71,
+1.99
+],
+[
+"competência",
+2.1,
+2.74
+],
+[
+"por",
+2.77,
+2.91
+],
+[
+"competência.",
+2.96,
+4.04
+]
+]
+},
+"ranks": {
+"text": "E a cada treino, você sobe de rank. Do Bronze ao Elite.",
+"dur": 2.97,
+"marks": {
+"treino": 0.52,
+"Bronze": 2.06,
+"Elite": 2.52
+},
+"words": [
+[
+"E",
+0.0,
+0.09
+],
+[
+"a",
+0.16,
+0.19
+],
+[
+"cada",
+0.24,
+0.48
+],
+[
+"treino,",
+0.52,
+0.85
+],
+[
+"você",
+0.87,
+1.04
+],
+[
+"sobe",
+1.1,
+1.31
+],
+[
+"de",
+1.33,
+1.42
+],
+[
+"rank.",
+1.47,
+1.82
+],
+[
+"Do",
+1.88,
+2.0
+],
+[
+"Bronze",
+2.06,
+2.37
+],
+[
+"ao",
+2.39,
+2.47
+],
+[
+"Elite.",
+2.52,
+2.97
+]
+]
+},
+"mentor": {
+"text": "Ficou com dúvida? O Mentor responde.",
+"dur": 2.55,
+"marks": {
+"dúvida": 0.45,
+"Mentor": 1.56,
+"responde": 1.94
+},
+"words": [
+[
+"Ficou",
+0.0,
+0.27
+],
+[
+"com",
+0.31,
+0.41
+],
+[
+"dúvida?",
+0.45,
+0.95
+],
+[
+"O",
+1.39,
+1.46
+],
+[
+"Mentor",
+1.56,
+1.88
+],
+[
+"responde.",
+1.94,
+2.55
+]
+]
+},
+"mapa": {
+"text": "Tem ainda simulados, flashcards e quiz. Em português, inglês ou espanhol.",
+"dur": 4.97,
+"marks": {
+"simulados": 0.53,
+"flashcards": 1.25,
+"quiz": 2.3,
+"português": 3.15
+},
+"words": [
+[
+"Tem",
+0.0,
+0.22
+],
+[
+"ainda",
+0.27,
+0.48
+],
+[
+"simulados,",
+0.53,
+1.22
+],
+[
+"flashcards",
+1.25,
+1.93
+],
+[
+"e",
+2.1,
+2.22
+],
+[
+"quiz.",
+2.3,
+2.74
+],
+[
+"Em",
+2.98,
+3.1
+],
+[
+"português,",
+3.15,
+3.67
+],
+[
+"inglês",
+3.71,
+4.05
+],
+[
+"ou",
+4.17,
+4.25
+],
+[
+"espanhol.",
+4.3,
+4.97
+]
+]
+},
+"fim": {
+"text": "Comece grátis em aiVest Study ponto com.",
+"dur": 2.65,
+"marks": {
+"grátis": 0.4,
+"aiVest": 1.02
+},
+"words": [
+[
+"Comece",
+0.0,
+0.35
+],
+[
+"grátis",
+0.4,
+0.66
+],
+[
+"em",
+0.78,
+0.91
+],
+[
+"aiVest",
+1.02,
+1.45
+],
+[
+"Study",
+1.49,
+1.79
+],
+[
+"ponto",
+1.83,
+2.09
+],
+[
+"com.",
+2.12,
+2.65
+]
+]
+}
+}
