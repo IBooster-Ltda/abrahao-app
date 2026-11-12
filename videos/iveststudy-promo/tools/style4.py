@@ -5,8 +5,10 @@ import json, os, sys, math, re, subprocess
 P=os.path.dirname(os.path.dirname(os.path.abspath(__file__))); os.chdir(P)
 def dur(p): return float(subprocess.run(['ffprobe','-v','error','-show_entries','format=duration','-of','csv=p=0',p],capture_output=True,text=True).stdout)
 ICON={n:re.sub(r'^<svg[^>]*>',lambda m: re.sub(r'\s(width|height|class|style)="[^"]*"','',m.group(0)),open(f'assets/brand/icons/{n}.svg',encoding='utf-8').read()) for n in ['brand','estudo','quiz','flashcards','simulados','redacao','mentor']}
-VO=json.load(open('tools/vo-trail-f.json',encoding='utf-8'))
-SCH=json.load(open('tools/trail4-schedule.json')); SC={k:tuple(v) for k,v in SCH['sched'].items()}; T=SCH['T']
+CFG=dict(vo='vo-trail-f', sched='trail4-schedule', music='music-trail3', name='trail4')
+CFG.update(dict(a.split('=',1) for a in sys.argv[1:] if '=' in a))   # e.g. vo=vo-trail-aa sched=trail5-schedule music=music-trail5 name=trail5
+VO=json.load(open(f'tools/{CFG["vo"]}.json',encoding='utf-8'))
+SCH=json.load(open(f'tools/{CFG["sched"]}.json')); SC={k:tuple(v) for k,v in SCH['sched'].items()}; T=SCH['T']
 BLUE='#3b82f6'; LIGHT='#93c5fd'; CORE='#eff6ff'
 IN=0.7; OUT=0.5
 
@@ -25,7 +27,7 @@ def build(W,H):
     def mk(k,word): s,off,_=SC[k]; return s+off+VO[k]['marks'][word]
     def vo(k):
         s,off,_=SC[k]; at=s+off
-        els.append(f'<audio id="vo-{k}" class="clip" src="assets/audio/vo-trail-f/{k}.wav" data-start="{at:.3f}" data-duration="{VO[k]["dur"]:.2f}" data-volume="1" data-track-index="7"></audio>')
+        els.append(f'<audio id="vo-{k}" class="clip" src="assets/audio/{CFG["vo"]}/{k}.wav" data-start="{at:.3f}" data-duration="{VO[k]["dur"]:.2f}" data-volume="1" data-track-index="7"></audio>')
         ws=[list(w) for w in VO[k]['words']]
         for w in ws:
             if w[0].lower().startswith('aivest'): w[0]='iVest'
@@ -202,7 +204,7 @@ def build(W,H):
         b=min(b, cues[i+1][0]-0.04) if i+1<len(cues) else min(b,T-0.05)
         els.append(f'<div id="cap{i}" class="subcap clip" data-start="{a:.2f}" data-duration="{max(0.4,b-a):.2f}" style="top:{capy}px">{txt}</div>')
     # ═══ audio
-    aud=[f'<audio id="music" class="clip" src="assets/audio/music-trail3.mp3" data-start="0" data-duration="{T}" data-media-start="0" data-volume="0.34" data-track-index="3"></audio>']
+    aud=[f'<audio id="music" class="clip" src="assets/audio/{CFG["music"]}.mp3" data-start="0" data-duration="{T}" data-media-start="0" data-volume="0.34" data-track-index="3"></audio>']
     lanes=list(range(8,16)); free={l:0.0 for l in lanes}
     for j,(nm,at,vol,ms,dd) in enumerate(sorted(sfx,key=lambda x:x[1])):
         dd=dd or min(dur(f'assets/sfx/{nm}.mp3'),4.0); dd=max(0.2,min(dd,T-at))
@@ -220,7 +222,7 @@ def build(W,H):
     jsh=open('tools/style2.js',encoding='utf-8').read().replace('__T__',str(T))
     html=f'''<!doctype html>
 <html lang="pt-BR"><head><meta charset="UTF-8" /><meta name="viewport" content="width={W}, height={H}" /><script src="assets/vendor/gsap.min.js"></script><style>{css}</style></head>
-<body><div id="root" data-composition-id="trail4" data-start="0" data-duration="{T}" data-width="{W}" data-height="{H}" data-fps="30">
+<body><div id="root" data-composition-id="{CFG['name']}" data-start="0" data-duration="{T}" data-width="{W}" data-height="{H}" data-fps="30">
 <div id="haze"></div><div id="vig"></div>
 {chr(10).join(els)}
 <svg class="trails" width="{W}" height="{H}" viewBox="0 0 {W} {H}"><defs><filter id="glowA" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="5"/></filter><filter id="glowB" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="14"/></filter></defs>
@@ -231,11 +233,11 @@ def build(W,H):
 </div>
 <script>{jsh}
   {chr(10).join("  "+l for l in js)}
-  window.__timelines["trail4"] = tl;
+  window.__timelines["{CFG['name']}"] = tl;
 </script></body></html>'''
-    os.makedirs('builds',exist_ok=True); out=f'builds/trail4-{W}x{H}.html'; open(out,'w',encoding='utf-8').write(html)
+    os.makedirs('builds',exist_ok=True); out=f'builds/{CFG["name"]}-{W}x{H}.html'; open(out,'w',encoding='utf-8').write(html)
     def f2s(t): h=int(t//3600); m=int(t%3600//60); ss=t%60; return f'{h:02d}:{m:02d}:{ss:06.3f}'.replace('.',',')
-    os.makedirs('deliver',exist_ok=True); open(f'deliver/trail4-{W}x{H}.srt','w',encoding='utf-8').write(''.join(f'{i+1}\n{f2s(a)} --> {f2s(b)}\n{tx}\n\n' for i,(a,b,tx) in enumerate(cues)))
+    os.makedirs('deliver',exist_ok=True); open(f'deliver/{CFG["name"]}-{W}x{H}.srt','w',encoding='utf-8').write(''.join(f'{i+1}\n{f2s(a)} --> {f2s(b)}\n{tx}\n\n' for i,(a,b,tx) in enumerate(cues)))
     print('wrote',out,'T',T,'cues',len(cues),'trails',len(trails),'sfx',len(sfx))
-for a in (sys.argv[1:] or ['1080x1920']):
+for a in ([x for x in sys.argv[1:] if '=' not in x] or ['1080x1920']):
     w,h=map(int,a.split('x')); build(w,h)
